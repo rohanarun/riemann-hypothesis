@@ -22,11 +22,11 @@ variable {p : ℕ} [Fact p.Prime]
 
 theorem good_X {σ : Type*} (i : σ) : Good (Xv (p := p) i) := by
   unfold Good
-  refine ⟨by simp [Xv], ?_⟩
-  unfold IntegralMv
+  refine ⟨by simp [PI.FglGram.Xv], ?_⟩
+  unfold PI.FglGram.IntegralMv
   intro n
-  unfold IsIntP
-  unfold Xv
+  unfold PI.FglGram.IsIntP
+  unfold PI.FglGram.Xv
   rw [MvPowerSeries.coeff_X]
   split_ifs <;> simp
 
@@ -55,7 +55,7 @@ theorem column_of (hE : Expand) : Column := by
 
 theorem gather_of (hSF : SumFirst) : Gather := by
   intro p _ l ex ph S H hC κ _ k A hA
-  have hcol : ∀ i, Simeq (phAt ph (lin l ex (fun e => (A e i).1) (fun e => (Xv e : MvPowerSeries (Fin k) ℂ_[p]))))
+  have hcol : ∀ i, _root_.PI.FglGram.Simeq (phAt ph (lin l ex (fun e => (A e i).1) (fun e => (Xv e : MvPowerSeries (Fin k) ℂ_[p]))))
       (∑ j, MvPowerSeries.C ((A j i).1 * (A j i).2) * phAt ph (Xv j) +
         ∑ j, ∑ j' ∈ Finset.univ.filter (fun j' => j < j'),
           be l ex ph (mulBy l ex ((A j' i).2 * (A j i).1) (Xv j)) (Xv j')) :=
@@ -172,7 +172,7 @@ theorem mulBy_add (hd : Data l ex ph) {a : MvPowerSeries σ ℂ_[p]} (ha : MvPow
   rw [lg_pt hd h1, lg_pt hd h2, map_add (f := _), add_mul]
 
 theorem good_zero : Good (0 : MvPowerSeries σ ℂ_[p]) := by
-  exact ⟨map_zero _, fun n => by simp [IsIntP]⟩
+  exact ⟨map_zero _, fun n => by simp [_root_.PI.FglGram.IsIntP]⟩
 
 theorem good_mulBy_sum (hGA : GoodAdd) {S : Set (ℂ_[p] × ℂ_[p])} (H : Hyps l ex ph S) {ι : Type}
     {a : MvPowerSeries σ ℂ_[p]} (ha : Good a) (s : Finset ι) (e : ι → ℂ_[p])
@@ -229,7 +229,7 @@ theorem good_pt_sum (hGA : GoodAdd) {S : Set (ℂ_[p] × ℂ_[p])} (H : Hyps l e
 
 theorem be_pt_sum (hGA : GoodAdd) (hBS : BiaddSub) {S : Set (ℂ_[p] × ℂ_[p])} (H : Hyps l ex ph S)
     {z : MvPowerSeries σ ℂ_[p]} (hz : Good z) {m : ℕ} (a : Fin m → MvPowerSeries σ ℂ_[p])
-    (ha : ∀ j, Good (a j)) : Simeq (be l ex ph (pt ex (∑ j, lg l (a j))) z) (∑ j, be l ex ph (a j) z) := by
+    (ha : ∀ j, Good (a j)) : _root_.PI.FglGram.Simeq (be l ex ph (pt ex (∑ j, lg l (a j))) z) (∑ j, be l ex ph (a j) z) := by
   induction m with
   | zero =>
     rw [pt_sum_zero H.data, be_zero_left H.data hz.1, Finset.univ_eq_empty, Finset.sum_empty]
@@ -257,7 +257,7 @@ theorem rhsBy_succ {m : ℕ} (a : Fin (m + 1) → MvPowerSeries σ ℂ_[p]) :
 
 theorem ph_pt_sum (hGA : GoodAdd) (hBS : BiaddSub) {S : Set (ℂ_[p] × ℂ_[p])} (H : Hyps l ex ph S)
     {m : ℕ} (a : Fin m → MvPowerSeries σ ℂ_[p]) (ha : ∀ j, Good (a j)) :
-    Simeq (phAt ph (pt ex (∑ j, lg l (a j)))) (rhsBy l ex ph a) := by
+    _root_.PI.FglGram.Simeq (phAt ph (pt ex (∑ j, lg l (a j)))) (rhsBy l ex ph a) := by
   induction m with
   | zero =>
     rw [pt_sum_zero H.data, phAt_zero H.data]

@@ -108,10 +108,6 @@ variable {n : ℕ}
 
 variable {ε : Fin n → Bool} {Λ : Fin n → ℝ}
 
--- [dedup] lemma toMK_mul' (k k' : KG ε) : toMK (k * k') = toMK k * toMK k' := rfl
-
--- [dedup] lemma toMK_one' : toMK (1 : KG ε) = 1 := rfl
-
 lemma op_mul' (T : KType ε Λ) (k k' : KG ε) : T.op (k * k') = T.op k * T.op k' := by
   show ((T.τ (k * k') : unitary (T.V →L[ℂ] T.V)) : T.V →L[ℂ] T.V) = _
   rw [map_mul]

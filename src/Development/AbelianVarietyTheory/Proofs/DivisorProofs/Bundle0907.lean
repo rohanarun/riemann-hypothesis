@@ -44,7 +44,7 @@ end GlobalTheory.EtC.DescZero
 
 namespace GlobalTheory.EtC.DescZero
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma spec_map_surjective_of_integral_ker_le_nilradical (A A' : Type) [CommRing A] [CommRing A'] [Algebra A A']
     [Algebra.IsIntegral A A'] (hker : RingHom.ker (algebraMap A A') ≤ nilradical A) :
@@ -56,7 +56,7 @@ private lemma spec_map_surjective_of_integral_ker_le_nilradical (A A' : Type) [C
     (by rw [Ideal.under_def, ← RingHom.ker_eq_comap_bot]; exact hker.trans (nilradical_le_prime _))
   exact ⟨(⟨Q, hQ⟩ : PrimeSpectrum A'), PrimeSpectrum.ext hQx⟩
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma sec_res_comp_divisor {R : Type} [CommRing R] {F : _root_.GlobalTheory.EtC.Shv R} {W V U : Scheme}
     (h : W ⟶ V) (g : V ⟶ U) (s : _root_.GlobalTheory.EtC.Sec F U) :
@@ -64,13 +64,13 @@ private lemma sec_res_comp_divisor {R : Type} [CommRing R] {F : _root_.GlobalThe
       _root_.GlobalTheory.EtC.Sec.res h (_root_.GlobalTheory.EtC.Sec.res g s) := by
   simp [_root_.GlobalTheory.EtC.Sec.res]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma disc_face_eq_id (P : _root_.GlobalTheory.EtC.PSh) (n : ℕ) (i : Fin (n + 2)) :
     SimplicialObject.δ (_root_.GlobalTheory.EtC.disc.obj P) i = 𝟙 _ := by
   first | rfl | simp [SimplicialObject.δ, _root_.GlobalTheory.EtC.disc]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma cobd_eq_zero_of_scheme {R : Type} [CommRing R] {F : _root_.GlobalTheory.EtC.Shv R} (X : Scheme)
     (t : (_root_.GlobalTheory.EtC.free R).obj ((_root_.GlobalTheory.EtC.sch.obj X) _⦋0⦌) ⟶ F) :
@@ -80,7 +80,7 @@ private lemma cobd_eq_zero_of_scheme {R : Type} [CommRing R] {F : _root_.GlobalT
   unfold _root_.GlobalTheory.EtC.cobd
   simp [Fin.sum_univ_two, h]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma isCls_secClass_of_val_eq_res {R : Type} [CommRing R] (F : _root_.GlobalTheory.EtC.Shv R)
     (X : Scheme) (s : _root_.GlobalTheory.EtC.Sec F X)
@@ -106,7 +106,7 @@ private lemma isCls_secClass_of_val_eq_res {R : Type} [CommRing R] (F : _root_.G
         (_root_.GlobalTheory.EtC.val t X (𝟙 X)) := rfl
     _ = _ := by rw [hval]; simp [_root_.GlobalTheory.EtC.Sec.res]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma cobd_eq_zero_of_face_comp_eq {R : Type} [CommRing R] {F : _root_.GlobalTheory.EtC.Shv R}
     {E : _root_.GlobalTheory.EtC.Spc} (T : (_root_.GlobalTheory.EtC.free R).obj (E _⦋0⦌) ⟶ F)
@@ -116,7 +116,7 @@ private lemma cobd_eq_zero_of_face_comp_eq {R : Type} [CommRing R] {F : _root_.G
   unfold _root_.GlobalTheory.EtC.cobd
   simp [Fin.sum_univ_two, h]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma cech_face_comp_cπ_eq_cπ_rev {Y X : Scheme.{0}} (f : Y ⟶ X) (i : Fin 2) :
     SimplicialObject.δ (_root_.GlobalTheory.EtC.cech f) i ≫ _root_.GlobalTheory.EtC.DescZero.cπ f 0 0 =
@@ -126,7 +126,7 @@ private lemma cech_face_comp_cπ_eq_cπ_rev {Y X : Scheme.{0}} (f : Y ⟶ X) (i 
     erw [WidePullback.lift_π]
     rfl
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma res_eq_of_tensorSquare_res_eq_lemma_6 {R : Type} [CommRing R] {F : _root_.GlobalTheory.EtC.Shv R}
     (A A' : Type) [CommRing A] [CommRing A'] [Algebra A A']
@@ -153,7 +153,7 @@ private lemma res_eq_of_tensorSquare_res_eq_lemma_6 {R : Type} [CommRing R] {F :
   clear_value u
   rw [← hu₀, ← hu₁, sec_res_comp_divisor, sec_res_comp_divisor, hs]
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma cπ_comp_eq_cπ_comp {Y X : Scheme.{0}} (f : Y ⟶ X) (n : ℕ) (k l : Fin (n + 1))
     (U : Scheme.{0}) (e : ((_root_.GlobalTheory.EtC.cech f).obj (op ⦋n⦌)).obj (op U)) :
@@ -163,7 +163,7 @@ private lemma cπ_comp_eq_cπ_comp {Y X : Scheme.{0}} (f : Y ⟶ X) (n : ℕ) (k
     (WidePullback.π_arrow (fun _ : Fin (n + 1) => yoneda.map f) l).symm
   exact congr_arg (fun φ => φ.app (op U) e) h
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 private lemma cechDiag_comp_cπ_eq_id {Y X : Scheme.{0}} (f : Y ⟶ X) :
     (_root_.GlobalTheory.CechOne.cechDiag f).app (op ⦋0⦌) ≫ _root_.GlobalTheory.EtC.DescZero.cπ f 0 0 = 𝟙 _ := by
@@ -172,7 +172,7 @@ private lemma cechDiag_comp_cπ_eq_id {Y X : Scheme.{0}} (f : Y ⟶ X) :
   rfl
 
 
-open CategoryTheory Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry Opposite CochainComplex CochainComplex.HomComplex Simplicial in
 open scoped TensorProduct in
 theorem _root_.GlobalTheory.EtC.DescZero.desc_zero : ∀ (q : ℕ) [NeZero q] (A A' : Type) [CommRing A] [CommRing A'] [Algebra A A'],
     Algebra.IsIntegral A A' → RingHom.ker (algebraMap A A') ≤ nilradical A → IsUnit (q : A) →

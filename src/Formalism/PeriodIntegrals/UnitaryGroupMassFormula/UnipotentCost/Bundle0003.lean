@@ -147,29 +147,14 @@ private lemma det_one_add_strictUpper' {q : ℕ} (M : Matrix (Fin q) (Fin q) ℂ
     have hij' : j < i := hij
     simp [Matrix.one_apply_ne hij'.ne', h i j hij'.le]
 
-lemma det_zjH_ne (hd : ∀ i, d i ≠ 0) (η : XiH p s σ) {Z : G.Mat s} (hZ : G.detM Z ≠ 0) :
-    (ZjH σ d η Z).det ≠ 0 := by
-  simp only [ZjH, Zj, blk2, Matrix.det_mul, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
-    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, headH, G.detM] at hZ ⊢
-  simp only [lowW, G.upper]
-  rw [det_one_add_strictLower _ (fun a b hab => ?_), det_one_add_strictUpper' _ (fun a b hab => ?_)]
-  · rw [permutationMatrix_eq_permMatrix', Matrix.det_permutation, Matrix.det_diagonal]
-    simp only [one_mul, mul_one]
-    refine mul_ne_zero (mul_ne_zero ?_ (Finset.prod_ne_zero_iff.2 fun i _ => hd i)) hZ
-    rcases Int.units_eq_one_or (Equiv.Perm.sign σ) with h | h <;> simp [h]
-  · simp [G.strictUpper, not_lt.2 hab]
-  · simp [not_lt.2 hab]
-
 lemma rn_mem' (hRP : RadicalParam) (j : ℕ) (x : RC k j ρ) : Rn k j ρ x ∈ B.GV k (j + ρ) := by
   have hr : Rn k j ρ x ∈ Rset k j ρ := (hRP k j ρ).2.1 ▸ Set.mem_range_self x
   exact ((hRP k j ρ).2.2 hr).1
 
 private lemma mul_mem_GV' {k r : ℕ} {a b : B.Mat k r} (ha : a ∈ B.GV k r) (hb : b ∈ B.GV k r) :
-    a * b ∈ B.GV k r := by
-  simp only [B.GV, Formalism.QuantumDeterminants.UH, Set.mem_setOf_eq] at ha hb ⊢
-  calc (a * b)ᴴ * Formalism.QuantumDeterminants.Hpk k r * (a * b) = bᴴ * (aᴴ * Formalism.QuantumDeterminants.Hpk k r * a) * b := by
-        simp only [Matrix.conjTranspose_mul, Matrix.mul_assoc]
-    _ = Formalism.QuantumDeterminants.Hpk k r := by rw [ha, hb]
+    a * b ∈ B.GV k r :=
+  (Formalism.QuantumDeterminants.unitary_group_holds _ _
+    (Matrix.isUnit_det_of_left_inverse (Formalism.QuantumDeterminants.GBasic.Hpk_sq k r))).2.1 a ha b hb
 
 lemma gaXi_mem (hSM : SliceMem) (hRP : RadicalParam) (hd : ∀ i, d i ≠ 0) (ξ : Xi k p s ρ σ) {Z : G.Mat s}
     (γ : B.Mat k ρ) (hZ : G.detM Z ≠ 0) (hγ : γ ∈ B.GV k ρ) : gaXi k ρ σ d ξ Z γ ∈ B.GV k (p + s + ρ) := by

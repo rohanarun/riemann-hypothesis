@@ -35,7 +35,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.StepZero
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.GlobalTheoryTheory.HLatOps
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.GlobalTheoryTheory.HLatOps
 open scoped ComplexOrder
 
 section Metric

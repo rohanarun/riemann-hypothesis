@@ -415,9 +415,7 @@ theorem UpperTheory.Reformulated.B.Gwa7.aux6 :
     Nonempty UpperTheory.Reformulated.B.Gwa7.U2 := by
   exact ⟨1⟩
 
-noncomputable def UpperTheory.Reformulated.B.Gwa7.μK :
-    @MeasureTheory.Measure UpperTheory.Reformulated.B.Gwa7.U2 UpperTheory.Reformulated.B.Gwa7.instMeasurableSpaceU2 :=
-    @MeasureTheory.Measure.haarMeasure UpperTheory.Reformulated.B.Gwa7.U2
+noncomputable def UpperTheory.Reformulated.B.Gwa7.μK : MeasureTheory.Measure UpperTheory.Reformulated.B.Gwa7.U2 := @MeasureTheory.Measure.haarMeasure UpperTheory.Reformulated.B.Gwa7.U2
       (@Unitary.instGroupSubtypeMemSubmonoidUnitary
         (Matrix (Fin (@OfNat.ofNat Nat (nat_lit 2) (instOfNatNat (nat_lit 2))))
           (Fin (@OfNat.ofNat Nat (nat_lit 2) (instOfNatNat (nat_lit 2)))) Complex)

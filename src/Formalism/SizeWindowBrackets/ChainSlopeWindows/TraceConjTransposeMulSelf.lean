@@ -96,9 +96,8 @@ section CS
 
 variable {m n : Type} [Fintype m] [Fintype n]
 
-private theorem le_sqrt_of_sq_le' {x y : ℝ} (h : x ^ 2 ≤ y) : x ≤ Real.sqrt y := by
-  refine (le_abs_self x).trans ?_
-  exact Real.abs_le_sqrt h
+private theorem le_sqrt_of_sq_le' {x y : ℝ} (h : x ^ 2 ≤ y) : x ≤ Real.sqrt y :=
+  Real.le_sqrt_of_sq_le h
 
 private theorem sum_norm_mul_le_hsNorm_mul (A B : Matrix m n ℂ) :
     ∑ i, ∑ j, ‖A i j‖ * ‖B i j‖ ≤ hsNorm A * hsNorm B := by
@@ -131,8 +130,7 @@ lemma hsSq_one (n : ℕ) : hsSq (1 : Matrix (Fin n) (Fin n) ℂ) = n := by
 
 end CS
 
-private theorem re_le_norm' (z : ℂ) : z.re ≤ ‖z‖ := by
-  exact Complex.re_le_norm z
+private theorem re_le_norm' (z : ℂ) : z.re ≤ ‖z‖ := Complex.re_le_norm z
 
 private theorem neg_re_le_norm' (z : ℂ) : -z.re ≤ ‖z‖ := by
   have h := re_le_norm' (-z)

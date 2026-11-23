@@ -156,7 +156,7 @@ private theorem fr_map {L : LocBase D} {R R' : Type} [CommRing R] [Algebra c.O R
 
 set_option synthInstance.maxHeartbeats 200000 in
 set_option maxHeartbeats 1000000 in
-private theorem main (hD : D.Good) (L : LocBase D) (F : Fr D L) (Q : Type) [CommRing Q] [Algebra c.O Q] [Module c.Oᵐᵒᵖ Q]
+private theorem existsQuotientDerivationOfShaCocycle (hD : D.Good) (L : LocBase D) (F : Fr D L) (Q : Type) [CommRing Q] [Algebra c.O Q] [Module c.Oᵐᵒᵖ Q]
     [IsCentralScalar c.O Q] [Module.Finite c.O Q] (z : G ℚ Ω → Q) (lc : IsLocallyConstant z)
     (coc : ∀ g h, z (g * h) = z g + ((D.Psi⁻¹ g : c.Oˣ) : c.O) • z h) (unr : D.UnrT z 0)
     (m : D.T → c.O) (hm : ∀ v : D.T, ∀ g ∈ D.Gp v, z g = algebraMap c.O Q (((D.Psi⁻¹ g : c.Oˣ) : c.O) * m v - m v)) :
@@ -270,6 +270,6 @@ theorem UpperTheory.exists_quotientDerivation_of_shaCocycle :
       obtain ⟨m, rfl⟩ := Ideal.Quotient.mk_surjective m
       exact ⟨m, fun g hg => by rw [hm g hg, map_sub, map_mul]; rfl⟩
   choose m hm using hm
-  obtain ⟨Db, h1, DB, h2, h3, h4, h5, h6⟩ := main hD L F (c.O ⧸ Ideal.span {a}) z hz.lc
+  obtain ⟨Db, h1, DB, h2, h3, h4, h5, h6⟩ := existsQuotientDerivationOfShaCocycle hD L F (c.O ⧸ Ideal.span {a}) z hz.lc
     (fun g h => by rw [hz.coc, Algebra.smul_def]; rfl) hz.unr m hm
   exact ⟨Db, h1, DB, h2, h3, h4, fun g i j => by rw [h5, Algebra.smul_def]; rfl, h6⟩

@@ -23,7 +23,7 @@ open Formalism.BasicNotions NumberField IsDedekindDomain Matrix Formalism.UG For
 open scoped TensorProduct
 
 namespace GlobalTheory.Port
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G _root_.Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
 
 variable {R : Ranks} {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E]
     [StarRing E] [Algebra F E] {sp : Spaces R F E} {gp : Fin 2 → ℕ}
@@ -57,7 +57,7 @@ end
 section
 
 namespace GlobalTheory.Port
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G _root_.Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PStabEq
@@ -153,7 +153,7 @@ end
 section
 
 namespace GlobalTheory.Port
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G _root_.Formalism.L2 Formalism.L2.G Formalism.MainNotions.G.KAat
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ.PStabEq
 open scoped TensorProduct
@@ -311,7 +311,7 @@ end
 section
 namespace GlobalTheory.Port
 
-open Formalism Formalism.MainNotions Formalism.MainNotions.G
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G
 
 open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PStabEq Formalism.MainNotions.G.KAat

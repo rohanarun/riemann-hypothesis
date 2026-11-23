@@ -13,7 +13,7 @@ open Formalism.DworkPowerSeriesWeights hiding mfact
 
 private theorem factA {K : Type} [NormedField K] [IsUltrametricDist K] [CharZero K] {l : ℕ} (hl : l.Prime)
     (hlt : ‖(l : K)‖ < 1) {ι : Type} [Fintype ι] (κ : ι →₀ ℕ) (A : ℝ) (hA : 1 ≤ A) (hκ : ∀ v, (κ v : ℝ) ≤ A) :
-    ‖((mfact κ : ℕ) : K)‖ ≤ ‖(l : K)‖ ^ ((∑ i, (κ i : ℝ) / ((l : ℝ) - 1)) -
+    ‖((_root_.Formalism.DworkPowerSeriesWeights.mfact κ : ℕ) : K)‖ ≤ ‖(l : K)‖ ^ ((∑ i, (κ i : ℝ) / ((l : ℝ) - 1)) -
         (Fintype.card ι : ℝ) * (Real.logb l A + 1)) := by
   have hl1 : (1 : ℝ) < l := by exact_mod_cast hl.one_lt
   have hπ0 : 0 < ‖(l : K)‖ := norm_pos_iff.2 (Nat.cast_ne_zero.2 hl.ne_zero)
@@ -31,8 +31,8 @@ private theorem factA {K : Type} [NormedField K] [IsUltrametricDist K] [CharZero
       have hNA : Real.logb l N ≤ Real.logb l A :=
         Real.logb_le_logb_of_le hl1 (by exact_mod_cast hNpos) hN
       linarith
-  have hm : ((mfact κ : ℕ) : K) = ∏ i, (((κ i).factorial : ℕ) : K) := by
-    unfold mfact
+  have hm : ((_root_.Formalism.DworkPowerSeriesWeights.mfact κ : ℕ) : K) = ∏ i, (((κ i).factorial : ℕ) : K) := by
+    unfold _root_.Formalism.DworkPowerSeriesWeights.mfact
     rw [Finsupp.prod_fintype _ _ (by simp), Nat.cast_prod]
   rw [hm, norm_prod]
   calc ∏ i, ‖(((κ i).factorial : ℕ) : K)‖
@@ -76,7 +76,7 @@ theorem UpperTheory.norm_mfact_mul_coeff_le_of_B0S :
     ∀ (Lt β : Type) [Fintype Lt] [Fintype β] [DecidableEq Lt] [DecidableEq β] (pos : Lt → ℕ → Lt), IsPos i pos →
     ∀ Th : MvPowerSeries (Lt × β) K, HasThetaProductForm l i pos Th → ∀ sig : Lt → ℝ, IsRadii l pos sig →
     ∀ (κ : Lt × β →₀ ℕ) (A : ℝ), 1 ≤ A → (∀ v, (κ v : ℝ) ≤ A) →
-    ‖((mfact κ : ℕ) : K) * MvPowerSeries.coeff κ Th‖ ≤
+    ‖((_root_.Formalism.DworkPowerSeriesWeights.mfact κ : ℕ) : K) * MvPowerSeries.coeff κ Th‖ ≤
       ‖(l : K)‖ ^ ((∑ v, (κ v : ℝ) * (gam l - sig v.1)) - (Fintype.card (Lt × β) : ℝ) * (Real.logb l A + 1)) := by
   intro K _ _ _ l i _ hl hodd hlt Lt β _ _ _ _ pos hpos Th hB sig hsig κ A hA hκ
   obtain ⟨K0, ζ, R, ep, sg, be, hK0, hζ, hep, hsg, hbe, U, hU, hsh⟩ := hB
@@ -130,7 +130,7 @@ theorem UpperTheory.norm_mfact_mul_coeff_le_of_B0S :
     rw [this]
     linear_combination (κ v : ℝ) * hc
   rw [norm_mul]
-  calc ‖((mfact κ : ℕ) : K)‖ * ‖MvPowerSeries.coeff κ Th‖
+  calc ‖((_root_.Formalism.DworkPowerSeriesWeights.mfact κ : ℕ) : K)‖ * ‖MvPowerSeries.coeff κ Th‖
       ≤ ‖(l : K)‖ ^ ((∑ v, (κ v : ℝ) / ((l : ℝ) - 1)) -
           (Fintype.card (Lt × β) : ℝ) * (Real.logb l A + 1)) *
         ‖(l : K)‖ ^ (0 + 0 - dot κ (fun v : Lt × β => rho l + sig v.1)) :=

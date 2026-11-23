@@ -27,7 +27,7 @@ noncomputable section
 section
 namespace GlobalTheory.Port
 
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv Formalism.MainNotions.G.ChF
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv Formalism.MainNotions.G.ChF
 
 open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.G.RelativeIndexFlags Formalism.L2.Forms Formalism.L2.Herm Formalism.UG NumberField IsDedekindDomain Matrix
   Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.CmpJ.AgreeLv Formalism.MainNotions.G.KAat Formalism.MainNotions.G.ChartsLv

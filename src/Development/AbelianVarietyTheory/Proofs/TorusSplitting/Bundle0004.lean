@@ -128,7 +128,7 @@ theorem paTh_centre (Y : GT ι) (v : EuclideanSpace ℂ ι) :
   refine tsum_congr fun γ => ?_
   set g : EuclideanSpace ℂ ι := γ.1
   unfold paU expH
-  rw [Hf_self g, sub_eq_add_neg v, Hf_add_left, Hf_neg_left, ← Hf_conj v g, conj_eq_sub (Hf v g),
+  rw [Hf_self g, sub_eq_add_neg v, Hf_add_left, Hf_neg_left, ← _root_.ReciprocityTheory.ChartRestriction.G.I2.FPw.Hf_conj v g, conj_eq_sub (Hf v g),
     ← Complex.exp_add, Complex.ofReal_exp, mul_assoc (Y.ka g), ← Complex.exp_add,
     mul_left_comm, ← Complex.exp_add]
   congr 2

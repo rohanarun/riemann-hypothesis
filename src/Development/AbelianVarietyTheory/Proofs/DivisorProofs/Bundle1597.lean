@@ -131,7 +131,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 theorem mem_dualFr_span_iff_dualsum {K : Type} [Field K] [NumberField K] {n : ℕ} (S : Set (Fin n → K))
     (φ : Fin n → K) :

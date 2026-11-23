@@ -22,7 +22,7 @@ attribute [local instance] GlobalTheory.TypeRec.factG
 
 namespace Ysupp.IrreducibleSupport
 
-open GlobalTheory GlobalTheory.SerSys
+open _root_.GlobalTheory GlobalTheory.SerSys
 
 section Chain
 

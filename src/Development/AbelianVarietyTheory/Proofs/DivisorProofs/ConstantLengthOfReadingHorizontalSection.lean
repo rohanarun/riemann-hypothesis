@@ -203,7 +203,7 @@ theorem flatCoord_eq {p q r g : ℕ} (ε : Fin q ⊕ Fin p ≃ Fin r) (τ : E �
 
 end Linear
 
-open AlgebraicGeometry CategoryTheory Limits IsDedekindDomain Module Formalism.BasicNotions Formalism.L2.Pj GlobalTheory.AllWt GlobalTheory.FlatLine GlobalTheory.CompHt
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits IsDedekindDomain Module Formalism.BasicNotions Formalism.L2.Pj GlobalTheory.AllWt GlobalTheory.FlatLine GlobalTheory.CompHt
   GlobalTheory.FlatCore
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}

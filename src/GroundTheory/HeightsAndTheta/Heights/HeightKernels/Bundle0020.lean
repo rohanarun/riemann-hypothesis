@@ -195,9 +195,9 @@ theorem ptsIntegralAt_eq {Ψ : (((k : Fin 1) → plBlocks 1 1 n k) → ℂ) →�
   unfold ptsIntegralAt chartMass
   congr 1
   funext y
-  have hfib : fibre (grassIdeal 1 1 n) Ψ y = {L (Fin.cons 1 y)} := by
+  have hfib : _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre (grassIdeal 1 1 n) Ψ y = {L (Fin.cons 1 y)} := by
     ext w
-    simp only [fibre, Set.mem_ofPred_eq, Set.mem_singleton_iff]
+    simp only [_root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre, Set.mem_ofPred_eq, Set.mem_singleton_iff]
     constructor
     · rintro ⟨z, -, -, hw⟩
       rw [← hw, hLΨ]
@@ -364,13 +364,13 @@ theorem exists_goodProj {W : Ideal (MRing ι)} (hfin : Finite (McClasses W)) :
 
 theorem bij_fibre [Nonempty K] {W : Ideal (MRing ι)} (hW : IsMultiHomogIdeal W)
     (Ψ : (((k : K) → ι k) → ℂ) →ₗ[ℂ] (Fin (0 + 1) → ℂ)) (hΨ : IsGoodProj W Ψ) (y : Fin 0 → ℂ) :
-    ∃ M : McClasses W → fibre W Ψ y, Function.Bijective M := by
+    ∃ M : McClasses W → _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W Ψ y, Function.Bijective M := by
   classical
   set a : ((Σ k, ι k) → ℂ) → ℂ := fun z => Ψ (segre z) 0 with ha_def
   have ha : ∀ z ∈ mcPts W, a z ≠ 0 := fun z hz h0 =>
     hΨ z hz (funext fun i => by rw [Fin.fin_one_eq_zero i]; exact h0)
   set N : ((Σ k, ι k) → ℂ) → (((k : K) → ι k) → ℂ) := fun z => (a z)⁻¹ • segre z with hN
-  have hNmem : ∀ z (hz : z ∈ mcPts W), N z ∈ fibre W Ψ y := by
+  have hNmem : ∀ z (hz : z ∈ mcPts W), N z ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W Ψ y := by
     intro z hz
     obtain ⟨k0⟩ := ‹Nonempty K›
     let u : K → ℂ := Pi.mulSingle k0 (a z)⁻¹
@@ -393,7 +393,7 @@ theorem bij_fibre [Nonempty K] {W : Ideal (MRing ι)} (hW : IsMultiHomogIdeal W)
     simp only [N, a, segre_smul, map_smul, Pi.smul_apply, smul_eq_mul, smul_smul]
     congr 1
     field_simp [hpc, ha z hz]
-  let M : McClasses W → fibre W Ψ y :=
+  let M : McClasses W → _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W Ψ y :=
     Quot.lift (fun z => ⟨N z, hNmem z z.2⟩) (fun z z' h => Subtype.ext (hNrel z z' h))
   refine ⟨M, ?_, ?_⟩
   · intro q q'
@@ -422,7 +422,7 @@ theorem bij_fibre [Nonempty K] {W : Ideal (MRing ι)} (hW : IsMultiHomogIdeal W)
 omit [∀ k, Fintype (ι k)] in
 theorem density_ge {W : Ideal (MRing ι)} {Ψ : (((k : K) → ι k) → ℂ) →ₗ[ℂ] (Fin (0 + 1) → ℂ)}
     {φ : Fin 0 → ((Σ k, ι k) → ℂ) → ℝ} {g : ((Σ k, ι k) → ℂ) → ℝ} {c : ℝ}
-    (hc : ∀ z ∈ mcPts W, c ≤ g z) {y : Fin 0 → ℂ} {w : ((k : K) → ι k) → ℂ} (hw : w ∈ fibre W Ψ y) :
+    (hc : ∀ z ∈ mcPts W, c ≤ g z) {y : Fin 0 → ℂ} {w : ((k : K) → ι k) → ℂ} (hw : w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W Ψ y) :
     c ≤ sheetDensity W Ψ φ g y w := by
   classical
   obtain ⟨z, hz, rfl, hΨz⟩ := hw
@@ -450,8 +450,8 @@ theorem PtsIntegralZeroLowerNE.proof : PtsIntegralZeroLowerNE.Statement := by
   rw [integral_fin_zero _ y]
   obtain ⟨M, hM⟩ := bij_fibre hW hex.choose hΨ y
   have := hfin
-  have : Finite (fibre W hex.choose y) := Finite.of_surjective M hM.2
-  have hF : (fibre W hex.choose y).Finite := Set.toFinite _
+  have : Finite (_root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W hex.choose y) := Finite.of_surjective M hM.2
+  have hF : (_root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre W hex.choose y).Finite := Set.toFinite _
   have hcard : degC W = hF.toFinset.card := by
     rw [← Nat.card_eq_card_finite_toFinset hF, ← Nat.card_eq_of_bijective M hM]
     rfl

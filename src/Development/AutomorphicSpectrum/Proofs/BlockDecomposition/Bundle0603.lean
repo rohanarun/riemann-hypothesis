@@ -42,7 +42,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.GunrExhaust
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gen Filter Topology
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gen Filter _root_.Topology
 open PositivityTheory.SiegelWeilFormula.Gunr
 open scoped TensorProduct
 

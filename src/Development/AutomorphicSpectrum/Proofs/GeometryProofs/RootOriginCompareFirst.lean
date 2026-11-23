@@ -59,7 +59,7 @@ end GlobalTheory.CompanionTheory.Ar.SingCmp
 noncomputable section
 namespace GlobalTheory.CompanionTheory.Ar.SingCmp
 open scoped ComplexOrder Matrix
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 open GlobalTheory.CompanionTheory.Ar.HodgeCpt (rootIdx rootSgn)
 
 section Move

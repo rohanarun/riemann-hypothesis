@@ -343,7 +343,7 @@ end Core
 
 section One
 
-open GlobalTheory.IndefiniteRowSideFullHecke Formalism.L2.Col
+open GlobalTheory.IndefiniteRowSideFullHecke _root_.Formalism.L2.Col
 
 variable {K : Type} [Field K] {n : ℕ}
 
@@ -356,7 +356,7 @@ end One
 
 section Tensor
 
-open GlobalTheory.IndefiniteRowSideFullHecke Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.BranchFormula
+open GlobalTheory.IndefiniteRowSideFullHecke _root_.Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.BranchFormula
 open scoped Pointwise
 
 theorem coeff_prod_rename {A ι : Type} [CommRing A] [Fintype ι] {n : ℕ} (b : ι → Fin n → ℕ)
@@ -449,7 +449,7 @@ end Tensor
 
 section Compare
 
-open GlobalTheory.IndefiniteRowSideFullHecke Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.BranchFormula NumberField IsDedekindDomain
+open GlobalTheory.IndefiniteRowSideFullHecke _root_.Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.BranchFormula NumberField IsDedekindDomain
 
 theorem interlace_iff {n : ℕ} (lam : DomWeight (n + 1)) (sg : DomWeight n) :
     Br.Interlace rfl lam sg ↔ InterlacingNumerators.Interlace lam sg := by

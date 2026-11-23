@@ -36,7 +36,7 @@ noncomputable section
 namespace GlobalTheory.AdForm.Rebase
 
 section Core
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.ZeroMove
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.ZeroMove
 
 theorem exists_move {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] [StarRing E]
     (hc : CMData F E) {n : ℕ} {ST SG Q SQ : Finset (HeightOneSpectrum (𝓞 E))}
@@ -270,7 +270,7 @@ theorem exists_moved {I : TC B X} (hI : I.Ok) (hP : TC.Pins B X) {l : I.Laws} {Z
     exact ((hS i hi).2.2.2.1 c).symm.trans (hA.rep i hi c).2
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem exists_frames {I : TC B X} (hI : I.Ok) {u : B.Word} {a : I.ι} {i : ℕ}
     (p : ChPt (Pr := B.primes X) (R := B.R) I.sel (I.tup a) u i) (k : TC.GA B (B.R.N i)) (hk : TC.PtOf k (extTo I.SQ p))
     (hN : p.deco.1.N = Formalism.L2.Col.stdLat B.fields.E (B.R.N i))
@@ -290,7 +290,7 @@ theorem exists_frames {I : TC B X} (hI : I.Ok) {u : B.Word} {a : I.ι} {i : ℕ}
   exact ⟨q, κ, rfl, fun _ => rfl, fun v hv => h1 v fun h => hv ((hQ v).1 h), h2⟩
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem repY_cong {X : Fields} {Pr : Primes X} {R : Ranks} {sel : HeightOneSpectrum (𝓞 X.F) → HeightOneSpectrum (𝓞 X.E)} {S : Set ℕ}
     {mu : Formalism.L2.DIV.Tup X.F X.E X.K S} {cst : LocCst X (rowSG Pr sel mu)} {u : Pr.Word} {j : ℕ} (h : j + 1 = R.m)
     (p p' : PtAt R sel mu cst u j) (hc : cosetIn p' = cosetIn p) (P : rowSG Pr sel mu) :

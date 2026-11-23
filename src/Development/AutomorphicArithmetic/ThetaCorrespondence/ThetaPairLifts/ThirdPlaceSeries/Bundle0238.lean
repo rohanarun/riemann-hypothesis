@@ -323,7 +323,7 @@ end GlobalTheory.TwInputs.SmallField
 namespace GlobalTheory.TwInputs.SmallField
 end GlobalTheory.TwInputs.SmallField
 namespace GlobalTheory.TwInputs.SmallField
-open Formalism.MainNotions.N Formalism.L2 Formalism.L2.NT Formalism.IndefR.NX GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up
+open Formalism.MainNotions.N _root_.Formalism.L2 Formalism.L2.NT Formalism.IndefR.NX GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 theorem fieldOk_and_exists_lamDat_ok_teich_valuesIn : _root_.GlobalTheory.HeightCounting.Up.PublishedInputsThirdLayerAlt → EvLgG fun K B f _ => KPx B f → ∀ (T : TwDat B) (w : ColW B f T) (Z : w.Lt),
     (∀ X : GlobalTheory.TwInputs.RealSide (w.st Z).toD7, X.R.C = (TC.cf w.I w.l Z) → GlobalTheory.TwInputs.FieldOk X) ∧
@@ -371,14 +371,14 @@ section
 noncomputable section
 namespace GlobalTheory.HeightCounting.Up.CopyEx
 section Gen
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Rows Formalism.MainNotions NumberField IsDedekindDomain Formalism.ConjugateSelfDual ReciprocityTheory.Gal GlobalTheory.TwInputs.Move
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Rows Formalism.MainNotions NumberField IsDedekindDomain Formalism.ConjugateSelfDual ReciprocityTheory.Gal GlobalTheory.TwInputs.Move
 set_option synthInstance.maxHeartbeats 400000
 set_option maxHeartbeats 2000000
 end Gen
 section Types
 open Formalism.BasicNotions NumberField IsDedekindDomain GlobalTheory.Mem.Top
 end Types
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.L2 Formalism.L2.Host Formalism.L2.NT Formalism.IndefR.NX NumberField IsDedekindDomain GlobalTheory.Mem GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up GlobalTheory.TwistChoice
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N _root_.Formalism.L2 Formalism.L2.Host Formalism.L2.NT Formalism.IndefR.NX NumberField IsDedekindDomain GlobalTheory.Mem GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up GlobalTheory.TwistChoice
 open GlobalTheory.Mem.Top.TwChar (plUnder incl embLL_incl mem_plUnder plUnder_surjective)
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 set_option synthInstance.maxHeartbeats 400000

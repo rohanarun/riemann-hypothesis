@@ -125,7 +125,7 @@ theorem exists_veryAmple_h1Zero_pull : ∀ (A : Type) [CommRing A] (X : Over (Sp
         exact congrArg (fun q => MvPolynomial.eval₂Hom q _ p)
           (RingHom.ext fun c => (VeryAmplePull.appLE_cst hπ.w _ _ _ c).symm)
       · exact ⟨MvPolynomial.C c, MvPolynomial.eval₂Hom_C _ _ _⟩
-  obtain ⟨t₀, ht₀⟩ := GlobalTheory.T.serre_vanishing_very_ample.1 K X₀ f₀ _ n₀ s' hH₀ hva _ hH₀
+  obtain ⟨t₀, ht₀⟩ := _root_.GlobalTheory.AbLaw.serre_h1Zero_and_sections_polynomial.1 K X₀ f₀ _ n₀ s' hH₀ hva _ hH₀
   have h1 := ht₀ (t₀.toNat : ℤ) (Int.self_le_toNat t₀)
   obtain ⟨w, hw⟩ := lbIso_tw hH₀ (t₀.toNat : ℤ)
   have h2 := H1Iso.firstCohomologyVanishes_of_iso_of_isGen (isLB_tw hH₀ hH₀ _).cover (isLB_pw hH₀ _) w hw h1

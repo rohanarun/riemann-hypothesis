@@ -31,7 +31,7 @@ noncomputable section
 
 namespace GlobalTheory.LvT.Built.KMap
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem.Col2
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem.Col2
 open Formalism.L2.Forms (fnOf shiftOf)
 open Formalism.L2.Host (HChar)
 open GlobalTheory.GO.ChSrc (trueWt nuEnd sS sD polFn fnPol)

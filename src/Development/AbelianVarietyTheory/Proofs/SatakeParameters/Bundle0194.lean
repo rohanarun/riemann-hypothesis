@@ -75,7 +75,7 @@ theorem finextRep : ∀ (l : ℕ) [Fact l.Prime] (E Ω : Type) [Field E] [Number
 
 end GlobalTheory.GalFirstClause
 
-open GlobalTheory
+open _root_.GlobalTheory
 
 open scoped TensorProduct
 

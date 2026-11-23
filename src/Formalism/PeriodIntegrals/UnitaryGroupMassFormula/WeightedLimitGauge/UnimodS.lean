@@ -154,10 +154,6 @@ theorem unitInv_of (hB : BallConj) : UnitInv := by
     (ENNReal.div_le_iff h0.ne' ht.ne).2 (by rw [one_mul]; exact le1 qᴴ hq' hqu')
   rw [hsc, one_of_le _ _ hm hc1 hc1', one_smul]
 
-theorem hb_sq (k : ℕ) : Hb k * Hb k = 1 := by
-  rw [Hb, Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
-  congr 1; funext j; split_ifs <;> norm_num
-
 theorem hermInv_of (hU : UnitInv) : HermInv := by
   intro k r ν hk hG B₀ hB hBh
   have hHbh : (Hb k)ᴴ = Hb k := MB.Hb_conjT

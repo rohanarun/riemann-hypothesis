@@ -41,7 +41,7 @@ namespace GlobalTheory.UU
 
 theorem exists_degData_unif_unconditional :
     AllSet fun {V} _ _ _ {A} {G} _ _ s => ∃ (D : DegData V (IsLocalRing.maximalIdeal V)) (U : Unif (IsLocalRing.maximalIdeal V) D A G), U.LG = s.P.L ∧ U.gen = s.gen ∧ HEq U.cubG s.P.c :=
-  _root_.GlobalTheory.UU.exists_degData_unif GlobalTheory.UU.TorsionCount.card_torsion_points_unconditional GlobalTheory.T.abelianScheme_laws_unconditional.1 GlobalTheory.T.abelianScheme_laws_unconditional.2
+  _root_.GlobalTheory.UU.exists_degData_unif GlobalTheory.UU.TorsionCount.card_torsion_points_unconditional _root_.GlobalTheory.abelianSchemeLaws_all.1 _root_.GlobalTheory.abelianSchemeLaws_all.2
 
 end GlobalTheory.UU
 end

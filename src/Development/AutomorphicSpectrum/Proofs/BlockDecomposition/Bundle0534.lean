@@ -233,7 +233,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.AdelicBump
 
-open NumberField IsDedekindDomain Topology
+open NumberField IsDedekindDomain _root_.Topology
 open scoped Classical
 
 theorem exists_compact_open_nhds (F : Type) [Field F] [NumberField F] {κ : Type} [Fintype κ]

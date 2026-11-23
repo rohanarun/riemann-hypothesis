@@ -231,7 +231,7 @@ theorem detDepth_lower : ∀ (C : Type) [Field C] [IsAlgClosed C] [CharZero C] (
     isSatFrame_of_mul hxint (fun a b => (hγ a b).2 1) hxT hu
   obtain ⟨g, cr, hcri, hcrS, hgint, hgdet, hgS⟩ :=
     GlobalTheory.LowU.adapted_basis C v i d x (Finset.univ.filter fun b => ty b = τ ∧ dp b < K) hxsat
-  obtain ⟨hcount, hKb⟩ := GlobalTheory.T.low_count_all_bounds.2.2 p i cr K c hp3 hc hcri hK1 hK2
+  obtain ⟨hcount, hKb⟩ := _root_.GlobalTheory.LowCount.lowC_all.2.2 p i cr K c hp3 hc hcri hK1 hK2
   refine ⟨cr, hcri, ?_, ?_⟩
   · have h1 : (cr : ℝ) ≤ ((K : ℝ) + 1) * j := by exact_mod_cast hcrS.trans (hcard τ hτ)
     rw [mul_comm]

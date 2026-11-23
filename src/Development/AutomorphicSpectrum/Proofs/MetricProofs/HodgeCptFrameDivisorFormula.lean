@@ -27,7 +27,7 @@ namespace GlobalTheory.CompanionTheory.Ar.PB.FMX.GenFl
 
 open AlgebraicGeometry CategoryTheory NumberField Matrix
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo ReciprocityTheory.ChartRestriction.G.Geo.Tor
-open GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.PB GlobalTheory.CompanionTheory.Ar.PB.FMX GlobalTheory.CompanionTheory.Ar.FlagBun GlobalTheory.CompanionTheory.Ar.PB.FMX.GenFl
+open _root_.GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.PB GlobalTheory.CompanionTheory.Ar.PB.FMX GlobalTheory.CompanionTheory.Ar.FlagBun GlobalTheory.CompanionTheory.Ar.PB.FMX.GenFl
 
 theorem flagStep_colFrame_le {R M : Type} [Field R] [AddCommGroup M] [Module R M] {r : ℕ} (e : Fin r → M)
     (B : Matrix (Fin r) (Fin r) R) (hB : ∀ a b, b < a → B a b = 0) (i : ℕ) :

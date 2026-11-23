@@ -16,6 +16,9 @@ def prepare(trusted, candidate, control, state, runner):
     rpc.require(lease['operation'] == rpc.PROOF_OPERATION, 'proof lease required')
     rpc.require(runner == lease['worker']['runner_name'], 'wrong registered runner')
     rpc.verify_source(candidate, lease['snapshot'], rpc.PROOF_OPERATION)
+    if rpc.proof_policy()['baseline'].get('fresh_project'):
+        from prepare_fresh import prepare_fresh
+        return prepare_fresh(candidate,control,state,lease)
     for name, key in [('lakefile.toml', 'lakefile_sha256'), ('lake-manifest.json', 'manifest_sha256')]:
         rpc.require(rpc.digest(trusted / name) == lease['snapshot'][key], 'trusted main configuration differs')
     spec = importlib.util.spec_from_file_location('donor_ci_prepare', trusted / 'scripts/ci-prepare.py')
@@ -30,8 +33,14 @@ def prepare(trusted, candidate, control, state, runner):
     rpc.atomic(request, {'pr_head': lease['snapshot']['git_commit'],
                          'expected': {'candidate_head': lease['snapshot']['git_commit']}})
     paths_file = state / 'donor-paths.json'
+    explicit = baseline.get('unchanged_module_names')
+    filtered_plan = None
+    if explicit is not None:
+        filtered_plan = state / 'donor-baseline-plan.json'
+        rpc.atomic(filtered_plan, {'status':'ready', 'candidate_head':lease['snapshot']['git_commit'],
+                                   'closure':explicit})
     module.prepare(SimpleNamespace(trusted=trusted, candidate=candidate, state=state,
-                                   request=request, output=paths_file))
+                                   request=request, output=paths_file, quick_plan=filtered_plan))
     paths = rpc.read(paths_file)
     environment = module.clean_env()
     environment['ELAN_TOOLCHAIN'] = lease['snapshot']['toolchain']

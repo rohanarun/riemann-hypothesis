@@ -127,7 +127,7 @@ theorem heq_pol (q : B'.toPre = B.toPre) (i : Fin (w.st Z).toD7.R.m) (i' : Fin (
   exact heq_of_eq ((MvPolynomial.map_map _ _ _).trans (congrArg (fun s => MvPolynomial.map s F) (RingHom.ext hι)))
 
 section Lift
-open OmExt LiftUnit Formalism.DivisionValues Formalism.L2.Col
+open OmExt LiftUnit Formalism.DivisionValues _root_.Formalism.L2.Col
 
 
 set_option maxHeartbeats 4000000 in

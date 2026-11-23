@@ -90,7 +90,7 @@ theorem moment_of_bessel (hH : GlobalTheory.GapIn.Hyp) {k r : ℕ} {Wp : Type} [
   have hDG : (R ν).IsDG (PI.BesselPeriodGGP.eps48 k r) (fun a => lam a + (ν a : ℝ)) := ⟨hDS.1, hDS.2, ⟨h / 2, hgap, hOK⟩⟩
   obtain ⟨c, hc⟩ := GlobalTheory.GapLine.bessel_line_gap hH k r _ _ (R ν) Wp z π u μW μN μG νq (l ν) B hDG hSide hBe.1 hnz hB
   have hmass := ((Gp91.GlobalTheory.T.bessel_functional_l2_bound_and_isometry hH.1 k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg
-    ((GlobalTheory.T.families_have_largeGap_of_numericalHypotheses.2 k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg).1 hS) ν hν).2 hnz).2 w hws
+    ((_root_.GlobalTheory.GapSetup.families_gap.2 k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg).1 hS) ν hν).2 hnz).2 w hws
   have hmom := _root_.GlobalTheory.MomOneGap.moment_one_gap hH k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg hS ν q h1 h2 w hwl a
   obtain ⟨-, -, -, -, hW, hN, hG, hq⟩ := hSide
   obtain ⟨m0, m1⟩ := Formalism.FourierDecayAlt.P.DDSmoothness.muSof_facts hW hN

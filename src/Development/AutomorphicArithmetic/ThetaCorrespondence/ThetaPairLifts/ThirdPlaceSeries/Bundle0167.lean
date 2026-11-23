@@ -256,7 +256,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 open GlobalTheory.SymBridge GlobalTheory.SplitWeil GlobalTheory.RootEx GlobalTheory.StepData GlobalTheory.SymChain ValuativeRel
 noncomputable section
 namespace GlobalTheory.Fam.MidLoc
-open Formalism.L2.Col (IntAt redP qOf)
+open _root_.Formalism.L2.Col (IntAt redP qOf)
 section Loc
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
 variable [MeasurableSpace k] [BorelSpace k]
@@ -269,7 +269,7 @@ variable {E k : Type} [Field E] [NumberField E] [StarRing E] [Field k] [Valuativ
   [IsNonarchimedeanLocalField k]
 end Mat
 section Tuple
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 end Tuple
 section World
 variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} {I : TC B X} {l : I.Laws} {Z : TC.Later B (I.cols l)} {L : SizeData₂ (_root_.GlobalTheory.Mem.assemble _ _ Z.W Z.V Z.S Z.N Z.G)}

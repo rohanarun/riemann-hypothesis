@@ -23,7 +23,7 @@ open scoped ENNReal InnerProductSpace
 
 namespace GlobalTheory.CompanionTheory.PathGrowth
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.L ReciprocityTheory.ChartRestriction.DS
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.L ReciprocityTheory.ChartRestriction.DS
 
 variable {n : ℕ}
 

@@ -26,10 +26,8 @@ theorem norm_sub_le_of_toZModPow_eq {x y : ℤ_[ℓ]} {n : ℕ}
   rw [PadicInt.norm_le_pow_iff_mem_span_pow, ← PadicInt.ker_toZModPow, RingHom.mem_ker, map_sub,
     h, sub_self]
 
-theorem exists_zpow_neg_lt {ε : ℝ} (hε : 0 < ε) : ∃ n : ℕ, (ℓ : ℝ) ^ (-(n : ℤ)) < ε := by
-  have h1 : (1 : ℝ) < ℓ := by exact_mod_cast hℓ.out.one_lt
-  obtain ⟨n, hn⟩ := exists_pow_lt_of_lt_one hε (inv_lt_one_of_one_lt₀ h1)
-  exact ⟨n, by rwa [zpow_neg, zpow_natCast, ← inv_pow]⟩
+theorem exists_zpow_neg_lt {ε : ℝ} (hε : 0 < ε) : ∃ n : ℕ, (ℓ : ℝ) ^ (-(n : ℤ)) < ε :=
+  PadicInt.exists_pow_neg_lt ℓ hε
 
 theorem continuous_toZModPow (n : ℕ) : Continuous (PadicInt.toZModPow (p := ℓ) n) :=
   _root_.UpperTheory.Reformulated.B.Yde3.continuous_toZModPow n

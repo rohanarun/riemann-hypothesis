@@ -259,7 +259,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.SW.StageF
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW GlobalTheory.CompanionTheory.SW.PiLocalization₂ GlobalTheory.CompanionTheory.WeilSiegel.Frame NumberField MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW GlobalTheory.CompanionTheory.SW.PiLocalization₂ GlobalTheory.CompanionTheory.WeilSiegel.Frame NumberField MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 
 section Alg

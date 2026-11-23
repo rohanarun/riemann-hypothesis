@@ -8,9 +8,7 @@ public import Mathlib
     Nat → Type :=
     fun (n : Nat) ↦ Matrix (Fin n) (Fin n) Complex
 
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Qk36.U :
-    Nat → Type :=
-    fun (n : Nat) ↦
+@[reducible] noncomputable def UpperTheory.Reformulated.B.Qk36.U : ℕ → Type := fun (n : Nat) ↦
       @UniversalEnvelopingAlgebra Complex (UpperTheory.Reformulated.B.Qk36.gl n) Complex.commRing
         (@LieRing.ofAssociativeRing (UpperTheory.Reformulated.B.Qk36.gl n)
           (@Matrix.instRing (Fin n) Complex (Fin.fintype n) (instDecidableEqFin n) Complex.instRing))
@@ -28,9 +26,7 @@ noncomputable def UpperTheory.Reformulated.B.Qk36.E :
         (@Prod.fst (Fin n) (Fin n) a) (@Prod.snd (Fin n) (Fin n) a)
         (@OfNat.ofNat Complex (nat_lit 1) (@One.toOfNat1 Complex Complex.instOne))
 
-noncomputable def UpperTheory.Reformulated.B.Qk36.e :
-    {n : Nat} → Prod (Fin n) (Fin n) → UpperTheory.Reformulated.B.Qk36.U n :=
-    fun {n : Nat} (a : Prod (Fin n) (Fin n)) ↦
+noncomputable def UpperTheory.Reformulated.B.Qk36.e : {n : ℕ} → Fin n × Fin n → UpperTheory.Reformulated.B.Qk36.U n := fun {n : Nat} (a : Prod (Fin n) (Fin n)) ↦
       @DFunLike.coe
         (@LieHom Complex (UpperTheory.Reformulated.B.Qk36.gl n)
           (@UniversalEnvelopingAlgebra Complex (UpperTheory.Reformulated.B.Qk36.gl n) Complex.commRing

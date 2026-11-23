@@ -241,7 +241,7 @@ end Gen
 
 section Small
 
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Chr
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Chr
 
 variable {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E]
   {σ : E →ₐ[F] E} {n : ℕ} {gp : Fin 2 → ℕ}
@@ -427,7 +427,7 @@ theorem act_one {E K : Type} [Field E] [NumberField E] [Field K] {n : ℕ} (S : 
 
 end Small
 
-open Formalism.MainNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC
+open Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC
 
 attribute [local instance] GlobalTheory.Mem.Col2.starE Formalism.BasicNotions.Host.cmStar
 

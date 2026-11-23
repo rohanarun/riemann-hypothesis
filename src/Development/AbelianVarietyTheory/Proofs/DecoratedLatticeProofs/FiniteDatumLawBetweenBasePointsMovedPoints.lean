@@ -24,7 +24,7 @@ noncomputable section
 namespace GlobalTheory.AdForm.MovedLaw
 
 section Rat
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 variable {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] {n : ℕ}
 
 def ratAt (F : Type) [Field F] [NumberField F] [Algebra F E] (n : ℕ) (P : HeightOneSpectrum (𝓞 E)) : Subgroup (GL (Fin n) (AfE F E)) :=
@@ -56,7 +56,7 @@ theorem ratAt_of_pt [StarRing E] {hc : Formalism.BasicNotions.CMData F E} {ST SG
 end Rat
 
 section Step
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 attribute [local instance] GlobalTheory.Mem.Col2.starE
 variable {B : Base} {X : PreX B.toPre} {I : TC B X}
 
@@ -91,7 +91,7 @@ theorem cosetIn_act_congr (hI : I.Ok) {u : B.Word} {a : I.ι} {j : ℕ} {b : (I.
 end Step
 
 section Main
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 attribute [local instance] GlobalTheory.Mem.Col2.starE
 variable {B : Base} {X : PreX B.toPre} {I : TC B X}
 

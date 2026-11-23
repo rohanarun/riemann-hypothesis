@@ -20,7 +20,7 @@ noncomputable section
 
 namespace GlobalTheory.BranchFormula
 
-open Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.IndefiniteRowSideFullHecke.InterlacingEquivariance
+open Formalism.BasicNotions Formalism.L2.DIV _root_.Formalism.L2.Col Formalism.L2.Col.Br GlobalTheory.IndefiniteRowSideFullHecke.InterlacingEquivariance
 open Formalism.MainNotions.PrimeDegreeVariant (embGL lastGL)
 
 theorem isBlock_embGL (R : Type) [CommRing R] {N n : ℕ} (hN : N = n + 1) (g : GL (Fin n) R) :

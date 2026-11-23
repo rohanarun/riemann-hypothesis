@@ -58,7 +58,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Flat.BdryModel
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.Fl
 
 def iota (R : Type) [CommRing R] : epsR R ≅ epsAt (𝟙 (Sp R)) := Over.isoMk (Iso.refl _) (by simp)

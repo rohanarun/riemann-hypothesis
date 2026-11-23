@@ -60,7 +60,7 @@ namespace GlobalTheory.Fam.MovedJoin
 open GlobalTheory.AdForm
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem adAt_kb_eq_frsF {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} {I : TC B X} {l : I.Laws} {Z : TC.Later B (I.cols l)} {u : B.Word} {a : I.ι}
     {Ch₀ : ℕ → Type} (A : TwDat I l Z u a Ch₀) (hA : A.Is) (P : BadPr I a) (hP : P.1 ∉ (B.primes X).vGs)
     (i : ℕ) (hi : i ≤ B.R.m) (β : Ch₀ i) (r s : Fin (B.R.N i)) :

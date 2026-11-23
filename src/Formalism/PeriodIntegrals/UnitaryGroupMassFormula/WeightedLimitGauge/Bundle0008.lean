@@ -366,7 +366,7 @@ theorem section_vector_properties (hd : WbData k r z z' μW μW' a a' μsec) {ζ
       herm (Hpk k r) (embWb k r (μsec ζ) *ᵥ z') (embWb k r (μsec ζ) *ᵥ z') = herm (Hpk k r) z' z' ∧
       herm (Hpk k r) (embWb k r (μsec ζ) *ᵥ z') z = ζ := by
   refine ⟨inWb_emb _ hd.z'_mem, herm_both _ _ (MB.emb_mem_UWb (hd.sec.2 ζ hζ).1).1 z' z', ?_⟩
-  rw [herm_emb (μsec ζ) z z' hd.z_mem hd.z'_mem]
+  rw [_root_.PI.RhsWLim.W.ZetaZeros.herm_emb _ hd.z_mem hd.z'_mem]
   exact (hd.sec.2 ζ hζ).2
 
 theorem meas_Ghat (hd : WbData k r z z' μW μW' a a' μsec) {F : (Fin (2 * r + k + 1) → ℂ) → ℝ≥0∞}

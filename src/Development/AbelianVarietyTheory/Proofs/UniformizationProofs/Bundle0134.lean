@@ -328,7 +328,7 @@ open GlobalTheory.KeyPow GlobalTheory.KeyKa
 namespace GlobalTheory
 
 theorem keyFormula_of_connFam : GlobalTheory.KeyKa.ConnFam → KeyFormula := fun hF =>
-  have hL := GlobalTheory.T.abelianScheme_laws_unconditional.1
+  have hL := _root_.GlobalTheory.abelianSchemeLaws_all.1
   have hR := GlobalTheory.KeyTop.exists_keyRule_charHalf hL _root_.GlobalTheory.thetaUnifAV_closed GlobalTheory.ThetaInversion.inversion (GlobalTheory.phHolo_of_phKoecher GlobalTheory.phKoecher) GlobalTheory.torusAlgebraic_holds
   GlobalTheory.KeyRoot.keyFormula_of_families _root_.GlobalTheory.thetaUnifAV_closed hL.polBaseChange (_root_.GlobalTheory.KeyCountableDescent.keyIn_descends_countable hL).1 hR
     (GlobalTheory.ThetaFrameSpec.value_specialises hL _root_.GlobalTheory.thetaUnifAV_closed GlobalTheory.ThetaInversion.inversion hR (GlobalTheory.ThetaEquiv.val_equivariant hL _root_.GlobalTheory.thetaUnifAV_closed GlobalTheory.ThetaInversion.inversion hR hF))
@@ -347,7 +347,7 @@ open GlobalTheory.KeyPow GlobalTheory.KeyKa
 namespace GlobalTheory
 
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj MeasureTheory in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj MeasureTheory in
 attribute [local instance] Over.cartesianMonoidalCategory in
 theorem _root_.GlobalTheory.keyFormulaPow_and_keyDegree :
     _root_.GlobalTheory.KeyFormulaPow ∧ _root_.GlobalTheory.KeyDegreeSt := by

@@ -421,7 +421,7 @@ noncomputable section
 
 namespace GlobalTheory.BaseFn
 
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.DetSpec
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.DetSpec
 
 section Loc
 

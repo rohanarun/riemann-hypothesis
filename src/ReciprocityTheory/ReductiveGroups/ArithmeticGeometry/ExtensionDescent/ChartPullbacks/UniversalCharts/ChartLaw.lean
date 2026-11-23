@@ -85,10 +85,6 @@ theorem isLieComb_iff {d : ℕ} (c : Fin d → R) (v : Fin d → (epsR R ⟶ G))
 
 variable {n : ℕ} {x : ∀ m : ℕ, sp (R₀ := R) (JetR R (Fin n) m) ⟶ G} (hx : IsUnivChart G n x)
 
--- [dedup] theorem tcoord_congr {w w' : sp (R₀ := R) (DualNumber R) ⟶ G} (e : w = w') (h : IsTan w)
--- [dedup]     (h' : IsTan w') : tcoord hx w h = tcoord hx w' h' := by
--- [dedup]   subst e; rfl
-
 theorem list_prod_tan : ∀ {k : ℕ} (u : Fin k → (sp (R₀ := R) (DualNumber R) ⟶ G))
     (hu : ∀ i, IsTan (u i)), ∃ h : IsTan (List.ofFn u).prod, tcoord hx _ h = ∑ i, tcoord hx (u i) (hu i) := by
   intro k

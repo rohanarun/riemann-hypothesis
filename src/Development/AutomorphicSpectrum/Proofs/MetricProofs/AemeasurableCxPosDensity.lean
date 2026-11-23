@@ -22,7 +22,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Pub.CxPosMeas
 
-open MvPolynomial MeasureTheory Metric Filter Topology ReciprocityTheory.ChartRestriction.G.Geo GlobalTheory.CompanionTheory.Ar.Pub.CxInt
+open MvPolynomial MeasureTheory _root_.Metric Filter Topology ReciprocityTheory.ChartRestriction.G.Geo GlobalTheory.CompanionTheory.Ar.Pub.CxInt
   GlobalTheory.CompanionTheory.Ar.Pub.CxComp
 open ReciprocityTheory.AnForm.R (conePts)
 

@@ -21,6 +21,16 @@ def wd (n : ℕ) (j : Fin n) (g : V n → ℂ) (y : V n) : ℂ :=
 def wdb (n : ℕ) (j : Fin n) (g : V n → ℂ) (y : V n) : ℂ :=
   (fderiv ℝ g y (bas n j) + Complex.I * fderiv ℝ g y (Complex.I • bas n j)) / 2
 
+open Filter Topology in
+theorem wd_congr {n : ℕ} {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
+    wd n j f x = wd n j g x := by
+  simp only [wd, h.fderiv_eq]
+
+open Filter Topology in
+theorem wdb_congr {n : ℕ} {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
+    wdb n j f x = wdb n j g x := by
+  simp only [wdb, h.fderiv_eq]
+
 def IsChart {M : Type*} [TopologicalSpace M] (n : ℕ) (z : M → V n)
     (e : OpenPartialHomeomorph M (V n)) : Prop :=
   Set.EqOn z e e.source

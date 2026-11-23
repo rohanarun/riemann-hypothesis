@@ -33,7 +33,7 @@ namespace GlobalTheory.SplitCorr
 
 section Algebra
 
-open Polynomial Formalism.L2.Col
+open Polynomial _root_.Formalism.L2.Col
 
 theorem prod_one_add (M : Multiset ℂ) :
     (M.map fun b => 1 + b).prod = ∑ j ∈ Finset.range (M.card + 1), M.esymm j := by

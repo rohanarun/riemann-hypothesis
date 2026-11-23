@@ -22,9 +22,9 @@ open Module NumberField IsDedekindDomain
 open scoped Matrix ComplexOrder
 noncomputable section
 namespace GlobalTheory.Cp
-open Formalism Formalism.L2 Formalism.L2.DIV Formalism.DivisionValues Formalism.EigenvalueLevelCeiling Formalism.L2.Indef
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.DIV Formalism.DivisionValues Formalism.EigenvalueLevelCeiling Formalism.L2.Indef
 section ColRec
-open Formalism.BasicNotions Formalism.L2.Col
+open Formalism.BasicNotions _root_.Formalism.L2.Col
 variable {X : Fields} {G : Type} [Group G] [Fintype G] {Pl0 I0 Ty T : Type} {m : ℕ}
   {A3 : FamIn3 X.K G Pl0 I0 Ty T m} {P1 : Subgroup G} {ψ1 : P1 →* X.Kˣ}
 end ColRec

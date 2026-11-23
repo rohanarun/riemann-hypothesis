@@ -16,7 +16,7 @@ noncomputable section
 
 namespace GlobalTheory.LvT.Built.IsTerm
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2 GlobalTheory.LvT GlobalTheory.LvT.Built
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2 GlobalTheory.LvT GlobalTheory.LvT.Built
 open GlobalTheory.ColPeriod GlobalTheory.IndefiniteRowSideFullHecke.FourierColumnIndicator
 
 section Generic

@@ -278,7 +278,7 @@ end Normaliser
 
 section Component
 
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal ReciprocityTheory.Aut Formalism.AUTREP Formalism.L2 NumberField IsDedekindDomain GlobalTheory.HeightCounting
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal ReciprocityTheory.Aut Formalism.AUTREP _root_.Formalism.L2 NumberField IsDedekindDomain GlobalTheory.HeightCounting
 open GlobalTheory.HeckeScalarSph GlobalTheory.SphLabelOps
 open scoped TensorProduct
 

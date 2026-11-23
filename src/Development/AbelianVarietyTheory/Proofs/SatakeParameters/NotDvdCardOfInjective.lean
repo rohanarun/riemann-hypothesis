@@ -14,7 +14,7 @@ noncomputable section
 
 namespace GlobalTheory.ColPeriod
 
-open NumberField IsDedekindDomain Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.L2.DIV Polynomial
+open NumberField IsDedekindDomain _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.L2.DIV Polynomial
 open scoped Matrix
 
 theorem not_dvd_card_of_injective {E : Type} [Field E] [NumberField E] {n : ℕ} {G : Type} [Group G] [Finite G]

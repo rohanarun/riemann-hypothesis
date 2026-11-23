@@ -28,7 +28,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
 
 section
 
@@ -108,7 +108,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms
 
 section General
 
@@ -417,7 +417,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.DiaStab
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
 
 section General
 

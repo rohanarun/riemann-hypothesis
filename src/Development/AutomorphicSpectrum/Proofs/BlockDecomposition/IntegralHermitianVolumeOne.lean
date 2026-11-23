@@ -10,7 +10,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.GoodHerm
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.SiegelWeilFormula.Gunr PositivityTheory.PfSWUS.Loc Topology
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.SiegelWeilFormula.Gunr PositivityTheory.PfSWUS.Loc _root_.Topology
 open scoped TensorProduct
 
 theorem measure_eq_one_of_selfDual {V : Type} [AddCommGroup V] [TopologicalSpace V] [IsTopologicalAddGroup V]

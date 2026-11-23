@@ -442,8 +442,8 @@ theorem translate_mul_inv_isLocus : ∀ (S : Scheme.{0}) [IsLocallyNoetherian S]
       = 2 • pull (fst A T).left c := by
     rw [hsq, ← sub_eq_zero, ← h0]
     abel
-  have hl := (GlobalTheory.T.nonvanishingLocus_pullback_and_vanish_into_locus.1 A.left (A ⊗ T).left (fst A T * (snd A T ≫ a)).left c V hV).add
-    (GlobalTheory.T.nonvanishingLocus_pullback_and_vanish_into_locus.1 A.left (A ⊗ T).left (fst A T * (snd A T ≫ a)⁻¹).left c V hV)
+  have hl := (_root_.GlobalTheory.LocusPull.locus_pull.1 A.left (A ⊗ T).left (fst A T * (snd A T ≫ a)).left c V hV).add
+    (_root_.GlobalTheory.LocusPull.locus_pull.1 A.left (A ⊗ T).left (fst A T * (snd A T ≫ a)⁻¹).left c V hV)
   rw [h2] at hl
   exact hl
 

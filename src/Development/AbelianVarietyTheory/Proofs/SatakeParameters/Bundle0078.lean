@@ -203,7 +203,7 @@ noncomputable section
 
 namespace GlobalTheory.GO
 
-open NumberField Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms
+open NumberField _root_.Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms
 
 theorem sum_inv_eq_sum_orbits {K M H X : Type} [Field K] [CharZero K] [AddCommGroup M] [Module K M] [Group H] [Finite H]
     [MulAction H X] [Fintype X] [Fintype (MulAction.orbitRel.Quotient H X)] (F : X → M)

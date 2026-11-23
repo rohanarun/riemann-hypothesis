@@ -215,7 +215,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory
 namespace SplitOffPlaces
-open Formalism.L2.Col Formalism.HermitianLatticesTheory
+open _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory
 
 noncomputable def conjSpec {E : Type} [Field E] [NumberField E] [StarRing E] (P : HeightOneSpectrum (𝓞 E)) :
     HeightOneSpectrum (𝓞 E) where
@@ -307,7 +307,7 @@ theorem exists_norm (D : D7) (x : 𝓞 D.host.K) :
 end SplitOffPlaces
 
 
-open SplitOffPlaces Formalism.L2.Col Formalism.HermitianLatticesTheory in
+open SplitOffPlaces _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory in
 theorem splitOff_places : ∀ {D : D7} (Pb : Formalism.L2.Host.PiBar D.host) (Pg : Finset (HeightOneSpectrum (𝓞 D.host.E))) (S : Finset (HeightOneSpectrum (𝓞 D.host.F))) (P : HeightOneSpectrum (𝓞 D.host.E)), (∀ PP, PP ∈ Pg ↔ ∃ k, Pb.Div k PP) → (∀ v ∈ S, ∃ PP ∈ Pg, (_root_.IsDedekindDomain.HeightOneSpectrum.under (𝓞 D.host.F) PP) = v) → Formalism.IndefR.Bridge.SplitOff P (Pg : Set (HeightOneSpectrum (𝓞 D.host.E))) → ((D.host.g 0 * D.host.g 1 : ℕ) : 𝓞 D.host.E) ∉ P.asIdeal ∧ (∀ PP ∈ Pg, PP ≠ P ∧ ¬ Formalism.IndefR.Lev.IsConjPl PP P) ∧ OffS D S P := by
   intro D Pb Pg S P hPg hS hP
   obtain ⟨-, hP1, hP2⟩ := hP

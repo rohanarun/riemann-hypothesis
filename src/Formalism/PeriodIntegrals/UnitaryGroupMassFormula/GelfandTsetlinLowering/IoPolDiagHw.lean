@@ -12,11 +12,8 @@ namespace PI.WGL
 
 open Formalism.BasicNotions Formalism.GradedWeylDivisibility MvPolynomial
 
-theorem io_natW_anti {k : ℕ} (mu : DomWeight k) : Antitone mu.natW := by
-  intro i j hij
-  have := mu.anti hij
-  show (mu.w j - mu.detShift).toNat ≤ (mu.w i - mu.detShift).toNat
-  exact Int.toNat_le_toNat (by linarith)
+theorem io_natW_anti {k : ℕ} (mu : DomWeight k) : Antitone mu.natW :=
+  fun _ _ hij => Int.toNat_le_toNat (sub_le_sub_right (mu.anti hij) _)
 
 theorem io_natW_cast {k : ℕ} (mu : DomWeight k) (a : Fin k) :
     ((mu.natW a : ℕ) : ℂ) = ((mu.w a - mu.detShift : ℤ) : ℂ) := by

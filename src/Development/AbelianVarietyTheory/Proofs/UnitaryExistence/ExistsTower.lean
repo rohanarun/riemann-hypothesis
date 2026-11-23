@@ -171,7 +171,7 @@ theorem exists_transition {Xo : ∀ l : Level H, Moduli D l} (S : System Xo) (hN
 
 theorem exists_towerAt {Xo : ∀ l : Level H, Moduli D l} (S : System Xo) (hD : 1 ≤ D.p + D.q) (l : Level H)
     (c : Coeff l) {p : ℕ} (hp : p.Prime) (hg : l.GoodAt p) : ∃ Tw : PointsOfFlagModel.Tower p (Xo l) c, PointsOfFlagModel.TowerAt Tw := by
-  have hN := (GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.2 E H D hD).1
+  have hN := (_root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.2 E H D hD).1
   have hne : ∀ (l : Level H) (c : Coeff l) (O : Type) [CommRing O] (β : O →+* c.F) (Y : Model (Xo l) c β),
       Nonempty Y.X := fun l c O _ β Y =>
     ((_root_.GlobalTheory.PeriodExists.typeFn_period_exist E H D).2.2 _root_.GlobalTheory.closing_of_abelianSchemeLaws hD l (Xo l) c).map fun x => Y.j x
@@ -213,9 +213,9 @@ theorem exists_tower : ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (H
   intro E _ _ _ H D l Xo c hD hg p
   classical
   obtain ⟨Xf, rfl⟩ : ∃ Xf : ∀ l : Level H, Moduli D l, Xf l = Xo :=
-    ⟨Function.update (fun l => (GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.1 E H D l hD).some) l Xo, Function.update_self ..⟩
+    ⟨Function.update (fun l => (_root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.1 E H D l hD).some) l Xo, Function.update_self ..⟩
   obtain ⟨L1, L2, L3, -⟩ := _root_.GlobalTheory.firstFiveLaws
-  obtain ⟨S, -⟩ := GlobalTheory.T.exists_localModelSystem_ampleFrames_fullLevel _root_.GlobalTheory.homExtension_semiAbelian_dvr L1 L2 L3 (_root_.GlobalTheory.topAmpExists_of_semistableReduction _root_.GlobalTheory.SS.semistableReductionSt) E H D Xf hD (GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.2 E H D hD).1
+  obtain ⟨S, -⟩ := GlobalTheory.T.exists_localModelSystem_ampleFrames_fullLevel _root_.GlobalTheory.homExtension_semiAbelian_dvr L1 L2 L3 (_root_.GlobalTheory.topAmpExists_of_semistableReduction _root_.GlobalTheory.SS.semistableReductionSt) E H D Xf hD (_root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.2 E H D hD).1
   by_cases hp : p.Prime
   · obtain ⟨Tw, h⟩ := exists_towerAt S hD l c hp (hg p hp)
     exact ⟨Tw, fun _ => h⟩

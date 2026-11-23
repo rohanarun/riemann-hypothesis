@@ -201,6 +201,12 @@ public noncomputable abbrev target
 
 end I195MixedCoordinates_b311a3746f35afef36fdd39b
 
+public noncomputable abbrev _root_.I195MixedCoordinates_b1361229ba0dbce9b699add1.source :=
+  @_root_.I195MixedCoordinates_b311a3746f35afef36fdd39b.source
+
+public noncomputable abbrev _root_.I195MixedCoordinates_b1361229ba0dbce9b699add1.target :=
+  @_root_.I195MixedCoordinates_b311a3746f35afef36fdd39b.target
+
 @[expose] public section
 
 open Formalism.BasicNotions Formalism.BasicNotions.TH Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes Formalism.MainNotions.StandardLattice Formalism.L2.Theta Formalism.IndefR Formalism.IndefR.Datum Formalism.IndefR.Links MeasureTheory IsDedekindDomain NumberField Matrix

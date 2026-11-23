@@ -24,7 +24,7 @@ noncomputable section
 
 namespace GlobalTheory.GO
 
-open NumberField IsDedekindDomain Formalism.MainNotions.G Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.L2.DIV
+open NumberField IsDedekindDomain Formalism.MainNotions.G _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.L2.DIV
 
 section Deco
 

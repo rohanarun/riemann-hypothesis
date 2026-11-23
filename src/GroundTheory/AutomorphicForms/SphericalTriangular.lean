@@ -215,7 +215,7 @@ theorem det_submatrix_tailEmb {u : GL (Fin n) F} (hu : u ∈ unipotent F n) (l :
     (hm : m ≤ n) :
     (((u * torusPow F n l : GL (Fin n) F) : Matrix (Fin n) (Fin n) F).submatrix (tailEmb hm)
       (tailEmb hm)).det = (uniformizer F : F) ^ tailSum l hm := by
-  have hB : u * torusPow F n l ∈ borel F n := (borel F n).mul_mem hu.1 (torusPow_mem_borel F n l)
+  have hB : u * torusPow F n l ∈ _root_.GroundTheory.Automorphic.Iwasawa.borel F n := (_root_.GroundTheory.Automorphic.Iwasawa.borel F n).mul_mem hu.1 (torusPow_mem_borel F n l)
   have hmono : StrictMono (tailEmb hm) := fun i j hij => by
     simp only [tailEmb, Fin.lt_def] at hij ⊢
     omega

@@ -336,15 +336,15 @@ theorem theta_map_aff : ∀ (S : Scheme.{0}) (G : Over S) [GrpObj G] [IsCommMonO
     rw [← hra]
     exact map_mul _ _ _
   have h2 : PCrd (spMap i ≫ GlobalTheory.ProjSpace.pt β e hspan) (fun j => a ^ (n + 1).factorial * symTup c j) := by
-    have := GlobalTheory.T.projectiveHomogeneousCoords_basic_properties.1 o R K n _ e i hf
+    have := _root_.GlobalTheory.UMin.CrdBasic.pCrd_basic.1 o R K n _ e i hf
     convert this using 2 with j
     rw [he K i pt _ hl0 j, GlobalTheory.UMin.symTup_basic.1]
   have ha0 : a ≠ 0 := by
     rintro h0
-    obtain ⟨j, hj⟩ := (GlobalTheory.T.projectiveHomogeneousCoords_basic_properties.2.2 o K n _).2 _ h2
+    obtain ⟨j, hj⟩ := (_root_.GlobalTheory.UMin.CrdBasic.pCrd_basic.2.2 o K n _).2 _ h2
     apply hj
     simp [h0, Nat.factorial_ne_zero]
-  have h3 := GlobalTheory.T.projectiveHomogeneousCoords_basic_properties.2.1 o K n _ _ ((a ^ (n + 1).factorial)⁻¹) (isUnit_iff_ne_zero.2 (inv_ne_zero (pow_ne_zero _ ha0))) h2
+  have h3 := _root_.GlobalTheory.UMin.CrdBasic.pCrd_basic.2.1 o K n _ _ ((a ^ (n + 1).factorial)⁻¹) (isUnit_iff_ne_zero.2 (inv_ne_zero (pow_ne_zero _ ha0))) h2
   convert h3 using 1
   funext j
   rw [inv_mul_cancel_left₀ (pow_ne_zero _ ha0)]

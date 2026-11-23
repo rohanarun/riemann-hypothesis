@@ -30,7 +30,7 @@ noncomputable section
 
 namespace GlobalTheory.HyodoFE
 
-open Formalism Formalism.WeaklyAdmissibleFiltrations GlobalTheory.HyodoDef TensorProduct Module
+open _root_.Formalism Formalism.WeaklyAdmissibleFiltrations GlobalTheory.HyodoDef TensorProduct Module
 
 section Generic
 

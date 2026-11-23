@@ -47,7 +47,7 @@ lemma continuous_rmulQ (a : Matrix (Fin m) (Fin m) ℂ) : Continuous (rmulQ (m :
 
 theorem transfer_holds : Transfer := by
   intro m ε T S P Q hQP hPQ hS hR μ hσ h0 hcar hl s hs
-  set Φ : Formalism.REAL.UJ ε → MtM m := fun g => fun i j => (Q * uMat g * P) i j with hΦdef
+  set Φ : _root_.Formalism.REAL.UJ ε → MtM m := fun g => fun i j => (Q * uMat g * P) i j with hΦdef
   have hΦc : Φ = conjH P Q hQP hPQ ∘ coeMatrixAlt ε := rfl
   have hemb : MeasurableEmbedding Φ := by
     rw [hΦc]
@@ -77,7 +77,7 @@ theorem transfer_holds : Transfer := by
         show (s' * (Q * uMat g * P)) i j = (Q * (P * s' * Q * uMat g) * P) i j
         rw [show Q * (P * s' * Q * uMat g) * P = (Q * P) * s' * (Q * uMat g * P) by
           simp only [Matrix.mul_assoc], hQP, Matrix.one_mul]
-      have htT : t ∈ {g : Formalism.REAL.UJ ε | uMat g ∈ T} := by
+      have htT : t ∈ {g : _root_.Formalism.REAL.UJ ε | uMat g ∈ T} := by
         show coeMatrixAlt ε t ∈ T
         rw [htt]; exact ht.2
       rw [Measure.map_map (continuous_lmulQ s').measurable hΦm, hcomm,

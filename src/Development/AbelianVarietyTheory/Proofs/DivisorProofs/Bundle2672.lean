@@ -58,7 +58,7 @@ theorem pCrd_of_symAt : ∀ (S : Scheme.{0}) (G : Over S) [GrpObj G] [IsCommMonO
   have h₃ := (_root_.GlobalTheory.UMin.ThMove.hasTh₂_move S G L ρ hL hρ _ P.A P.L ρP (x ≫ q) α P.isLB hρP hα hw m m _ _ Ω' _ c c).1 h₂
   rw [← Category.assoc] at h₃
   have h₄ := hf Ω' _ c (hasTh_iff.2 h₃)
-  refine GlobalTheory.T.projectiveHomogeneousCoords_field_determine_descend.2.2 o Ω Ω' n _ e (algebraMap Ω Ω') ?_
+  refine _root_.GlobalTheory.UMin.CrdUniq.main.2.2 o Ω Ω' n _ e (algebraMap Ω Ω') ?_
   rw [← Category.assoc, funext (he Ω' _ pt c hl)]
   exact h₄
 

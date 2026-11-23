@@ -28,10 +28,8 @@ def datR : SemiG.Dat (R ⊗[F] E) (Fin M) r where
 
 theorem datR_h (x y : Fin M → R ⊗[F] E) : (datR R σ J P T).h x y = hR R σ J x y := rfl
 
-theorem sigR_inclR (x : E) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR (F := F) R x) = inclR (F := F) R (σ x) := by
-  first
-    | rfl
-    | simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR, inclR]
+theorem sigR_inclR (x : E) : _root_.Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR (F := F) R x) = inclR (F := F) R (σ x) :=
+  DFunLike.congr_fun (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id F R) σ) x
 
 theorem hR_ratV (x y : Fin M → E) :
     hR R σ J (ratV (F := F) R x) (ratV (F := F) R y) = inclR (F := F) R (hE σ J x y) := by

@@ -270,7 +270,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 namespace GlobalTheory.QTw.GeoInhab
 open GlobalTheory.FinPl (SplitPt latV idAt intAt Lat Pl)
 open Formalism.L2.NTheta (IsIdemAt)
-open Formalism.L2.Col (IntAt qOf)
+open _root_.Formalism.L2.Col (IntAt qOf)
 open GlobalTheory.SymBridge (IsOrd zPos xPos IsCompl)
 open GlobalTheory.IndefiniteRowSideFullHecke.FramePositiveSum (IsUnif)
 

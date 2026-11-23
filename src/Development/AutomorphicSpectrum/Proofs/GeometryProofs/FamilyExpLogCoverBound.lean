@@ -25,8 +25,8 @@ noncomputable section
 namespace GlobalTheory.CompanionTheory.Ar.QuotLoc
 
 open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField TensorProduct Filter Topology Matrix
-open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.Semi GlobalTheory.CompanionTheory.Ar
-open GlobalTheory.CompanionTheory.Ar.Flat Metric
+open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.Semi _root_.GlobalTheory.CompanionTheory.Ar
+open GlobalTheory.CompanionTheory.Ar.Flat _root_.Metric
 
 theorem isHolTo_comp {V V' : Type} [NormedAddCommGroup V] [NormedSpace ℂ V] [NormedAddCommGroup V'] [NormedSpace ℂ V']
     {X : Scheme.{0}} {A : Set V'} {y : V' → (Sp ℂ ⟶ X)} (hy : IsHolTo A y) {B' : Set V} (hB' : IsOpen B')

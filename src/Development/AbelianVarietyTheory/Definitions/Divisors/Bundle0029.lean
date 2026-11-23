@@ -186,7 +186,7 @@ noncomputable section
 
 namespace GlobalTheory.Adelic
 
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace MvPolynomial
+open CategoryTheory _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace MvPolynomial
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
 open ReciprocityTheory.ChartRestriction.G.Out (nonzeroLocus)
 open GlobalTheory.Points GlobalTheory.Twist GlobalTheory.ProjSpace

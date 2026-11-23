@@ -25,7 +25,7 @@ public import Development.AbelianVarietyTheory.CrystallinePeriods.Bundle0001
 
 noncomputable section
 namespace GlobalTheory.MemLoc.PrimeEx
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc GlobalTheory.MemLoc
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc GlobalTheory.MemLoc
 open scoped Formalism.Per
 
 section General
@@ -276,7 +276,7 @@ def tied (C : Core l) : LocTied l (prime C) (ainf C) where
 end GlobalTheory.MemLoc.PrimeEx
 
 namespace GlobalTheory.MemLoc
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc
 
 theorem exists_locPrime_tied : ∀ (l : ℕ) [Fact l.Prime],
     ∃ (P : LocPrime l) (AI : LocAinf l P), Nonempty (LocTied l P AI) := by

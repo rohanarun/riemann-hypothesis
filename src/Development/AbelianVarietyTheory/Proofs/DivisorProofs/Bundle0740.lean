@@ -27,7 +27,7 @@ noncomputable section
 
 namespace GlobalTheory.ColNorms.NumMean
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Col Formalism.L2.Ker GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds GlobalTheory.ColNorms
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV _root_.Formalism.L2.Col Formalism.L2.Ker GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds GlobalTheory.ColNorms
 
 theorem log_le_of_le_exp {y X : ℝ} (hy : 0 ≤ y) (hX : 0 ≤ X) (h : y ≤ Real.exp X) : Real.log y ≤ X := by
   rcases hy.eq_or_lt with h0 | h0
@@ -258,7 +258,7 @@ noncomputable section
 
 namespace GlobalTheory.LatVal.CurveTransport
 
-open GlobalTheory.EllipticCM GlobalTheory.ConjPoint WeierstrassCurve
+open GlobalTheory.EllipticCM GlobalTheory.ConjPoint _root_.WeierstrassCurve
 open GlobalTheory.Idele
 open GlobalTheory.IndefiniteRowSideFullHecke.LatticeNormTransport (IsLatOf IsInvIdealOf)
 

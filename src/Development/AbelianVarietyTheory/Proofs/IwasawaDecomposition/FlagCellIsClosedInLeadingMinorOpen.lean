@@ -59,7 +59,7 @@ theorem map_uvec (ψ : CR m U →+* R) {k : ℕ} (e : Fin k → Let m) :
 theorem lead_eq (hD : LeftInv D c) (ψ : CR m U →+* R) {k : ℕ} {e : Fin k → Let m} (he : Down e) (u : Rˣ) :
     ∑ q, ψ.comp MvPolynomial.C (lform D (wLet w ∘ e) q) * (u • ψ ∘ plk (uvec c w) e) q = u := by
   have hL := LeftInv.map (ψ.comp MvPolynomial.C) hD
-  have key := (GlobalTheory.T.cauchyBinet_plucker_and_cellCoordinates.2 T m R M _ _ w (ψ ∘ MvPolynomial.X) hL).1 k e he
+  have key := (_root_.GlobalTheory.FlagEmb.CauchyBinet.main.2 T m R M _ _ w (ψ ∘ MvPolynomial.X) hL).1 k e he
   calc _ = (u : R) * ∑ q, lform (fun z => ψ.comp MvPolynomial.C ∘ D z) (wLet w ∘ e) q *
         plk (cellVec (fun z => ψ.comp MvPolynomial.C ∘ c z) w (ψ ∘ MvPolynomial.X)) e q := by
         rw [Finset.mul_sum]
@@ -78,7 +78,7 @@ theorem read_eq (hD : LeftInv D c) (ψ : CR m U →+* R) (x : CellVar m) (u : R�
       u * ψ (MvPolynomial.X x) := by
   obtain ⟨τ, ⟨⟨i, j⟩, hij⟩⟩ := x
   have hL := LeftInv.map (ψ.comp MvPolynomial.C) hD
-  have key := (GlobalTheory.T.cauchyBinet_plucker_and_cellCoordinates.2 T m R M _ _ w (ψ ∘ MvPolynomial.X) hL).2 τ i j hij
+  have key := (_root_.GlobalTheory.FlagEmb.CauchyBinet.main.2 T m R M _ _ w (ψ ∘ MvPolynomial.X) hL).2 τ i j hij
   calc _ = (u : R) * ∑ q, lform (fun z => ψ.comp MvPolynomial.C ∘ D z) (rd w ⟨τ, ⟨(i, j), hij⟩⟩) q *
         plk (cellVec (fun z => ψ.comp MvPolynomial.C ∘ c z) w (ψ ∘ MvPolynomial.X))
           (vEn (m := m) ⟨τ, ⟨(i, j), hij⟩⟩).2.1 q := by

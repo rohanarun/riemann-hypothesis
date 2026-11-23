@@ -178,18 +178,13 @@ def LeafZcPull : Prop := ∀ {R : Type} [CommRing R] (K : Cx R) {X' X : Scheme.{
 def LeafZcIn : Prop := ∀ {R : Type} [CommRing R] (K : Cx R) {X : Scheme.{0}} (U W V : X.Opens) (h : V ≤ W), V ≤ U →
   ∀ (n : ℤ) (a : Sec (K.X n) W.toScheme), a ∈ Zc K (W.ι ⁻¹ᵁ U) n → rs h a = 0
 
--- [dedup] private theorem sres_zero {R : Type} [CommRing R] {G : Shv R} {X Y : Scheme.{0}} (f : Y ⟶ X) :
--- [dedup]     Sec.res f (0 : Sec G X) = 0 := by
--- [dedup]   show (G.obj.map f.op).hom 0 = 0
--- [dedup]   exact map_zero _
-
--- [dedup] private theorem smap_zero {R : Type} [CommRing R] {G H : Shv R} (φ : G ⟶ H) {X : Scheme.{0}} :
--- [dedup]     Sec.map φ (0 : Sec G X) = 0 := by
--- [dedup]   show (φ.hom.app (op X)).hom 0 = 0
--- [dedup]   exact map_zero _
+private theorem desc_sres_zero {R : Type} [CommRing R] {G : Shv R} {X Y : Scheme.{0}} (f : Y ⟶ X) :
+    Sec.res f (0 : Sec G X) = 0 := by
+  show (G.obj.map f.op).hom 0 = 0
+  exact map_zero _
 
 private theorem Bd_zero {R : Type} [CommRing R] (K : Cx R) {X : Scheme.{0}} (U : X.Opens) (n : ℤ) : Bd K U n 0 :=
-  ⟨0, sres_zero _, smap_zero _⟩
+  ⟨0, desc_sres_zero _, smap_zero _⟩
 
 private theorem leι {X : Scheme.{0}} {V W : X.Opens} (h : V ≤ W) (U : X.Opens) :
     V.ι ⁻¹ᵁ U ≤ X.homOfLE h ⁻¹ᵁ (W.ι ⁻¹ᵁ U) :=
@@ -257,27 +252,27 @@ private theorem descent_glue_of_residue_pullback_inclusion (hK : LeafResK) (hP :
   rw [hnat (V a).ι ((V a).ι ⁻¹ᵁ U) U le_rfl ⟨c, hc⟩ ⟨_, zc⟩ rfl, ← hl a, ← sub_eq_zero, ← map_sub]
   exact (hker _ _).2 (hcb (some a))
 
--- [dedup] private theorem sres_comp {R : Type} [CommRing R] {G : Shv R} {X Y Z : Scheme.{0}} (g : Z ⟶ Y) (f : Y ⟶ X) (a : Sec G X) :
--- [dedup]     Sec.res g (Sec.res f a) = Sec.res (g ≫ f) a := by
--- [dedup]   show (G.obj.map g.op).hom ((G.obj.map f.op).hom a) = (G.obj.map (g ≫ f).op).hom a
--- [dedup]   rw [op_comp, Functor.map_comp]; rfl
+private theorem desc_sres_comp {R : Type} [CommRing R] {G : Shv R} {X Y Z : Scheme.{0}} (g : Z ⟶ Y) (f : Y ⟶ X) (a : Sec G X) :
+    Sec.res g (Sec.res f a) = Sec.res (g ≫ f) a := by
+  show (G.obj.map g.op).hom ((G.obj.map f.op).hom a) = (G.obj.map (g ≫ f).op).hom a
+  rw [op_comp, Functor.map_comp]; rfl
 
 private theorem sres_id {R : Type} [CommRing R] {G : Shv R} {X : Scheme.{0}} (a : Sec G X) : Sec.res (𝟙 X) a = a := by
   show (G.obj.map (𝟙 X).op).hom a = a
   rw [op_id, CategoryTheory.Functor.map_id]; rfl
 
--- [dedup] private theorem smap_res {R : Type} [CommRing R] {G H : Shv R} (φ : G ⟶ H) {X Y : Scheme.{0}} (f : Y ⟶ X) (a : Sec G X) :
--- [dedup]     Sec.map φ (Sec.res f a) = Sec.res f (Sec.map φ a) := by
--- [dedup]   show (φ.hom.app (op Y)).hom ((G.obj.map f.op).hom a) = (H.obj.map f.op).hom ((φ.hom.app (op X)).hom a)
--- [dedup]   have h := φ.hom.naturality f.op
--- [dedup]   exact congrArg (fun t => t.hom a) h
+private theorem desc_smap_res {R : Type} [CommRing R] {G H : Shv R} (φ : G ⟶ H) {X Y : Scheme.{0}} (f : Y ⟶ X) (a : Sec G X) :
+    Sec.map φ (Sec.res f a) = Sec.res f (Sec.map φ a) := by
+  show (φ.hom.app (op Y)).hom ((G.obj.map f.op).hom a) = (H.obj.map f.op).hom ((φ.hom.app (op X)).hom a)
+  have h := φ.hom.naturality f.op
+  exact congrArg (fun t => t.hom a) h
 
 private theorem LeafZcPull_pf : LeafZcPull := by
   intro R _ K X' X f U' U h n a ha
   obtain ⟨h1, h2⟩ := (mem_Zc a).1 ha
   refine (mem_Zc _).2 ⟨?_, ?_⟩
-  · rw [sres_comp, ← Scheme.Hom.resLE_comp_ι f h, ← sres_comp, h1, sres_zero]
-  · rw [smap_res, h2, sres_zero]
+  · rw [desc_sres_comp, ← Scheme.Hom.resLE_comp_ι f h, ← desc_sres_comp, h1, desc_sres_zero]
+  · rw [desc_smap_res, h2, desc_sres_zero]
 
 private theorem LeafZcIn_pf : LeafZcIn := by
   intro R _ K X U W V h hU n a ha
@@ -285,8 +280,8 @@ private theorem LeafZcIn_pf : LeafZcIn := by
   have e : (⊤ : V.toScheme.Opens) ≤ X.homOfLE h ⁻¹ᵁ (W.ι ⁻¹ᵁ U) :=
     le_of_comp _ _ U rfl _ (Scheme.homOfLE_ι _ _) ((Scheme.Opens.ι_preimage_self V).symm.le.trans (fun y hy => hU hy))
   have h0 : Sec.res (⊤ : V.toScheme.Opens).ι (rs h a) = 0 := by
-    rw [sres_comp, ← Scheme.Hom.resLE_comp_ι (X.homOfLE h) e, ← sres_comp, h1, sres_zero]
-  rw [← sres_id (rs h a), ← Scheme.toIso_inv_ι, ← sres_comp, h0, sres_zero]
+    rw [desc_sres_comp, ← Scheme.Hom.resLE_comp_ι (X.homOfLE h) e, ← desc_sres_comp, h1, desc_sres_zero]
+  rw [← sres_id (rs h a), ← Scheme.toIso_inv_ι, ← desc_sres_comp, h0, desc_sres_zero]
 
 private theorem resK_inj (q : ℕ) (i : ℤ) (s : ℤ) : Injective ((res _ (tw q i)).X s) := by unfold GlobalTheory.EtC.res; infer_instance
 private theorem LeafResK_pf : LeafResK := fun q i => ⟨resK_inj q i, fun s hs => by

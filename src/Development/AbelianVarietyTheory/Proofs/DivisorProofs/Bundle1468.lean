@@ -451,7 +451,7 @@ theorem pull_actLev : ∀ (D : D7) (j : ℕ) (H : ReciprocityTheory.ChartRestric
     (lev g) LinearMap.id (lev₂ g₂) LinearMap.id hmv hmv₂ hcong (fun x => ⟨0, by simp⟩)
   have hov' := GlobalTheory.frOver_of_square_of_frMove D.host.E H Dw l Xo c 0 d ρ ν ρ₂ ν₂ r' m' hsq₁ hsq₂ k y _ y₂ _ hov hfm hfm₂
   obtain ⟨z₂, hz₂⟩ := hlift k hk _
-  have hL : ReciprocityTheory.ChartRestriction.G.Out.Laws := GlobalTheory.T.abelianScheme_laws_unconditional.1
+  have hL : ReciprocityTheory.ChartRestriction.G.Out.Laws := _root_.GlobalTheory.abelianSchemeLaws_all.1
   have hN := GlobalTheory.levelMaps_closed hL D.host.E H Dw hpq
   obtain ⟨g', ρ', ν', hg', -, hmv', hfm'⟩ :=
     GlobalTheory.exists_levMove_of_frOver hL D.host.E H Dw l Xo c 0 d hN hd hM hE r' m' hE' k hk _ z₂ _ hz₂ hov'

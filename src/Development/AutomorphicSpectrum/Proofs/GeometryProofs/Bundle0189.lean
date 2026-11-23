@@ -41,7 +41,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Rec.FinRd.Roots.LieBasis
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 namespace CombVal
 

@@ -50,7 +50,7 @@ namespace GlobalTheory.CompanionTheory.Ar.HodgeSum
 
 section LinearAlgebra
 
-open Submodule
+open _root_.Submodule
 
 variable {Ω V : Type} [Field Ω] [AddCommGroup V] [Module Ω V]
 

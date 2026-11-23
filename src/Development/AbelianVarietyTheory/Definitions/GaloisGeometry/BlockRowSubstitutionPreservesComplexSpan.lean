@@ -31,7 +31,7 @@ noncomputable section
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Module Formalism.MainNotions.G.CmpJ.PCard
 open scoped TensorProduct
@@ -315,7 +315,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms NumberField Module Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.CmpJ.PCard
   GlobalTheory.HP
@@ -726,7 +726,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G
 
 open Formalism.BasicNotions Formalism.L2.Forms NumberField IsDedekindDomain Matrix Formalism.UG Formalism.L2.GlobalTheoryTheory.LocalLatticeBases
 
@@ -863,7 +863,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.UG Formalism.L2.Forms MvPolynomial NumberField IsDedekindDomain
 
@@ -1025,7 +1025,7 @@ end
 section
 open MvPolynomial Matrix Formalism.GradedWeylDivisibility Formalism.MainNotions.G Formalism.BasicNotions Formalism.L2.Forms
 namespace GlobalTheory.HP
-open Formalism Formalism.L2 Formalism.L2.G
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.G
 
 open Formalism.L2.G.Cmp Formalism.L2.G.RelativeIndexFlags Formalism.L2.G.RelativeIndexFlags.Core
 
@@ -1165,7 +1165,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Module Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PCard GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP
@@ -1264,7 +1264,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Module Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PCard GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP
@@ -1409,7 +1409,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Module Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PCard GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP
@@ -1492,7 +1492,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Module Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PCard GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP
@@ -1595,7 +1595,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Module Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PCard GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP GlobalTheory.HP
@@ -1631,7 +1631,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.CmpJ.PValIntN
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.CmpJ.PValIntN
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.G.RelativeIndexFlags Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
 open scoped TensorProduct
@@ -1713,7 +1713,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChF
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChF
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.G.RelativeIndexFlags Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PValIntN
@@ -1968,7 +1968,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.KAat
 
@@ -1999,7 +1999,7 @@ end
 section
 
 namespace GlobalTheory.HP
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChF
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChF
 
 open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
   Formalism.MainNotions.G.CmpJ.PStabEq Formalism.MainNotions.G.KAat Formalism.MainNotions.G.CmpJ.PValIntN GlobalTheory.HP

@@ -122,5 +122,13 @@ def main():
     args=vars(a);dry=args.pop('dry_run');argv=command(**args)
     if dry:
         import json;print(json.dumps(argv));return 0
-    return subprocess.run(argv,env={'PATH':os.environ.get('PATH','/usr/bin:/bin')},timeout=rpc.read(Path(a.control)/'lease.json')['worker']['timeout_seconds']+120).returncode
+    from host_profile import HostProfile,publish_profile
+    profile=HostProfile()
+    try:
+        result=subprocess.run(argv,env={'PATH':os.environ.get('PATH','/usr/bin:/bin')},timeout=rpc.read(Path(a.control)/'lease.json')['worker']['timeout_seconds']+120)
+    except BaseException:
+        publish_profile(a.output,profile.finish(None))
+        raise
+    publish_profile(a.output,profile.finish(result.returncode))
+    return result.returncode
 if __name__=='__main__':sys.exit(main())

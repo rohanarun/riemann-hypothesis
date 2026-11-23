@@ -424,7 +424,7 @@ theorem gam_true (ε : Fin n → Bool) (lam : Fin n → ℝ) (i : Fin (nb ε tru
   linarith
 
 theorem block_eigen (ε : Fin n → Bool) (s : Bool) (μ : Fin n → ℝ) (V : Type) [AddCommGroup V] [Module ℂ V]
-    (F : Fin n → Fin n → Module.End ℂ V) (x : V) (hF : KRel ε F) (hx : KHighest ε F μ x) (u : ℂ) :
+    (F : Fin n → Fin n → Module.End ℂ V) (x : V) (hF : _root_.CompanionTheory.D.DSIC.KRel ε F) (hx : KHighest ε F μ x) (u : ℂ) :
     qminor F (blk ε s) (blk ε s) u x = (∏ i : Fin (nb ε s), (u - (i : ℂ) + (μ (blk ε s i) : ℂ))) • x := by
   have inj : ∀ i j, blk ε s i = blk ε s j ↔ i = j := fun i j => (blk_strictMono ε s).injective.eq_iff
   have hgl : GlRel (fun i j => F (blk ε s i) (blk ε s j)) := by

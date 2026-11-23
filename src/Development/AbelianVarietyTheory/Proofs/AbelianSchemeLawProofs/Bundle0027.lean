@@ -54,7 +54,7 @@ theorem sections_growth :
     ∀ (K : Type) [Field K] [IsAlgClosed K] (P : PolAV (Spec (CommRingCat.of K))), (∀ j : ℕ, Module.Finite Γ((baseOver (Spec (CommRingCat.of K))).left, ⊤) (SecM P.A P.L (j : ℤ) (baseOver (Spec (CommRingCat.of K))))) ∧ ∃ N c C : ℕ, 1 ≤ N ∧ 1 ≤ c ∧ ∀ t : ℕ, 1 ≤ t → t ^ P.g ≤ c * Module.finrank Γ((baseOver (Spec (CommRingCat.of K))).left, ⊤) (SecM P.A P.L ((N * t : ℕ) : ℤ) (baseOver (Spec (CommRingCat.of K)))) ∧ Module.finrank Γ((baseOver (Spec (CommRingCat.of K))).left, ⊤) (SecM P.A P.L ((N * t : ℕ) : ℤ) (baseOver (Spec (CommRingCat.of K)))) ≤ C * t ^ P.g :=
   GlobalTheory.SecGrowth.secM_finite_and_growth
     GlobalTheory.forall_geometricallyIntegral_of_smooth_of_geometricallyConnected
-    (GlobalTheory.AbLaw.polAV_veryAmpleBy GlobalTheory.laws_without_cohomology.2.2.1) sections_finite GlobalTheory.T.serre_vanishing_very_ample.2
+    (GlobalTheory.AbLaw.polAV_veryAmpleBy GlobalTheory.laws_without_cohomology.2.2.1) sections_finite _root_.GlobalTheory.AbLaw.serre_h1Zero_and_sections_polynomial.2
     GlobalTheory.finrank_totalDegree_image_growth GlobalTheory.trdeg_eq_of_smoothOfRelativeDimension
 
 theorem cube_and_sections :

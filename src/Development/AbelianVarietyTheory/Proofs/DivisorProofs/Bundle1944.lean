@@ -173,7 +173,7 @@ theorem mapSystem : ∀ (R : Type) [CommRing R] (I : Ideal R) (W W' : Scheme.{0}
     have h2 : (t e).comap (t (e + 1)).subschemeι =
         (baseIdeal f (I ^ (e + 1))).comap ((t (e + 1)).subschemeι ≫ π) := by
       conv_lhs => rw [ht e]
-      rw [Scheme.IdealSheafData.comap_sup, hbot, bot_sup_eq, GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.1, GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.1,
+      rw [Scheme.IdealSheafData.comap_sup, hbot, bot_sup_eq, _root_.GlobalTheory.FormalAlg.baseIdeal_calculus.1, _root_.GlobalTheory.FormalAlg.baseIdeal_calculus.1,
         Category.assoc]
     have h3 := (_root_.GlobalTheory.ClosedImmIdeal.map_sup_comap_and_comap_map _ _ _ (hci (e + 1)) ⊥ (baseIdeal f (I ^ (e + 1)))).1
     rw [bot_sup_eq, Scheme.IdealSheafData.map_bot] at h3

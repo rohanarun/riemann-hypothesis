@@ -219,12 +219,6 @@ open Formalism.L2.SG.RealObj Formalism.L2.SG.HidaSetting Formalism.L2.SG.RealObj
 
 variable {D : D7} {X : Formalism.L2.SG.HidaSetting.HidaSetting D} {θ : ℝ} (C : Choice X θ)
 
-theorem trHyp_C (u : D.what₂.Word) (τ : D.what₂.Tau) :
-    Formalism.L2.SG.Pf.Bridge.TrHyp (PtRepPf.frU X u (vOf X τ)) (C.Q τ) (C.Qi τ)
-      (fun a : Fin D.R.rS => frS D ^ (D.R.rS - (a : ℕ))) := by
-  obtain ⟨h1, h2, hH, hef⟩ := C.isT τ
-  exact ⟨h1, h2, hH, fun a => (hef a a rfl).1, fun a => (hef a a rfl).2⟩
-
 theorem n_eq : X.B.I.n = 2 * D.R.rS + D.R.k + 1 := by
   obtain ⟨v⟩ : Nonempty (InfinitePlace X.B.I.F) := inferInstance
   have h := (PtRepPf.frU X (Classical.arbitrary D.what₂.Word) v).card

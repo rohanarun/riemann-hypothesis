@@ -314,7 +314,7 @@ theorem exists_equiv {Φ : (ι → GL (Fin n) ℂ) → Matrix κ κ ℂ} {Φ' : 
 end Uniq
 
 section Wt
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 variable {L : Type} [Field L] [NumberField L] [IsCMField L] {n : ℕ} {ι : Type} [Fintype ι] [DecidableEq ι]
   (emb : ι → L →+* ℂ) (hinj : Function.Injective emb)
   (hcm : ∀ τ τ', emb τ ≠ ComplexEmbedding.conjugate (emb τ'))
@@ -451,7 +451,7 @@ theorem iso_of_hwAt (a a' : AlgWt L n) (lam : ι → Fin n → ℤ) (ha : ∀ τ
 end Wt
 
 
-open Formalism.BasicNotions Formalism.L2 Formalism.L2.DIV Formalism.L2.Col in
+open Formalism.BasicNotions _root_.Formalism.L2 Formalism.L2.DIV _root_.Formalism.L2.Col in
 theorem exists_equiv_VV : ∀ (L : Type) [Field L] [NumberField L] [IsCMField L] (n : ℕ) (ι : Type) [Fintype ι]
     (emb : ι → L →+* ℂ), Function.Injective emb → (∀ t t', emb t ≠ ComplexEmbedding.conjugate (emb t')) →
     (∀ σ : L →+* ℂ, ∃ t, σ = emb t ∨ σ = ComplexEmbedding.conjugate (emb t)) → ∀ a : NG.AlgWt L n,

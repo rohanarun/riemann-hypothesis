@@ -283,7 +283,7 @@ theorem offAt_of_shape (hS : ShapeAt ch) (hB : ∀ t, ∃ b, IsBase t ch.S.B b) 
     group
 
 theorem offAt_big : Big fun ch => OffAt ch := by
-  obtain ⟨CF0, H⟩ := GlobalTheory.T.lastRowLatticesGoodPosition_large_depth.and _root_.GlobalTheory.RowVacTw.vacTw
+  obtain ⟨CF0, H⟩ := _root_.GlobalTheory.RowShape.shapeAt_big.and _root_.GlobalTheory.RowVacTw.vacTw
   refine ⟨CF0, fun ε CF hC => ?_⟩
   obtain ⟨x, H⟩ := H ε CF hC
   refine ⟨x, fun D large₂ e hx Γ _ _ Pl0 T A Ks _ _ _ R F s ch i j => ?_⟩

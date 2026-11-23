@@ -17,14 +17,14 @@ noncomputable section
 
 namespace GlobalTheory.Cp
 
-open Formalism Formalism.L2 Formalism.L2.DIV Formalism.DivisionValues Formalism.EigenvalueLevelCeiling Formalism.L2.Indef
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.DIV Formalism.DivisionValues Formalism.EigenvalueLevelCeiling Formalism.L2.Indef
 
 abbrev fieldsLL (D : Formalism.BasicNotions.D7) (X : Formalism.L2.Col.Fields) (e : X.Tau → (X.E →+* D.what₂.LL)) : Formalism.L2.Col.Fields :=
   { X with K := D.what₂.LL, fieldK := inferInstance, nfK := inferInstance, starK := inferInstance, emb := e }
 
 section ColRec
 
-open Formalism.BasicNotions Formalism.L2.Col
+open Formalism.BasicNotions _root_.Formalism.L2.Col
 
 structure ColRec3 (X : Fields) {G : Type} [Group G] [Fintype G] {Pl0 I0 Ty T : Type} {m : ℕ}
     (A3 : FamIn3 X.K G Pl0 I0 Ty T m) (P1 : Subgroup G) (ψ1 : P1 →* X.Kˣ) where

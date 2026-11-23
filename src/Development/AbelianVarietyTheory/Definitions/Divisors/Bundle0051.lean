@@ -284,7 +284,7 @@ structure TiesG (T : CoreJ D) [Algebra T.Q.c.F D.what₂.LL] (R : RealDat3 D A3 
 
 section Real
 
-open Formalism.L2 Formalism.L2.Rows
+open _root_.Formalism.L2 Formalism.L2.Rows
 
 variable {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {K : Formalism.MainNotions.G.Consts} {Y : DivX D}
   {cX : ExtraC} {ex : Extra D L hT Gi Gl K Y cX}

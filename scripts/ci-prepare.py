@@ -92,6 +92,8 @@ def resolve(args):
     selected_head = args.head
     for attempt in range(5):
         pr = api("pulls/" + str(args.pr))
+        if getattr(args, "require_main", False) and pr.get("base", {}).get("ref") != "main":
+            raise ValueError("quick checks require a PR targeting main")
         selected_head = selected_head or pr["head"]["sha"]
         if pr["head"]["sha"] != selected_head:
             raise ValueError("PR head changed before this job started; a newer run will build it")
@@ -112,7 +114,7 @@ def resolve(args):
         time.sleep(2 * (attempt + 1))
     result = identity(revision)
     request = {"repository": REPO, "run_id": int(os.environ.get("GITHUB_RUN_ID", "0")),
-               "pr_number": args.pr, "pr_head": pr["head"]["sha"], "expected": result}
+               "pr_number": args.pr, "pr_head": pr["head"]["sha"], "base_head": pr["base"]["sha"], "base_ref": pr["base"].get("ref"), "expected": result}
     reused = get(f"{BASE}/ci/inputs/{result['input_fingerprint']}.json", missing=True, maximum=2_000_000)
     if reused is not None:
         reused = json.loads(reused)
@@ -160,6 +162,11 @@ def manifest_hashes(data, entries, map_data, identity=None):
             raise ValueError("Conflicting archive digests in module manifest")
         result[row[2]] = row[3]
     return result
+
+
+def select_module_entries(manifest, entries, names):
+    _, rows = publication.parse_manifest(manifest, entries)
+    return {row[1]: row[2] for row in rows.values() if row[0] in names}
 
 
 def downloads(cache, entries, sha256s):
@@ -287,9 +294,19 @@ def prepare(args):
         (cache / "modules.jsonl.gz").write_bytes(manifest)
         entries = mapping(map_data)
         hashes = manifest_hashes(manifest, entries, map_data)
+        quick_plan = getattr(args, "quick_plan", None)
+        if quick_plan:
+            plan = json.loads(Path(quick_plan).read_text())
+            request = json.loads(Path(args.request).read_text())
+            if plan.get("candidate_head") != request["expected"]["candidate_head"] or plan.get("status") != "ready":
+                raise ValueError("quick plan does not bind the resolved candidate")
+            names = set(plan["closure"])
+            if not names or len(names) > 2000:
+                raise ValueError("quick plan exceeds its dependency budget")
+            entries = select_module_entries(manifest, entries, names)
         downloads(cache, entries, hashes)
         request = json.loads(Path(args.request).read_text())
-        selected = restore_previous_cache(args.candidate, request, cache)
+        selected = None if quick_plan else restore_previous_cache(args.candidate, request, cache)
         paths = {"packages": str(deps / ".lake/packages"), "baseline_cache": str(cache),
                  "baseline_manifest": str(cache / "modules.jsonl.gz"), "baseline_map": str(cache / "outputs.jsonl"),
                  "latest_map": str(selected) if selected else ""}
@@ -315,6 +332,7 @@ def main():
     prep = commands.add_parser("prepare")
     for name in ("trusted", "candidate", "state", "request", "output"):
         prep.add_argument("--" + name, required=True)
+    prep.add_argument("--quick-plan", type=Path)
     prep.set_defaults(function=prepare)
     exp = commands.add_parser("expected")
     exp.add_argument("--request", required=True)

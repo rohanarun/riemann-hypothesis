@@ -285,7 +285,7 @@ theorem exists_pol_model (h₁ : Out.Laws) (h₂ : Out.Laws2) (W : Type) [CommRi
     [Subsingleton D.toPre.X] :
     ∃ (P : Out.PolAV (Sp W)) (φ : A.A.left ⟶ P.A.left), IsGrpPullback A.A P.A (Out.jK W) φ ∧ LBIso A.L (P.L.pull φ) := by
   have hA : Out.AdmBase W (IsLocalRing.maximalIdeal W) := ⟨inferInstance, inferInstance, inferInstance, hc⟩
-  obtain ⟨O, hO, hψ⟩ := GlobalTheory.T.uniformization_laws_and_expansion_statements.1.2.2.2.2.psiOnExists W _ hA D
+  obtain ⟨O, hO, hψ⟩ := _root_.GlobalTheory.lawsAndExpansions.1.2.2.2.2.psiOnExists W _ hA D
   obtain ⟨D', hD, -, -⟩ := GlobalTheory.exists_degData_isPullDeg h₁.polBaseChange h₁.globalFns W W _ _ (RingHom.id W)
     (Ideal.map_id _).le D O hψ (by
       rw [show Out.specOf (RingHom.id W) = 𝟙 _ from Spec.map_id _]; exact hO)

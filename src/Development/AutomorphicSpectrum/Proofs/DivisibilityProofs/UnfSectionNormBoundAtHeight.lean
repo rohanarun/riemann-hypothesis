@@ -22,7 +22,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Br.FlatNorm
 
-open ReciprocityTheory.ChartRestriction.G.FD Formalism.L2.Pj GlobalTheory GlobalTheory.CM GlobalTheory.Frames GlobalTheory.LamT Formalism.L2.LamCM
+open ReciprocityTheory.ChartRestriction.G.FD Formalism.L2.Pj _root_.GlobalTheory GlobalTheory.CM GlobalTheory.Frames GlobalTheory.LamT Formalism.L2.LamCM
 open scoped Matrix ComplexOrder
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {Dw : Datum H} {l : Level H}

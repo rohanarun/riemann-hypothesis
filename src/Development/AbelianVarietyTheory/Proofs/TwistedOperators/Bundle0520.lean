@@ -247,6 +247,9 @@ public noncomputable abbrev source
 
 end I195MixedCoordinates_8ff71cc19fc82be2cd949563
 
+public noncomputable abbrev _root_.I195MixedCoordinates_5fec64f1e39721af271f64cb.source :=
+  @_root_.I195MixedCoordinates_8ff71cc19fc82be2cd949563.source
+
 @[expose] public section
 
 open Formalism.BasicNotions Formalism.BasicNotions.TH Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes Formalism.MainNotions.StandardLattice Formalism.L2.Theta Formalism.IndefR Formalism.IndefR.Datum Formalism.IndefR.Links MeasureTheory IsDedekindDomain NumberField Matrix
@@ -343,6 +346,9 @@ public noncomputable abbrev source
     (heisO ψ S T (x * d.pX) (heisO ψ S T (w₀ * d.p0) f)) 0 ∂μ
 
 end I195MixedCoordinates_acb50ed7a993b068b784d65f
+
+public noncomputable abbrev _root_.I195MixedCoordinates_684fc6d6042eff6a430ef673.source :=
+  @_root_.I195MixedCoordinates_acb50ed7a993b068b784d65f.source
 
 @[expose] public section
 

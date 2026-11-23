@@ -13,7 +13,7 @@ open scoped NumberField.AdeleRing
 
 namespace GlobalTheory.CompanionTheory.GGPS
 
-open MeasureTheory Set Filter Topology Function IsDedekindDomain
+open MeasureTheory Set Filter _root_.Topology Function IsDedekindDomain
 open AutomorphicForm CuspidalSpectrum
 open scoped Pointwise
 

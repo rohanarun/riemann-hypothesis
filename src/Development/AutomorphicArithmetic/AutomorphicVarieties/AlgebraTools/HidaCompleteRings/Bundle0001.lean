@@ -343,7 +343,7 @@ theorem UpperTheory.V.AlgebraTools.AnnihilatorQuotientFinite.locChar :
   intro R N T ι _ _ _ _ _ _ _ ρ I u e hI he hu hspan x
   have hP : ∀ (k : ℕ) (t : T) {z : N}, z ∈ maximalIdeal R ^ k • (⊤ : Submodule R N) →
       ρ t z ∈ maximalIdeal R ^ k • (⊤ : Submodule R N) :=
-    fun k t z hz => map_mem_smul_top _ (ρ t) hz
+    fun k t z hz => _root_.map_mem_smul_top _ (ρ t) hz
   constructor
   · intro hx i k
     obtain ⟨n, hn⟩ := hu i

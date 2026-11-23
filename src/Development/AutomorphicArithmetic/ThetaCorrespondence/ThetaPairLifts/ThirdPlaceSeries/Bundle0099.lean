@@ -92,7 +92,7 @@ end GlobalTheory.BigOn.PageNumbers
 namespace GlobalTheory.BigOn
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 theorem pageSt_alt : _root_.GlobalTheory.BigOn.PageStatement := by
-  refine (GlobalTheory.T.indexBoundParameterRequirements_eventually_family.and _root_.GlobalTheory.T.leafLevelSq_and_leafYBound).imp fun Fm CH _ H => ?_
+  refine (_root_.GlobalTheory.OntoSizeRows.sizeRows_along.and _root_.GlobalTheory.T.leafLevelSq_and_leafYBound).imp fun Fm CH _ H => ?_
   obtain ⟨⟨xs, hxs⟩, ⟨c1, hc1⟩⟩ := H
   refine ⟨max c1 1, fun c hc hB => ?_⟩
   obtain ⟨x2, hx2⟩ := hc1 c ((le_max_left _ _).trans hc) hB

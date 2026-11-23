@@ -104,7 +104,7 @@ end
 section
 section
 namespace GlobalTheory.ResLoc
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal Formalism.L2 Formalism.L2.Host GlobalTheory.HeightCounting NumberField IsDedekindDomain Polynomial
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal _root_.Formalism.L2 Formalism.L2.Host GlobalTheory.HeightCounting NumberField IsDedekindDomain Polynomial
 open GlobalTheory.EigTie (ResTied IsRowPar plRed resTied_of_plSide)
 open GlobalTheory.IndefiniteRowSideFullHecke.RayClassPrimeCounting (IsGaloisRepOf Zbar GalE OnW)
 end GlobalTheory.ResLoc
@@ -113,7 +113,7 @@ end
 section
 section
 namespace GlobalTheory.ResLoc
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal Formalism.L2 Formalism.L2.Host GlobalTheory.HeightCounting NumberField IsDedekindDomain Polynomial
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal _root_.Formalism.L2 Formalism.L2.Host GlobalTheory.HeightCounting NumberField IsDedekindDomain Polynomial
 open GlobalTheory.EigTie (ResTied IsRowPar plRed resTied_of_plSide)
 open GlobalTheory.IndefiniteRowSideFullHecke.RayClassPrimeCounting (IsGaloisRepOf Zbar GalE OnW)
 theorem resTied_of_points_alt_alt {D : D7} (hC : GlobalTheory.RowTie.ChebSplit D.nd) (Rw : RowSide D) (Pl : PlSide D) (hI : IotaOk D Pl)

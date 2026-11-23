@@ -23,7 +23,7 @@ open scoped nonZeroDivisors IntermediateField
 
 namespace GlobalTheory.Mem.DiscRoot
 
-open Polynomial WeierstrassCurve
+open Polynomial _root_.WeierstrassCurve
 
 theorem exists_vieta_two (p q : ℂ) : ∃ x y : ℂ, x + y = p ∧ x * y = q := by
   obtain ⟨s, hs⟩ := IsAlgClosed.exists_pow_nat_eq (p ^ 2 - 4 * q) (show 0 < 2 by norm_num)

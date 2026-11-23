@@ -209,6 +209,11 @@ def IterNested : Prop :=
       iteratedFDeriv ℂ a (fun t1 => iteratedFDeriv ℂ b (fun t2 => F (c + L1 t1 + L2 t2)) 0 w) 0 u =
         iteratedFDeriv ℂ (a + b) F c (Fin.append (fun i => L1 (u i)) (fun i => L2 (w i)))
 
+theorem iter_cast {V : Type} [NormedAddCommGroup V] [NormedSpace ℂ V] {F : V → ℂ} {c : V} {m m' : ℕ} (h : m = m')
+    (v : Fin m → V) : iteratedFDeriv ℂ m F c v = iteratedFDeriv ℂ m' F c (v ∘ Fin.cast h.symm) := by
+  subst h
+  rfl
+
 variable {n : ℕ}
 
 def bdiag (j : ℕ) (c c' : ℂ) (t : Matrix (Fin n) (Fin n) ℂ) : Matrix (Fin n) (Fin n) ℂ :=

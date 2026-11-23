@@ -28,7 +28,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory.ThetaPrimeHecke
 
-open Formalism.L2.Host Formalism.L2.Col
+open Formalism.L2.Host _root_.Formalism.L2.Col
 
 theorem locK_eq_val {L : Type} [Field L] [NumberField L] (χ : HChar L) (Q : HeightOneSpectrum (𝓞 L))
     (hu : χ.UnrAt Q) (k : Lˣ) (hk : Q.valuation L (k : L) = WithZero.exp (-1 : ℤ)) :

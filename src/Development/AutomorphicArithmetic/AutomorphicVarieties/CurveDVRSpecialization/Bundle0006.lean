@@ -290,7 +290,7 @@ theorem UpperTheory.V.Pr.niceIrrE :
     (residue y.A) (fun a => W.pushCh k' (((F.Ψ.comp F.del.ker.subtype).comp T.K.π) ^ w 3 (![0, 2] a)))
     (fun g => (hres _).trans (congrArg _ (hb (T.K.π g) 0))) (fun g => (hres _).trans (congrArg _ (hb (T.K.π g) 2)))
     (fun g => by
-      by_cases hx : T.S.u.triP ≤ x
+      rcases Classical.em (T.S.u.triP ≤ x) with hx | hx
       · have h1 : L.ρ.r (T.K.π g) 2 0 ∈ maximalIdeal L.R := by
           have := hx (Ideal.subset_span ⟨T.K.π g, 2, 0, by decide, rfl⟩)
           rw [← L.lies] at this

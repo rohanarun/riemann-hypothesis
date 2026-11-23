@@ -305,7 +305,7 @@ end Gen
 
 section Pt
 
-open Formalism.L2.Col Formalism.MainNotions Formalism.L2.DIV
+open _root_.Formalism.L2.Col Formalism.MainNotions Formalism.L2.DIV
 
 variable {X : Fields} {Pr : Primes X} {R : Ranks} {sel : HeightOneSpectrum (𝓞 X.F) → HeightOneSpectrum (𝓞 X.E)} {S : Set ℕ}
   {mu : Tup X.F X.E X.K S} {cst : LocCst X (rowSG Pr sel mu)}
@@ -346,7 +346,7 @@ end GlobalTheory.BaseCosetPt
 
 namespace GlobalTheory.BaseCosetPt
 
-open Formalism.L2.Col Formalism.MainNotions Formalism.L2.DIV
+open _root_.Formalism.L2.Col Formalism.MainNotions Formalism.L2.DIV
 
 end GlobalTheory.BaseCosetPt
 end

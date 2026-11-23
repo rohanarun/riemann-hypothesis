@@ -361,7 +361,7 @@ theorem exists_lift_of_pdDerivation (R B : Type) [CommRing R] [CommRing B] [Alge
       (∀ c ω, Submodule.Quotient.mk ω = w c → ρ (ι1 (D R C c)) - ι1 ω ∈ rel R δ) ∧
       (∀ x ∈ rel R δC, ρ x ∈ rel R δ) ∧ (∀ x, ∃ ω, ρ (ι1 x) - ι1 ω ∈ rel R δ) ∧
       ∀ (j : ℕ), ∀ x ∈ ⋀[C]^j Ω[C⁄R], ∃ y ∈ ⋀[B]^j Ω[B⁄R], ρ x - y ∈ rel R δ := by
-  haveI : (rel R δ).IsTwoSided := rel_isTwoSided δ ((GlobalTheory.T.divPowerCompatRel_filtration_twoSided_rel_eq_bot_of_base.1 R B J δ).1)
+  haveI : (rel R δ).IsTwoSided := rel_isTwoSided δ ((_root_.GlobalTheory.PDForm.rel_two_sided_and_bot.1 R B J δ).1)
   letI algC : Algebra C (DR R B ⧸ rel R δ) :=
     ((algebraMap B (DR R B ⧸ rel R δ)).comp (π : C →+* B)).toAlgebra' fun c x ↦ Algebra.commutes (π c) x
   haveI : IsScalarTower R C (DR R B ⧸ rel R δ) := IsScalarTower.of_algebraMap_eq fun r ↦ by

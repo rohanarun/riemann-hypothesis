@@ -267,7 +267,7 @@ end Geometry
 
 variable {R : Type} [CommRing R] [IsDomain R] {D : DegPre R} {O : Type} [CommRing O] [StarRing O] [Module O D.X]
 
-open DVR (cP cPoint_add)
+open _root_.ReciprocityTheory.ChartRestriction.G.DVR (cP cPoint_add)
 
 end GlobalTheory.PsiRescale
 end

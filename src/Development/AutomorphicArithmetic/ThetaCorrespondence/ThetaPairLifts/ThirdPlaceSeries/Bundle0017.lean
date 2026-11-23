@@ -120,7 +120,7 @@ open GlobalTheory.TameLabels GlobalTheory.AntiRamConj GlobalTheory.TwistDet
 open scoped Pointwise
 end GlobalTheory.TypeLeaf.ConjPlace
 namespace GlobalTheory.AdmTame
-open NumberField IsDedekindDomain Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions Formalism.MainNotions.N Formalism.WeaklyAdmissibleFiltrations Formalism.ConjugateSelfDual ReciprocityTheory.Gal Polynomial
+open NumberField IsDedekindDomain _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions Formalism.MainNotions.N Formalism.WeaklyAdmissibleFiltrations Formalism.ConjugateSelfDual ReciprocityTheory.Gal Polynomial
 theorem main_alt_alt_alt : ∀ D : D7, SumRepresentations.tie0 D → _root_.Formalism.MainNotions.SumRepresentations.adm2_alt D → SumRepresentations.adm5 D → UpperTheory.GalS.LabTameS D.nd D.naut → UpperTheory.GalS.AdmissibleResidualTameEigenvalues D := by
   intro D h0 hG hA hL
   obtain ⟨hLP, hAut, -⟩ := h0

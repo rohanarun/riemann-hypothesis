@@ -42,7 +42,7 @@ open scoped CategoryTheory.Obj
 namespace GlobalTheory.Moduli
 
 theorem moduli_scheme_exists : N1ab :=
-  _root_.GlobalTheory.ZM.moduli_nonempty_all_levels GlobalTheory.T.all_six_abelian_scheme_laws_hold.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.1 _root_.GlobalTheory.Moduli.cube_of_isLB _root_.GlobalTheory.thetaUnifAV_closed
+  _root_.GlobalTheory.ZM.moduli_nonempty_all_levels _root_.GlobalTheory.allSixLaws.1 _root_.GlobalTheory.allSixLaws.2.1 _root_.GlobalTheory.Moduli.cube_of_isLB _root_.GlobalTheory.thetaUnifAV_closed
 
 end GlobalTheory.Moduli
 end

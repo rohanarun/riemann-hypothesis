@@ -295,7 +295,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 noncomputable section
 namespace GlobalTheory.MiTop.CenIsom
 variable {D : D7} {X : HidaSetting D} {u : D.what₂.Word}
-open Formalism.MainNotions Formalism.L2 Formalism.L2.DIV
+open Formalism.MainNotions _root_.Formalism.L2 Formalism.L2.DIV
 variable {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {Kc : Formalism.MainNotions.G.Consts}
   {Yd : DivX D} {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Yd cX} {R : _root_.Formalism.L2.RecTAlt ex}
 set_option maxHeartbeats 1000000 in

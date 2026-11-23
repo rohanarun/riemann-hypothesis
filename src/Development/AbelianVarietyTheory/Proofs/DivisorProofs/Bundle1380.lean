@@ -205,7 +205,7 @@ noncomputable section
 
 namespace GlobalTheory.FlagMod
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.Reg
 
 theorem eq_of_field_maps {S : Type} [CommRing S] [_root_.IsReduced S] {a b : S}

@@ -250,7 +250,7 @@ omit [FiniteDimensional ℂ Wp] in
 theorem setupG_of {lam u b bv ga h R l dg}
     (hS : Setup (k := k) (r := r) lam u b bv ga h q0 z π μW μN μG νq R l dg) :
     SetupG (k := k) (r := r) lam u b bv ga h q0 z π μW μN μG νq R l dg :=
-  (GlobalTheory.T.families_have_largeGap_of_numericalHypotheses.2 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _).1 hS
+  (_root_.GlobalTheory.GapSetup.families_gap.2 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _).1 hS
 
 theorem side_kappa (hH : GlobalTheory.GapIn.Hyp) (ht : t ∈ GG k r) {lam u u' b bv ga h F F' l₁ m₁ dg dg'}
     {μN' : Measure (Mt k r)}

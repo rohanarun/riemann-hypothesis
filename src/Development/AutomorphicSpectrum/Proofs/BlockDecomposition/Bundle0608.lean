@@ -351,7 +351,7 @@ end
 section
 namespace GlobalTheory.CompanionTheory.Exhaustion
 
-open Filter Topology
+open Filter _root_.Topology
 
 variable {α E : Type*} [NormedAddCommGroup E]
 

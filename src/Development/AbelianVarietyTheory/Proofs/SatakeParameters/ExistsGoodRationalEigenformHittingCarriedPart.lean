@@ -109,7 +109,7 @@ end Lin
 
 section Form
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {K V W I : Type} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] [AddCommGroup W] [Module ℂ W]
   [FiniteDimensional ℂ W] {σ : K →+* ℂ}
@@ -236,7 +236,7 @@ theorem adj_phase {s : Bool} {E F : Type} [NormedAddCommGroup E] [InnerProductSp
 
 section Core
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {K V Hv Hw I ι : Type} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
   [NormedAddCommGroup Hv] [InnerProductSpace ℂ Hv] [FiniteDimensional ℂ Hv]
@@ -343,7 +343,7 @@ variable {G : Type} [Group G] [Fintype G] {Pl0 T : Type} {A : FamIn D.what₂.LL
 
 
 set_option maxHeartbeats 2000000 in
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem witness_real {I : Type} (R : RealDat D A Ks) (F : Face D A) (hCore : Core R F) (hSch : SchurAll R)
     (hirr : ∀ χ ∈ A.X, IsAbsIrrChar χ) (hG : GoodGeneric A.X F.P0 F.ψ0⁻¹)
     (SF : Finset (HeightOneSpectrum (𝓞 D.host.F))) (hSF : IsSF R SF) (j : Fin D.R.m)

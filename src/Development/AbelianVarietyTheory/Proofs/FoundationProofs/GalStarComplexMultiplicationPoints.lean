@@ -17,7 +17,7 @@ noncomputable section
 
 namespace GlobalTheory.ConjPoint
 
-open PeriodPair Polynomial WeierstrassCurve
+open PeriodPair Polynomial _root_.WeierstrassCurve
 
 def mapPoint (W : WeierstrassCurve ℂ) (σ : ℂ →+* ℂ) :
     W.toAffine.Point →+ (W.map σ).toAffine.Point where

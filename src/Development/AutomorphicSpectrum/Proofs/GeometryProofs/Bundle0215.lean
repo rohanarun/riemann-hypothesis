@@ -40,7 +40,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Sl.RigScale
 
-open GlobalTheory GlobalTheory.ArchMetricCompare
+open _root_.GlobalTheory GlobalTheory.ArchMetricCompare
 
 theorem eSec_comp_of_cart {S : Scheme.{0}} {G : Over S} [GrpObj G] {z : Sp ℂ ⟶ S} {A : Over (Sp ℂ)} [GrpObj A]
     {φ : A.left ⟶ G.left} (h : IsGrpPullback A G z φ) : eSec A ≫ φ = z ≫ eSec G := by
@@ -73,7 +73,7 @@ end GlobalTheory.CompanionTheory.Ar.Sl.RigScale
 
 namespace GlobalTheory.CompanionTheory.Ar.Sl
 
-open GlobalTheory GlobalTheory.ArchMetricCompare RigScale
+open _root_.GlobalTheory GlobalTheory.ArchMetricCompare RigScale
 
 theorem exists_archFrame_of_isAH : ∀ (S : Scheme.{0}) (G : Over S) [GrpObj G] [IsCommMonObj G] (P : RigLB G) (z : Sp ℂ ⟶ S) (A : Over (Sp ℂ)) [GrpObj A] (φ : A.left ⟶ G.left) (g : ℕ) (u : HolUnif A (P.L.pull φ) g) (Hm : Matrix (Fin g) (Fin g) ℂ) (χ : u.Λ → ℂ), IsGrpPullback A G z φ → u.IsAH Hm χ → Nonempty (ArchFrame P z g) := by
   intro S G _ _ P z A _ φ g u Hm χ cart ah
@@ -127,10 +127,10 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Sl.Fac
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField MeasureTheory
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField MeasureTheory
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.Semi
 open GroundTheory.Heights₂.Heights TensorProduct
-open GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.Sl
+open _root_.GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.Sl
 
 private theorem eq_of_sp_complex_pts (y y' : ↥(ReciprocityTheory.ChartRestriction.G.Geo.Tor.Sp ℂ)) : y = y' := by
   have e : ∀ p : PrimeSpectrum ℂ, p.asIdeal = ⊥ := fun p => Ideal.eq_bot_of_prime p.asIdeal

@@ -316,7 +316,8 @@ theorem existsUnique_ev : ∀ (l : ℕ) [Fact l.Prime] (LL : FinExt l) (x : Powe
           PowerSeries ↥(OL LL))) : ↥LL.1) : Om l)) Filter.atTop
         (nhds ((PowerSeries.coeff k (ev a) : ↥LL.1) : Om l)) := by
   intro l _ LL x hx
-  obtain ⟨_, hcomp, -⟩ := GlobalTheory.Per.integers_completeDVR l LL
+  obtain ⟨dvr, hcomp, -⟩ := GlobalTheory.Per.integers_completeDVR l LL
+  have : IsLocalRing ↥(OL LL) := dvr.toIsLocalRing
   have hfin := LL.2
   have hn : ∀ y : ↥LL.1, ‖GlobalTheory.DiscEval.fieldEmb LL.1 y‖ = ‖(y : Om l)‖ := fun y => by
     rw [GlobalTheory.DiscEval.fieldEmb_apply, PadicComplex.norm_extends]

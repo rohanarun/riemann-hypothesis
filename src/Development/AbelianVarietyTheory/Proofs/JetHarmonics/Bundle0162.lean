@@ -438,7 +438,7 @@ theorem iInf_thGen_le_nuLocC : ∀ (E : Type) [Field E] [NumberField E] [IsCMFie
   have hval := nabValN_algebraMap T.Fr F _ _ C.ch.B C.ch.h (ReciprocityTheory.ChartRestriction.G.TB.WickVanishing.Nab.cc_h C.ch.gauge) H.w0 l.M n f
     (LtN Dw n) (fun ℓ : LtN Dw n => ℓ.2.2) (fun ℓ : LtN Dw n => C.ch.uvec ⟨ℓ.1, ℓ.2.1⟩) Pp
   obtain ⟨i, p, w, ζ, x, t₀, t, σ', h, ρ, h1, h2, h3, h4', h5, h6, h7, h8, h9, hρ, hle⟩ :=
-    GlobalTheory.T.pointStatements_on_copies_hold.1 E H Dw l Xo c T io y C hTr P hP hy ϖ hϖ Q hQ F v hv TI Φ M0 r b hΦ hb hb' n D' A' G' pD pA pG U' PU
+    _root_.GlobalTheory.PowGerm.pointStatements_on_copies.1 E H Dw l Xo c T io y C hTr P hP hy ϖ hϖ Q hQ F v hv TI Φ M0 r b hΦ hb hb' n D' A' G' pD pA pG U' PU
       oD' hx hact hn α l.M Dg hα hcop hu h4 hM0 θ θα hθ1 hθ2 hθ3 (Fin s)
       (fun i => MvPolynomial.map ((algebraMap T.Fr F).comp io) (Qs i))
       (fun i => algebraMap T.Fr F (algebraMap T.V T.Fr (cf i))) (fun i => val_algebraMap_nonneg T v hvx _)

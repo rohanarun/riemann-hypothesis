@@ -31,7 +31,7 @@ open NumberField
 noncomputable section
 namespace GlobalTheory.CompanionTheory.SiegelND.Integ.Hua.Commens
 
-open Topology
+open _root_.Topology
 
 theorem exists_den {F : Type} [Field F] [NumberField F] (y : F) :
     ∃ D : ℕ, 0 < D ∧ ∃ r : 𝓞 F, algebraMap (𝓞 F) F r = (D : F) * y := by
@@ -99,7 +99,7 @@ end GlobalTheory.CompanionTheory.SiegelND.Integ.Hua.Commens
 
 namespace GlobalTheory.CompanionTheory.SiegelND.Integ.Hua.Commens
 
-open Topology
+open _root_.Topology
 
 theorem exists_smul_mem_open : ∀ (F E : Type) [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] (σ : E →ₐ[F] E),
     IsCMExt F E σ → ∀ (n : ℕ) (U : AddSubgroup (HermR (Af F) σ n)), IsOpen (U : Set (HermR (Af F) σ n)) →
@@ -201,7 +201,7 @@ namespace GlobalTheory.CompanionTheory.WhitFree.DecN
 
 open NumberField IsDedekindDomain GlobalTheory.Published.SiegelOneVector GlobalTheory.CompanionTheory.Hypotheses₂.OneV.Coef.Dec
 open PI.VolStabS.PositiveNearLattice PI.VolStabS.AdmissibleCompactSupport
-open scoped Topology
+open scoped _root_.Topology
 
 variable {F : Type} [Field F] [NumberField F]
 variable {E : Type} [Field E] [Algebra F E] [FiniteDimensional F E] {d : ℕ} (b : Module.Basis (Fin d) F E)
@@ -409,7 +409,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.AvgFree.Dilate
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 open GlobalTheory.CompanionTheory.WeilSiegel.Frame GlobalTheory.CompanionTheory.WeilSiegel.Free
 

@@ -299,7 +299,7 @@ noncomputable def cupCharClassH0 (A : Rep ℤ G) (χ : Additive G →+ AddCircle
   cupRight (A := A) (B := 𝟙_ (Rep ℤ G)) (zero_add 2) (charClass χ) ≫ map (MonoidHom.id G) (ρ_ A).hom 2
 
 noncomputable def cupCharClass (A : Rep ℤ G) (χ : Additive G →+ AddCircle (1 : ℚ)) :=
-  (H0Iso A).inv ≫ cupCharClassH0 A χ
+  (groupCohomology.H0Iso A).inv ≫ cupCharClassH0 A χ
 
 end GroundTheory.ProfCoh
 end

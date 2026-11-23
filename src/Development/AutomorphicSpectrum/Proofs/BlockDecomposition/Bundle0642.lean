@@ -324,7 +324,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.FarSeries
 
-open PositivityTheory.RgEis PositivityTheory.Rg.SwEis Topology
+open PositivityTheory.RgEis PositivityTheory.Rg.SwEis _root_.Topology
 
 theorem exp_mul_le {a b x s t L : ℝ} (h1 : a ≤ x) (h2 : x ≤ b) (hL : |s - t| ≤ L) :
     Real.exp (x * s) ≤ Real.exp ((|a| + |b|) * L) * (Real.exp (a * t) + Real.exp (b * t)) := by

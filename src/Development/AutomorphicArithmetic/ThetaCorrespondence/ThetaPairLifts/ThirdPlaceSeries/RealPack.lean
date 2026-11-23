@@ -19,7 +19,7 @@ open scoped InnerProductSpace
 open Formalism.BasicNotions Formalism.MainNotions Formalism.DivisionValues Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef Formalism.L2.Rows Formalism.L2.Theta Formalism.IndefR Formalism.IndefR.Cx
   Formalism.IndefR.Links Formalism.L2.SG.PackageTie2 Formalism.L2.SG.KerJoinS Formalism.IndefR.CxPass
 namespace GlobalTheory.MiS
-open Formalism Formalism.IndefR Formalism.IndefR.Mi
+open _root_.Formalism Formalism.IndefR Formalism.IndefR.Mi
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : MainNotions.G.Inst D L} {Gl : MainNotions.G.LatInst D} {Kc : MainNotions.G.Consts}
   {Yd : DivX D} {cX : ExtraC}

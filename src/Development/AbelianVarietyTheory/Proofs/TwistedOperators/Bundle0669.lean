@@ -434,6 +434,6 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 theorem GlobalTheory.RowVal.conLin_big : Big fun ch => ConLin ch :=
   GlobalTheory.RowReal.big_mono (fun ch h => GlobalTheory.ConnectionLinear.conLin_of_positions ch h.1.1.1 h.1.1.2 h.1.2 h.2)
-    (((GlobalTheory.T.thetaContraction_linear_left_largeDepth.and _root_.GlobalTheory.ConLinR.contrLin_one_big).and _root_.GlobalTheory.LastPositionLin.lastLin_zero).and _root_.GlobalTheory.ConnectionLinear.big_lastLin_one)
+    (((_root_.GlobalTheory.ConnectionLinear.contrLin_left.and _root_.GlobalTheory.ConLinR.contrLin_one_big).and _root_.GlobalTheory.LastPositionLin.lastLin_zero).and _root_.GlobalTheory.ConnectionLinear.big_lastLin_one)
 end
 

@@ -219,56 +219,38 @@ end
 
 -- bundled from Development.AutomorphicArithmetic.IntegralCasts.CapelliIdentities.CosetOfCover
 section
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Qn18.Mat :
-    Type → ℕ → Type :=
-    fun (C : Type) (N : ℕ) ↦ Matrix (Fin N) (Fin N) C
+namespace UpperTheory.Reformulated.B.Qn18
 
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Qn18.MP :
-    (C : Type) → [Field C] → ℕ → Type :=
-    fun (C : Type) [Field C] (N : ℕ) ↦ MvPolynomial (Fin N × Fin N) C
+@[reducible] noncomputable def Mat : Type → ℕ → Type :=
+  fun C N ↦ Matrix (Fin N) (Fin N) C
 
-noncomputable def UpperTheory.Reformulated.B.Qn18.ev :
-    {C : Type} → [inst : Field C] → {N : ℕ} → UpperTheory.Reformulated.B.Qn18.Mat C N → UpperTheory.Reformulated.B.Qn18.MP C N → C :=
-    fun {C : Type} [Field C] {N : ℕ} (x : UpperTheory.Reformulated.B.Qn18.Mat C N) (f : UpperTheory.Reformulated.B.Qn18.MP C N) ↦
-      (MvPolynomial.eval fun (p : Fin N × Fin N) ↦ x p.1 p.2 : MvPolynomial (Fin N × Fin N) C → C) f
+@[reducible] noncomputable def MP : (C : Type) → [Field C] → ℕ → Type :=
+  fun C [Field C] N ↦ MvPolynomial (Fin N × Fin N) C
 
-noncomputable def UpperTheory.Reformulated.B.Qn18.dAt :
-    {C : Type} →
-      [inst : Field C] → {N : ℕ} → UpperTheory.Reformulated.B.Qn18.MP C N → UpperTheory.Reformulated.B.Qn18.Mat C N → UpperTheory.Reformulated.B.Qn18.Mat C N → C :=
-    fun {C : Type} [Field C] {N : ℕ} (f : UpperTheory.Reformulated.B.Qn18.MP C N) (x Y : UpperTheory.Reformulated.B.Qn18.Mat C N) ↦
-      ∑ p : Fin N × Fin N,
-        UpperTheory.Reformulated.B.Qn18.ev x
-            ((MvPolynomial.pderiv p : MvPolynomial (Fin N × Fin N) C → MvPolynomial (Fin N × Fin N) C) f) *
-          Y p.1 p.2
+noncomputable def ev : {C : Type} → [inst : Field C] → {N : ℕ} → Mat C N → MP C N → C :=
+  fun {C} [Field C] {N} x f ↦ MvPolynomial.eval (fun p ↦ x p.1 p.2) f
 
-noncomputable def UpperTheory.Reformulated.B.Qn18.Chain :
-    Prop :=
-    ∀ (C : Type) [inst : Field C] (N M : ℕ) (φ : UpperTheory.Reformulated.B.Qn18.Mat C N →ₗ[C] UpperTheory.Reformulated.B.Qn18.Mat C M)
-      (f : UpperTheory.Reformulated.B.Qn18.MP C M),
-      ∃ (f' : UpperTheory.Reformulated.B.Qn18.MP C N),
-        (∀ (x : UpperTheory.Reformulated.B.Qn18.Mat C N),
-            UpperTheory.Reformulated.B.Qn18.ev x f' =
-              UpperTheory.Reformulated.B.Qn18.ev ((φ : UpperTheory.Reformulated.B.Qn18.Mat C N → UpperTheory.Reformulated.B.Qn18.Mat C M) x) f) ∧
-          ∀ (x Y : UpperTheory.Reformulated.B.Qn18.Mat C N),
-            UpperTheory.Reformulated.B.Qn18.dAt f' x Y =
-              UpperTheory.Reformulated.B.Qn18.dAt f ((φ : UpperTheory.Reformulated.B.Qn18.Mat C N → UpperTheory.Reformulated.B.Qn18.Mat C M) x)
-                ((φ : UpperTheory.Reformulated.B.Qn18.Mat C N → UpperTheory.Reformulated.B.Qn18.Mat C M) Y)
+noncomputable def dAt :
+    {C : Type} → [inst : Field C] → {N : ℕ} → MP C N → Mat C N → Mat C N → C :=
+  fun {C} [Field C] {N} f x Y ↦
+    ∑ p : Fin N × Fin N, ev x (MvPolynomial.pderiv p f) * Y p.1 p.2
 
-noncomputable def UpperTheory.Reformulated.B.Qn18.OpenCoset :
-    Prop :=
-    ∀ (Γ C : Type) [inst : Group Γ] [inst_1 : TopologicalSpace Γ] [IsTopologicalGroup Γ] [CompactSpace Γ] [inst_4 : Field C]
-      (n : ℕ) (r : Γ →* GL (Fin n) C) (f : UpperTheory.Reformulated.B.Qn18.MP C n) (O : Set Γ),
-      IsOpen O →
-        O.Nonempty →
-          (∀ g ∈ O, UpperTheory.Reformulated.B.Qn18.ev (↑((r : Γ → GL (Fin n) C) g) : Matrix (Fin n) (Fin n) C) f = (0 : C)) →
-            ∃ (U : Subgroup Γ),
-              U.Normal ∧
-                U.FiniteIndex ∧
-                  ∃ (g : Γ),
-                    ∀ u ∈ U, UpperTheory.Reformulated.B.Qn18.ev (↑((r : Γ → GL (Fin n) C) (g * u)) : Matrix (Fin n) (Fin n) C) f = (0 : C)
+noncomputable def Chain : Prop :=
+  ∀ (C : Type) [inst : Field C] (N M : ℕ) (φ : Mat C N →ₗ[C] Mat C M) (f : MP C M),
+    ∃ (f' : MP C N),
+      (∀ (x : Mat C N), ev x f' = ev (φ x) f) ∧
+      ∀ (x Y : Mat C N), dAt f' x Y = dAt f (φ x) (φ Y)
+
+noncomputable def OpenCoset : Prop :=
+  ∀ (Γ C : Type) [inst : Group Γ] [inst_1 : TopologicalSpace Γ] [IsTopologicalGroup Γ]
+    [CompactSpace Γ] [inst_4 : Field C] (n : ℕ) (r : Γ →* GL (Fin n) C)
+    (f : MP C n) (O : Set Γ), IsOpen O → O.Nonempty →
+    (∀ g ∈ O, ev ↑(r g) f = 0) →
+    ∃ (U : Subgroup Γ),
+      U.Normal ∧ U.FiniteIndex ∧ ∃ (g : Γ), ∀ u ∈ U, ev ↑(r (g * u)) f = 0
 
 open scoped Pointwise in
-private theorem UpperTheory.Reformulated.B.Qn18.coset_of_cover {G : Type} [Group G] [TopologicalSpace G]
+private theorem coset_of_cover {G : Type} [Group G] [TopologicalSpace G]
     [TopologicalSpace.NoetherianSpace G] (hc : ∀ h : G, Continuous fun x : G => h * x)
     (Z : Set G) (hZ : IsClosed Z) (s : Finset G) (hs : ∀ x : G, ∃ a ∈ s, a * x ∈ Z) :
     ∃ U : Subgroup G, U.Normal ∧ U.FiniteIndex ∧ ∃ g : G, ∀ u ∈ U, g * u ∈ Z := by
@@ -315,7 +297,7 @@ private theorem UpperTheory.Reformulated.B.Qn18.coset_of_cover {G : Type} [Group
     exact ⟨1, mem_irreducibleComponent, by simp⟩
   exact hXW this
 
-private theorem UpperTheory.Reformulated.B.Qn18.finite_cover {G : Type} [Group G] [TopologicalSpace G]
+private theorem finite_cover {G : Type} [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] [CompactSpace G] (O : Set G) (hO : IsOpen O) (hne : O.Nonempty) :
     ∃ s : Finset G, ∀ x : G, ∃ a ∈ s, a * x ∈ O := by
   obtain ⟨o, ho⟩ := hne
@@ -325,47 +307,45 @@ private theorem UpperTheory.Reformulated.B.Qn18.finite_cover {G : Type} [Group G
   refine ⟨s, fun x => ?_⟩
   simpa using hs (Set.mem_univ x)
 
-theorem UpperTheory.Reformulated.B.Qn18.main :
-    UpperTheory.Reformulated.B.Qn18.Chain → UpperTheory.Reformulated.B.Qn18.OpenCoset := by
+theorem main :
+    Chain → OpenCoset := by
   intro hch Γ C _ _ _ _ _ n r f O hO hne hf
-  obtain ⟨s, hs⟩ := UpperTheory.Reformulated.B.Qn18.finite_cover O hO hne
+  obtain ⟨s, hs⟩ := finite_cover O hO hne
   let p : Γ → PrimeSpectrum (MvPolynomial (Fin n × Fin n) C) := fun g =>
     ⟨RingHom.ker (MvPolynomial.eval fun q : Fin n × Fin n =>
       (↑(r g) : Matrix (Fin n) (Fin n) C) q.1 q.2), RingHom.ker_isPrime _⟩
   have hp : ∀ (g : Γ) (S : Set (MvPolynomial (Fin n × Fin n) C)),
       p g ∈ PrimeSpectrum.zeroLocus S ↔
-        ∀ k ∈ S, UpperTheory.Reformulated.B.Qn18.ev (↑(r g) : Matrix (Fin n) (Fin n) C) k = 0 := by
+        ∀ k ∈ S, ev ↑(r g) k = 0 := by
     intro g S
     rw [PrimeSpectrum.mem_zeroLocus]
     exact Iff.rfl
-  let τ : TopologicalSpace Γ := TopologicalSpace.induced p inferInstance
-  have hcl : ∀ k : MvPolynomial (Fin n × Fin n) C,
-      @IsClosed Γ τ {g | UpperTheory.Reformulated.B.Qn18.ev (↑(r g) : Matrix (Fin n) (Fin n) C) k = 0} := by
-    intro k
-    refine (@isClosed_induced_iff _ _ _ _ p).mpr ⟨_, PrimeSpectrum.isClosed_zeroLocus {k}, ?_⟩
+  letI : TopologicalSpace Γ := TopologicalSpace.induced p inferInstance
+  have hcl (k : MP C n) : IsClosed {g | ev ↑(r g) k = 0} := by
+    refine (isClosed_induced_iff (f := p)).mpr ⟨_, PrimeSpectrum.isClosed_zeroLocus {k}, ?_⟩
     ext g
     simp [hp]
-  have hN : @TopologicalSpace.NoetherianSpace Γ τ := by
-    letI := τ
-    exact (@Topology.IsInducing.mk _ _ τ _ p rfl).noetherianSpace
-  have hc : ∀ h : Γ, @Continuous Γ Γ τ τ fun x => h * x := by
-    intro h
-    refine (@continuous_iff_isClosed _ _ τ τ _).mpr ?_
+  haveI : TopologicalSpace.NoetherianSpace Γ :=
+    (show Topology.IsInducing p from ⟨rfl⟩).noetherianSpace
+  have hc (h : Γ) : Continuous fun x => h * x := by
+    refine continuous_iff_isClosed.mpr ?_
     intro T hT
-    obtain ⟨T', hT', rfl⟩ := (@isClosed_induced_iff _ _ _ _ p).mp hT
+    obtain ⟨T', hT', rfl⟩ := (isClosed_induced_iff (f := p)).mp hT
     obtain ⟨S, rfl⟩ := (PrimeSpectrum.isClosed_iff_zeroLocus _).mp hT'
     choose F hF using fun k => hch C n n
       (LinearMap.mulLeft C (↑(r h) : Matrix (Fin n) (Fin n) C)) k
     have : (fun x => h * x) ⁻¹' (p ⁻¹' PrimeSpectrum.zeroLocus S) =
-        ⋂ k ∈ S, {g | UpperTheory.Reformulated.B.Qn18.ev (↑(r g) : Matrix (Fin n) (Fin n) C) (F k) = 0} := by
+        ⋂ k ∈ S, {g | ev ↑(r g) (F k) = 0} := by
       ext g
       simp only [Set.mem_preimage, hp, Set.mem_iInter, Set.mem_setOf_eq, (hF _).1,
         LinearMap.mulLeft_apply, map_mul, Units.val_mul]
     rw [this]
-    exact @isClosed_biInter _ _ τ _ _ fun k _ => hcl (F k)
-  exact @UpperTheory.Reformulated.B.Qn18.coset_of_cover Γ _ τ hN hc _ (hcl f) s fun x => by
+    exact isClosed_biInter fun k _ => hcl (F k)
+  exact coset_of_cover hc _ (hcl f) s fun x => by
     obtain ⟨a, ha, hx⟩ := hs x
     exact ⟨a, ha, hf _ hx⟩
+
+end UpperTheory.Reformulated.B.Qn18
 end
 
 -- bundled from Development.AutomorphicArithmetic.IntegralCasts.CapelliIdentities.CurveDVRPrecompleteFinite

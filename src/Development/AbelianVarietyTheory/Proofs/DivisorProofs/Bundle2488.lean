@@ -158,7 +158,7 @@ theorem wedgeO_descends_field : ∀ (K L : Type) [Field K] [Field L] [Algebra K 
     _root_.GlobalTheory.AbCoh.flat_baseChange_HO K L A.left B.left A.hom B.hom φ h.1 inferInstance inferInstance
   refine _root_.GlobalTheory.AbCoh.exteriorSquare_equiv_of_baseChange K L _ _ _ _ (cup (OAff A.hom)) (cup (OAff B.hom)) e₁ e₂ (fun a b ↦ ?_) hB
   rw [he₁, he₁, he₂]
-  exact (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.2.1 K L A.left B.left A.hom B.hom _ φ h.1.w).1 a b
+  exact (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.2.1 K L A.left B.left A.hom B.hom _ φ h.1.w).1 a b
 
 end GlobalTheory.AbCoh
 end

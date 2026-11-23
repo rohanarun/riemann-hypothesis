@@ -61,7 +61,7 @@ namespace GlobalTheory.CompanionTheory.Ar.Rec
 
 section Bridge
 
-open AlgebraicGeometry CategoryTheory Limits
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}
   {l : Level H} {Xo : Moduli Dw l} {c : Coeff l}

@@ -73,6 +73,11 @@ def snapshot_identity(snapshot, mode=OPERATION):
     require(bool(re.fullmatch(r'[0-9a-f]{40}',snapshot.get('git_commit',''))),'invalid candidate commit pin')
     for key,value in expected.items():require(snapshot.get(key)==value,'candidate identity mismatch: '+key)
     require(bool(SHA.fullmatch(snapshot.get('fingerprint',''))),'invalid source fingerprint')
+    if mode==PROOF_OPERATION and proof_policy().get('approval_mode')=='ancestor-of-open-pr':
+        require(set(snapshot)=={'git_commit','source_tree','toolchain','lakefile_sha256','manifest_sha256','fingerprint'},'unexpected snapshot fields')
+        require(bool(re.fullmatch(r'[0-9a-f]{40}',snapshot.get('source_tree',''))),'invalid source tree')
+        fields={k:v for k,v in snapshot.items()if k!='fingerprint'}
+        require(hashlib.sha256(json.dumps(fields,sort_keys=True).encode()).hexdigest()==snapshot['fingerprint'],'incorrect snapshot fingerprint')
     return snapshot
 
 def verify_source(root, snapshot, mode=OPERATION):

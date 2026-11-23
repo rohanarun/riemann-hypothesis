@@ -343,7 +343,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Flat
 
-open Link
+open _root_.GlobalTheory.CompanionTheory.Ar.Flat.Link _root_.GlobalTheory.CompanionTheory.Ar.Flat.Link
 
 theorem exists_logPeriods_isRiem : ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (H : Host E) (D : Datum H) (l : Level H) (Xo : Moduli D l) (σ : KA l →+* ℂ) (n a : ℕ) (C : BdryChart Xo σ n a), 1 ≤ D.p + D.q → σ (baseKA l).ρ = H.rt0 → ∃ (ρ : ℝ) (Λ : Type) (_ : AddCommGroup Λ) (L : LogPeriods n a C.g Λ), 0 < ρ ∧ ρ ≤ 1 ∧ ∀ z ∈ punct n a 1, C.IsRiem ((ρ : ℂ) • z) (L.H z) := by
   intro E _ _ _ H D l Xo σ n a C hpq hσ

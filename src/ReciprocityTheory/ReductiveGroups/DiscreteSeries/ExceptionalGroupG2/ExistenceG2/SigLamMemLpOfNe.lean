@@ -42,11 +42,11 @@ theorem sigLam_umat_mul (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv�
     sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat (a * b)) = (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat a)).comp (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat b)) := by
   have h1 : Formalism.MainNotions.S.umat (a * b) = Formalism.MainNotions.S.umat a * Formalism.MainNotions.S.umat b := rfl
   rw [h1]
-  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset a) _ (umat_mem_UJset b)
+  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset _ a) _ (umat_mem_UJset _ b)
 
 theorem sigLam_umat_iso (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (g : Formalism.REAL.UJ ε)
     (v : Hlam ε Ψ v₀) : ‖sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) v‖ = ‖v‖ :=
-  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset g) v
+  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset _ g) v
 
 theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (w₀ x₀ : Hlam ε Ψ v₀)
     (hx₀ : x₀ ≠ 0)
@@ -67,7 +67,7 @@ theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (h
 theorem inner_sigLam_umat (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (y z : Hlam ε Ψ v₀)
     (g : Formalism.REAL.UJ ε) :
     ⟪y, sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) z⟫_ℂ = inner ℂ (y : L2 ε) (rreg ε (Formalism.MainNotions.S.umat g) (z : L2 ε)) := by
-  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset g)]
+  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset _ g)]
 
 theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (x : Hlam ε Ψ v₀) :
     MemLp (fun g : Formalism.REAL.UJ ε =>
@@ -88,7 +88,7 @@ theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀
         fun g => ((‖uniformisationL2 ε Ψ v₀ T.w‖ ^ 2 : ℝ) : ℂ) *
           ((innerSL ℂ T.w).comp (ContinuousLinearMap.apply ℂ T.V T.w)) (Ψ (Formalism.MainNotions.S.umat g)) := by
       funext g
-      rw [formulaF hgap hP hv₀ (umat_mem_UJset g) T.w T.w]
+      rw [formulaF hgap hP hv₀ (umat_mem_UJset _ g) T.w T.w]
       rfl
     rw [e']
     exact h1

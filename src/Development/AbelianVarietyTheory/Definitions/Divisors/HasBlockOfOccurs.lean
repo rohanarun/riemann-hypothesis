@@ -262,7 +262,7 @@ end Galois
 
 section Link
 
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 
 theorem sysOf_zero {l : ℕ} [Fact l.Prime] {Pl I : Type} (n : ℕ) (pt : Pl → Fin n → I) (θ : I → Qbar l) (P : Pl) :
     sysOf n pt θ P 0 = 1 := by simp [sysOf]

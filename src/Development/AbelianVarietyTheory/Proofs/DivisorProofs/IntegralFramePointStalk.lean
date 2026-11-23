@@ -19,7 +19,7 @@ namespace GlobalTheory.KeyValZero
 
 section Key
 
-open AlgebraicGeometry CategoryTheory Limits NumberField IsDedekindDomain
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField IsDedekindDomain
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.LamT GlobalTheory.KeyFourth GlobalTheory.IndefiniteRowSideFullHecke.FibreFramesOnModels
 open GlobalTheory.KeyIntegralVal GlobalTheory.ShFam
 
@@ -313,7 +313,7 @@ theorem twSec_keyRoot_val : ∀ (E : Type) [Field E] [NumberField E] [IsCMField 
   rw [← hKval T.Fr y.1 Φ hΦ] at hK0
   exact val_inv_root y ho (idem_mul_idem Z) hZ ρ K ha haK hK0
 
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits NumberField
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.GeometryOfNumbersTheory Formalism.L2.Pj Formalism.BasicNotions
 open ReciprocityTheory.ChartRestriction.G.Out (nonzeroLocus)
 open GlobalTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.HermTools GlobalTheory.Adelic GlobalTheory.CompHS GlobalTheory.CovTop GlobalTheory.BigTop

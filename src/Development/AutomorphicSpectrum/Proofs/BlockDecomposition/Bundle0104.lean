@@ -232,7 +232,7 @@ set_option maxSynthPendingDepth 1
 
 namespace GlobalTheory.CompanionTheory.Ar.Branch
 
-open GroundTheory.Heights₂.Heights.IndefiniteRowSideFullHecke.ComplexSets MvPolynomial Topology Filter Metric
+open GroundTheory.Heights₂.Heights.IndefiniteRowSideFullHecke.ComplexSets MvPolynomial _root_.Topology Filter Metric
 
 theorem normalRiemannExtensionLocal (hud : LocalUniversalDenominator.Statement)
     (hbq : NormalBoundedQuotient.Statement) (hvan : VanishNearPoint.Statement) :

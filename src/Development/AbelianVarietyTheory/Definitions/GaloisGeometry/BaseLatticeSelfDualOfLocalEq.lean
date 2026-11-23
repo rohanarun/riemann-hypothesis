@@ -13,7 +13,7 @@ noncomputable section
 section
 
 namespace GlobalTheory.Port
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix
 open scoped TensorProduct
@@ -149,7 +149,7 @@ end
 section
 namespace GlobalTheory.Port
 
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Matrix Formalism.MainNotions.G.CmpJ
 open scoped TensorProduct
@@ -211,7 +211,7 @@ end
 section
 namespace GlobalTheory.Port
 
-open Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
+open _root_.Formalism Formalism.MainNotions Formalism.MainNotions.G Formalism.MainNotions.G.ChartsLv
 
 open Formalism.BasicNotions Formalism.MainNotions.G Formalism.L2.G Formalism.L2.Forms Formalism.UG NumberField IsDedekindDomain Formalism.MainNotions.G.CmpJ Formalism.MainNotions.G.CmpJ.AgreeLv Formalism.L2.Herm
 open scoped TensorProduct

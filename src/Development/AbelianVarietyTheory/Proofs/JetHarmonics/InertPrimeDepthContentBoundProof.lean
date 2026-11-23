@@ -99,10 +99,10 @@ theorem orbit (l d : ℕ) [NeZero d] (hl : 5 ≤ l) (m k : ℕ) (hmk : m + 3 ≤
     rw [Nat.cast_sub (by omega)]; simp
   have hL : 1 ≤ Real.log k := one_le_log (by linarith)
   have hi : (i0 k l : ℝ) ≤ 5 * Real.log k := by
-    have := GlobalTheory.T.levelsUsed_balancedValue_orbitSums.2.1 k l (by omega) hl
+    have := _root_.GlobalTheory.LevelsOrbits.main.2.1 k l (by omega) hl
     linarith
   have hth : 0 ≤ thl k l := by
-    rw [(GlobalTheory.T.levelsUsed_balancedValue_orbitSums.1 k l (by omega) (by omega)).2.2.2]; positivity
+    rw [(_root_.GlobalTheory.LevelsOrbits.main.1 k l (by omega) (by omega)).2.2.2]; positivity
   have hθ1 : 0 ≤ 1 - θ := by linarith [hθ.2]
   obtain ⟨p, h1, h2, h3⟩ := _root_.GlobalTheory.GoodPlan.exists_plan l d hl (k - 1) m k (S0 l (i0 k l) (k - 1)) (by omega) (by omega) W
     (fun a => (1 - θ) * w a / T) Good
@@ -216,7 +216,7 @@ theorem main : InertBd := by
           · exact (halt.2 a).2 h
           · have := ((Pk.R.X z).big_compl 0 a).2 (fun hb => h ((halt.2 a).1 hb))
             simpa using this
-        have hW := GlobalTheory.T.oddLevelBlock_bound_attained.2 Pk.R.C Pk.R.V P.d (Pk.R.I z) (Pk.R.J z) (Pk.R.X z) (Pk.R.F z) halt
+        have hW := _root_.GlobalTheory.oddBlock_supply.2 Pk.R.C Pk.R.V P.d (Pk.R.I z) (Pk.R.J z) (Pk.R.X z) (Pk.R.F z) halt
           (by rw [Pk.R.hVl]; exact hl) (by rw [(Pk.R.hn z).1]; omega) (RF.bg a) a hbig i hi2 (Finset.mem_range.1 hi1)
         rw [Pk.R.hVl, (Pk.R.hn z).1, (Pk.R.hn z).2] at hW
         refine ⟨hW.1, fun Y0 => ?_⟩
@@ -243,7 +243,7 @@ theorem main : InertBd := by
   have hm' : (1 : ℝ) ≤ P.m := by exact_mod_cast hm
   have hL : 1 ≤ Real.log P.k := one_le_log (by linarith)
   have hth : 0 ≤ thl P.k l := by
-    rw [(GlobalTheory.T.levelsUsed_balancedValue_orbitSums.1 P.k l (by omega) (by omega)).2.2.2]; positivity
+    rw [(_root_.GlobalTheory.LevelsOrbits.main.1 P.k l (by omega) (by omega)).2.2.2]; positivity
   have hA0 : 0 ≤ ∑ z, P.w z := Finset.sum_nonneg fun z _ => (dg.w_pos z).le
   have hSE := hP.SE_nonneg
   have hN : 0 ≤ (P.k : ℝ) - 1 := by linarith

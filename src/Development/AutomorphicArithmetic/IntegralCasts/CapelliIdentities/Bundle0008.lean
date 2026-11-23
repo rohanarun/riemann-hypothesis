@@ -6,38 +6,11 @@ public import Mathlib
 
 -- bundled from Development.AutomorphicArithmetic.IntegralCasts.CapelliIdentities.CoerciveOfPositiveDefinite
 section
+open scoped ComplexOrder in
 theorem UpperTheory.Reformulated.B.CoerciveOfPositiveDefinite.exists_coercive_of_posDef.{u_1} :
-    ∀ {ι : Type u_1} [inst : Fintype ι] {P : Matrix ι ι Complex},
-      @Matrix.PosDef ι Complex Complex.instRing Complex.partialOrder Complex.instStarRing P →
-        ∃ (c : Real),
-          And (@LT.lt Real Real.instLT (@OfNat.ofNat Real (nat_lit 0) (@Zero.toOfNat0 Real Real.instZero)) c)
-            (∀ (z : ι → Complex) (j : ι),
-              @LE.le Real Real.instLE
-                (@HMul.hMul Real Real Real (@instHMul Real Real.instMul) c
-                  (@HPow.hPow Real Nat Real (@instHPow Real Nat (@NPow.toPow Real (@Monoid.toNPow Real Real.instMonoid)))
-                    (@Norm.norm Complex Complex.instNorm (z j)) (@OfNat.ofNat Nat (nat_lit 2) (instOfNatNat (nat_lit 2)))))
-                (@dotProduct ι Complex inst Complex.instMul Complex.instAddCommMonoid
-                    (@Star.star (ι → Complex)
-                      (@Pi.instStarForall ι (fun (a : ι) ↦ Complex) fun (i : ι) ↦
-                        @InvolutiveStar.toStar Complex
-                          (@StarAddMonoid.toInvolutiveStar Complex
-                            (@AddCommMonoid.toAddMonoid Complex
-                              (@NonUnitalNonAssocSemiring.toAddCommMonoid Complex
-                                (@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Complex
-                                  (@NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing Complex
-                                    (@NonUnitalCommRing.toNonUnitalNonAssocCommRing Complex
-                                      Complex.instNonUnitalCommRing)))))
-                            (@StarRing.toStarAddMonoid Complex
-                              (@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Complex
-                                (@NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing Complex
-                                  (@NonUnitalCommRing.toNonUnitalNonAssocCommRing Complex Complex.instNonUnitalCommRing)))
-                              Complex.instStarRing)))
-                      z)
-                    (@Matrix.mulVec ι ι Complex
-                      (@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Complex
-                        (@NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing Complex
-                          (@NonUnitalCommRing.toNonUnitalNonAssocCommRing Complex Complex.instNonUnitalCommRing)))
-                      inst P z)).re) := by
+    ∀ {ι : Type u_1} [inst : Fintype ι] {P : Matrix ι ι ℂ},
+      P.PosDef → ∃ (c : ℝ), 0 < c ∧
+        ∀ (z : ι → ℂ) (j : ι), c * ‖z j‖ ^ 2 ≤ (star z ⬝ᵥ P.mulVec z).re := by
   intro ι _ P hP
   rcases isEmpty_or_nonempty ι with hι | hι
   · exact ⟨1, one_pos, fun _ j => (hι.false j).elim⟩

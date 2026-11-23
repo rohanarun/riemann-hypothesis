@@ -227,7 +227,7 @@ noncomputable section
 
 namespace GlobalTheory.BrRat
 
-open MvPolynomial Formalism.L2.Col Formalism.L2.Ker
+open MvPolynomial _root_.Formalism.L2.Col Formalism.L2.Ker
 
 section General
 

@@ -381,7 +381,7 @@ private theorem crystallineSmoothLift_natural_local :
   choose e₁ he₁ using E1
   refine ⟨e₁, ?_⟩
   intro D D' σ φ φ₀ h m hc c
-  exact GlobalTheory.T.crystallineDeRhamRelation_natural_smoothLift_morphism.1 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _
+  exact _root_.GlobalTheory.PDForm.LiftNat.main.1 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _
     ((he₁ D c _).1 rfl) ((he₁ D' _ _).1 rfl)
 
 end GlobalTheory.SmoothLift

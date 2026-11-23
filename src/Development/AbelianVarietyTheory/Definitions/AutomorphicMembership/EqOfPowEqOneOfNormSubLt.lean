@@ -78,9 +78,10 @@ def frobUr : ↥(MaximalUnramifiedExtension l) →ₐ[ℚ_[l]] ↥(MaximalUnrami
 theorem frobUr_root (c : ↥(MaximalUnramifiedExtension l)) (m : ℕ) (h0 : 0 < m) (hm : ¬ l ∣ m) (hc : c ^ m = 1) :
     frobUr l c = c ^ l := (GlobalTheory.MemLoc.exists_frobenius_Kur l).choose_spec c m h0 hm hc
 
-set_option synthInstance.maxHeartbeats 200000 in
-theorem frobUr_bijective : Function.Bijective (frobUr l) :=
-  Algebra.IsAlgebraic.algHom_bijective _
+theorem frobUr_bijective : Function.Bijective (frobUr l) := by
+  have : Module.IsTorsionFree ℚ_[l] ↥(MaximalUnramifiedExtension l) :=
+    DivisionSemiring.to_moduleIsTorsionFree
+  exact Algebra.IsAlgebraic.algHom_bijective _
 
 def adjExt (x : Om l) : FinExt l :=
   ⟨IntermediateField.adjoin ℚ_[l] {x},

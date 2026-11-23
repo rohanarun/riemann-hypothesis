@@ -197,7 +197,7 @@ theorem oneOn_singleton_of_siegelWeil_of_stepChoice :
   obtain ⟨_h1, _h2, h3, h4, h5, h6, _h7, _h8, _h9⟩ := _root_.GlobalTheory.closed_steps_equal_words
   have hG : GlobalTheory.Core.One.RowGen1P :=
     GlobalTheory.Core.One.rowGen1P_of_siegelWeil_of_points (GlobalTheory.St.swxs_of_siegelWeil h)
-      GlobalTheory.T.normalCount_line_integrality_separation.1 GlobalTheory.T.normalCount_line_integrality_separation.2.1 GlobalTheory.T.normalCount_line_integrality_separation.2.2 h3 h4 h5 hB h6 hT
+      _root_.GlobalTheory.Core.One.normalCountSteps.1 _root_.GlobalTheory.Core.One.normalCountSteps.2.1 _root_.GlobalTheory.Core.One.normalCountSteps.2.2 h3 h4 h5 hB h6 hT
   exact ⟨oneOn_singleton_of_rows.1 hG c, oneOn_singleton_of_rows.2 hN c⟩
 
 end GlobalTheory.Core.Diag

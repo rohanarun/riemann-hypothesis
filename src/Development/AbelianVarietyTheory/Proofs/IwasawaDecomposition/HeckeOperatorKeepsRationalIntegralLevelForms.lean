@@ -24,7 +24,7 @@ namespace GlobalTheory.MtInHecke
 
 section
 
-open Formalism.L2.Col Formalism.HermitianLatticesTheory Module
+open _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Module
 
 section Comm
 

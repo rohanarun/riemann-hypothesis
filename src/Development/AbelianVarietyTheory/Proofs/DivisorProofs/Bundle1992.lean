@@ -292,7 +292,7 @@ open GlobalTheory.IndefiniteRowSideFullHecke.SiegelReframe (Fl Pt stdLat symMat 
 open ReciprocityTheory.L2DbarEstimates (V)
 open Filter Topology
 open scoped ContDiff
-open MonoidalCategory CartesianMonoidalCategory Limits
+open MonoidalCategory CartesianMonoidalCategory _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits
 open GlobalTheory.CechPic (Pic cls lam)
 open MonObj
 open scoped CategoryTheory.Obj

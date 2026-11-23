@@ -38,7 +38,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.PerConj
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix
 open scoped ComplexOrder
 
 section Val

@@ -49,7 +49,7 @@ theorem exists_const_of_pointwise {V : Type} [NormedAddCommGroup V] [NormedSpace
 
 section Family
 
-open NumberField AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
+open NumberField AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
   ReciprocityTheory.ChartRestriction.G.FD Formalism.L2.Pj
 open scoped Matrix CategoryTheory.Obj
 

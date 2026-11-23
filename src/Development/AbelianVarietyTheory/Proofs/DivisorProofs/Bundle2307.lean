@@ -245,7 +245,7 @@ theorem exists_geometric_point {A : Type} [CommRing A] {B : Over (Sp A)} [GrpObj
 
 theorem exists_section_translate : ∀ (A : Type) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] (B : Over (Sp A)) [GrpObj B] [IsCommMonObj B] (g : ℕ) (L O : LB B.left), IsAbelianScheme B → SmoothOfRelativeDimension g B.hom → L.IsLB → RelAmple B L → KTriv B L → (∃ t : LB.Gen (Theta B L), t.IsGen) → O.IsLB → (∃ u : LB.Gen (abelian₂ B O), u.IsGen) → ∃ x : 𝟙_ _ ⟶ B, LBIso O (LB.LinComb L (K := Fin 2) ![((toUnit B ≫ x) * 𝟙 B).left, 𝟙 B.left] ![1, -1]) := by
   intro V _ _ _ B _ _ d L O hB hd hL ha hk hΘ hO hu
-  have hG : GlobalFnsSt := GlobalTheory.T.all_six_abelian_scheme_laws_hold.1.globalFns
+  have hG : GlobalFnsSt := _root_.GlobalTheory.allSixLaws.1.globalFns
   have proj : IsProjBy B.hom := by
     obtain ⟨d, -, n, s, hs⟩ := (GlobalTheory.Unif.relAmple_iff_veryAmpleBy V B L hL).1 ha
     exact ⟨_, isLB_pw hL _, n, s, hs⟩

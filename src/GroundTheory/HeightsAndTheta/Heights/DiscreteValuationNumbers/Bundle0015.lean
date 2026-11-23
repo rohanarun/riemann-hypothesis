@@ -123,18 +123,18 @@ namespace GroundTheory.Heights₂.Heights.NumbersDVR
 open MvPolynomial
 open ReciprocityTheory.ChartRestriction.G.Geo (ChartBundle)
 open ReciprocityTheory.ChartRestriction.G.AI.I1 (IFamily IsFieldIntersection)
-open GroundTheory.Heights₂.Heights.NumbersDVR.Bundles
-  (IsModelOver mcIdeal joinCoord fnField mseg SameGeneric FlagModel FlagPair IsPull IsVertDiv pairNum pullDeg liftVar)
+open IndefiniteRowSideFullHecke.NumbersDVR.Bundles
+  (mcIdeal joinCoord fnField mseg SameGeneric FlagModel FlagPair IsPull IsVertDiv pullDeg liftVar)
 
 def FlagModelJoinLeftAlt.Statement : Prop :=
   ∀ (O : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] (Ω : Type) [Field Ω]
     [Algebra O Ω] (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)]
     (x : (Σ k, ι k) → Ω) (d N : ℕ) (V : Type) [AddCommGroup V] [Module Ω V]
     (E E' : ChartBundle O (mseg x) N V),
-    IsModelOver O (mcIdeal O x) d → SameGeneric O x E E' →
+    IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O x) d → SameGeneric O x E E' →
     ∀ (F : FlagModel O x d N E E') (K₂ : Type) [Fintype K₂] (ι₂ : K₂ → Type) [∀ k, Fintype (ι₂ k)]
       (w : (Σ k, ι₂ k) → Ω),
-      IsModelOver O (mcIdeal O (joinCoord x (joinCoord F.z w))) d →
+      IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O (joinCoord x (joinCoord F.z w))) d →
       fnField O (joinCoord x (joinCoord F.z w)) = fnField O x →
     ∀ EB E'B : ChartBundle O (mseg (joinCoord x (joinCoord F.z w))) N V,
       IsPull O x (joinCoord F.z w) E EB → IsPull O x (joinCoord F.z w) E' E'B →
@@ -148,7 +148,7 @@ def FlagModelJoinLeftAlt.Statement : Prop :=
       ∀ (c : ℕ) (Q : MvPolynomial (Fin r) ℤ), c ≤ d + 1 → G.IsHomogeneous c →
         Q.IsHomogeneous (d + 1 - c) →
         F.value O I₁ G y y' f g Q =
-          pairNum O I (mcIdeal O (joinCoord x (joinCoord F.z w))) d
+          IndefiniteRowSideFullHecke.NumbersDVR.Bundles.pairNum O I (mcIdeal O (joinCoord x (joinCoord F.z w))) d
             (Fin.append φ.deg fun l => pullDeg (K' := F.K' ⊕ K₂) (y l))
             (Fin.append φ.deg' fun l => pullDeg (K' := F.K' ⊕ K₂) (y' l))
             (Fin.append φ.f fun l => rename (liftVar (Sum.elim F.ι' ι₂)) (f l))
@@ -171,18 +171,18 @@ namespace GroundTheory.Heights₂.Heights.NumbersDVR
 open MvPolynomial
 open ReciprocityTheory.ChartRestriction.G.Geo (ChartBundle)
 open ReciprocityTheory.ChartRestriction.G.AI.I1 (IFamily IsFieldIntersection)
-open GroundTheory.Heights₂.Heights.NumbersDVR.Bundles
-  (IsModelOver mcIdeal joinCoord fnField mseg SameGeneric FlagModel FlagPair IsPull IsVertDiv pairNum pullDeg liftVar)
+open IndefiniteRowSideFullHecke.NumbersDVR.Bundles
+  (mcIdeal joinCoord fnField mseg SameGeneric FlagModel FlagPair IsPull IsVertDiv pullDeg liftVar)
 
 def FlagModelJoinRightAlt.Statement : Prop :=
   ∀ (O : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] (Ω : Type) [Field Ω]
     [Algebra O Ω] (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)]
     (x : (Σ k, ι k) → Ω) (d N : ℕ) (V : Type) [AddCommGroup V] [Module Ω V]
     (E E' : ChartBundle O (mseg x) N V),
-    IsModelOver O (mcIdeal O x) d → SameGeneric O x E E' →
+    IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O x) d → SameGeneric O x E E' →
     ∀ (F : FlagModel O x d N E E') (K₂ : Type) [Fintype K₂] (ι₂ : K₂ → Type) [∀ k, Fintype (ι₂ k)]
       (w : (Σ k, ι₂ k) → Ω),
-      IsModelOver O (mcIdeal O (joinCoord x (joinCoord w F.z))) d →
+      IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O (joinCoord x (joinCoord w F.z))) d →
       fnField O (joinCoord x (joinCoord w F.z)) = fnField O x →
     ∀ EB E'B : ChartBundle O (mseg (joinCoord x (joinCoord w F.z))) N V,
       IsPull O x (joinCoord w F.z) E EB → IsPull O x (joinCoord w F.z) E' E'B →
@@ -196,7 +196,7 @@ def FlagModelJoinRightAlt.Statement : Prop :=
       ∀ (c : ℕ) (Q : MvPolynomial (Fin r) ℤ), c ≤ d + 1 → G.IsHomogeneous c →
         Q.IsHomogeneous (d + 1 - c) →
         F.value O I₁ G y y' f g Q =
-          pairNum O I (mcIdeal O (joinCoord x (joinCoord w F.z))) d
+          IndefiniteRowSideFullHecke.NumbersDVR.Bundles.pairNum O I (mcIdeal O (joinCoord x (joinCoord w F.z))) d
             (Fin.append φ.deg fun l => pullDeg (K' := K₂ ⊕ F.K') (y l))
             (Fin.append φ.deg' fun l => pullDeg (K' := K₂ ⊕ F.K') (y' l))
             (Fin.append φ.f fun l => rename (liftVar (Sum.elim ι₂ F.ι')) (f l))
@@ -336,17 +336,17 @@ set_option maxSynthPendingDepth 1
 
 namespace GroundTheory.Heights₂.Heights.NumbersDVR
 
-open GroundTheory.Heights₂.Heights.NumbersDVR.Bundles (IsModelOver mcIdeal joinCoord fnField)
+open IndefiniteRowSideFullHecke.NumbersDVR.Bundles (mcIdeal joinCoord fnField)
 
 def JoinTwoModels.Statement : Prop :=
   ∀ (O : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] (Ω : Type) [Field Ω]
     [Algebra O Ω] (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)]
-    (x : (Σ k, ι k) → Ω) (d : ℕ), IsModelOver O (mcIdeal O x) d →
+    (x : (Σ k, ι k) → Ω) (d : ℕ), IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O x) d →
     ∀ (K₁ : Type) [Fintype K₁] (ι₁ : K₁ → Type) [∀ k, Fintype (ι₁ k)] (z₁ : (Σ k, ι₁ k) → Ω)
       (K₂ : Type) [Fintype K₂] (ι₂ : K₂ → Type) [∀ k, Fintype (ι₂ k)] (z₂ : (Σ k, ι₂ k) → Ω),
-      IsModelOver O (mcIdeal O (joinCoord x z₁)) d → fnField O (joinCoord x z₁) = fnField O x →
-      IsModelOver O (mcIdeal O (joinCoord x z₂)) d → fnField O (joinCoord x z₂) = fnField O x →
-      IsModelOver O (mcIdeal O (joinCoord x (joinCoord z₁ z₂))) d ∧
+      IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O (joinCoord x z₁)) d → fnField O (joinCoord x z₁) = fnField O x →
+      IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O (joinCoord x z₂)) d → fnField O (joinCoord x z₂) = fnField O x →
+      IndefiniteRowSideFullHecke.NumbersDVR.Bundles.IsModelOver O (mcIdeal O (joinCoord x (joinCoord z₁ z₂))) d ∧
         fnField O (joinCoord x (joinCoord z₁ z₂)) = fnField O x
 
 end GroundTheory.Heights₂.Heights.NumbersDVR

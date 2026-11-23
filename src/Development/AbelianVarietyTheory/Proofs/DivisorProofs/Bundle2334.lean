@@ -296,9 +296,9 @@ theorem homotopy_identity : ∀ (R B : Type) [CommRing R] [CommRing B] [Algebra 
     have := (GlobalTheory.PDA.fil_properties Q.P (Q.ext J) η).2.2.2.2.1 k (Q.e 1) (Q.e_one_mem_ext J)
     rwa [hstd.var] at this
   obtain ⟨hot_add, hot_alg, -, hot_rel, hot_fil⟩ := _root_.GlobalTheory.PDForm.HotFil.hot_fil R Q.P (Q.ext J) η v Q.e N hvd hfilE
-  obtain ⟨hrel_mul, -, -, -, hfil0, hfil_anti, hfil_smul⟩ := GlobalTheory.T.divPowerCompatRel_filtration_twoSided_rel_eq_bot_of_base.1 R Q.P (Q.ext J) η
+  obtain ⟨hrel_mul, -, -, -, hfil0, hfil_anti, hfil_smul⟩ := _root_.GlobalTheory.PDForm.rel_two_sided_and_bot.1 R Q.P (Q.ext J) η
   have hd_fil : ∀ n, ∀ x ∈ filDR R η (n + 1), dDR R Q.P x ∈ filDR R η n := fun n ↦
-    (GlobalTheory.T.contraction_lieDerivative_divPowerCompat_filtration_rules.2 R Q.P (Q.ext J) η v hvd n).2.1
+    (_root_.GlobalTheory.PDForm.ctr_lie_rel_filDR.2 R Q.P (Q.ext J) η v hvd n).2.1
   have hrel_le : rel R η ≤ filDR R η N := le_sup_right
   let H : DR R Q.P →+ DR R Q.P := AddMonoidHom.mk' (hot v Q.e N) hot_add
   have hH : ∀ x, H x = hot v Q.e N x := fun _ ↦ rfl

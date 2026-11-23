@@ -58,7 +58,7 @@ noncomputable section
 
 namespace UpperTheory.GalC
 
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal NumberField IsDedekindDomain GlobalTheory Tr
+open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal NumberField IsDedekindDomain _root_.GlobalTheory Tr
 
 variable {D : D7}
 

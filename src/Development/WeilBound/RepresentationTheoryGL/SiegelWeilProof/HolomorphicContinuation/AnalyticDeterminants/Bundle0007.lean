@@ -213,10 +213,6 @@ lemma iter_diffAt {F : V → ℂ} {Ω : Set V} (hΩ : IsOpen Ω) (hF : ContDiffO
     DifferentiableAt ℂ (iteratedFDeriv ℂ i F) y := by
   exact ((iter_smooth hΩ hF i).differentiableOn (by simp)).differentiableAt (hΩ.mem_nhds hy)
 
-lemma iter_cast {F : V → ℂ} {c : V} {m m' : ℕ} (h : m = m') (v : Fin m → V) :
-    iteratedFDeriv ℂ m F c v = iteratedFDeriv ℂ m' F c (v ∘ Fin.cast h.symm) := by
-  subst h; rfl
-
 end
 
 theorem iterAffine : IterAffine := by

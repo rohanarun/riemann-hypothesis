@@ -89,7 +89,7 @@ theorem e_one : X.B.e 1 = 1 / (X.volK2 : ℂ) := by
   rfl
 
 
-open Formalism Formalism.L2 Formalism.L2.SG in
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.SG in
 theorem dstarD_eq
     (hI : (X.B.μf X.B.I.Kset).toReal / X.volK2 = Formalism.MainNotions.StandardLattice.idxSig D (D.host.g 0) (D.host.g 1))
     (hV : (∏ v, X.dv v) * X.B.I.vol X.B.μf X.B.fund / (X.B.μf X.B.I.Kset).toReal =

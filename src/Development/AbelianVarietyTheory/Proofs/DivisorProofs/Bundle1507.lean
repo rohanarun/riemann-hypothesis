@@ -184,7 +184,7 @@ noncomputable section
 
 namespace GlobalTheory.CompHS.FunDer
 
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits NumberField
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.CompHS
 open GlobalTheory.TangentOrigin GlobalTheory.Frames GlobalTheory.FlagTan
 open TrivSqZeroExt hiding map lift

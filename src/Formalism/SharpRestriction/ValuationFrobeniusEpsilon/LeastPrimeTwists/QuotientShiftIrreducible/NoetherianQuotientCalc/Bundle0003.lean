@@ -179,7 +179,7 @@ theorem ruleSmall : RuleSmall := by
     have hs : s ∈ X.𝒜 d := (hV (d, s) List.mem_cons_self).2
     have hV' : Valid X.𝒜 ts := fun p hp => hV p (List.mem_cons_of_mem _ hp)
     have h0 : ∀ᶠ m in atTop, chi ts F m = hdiff ts F m := ih F hV' hF hA
-    filter_upwards [step ruleGr (euler_additivity_of_rules ruleGr ruleFin ruleIso) X ts F d s hV' hs hF hA, h0,
+    filter_upwards [_root_.Formalism.MainNotions.V.Pf.V2.Calc.Sm.step (euler_additivity_of_rules ruleGr ruleFin ruleIso) ruleGr X ts F d s hV' hs hF hA, h0,
       ev_shift d h0] with m h1 h2 h3
     rw [h1, h2, h3]
     exact (hdiff_cons d s ts F m).symm

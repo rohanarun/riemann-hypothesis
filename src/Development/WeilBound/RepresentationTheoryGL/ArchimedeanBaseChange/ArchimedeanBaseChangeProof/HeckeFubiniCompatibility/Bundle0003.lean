@@ -89,11 +89,6 @@ theorem gInf_eq (v : InfinitePlace E) (g : GA E n) :
     gInf v g = GeneralLinearGroup.map (Pi.evalRingHom (fun _ : InfinitePlace E => ℂ) v)
       (GeneralLinearGroup.map (pInf E) g) := rfl
 
-theorem continuous_gInf (v : InfinitePlace E) : Continuous (gInf (E := E) (n := n) v) := by
-  have h : Continuous (GeneralLinearGroup.map (n := Fin n) (Pi.evalRingHom (fun _ : InfinitePlace E => ℂ) v)) :=
-    Continuous.units_map _ (by exact continuous_id.matrix_map (continuous_apply v))
-  exact (h.comp (_root_.GlobalTheory.GLProj.continuous_proj_incl E n).1).congr fun g => (gInf_eq v g).symm
-
 theorem continuous_hFin : Continuous (hFin (E := E) (a := a) (b := b)) :=
   ((_root_.GlobalTheory.GLProj.continuous_proj_incl E a).2.1.comp continuous_fst).prodMk ((_root_.GlobalTheory.GLProj.continuous_proj_incl E b).2.1.comp continuous_snd)
 
@@ -155,8 +150,8 @@ theorem tens_entry {Ma : Mods E a} {Mb : Mods E b} {κ : Type} [MeasurableSpace 
     have cB : ∀ v, Continuous fun y : G b => ent (Mb v) (kb v y.val) (i.1.2 v) (j.1.2 v) := fun v =>
       (mult_ent (hB v) _ _).1
     refine ⟨?_, ?_⟩
-    · exact ((continuous_finsetProd _ fun v _ => (cA v).comp ((continuous_gInf v).comp continuous_fst)).mul
-        (continuous_finsetProd _ fun v _ => (cB v).comp ((continuous_gInf v).comp continuous_snd))).mul
+    · exact ((continuous_finsetProd _ fun v _ => (cA v).comp ((continuous_gInf a v).comp continuous_fst)).mul
+        (continuous_finsetProd _ fun v _ => (cB v).comp ((continuous_gInf b v).comp continuous_snd))).mul
         ((hψ i.2 j.2).1.comp continuous_hFin)
     · refine hasCompactSupport_of_section (fun g : H E a b => ((fun v => gInf v g.1, fun v => gInf v g.2), hFin g))
         ofParts continuous_ofParts ofParts_parts

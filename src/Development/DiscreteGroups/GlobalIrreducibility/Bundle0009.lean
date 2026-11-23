@@ -317,8 +317,6 @@ theorem corner_mul {m : ℕ} (g h : GL (Fin m) k) : corner (g * h) = corner g * 
   simp only [corner]
   rw [← map_mul, Prod.mk_mul_mk, mul_one]
 
-theorem corner_one {m : ℕ} : corner (1 : GL (Fin m) k) = 1 := map_one (emb₂ k (stdSum (rfl : m + 1 = m + 1)))
-
 variable {n : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V]
 
 theorem isFunctional_theta {ψ : AddChar k Circle} {ρ : Representation ℂ (GL (Fin n) k) V} {l : Module.Dual ℂ V}

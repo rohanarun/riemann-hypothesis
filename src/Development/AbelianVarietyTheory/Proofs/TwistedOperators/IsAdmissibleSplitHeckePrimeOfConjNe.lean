@@ -152,7 +152,7 @@ end GlobalTheory.HeckeGeomSum
 
 namespace GlobalTheory.HeckeGeomSum
 
-open NumberField AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G.FD GlobalTheory.AHPhase
+open NumberField AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G.FD GlobalTheory.AHPhase
 
 section Geo
 

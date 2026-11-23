@@ -130,8 +130,8 @@ theorem generalized_verma_module_polynomial : Verma2 := by
       · simp
 
 theorem kRel_tens {n : ℕ} {ε : Fin n → Bool} {V Z : Type} [AddCommGroup V] [Module ℂ V] [AddCommGroup Z] [Module ℂ Z]
-    {E : Fin n → Fin n → Module.End ℂ V} {M : Fin n → Fin n → Module.End ℂ Z} (hE : KRel ε E) (hM : GlRel M) :
-    KRel ε fun a b => ((E a b).rTensor Z + (M a b).lTensor V : Module.End ℂ (V ⊗[ℂ] Z)) := by
+    {E : Fin n → Fin n → Module.End ℂ V} {M : Fin n → Fin n → Module.End ℂ Z} (hE : _root_.CompanionTheory.D.DSIC.KRel ε E) (hM : GlRel M) :
+    _root_.CompanionTheory.D.DSIC.KRel ε fun a b => ((E a b).rTensor Z + (M a b).lTensor V : Module.End ℂ (V ⊗[ℂ] Z)) := by
   intro a b c d h1 h2
   apply TensorProduct.ext'
   intro v z

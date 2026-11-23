@@ -350,7 +350,7 @@ end
 section
 namespace GlobalTheory.CompanionTheory.EisRk1
 
-open MeasureTheory Set Filter Topology
+open MeasureTheory Set Filter _root_.Topology
 
 theorem weakFEPair_norm_Λ₀_le (P : WeakFEPair ℂ) {r M : ℝ}
     (hf : ∀ x : ℝ, 1 ≤ x → ‖P.f x - P.f₀‖ ≤ M * x ^ (-r))

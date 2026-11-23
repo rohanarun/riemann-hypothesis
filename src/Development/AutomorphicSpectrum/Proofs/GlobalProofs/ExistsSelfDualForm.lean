@@ -17,7 +17,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Hypotheses₂.SdExist
 
-open MeasureTheory Topology
+open MeasureTheory _root_.Topology
 
 section Abstract
 

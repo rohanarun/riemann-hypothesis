@@ -254,7 +254,7 @@ open CategoryTheory AlgebraicGeometry TopologicalSpace
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
 open GlobalTheory GlobalTheory.CxPts GlobalTheory.VB
 
-open MonoidalCategory CartesianMonoidalCategory MonObj Limits
+open MonoidalCategory CartesianMonoidalCategory MonObj _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 open GlobalTheory.CechPic (Pic cls lam)
 noncomputable section

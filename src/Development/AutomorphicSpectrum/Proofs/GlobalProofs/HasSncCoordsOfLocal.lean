@@ -11,7 +11,7 @@ public import Development.AutomorphicSpectrum.Proofs.GlobalProofs.Bundle0005
 
 noncomputable section
 namespace GlobalTheory.CompanionTheory.Geo.SncCoords
-open AlgebraicGeometry CategoryTheory Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.AnForm.R ReciprocityTheory.ChartRestriction.G.Geo.ResK
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.AnForm.R ReciprocityTheory.ChartRestriction.G.Geo.ResK
 
 theorem relDim_of_dense {X S : Scheme.{0}} (f : X ⟶ S) [Smooth f] (D : ℕ) (W : X.Opens)
     (hW : Dense (W : Set X)) (hWD : SmoothOfRelativeDimension D (W.ι ≫ f)) :

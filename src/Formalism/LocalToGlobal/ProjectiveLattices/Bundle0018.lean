@@ -38,7 +38,7 @@ noncomputable section
 namespace Formalism.L2.Pj
 
 open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
-open ReciprocityTheory.ChartRestriction.G.Geo.Tor
+open ReciprocityTheory.ChartRestriction.G.Geo.Tor hiding JetR
 open scoped CategoryTheory.Obj
 open ReciprocityTheory.ChartRestriction.G.Chart (JetR tvec tmap eigLat IsUnivChart)
 

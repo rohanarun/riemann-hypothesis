@@ -34,7 +34,7 @@ theorem torusIntegrable_kernel' {n : ℕ} {f : (Fin n → ℂ) → ℂ} {c z : F
   exact ((continuous_apply i).comp (continuous_torusMap c r)).sub continuous_const
 
 theorem cauchy' : ∀ (n : ℕ) (f : (Fin n → ℂ) → ℂ) (c : Fin n → ℂ) (r : ℝ), 0 < r →
-    SepHol f (closedBall c r) → ∀ z ∈ ball c r,
+    _root_.UpperTheory.Esk.OrbitalSingularIntegrals.SepHol f (closedBall c r) → ∀ z ∈ ball c r,
     (∯ ζ in T(c, fun _ => r), (∏ i, (ζ i - z i)⁻¹) * f ζ) = (2 * π * I) ^ n * f z := by
   intro n
   induction n with
@@ -60,7 +60,7 @@ theorem cauchy' : ∀ (n : ℕ) (f : (Fin n → ℂ) → ℂ) (c : Fin n → ℂ
         (fun x => (2 * π * I) ^ n * ((x - z 0)⁻¹ * f (Fin.cons x (Fin.tail z)))) (sphere (c 0) r) := by
       intro x hx
       have hxc : x ∈ closedBall (c 0) r := sphere_subset_closedBall hx
-      have hS : SepHol (fun y => f (Fin.cons x y)) (closedBall (fun i => c (Fin.succ i)) r) := by
+      have hS : _root_.UpperTheory.Esk.OrbitalSingularIntegrals.SepHol (fun y => f (Fin.cons x y)) (closedBall (fun i => c (Fin.succ i)) r) := by
         refine ⟨?_, fun ζ hζ j => ?_⟩
         · exact hf.1.comp (differentiable_cons_right x).continuous.continuousOn
             (fun y hy => hcons x hxc y hy)
@@ -125,7 +125,7 @@ def fctlCLM' (c : Fin n → ℂ) (r : ℝ) (f : (Fin n → ℂ) → ℂ)
         _ ≤ ‖g‖ * M := mul_le_mul_of_nonneg_left h1 (norm_nonneg _))
 
 theorem fctlCLM'_kern {c z : Fin n → ℂ} {r : ℝ} (hr : 0 < r) {f : (Fin n → ℂ) → ℂ}
-    (hf : SepHol f (closedBall c r)) (hz : z ∈ ball c r) :
+    (hf : _root_.UpperTheory.Esk.OrbitalSingularIntegrals.SepHol f (closedBall c r)) (hz : z ∈ ball c r) :
     fctlCLM' c r f (continuous_comp_torusMap' hr.le hf.1) (kern c r z) = (2 * π * I) ^ n * f z := by
   rw [← cauchy' n f c r hr hf z hz]
   show fctl c r f (kern c r z) = _
@@ -134,13 +134,13 @@ theorem fctlCLM'_kern {c z : Fin n → ℂ} {r : ℝ} (hr : 0 < r) {f : (Fin n �
   simp only [jac, kern_apply hr hz, cubeProj_of_mem hθ, smul_eq_mul]
   ring
 
-theorem osgFin (U : Set (Fin n → ℂ)) (hU : IsOpen U) (f : (Fin n → ℂ) → ℂ) (hf : SepHol f U) :
+theorem osgFin (U : Set (Fin n → ℂ)) (hU : IsOpen U) (f : (Fin n → ℂ) → ℂ) (hf : _root_.UpperTheory.Esk.OrbitalSingularIntegrals.SepHol f U) :
     AnalyticOnNhd ℂ f U := by
   intro z0 hz0
   obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hU z0 hz0
   have hr : 0 < ε / 2 := half_pos hε
   have hsub : closedBall z0 (ε / 2) ⊆ U := (closedBall_subset_ball (half_lt_self hε)).trans hball
-  have hS : SepHol f (closedBall z0 (ε / 2)) :=
+  have hS : _root_.UpperTheory.Esk.OrbitalSingularIntegrals.SepHol f (closedBall z0 (ε / 2)) :=
     ⟨hf.1.mono hsub, fun ζ hζ i => hf.2 ζ (hsub hζ) i⟩
   have hne : (2 * π * I : ℂ) ^ n ≠ 0 := pow_ne_zero _ (by simp [Real.pi_ne_zero, I_ne_zero])
   have han : AnalyticAt ℂ (fun z => ((2 * π * I : ℂ) ^ n)⁻¹ *
@@ -170,7 +170,7 @@ theorem UpperTheory.Esk.pf_Osg : UpperTheory.Esk.Osg := by
       simp [Φ]
     · have h' : e i ≠ j := fun h' => h (by rw [← h']; simp)
       simp [Φ, h, h']
-  have hg : SepHol g V := by
+  have hg : UpperTheory.Esk.OrbitalSingularIntegrals.SepHol g V := by
     refine ⟨hf.comp hΦ.continuousOn (fun w hw => hw), fun w hw j => ?_⟩
     have h1 := hsep (Φ w) hw (e.symm j)
     have e1 : (fun t => g (Function.update w j t)) = fun t => f (Function.update (Φ w) (e.symm j) t) := by

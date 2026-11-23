@@ -164,8 +164,8 @@ theorem fibreSum_pencil {e : ℕ} {Q : Ideal (MRing ι)} (hQ : IsArithVar Q (e +
     {α β : ((Σ k, ι k) → ℂ) → ℝ} (hα : IsC2AlongSheets Q Ψ α) (hβ : IsC2AlongSheets Q Ψ β) (a b : ℝ)
     {φ : Fin e → ((Σ k, ι k) → ℂ) → ℝ} (hφ : ∀ j, ∀ z ∈ mcPts Q, φ j z = a * α z + b * β z)
     (g : ((Σ k, ι k) → ℂ) → ℝ) (y : Fin e → ℂ) :
-    ∑ᶠ w ∈ fibre Q Ψ y, sheetDensity Q Ψ φ g y w = ∑ i ∈ Finset.range (e + 1),
-      (e.choose i : ℝ) * b ^ i * a ^ (e - i) * ∑ᶠ w ∈ fibre Q Ψ y, sheetDensity Q Ψ (mixW α β i) g y w := by
+    ∑ᶠ w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre Q Ψ y, sheetDensity Q Ψ φ g y w = ∑ i ∈ Finset.range (e + 1),
+      (e.choose i : ℝ) * b ^ i * a ^ (e - i) * ∑ᶠ w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre Q Ψ y, sheetDensity Q Ψ (mixW α β i) g y w := by
   have hfin := fibreFinite K ι Q e Ψ hQ hΨ y
   simp only [finsum_mem_eq_finite_toFinset_sum _ hfin, Finset.mul_sum]
   rw [Finset.sum_comm]
@@ -175,16 +175,16 @@ theorem ptsIntegral_pencil {e : ℕ} {Q : Ideal (MRing ι)} (hQ : IsArithVar Q (
     {α β : ((Σ k, ι k) → ℂ) → ℝ} (hα : ∀ Ψ, IsC2AlongSheets (e := e) Q Ψ α)
     (hβ : ∀ Ψ, IsC2AlongSheets (e := e) Q Ψ β) (g : ((Σ k, ι k) → ℂ) → ℝ)
     (hint : ∀ Ψ : (((k : K) → ι k) → ℂ) →ₗ[ℂ] (Fin (e + 1) → ℂ), IsGoodProj Q Ψ → ∀ i ∈ Finset.range (e + 1),
-      Integrable (fun y => ∑ᶠ w ∈ fibre Q Ψ y, sheetDensity Q Ψ (mixW α β i) g y w))
+      Integrable (fun y => ∑ᶠ w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre Q Ψ y, sheetDensity Q Ψ (mixW α β i) g y w))
     (a b : ℝ) {φ : Fin e → ((Σ k, ι k) → ℂ) → ℝ} (hφ : ∀ j, ∀ z ∈ mcPts Q, φ j z = a * α z + b * β z) :
     ptsIntegral Q φ g = ∑ i ∈ Finset.range (e + 1),
       (e.choose i : ℝ) * b ^ i * a ^ (e - i) * ptsIntegral Q (mixW (e := e) α β i) g := by
   simp only [ptsIntegral]
   split_ifs with hΨ
   · simp only [ptsIntegralAt]
-    have hfun : (fun y => ∑ᶠ w ∈ fibre Q hΨ.choose y, sheetDensity Q hΨ.choose φ g y w) =
+    have hfun : (fun y => ∑ᶠ w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre Q hΨ.choose y, sheetDensity Q hΨ.choose φ g y w) =
         fun y => ∑ i ∈ Finset.range (e + 1), (e.choose i : ℝ) * b ^ i * a ^ (e - i) *
-          ∑ᶠ w ∈ fibre Q hΨ.choose y, sheetDensity Q hΨ.choose (mixW α β i) g y w :=
+          ∑ᶠ w ∈ _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre Q hΨ.choose y, sheetDensity Q hΨ.choose (mixW α β i) g y w :=
       funext fun y => fibreSum_pencil hQ hΨ.choose_spec (hα _) (hβ _) a b hφ g y
     rw [hfun, integral_finsetSum _ fun i hi => (hint _ hΨ.choose_spec i hi).const_mul _]
     exact Finset.sum_congr rfl fun i _ => integral_const_mul _ _

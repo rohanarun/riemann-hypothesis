@@ -16,20 +16,6 @@ theorem eqv_of_isIso {R : Type} [CommRing R] {E E' : Spc} (f : E ⟶ E') [IsIso 
     rwa [← pull_comp, ← pull_comp, IsIso.inv_hom_id, pull_id, pull_id] at this
   · rw [← pull_comp, IsIso.hom_inv_id, pull_id]
 
-theorem eqv_comp {R : Type} [CommRing R] {E E' E'' : Spc} {f : E ⟶ E'} {g : E' ⟶ E''} {F : Shv R}
-    (hf : Eqv R f F) (hg : Eqv R g F) : Eqv R (f ≫ g) F := by
-  intro n
-  have : (pull R (f ≫ g) F n : _ → _) = pull R f F n ∘ pull R g F n := funext fun x => pull_comp R f g F n x
-  rw [this]; exact (hf n).comp (hg n)
-
-theorem eqv_of_section {R : Type} [CommRing R] {E E' : Spc} {f : E ⟶ E'} {r : E' ⟶ E} {F : Shv R}
-    (h : f ≫ r = 𝟙 _) (hr : Eqv R r F) : Eqv R f F := by
-  intro n
-  have hc : (pull R f F n : _ → _) ∘ pull R r F n = id := by
-    funext x; change pull R f F n (pull R r F n x) = x; rw [← pull_comp, h, pull_id]
-  have : Function.Bijective ((pull R f F n : _ → _) ∘ pull R r F n) := by rw [hc]; exact Function.bijective_id
-  exact (Function.Bijective.of_comp_iff _ (hr n)).1 this
-
 def fW (d : ℕ) (R : Type) [CommRing R] :
     Spec (CommRingCat.of (LaurentPolynomial (MvPolynomial (Fin d) R))) ⟶ Spec (CommRingCat.of (MvPolynomial (Fin d) R)) :=
   Spec.map (CommRingCat.ofHom (LaurentPolynomial.C : MvPolynomial (Fin d) R →+* _))

@@ -237,84 +237,10 @@ noncomputable def UpperTheory.Reformulated.B.GenericMap.genMap :
           (@AlgebraicGeometry.Scheme.stalkClosedPointTo X (@CommRingCat.of Ω (@Field.toCommRing Ω inst))
             (@UpperTheory.Reformulated.B.GenericMap.aux5 Ω inst) ξ))
 
-noncomputable def UpperTheory.Reformulated.B.GenericMap.regAt :
-    {X : AlgebraicGeometry.Scheme} →
-      {Ω : Type} →
-        [inst : Field Ω] →
-          (ξ :
-              @Quiver.Hom AlgebraicGeometry.Scheme
-                (@CategoryTheory.ReflQuiver.toQuiver AlgebraicGeometry.Scheme
-                  (@CategoryTheory.catToReflQuiver AlgebraicGeometry.Scheme AlgebraicGeometry.Scheme.instCategory))
-                (AlgebraicGeometry.Spec (@CommRingCat.of Ω (@Field.toCommRing Ω inst))) X) →
-            @UpperTheory.Reformulated.B.GenericMap.Cpt X Ω inst ξ →
-              @Subring Ω (@NonAssocCommRing.toNonAssocRing Ω (@CommRing.toNonAssocCommRing Ω (@Field.toCommRing Ω inst))) :=
-    fun {X : AlgebraicGeometry.Scheme} {Ω : Type} [inst : Field Ω]
-        (ξ :
-          @Quiver.Hom AlgebraicGeometry.Scheme
-            (@CategoryTheory.ReflQuiver.toQuiver AlgebraicGeometry.Scheme
-              (@CategoryTheory.catToReflQuiver AlgebraicGeometry.Scheme AlgebraicGeometry.Scheme.instCategory))
-            (AlgebraicGeometry.Spec (@CommRingCat.of Ω (@Field.toCommRing Ω inst))) X)
-        (p : @UpperTheory.Reformulated.B.GenericMap.Cpt X Ω inst ξ) ↦
-      @RingHom.range
-        (↑(@TopCat.Presheaf.stalk CommRingCat CommRingCat.instCategory CommRingCat.Colimits.hasColimits_commRingCat
-              (@AlgebraicGeometry.PresheafedSpace.carrier CommRingCat CommRingCat.instCategory
-                (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-              (@AlgebraicGeometry.PresheafedSpace.presheaf CommRingCat CommRingCat.instCategory
-                (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-              (@Subtype.val (↥X)
-                (fun (p : ↥X) ↦
-                  @Specializes (↥X)
-                    (@AlgebraicGeometry.SheafedSpace.instTopologicalSpaceCarrierCarrier CommRingCat CommRingCat.instCategory
-                      X.toSheafedSpace)
-                    (@UpperTheory.Reformulated.B.GenericMap.genPt X Ω inst ξ) p)
-                p)) :
-          Type)
-        Ω
-        (@NonAssocCommRing.toNonAssocRing
-          (↑(@TopCat.Presheaf.stalk CommRingCat CommRingCat.instCategory CommRingCat.Colimits.hasColimits_commRingCat
-                (@AlgebraicGeometry.PresheafedSpace.carrier CommRingCat CommRingCat.instCategory
-                  (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-                (@AlgebraicGeometry.PresheafedSpace.presheaf CommRingCat CommRingCat.instCategory
-                  (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-                (@Subtype.val (↥X)
-                  (fun (p : ↥X) ↦
-                    @Specializes (↥X)
-                      (@AlgebraicGeometry.SheafedSpace.instTopologicalSpaceCarrierCarrier CommRingCat
-                        CommRingCat.instCategory X.toSheafedSpace)
-                      (@UpperTheory.Reformulated.B.GenericMap.genPt X Ω inst ξ) p)
-                  p)) :
-            Type)
-          (@CommRing.toNonAssocCommRing
-            (↑(@TopCat.Presheaf.stalk CommRingCat CommRingCat.instCategory CommRingCat.Colimits.hasColimits_commRingCat
-                  (@AlgebraicGeometry.PresheafedSpace.carrier CommRingCat CommRingCat.instCategory
-                    (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory
-                      X.toSheafedSpace))
-                  (@AlgebraicGeometry.PresheafedSpace.presheaf CommRingCat CommRingCat.instCategory
-                    (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory
-                      X.toSheafedSpace))
-                  (@Subtype.val (↥X)
-                    (fun (p : ↥X) ↦
-                      @Specializes (↥X)
-                        (@AlgebraicGeometry.SheafedSpace.instTopologicalSpaceCarrierCarrier CommRingCat
-                          CommRingCat.instCategory X.toSheafedSpace)
-                        (@UpperTheory.Reformulated.B.GenericMap.genPt X Ω inst ξ) p)
-                    p)) :
-              Type)
-            (@CommRingCat.instCommRingObjForgetRingHomCarrier
-              (@TopCat.Presheaf.stalk CommRingCat CommRingCat.instCategory CommRingCat.Colimits.hasColimits_commRingCat
-                (@AlgebraicGeometry.PresheafedSpace.carrier CommRingCat CommRingCat.instCategory
-                  (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-                (@AlgebraicGeometry.PresheafedSpace.presheaf CommRingCat CommRingCat.instCategory
-                  (@AlgebraicGeometry.SheafedSpace.toPresheafedSpace CommRingCat CommRingCat.instCategory X.toSheafedSpace))
-                (@Subtype.val (↥X)
-                  (fun (p : ↥X) ↦
-                    @Specializes (↥X)
-                      (@AlgebraicGeometry.SheafedSpace.instTopologicalSpaceCarrierCarrier CommRingCat
-                        CommRingCat.instCategory X.toSheafedSpace)
-                      (@UpperTheory.Reformulated.B.GenericMap.genPt X Ω inst ξ) p)
-                  p)))))
-        (@NonAssocCommRing.toNonAssocRing Ω (@CommRing.toNonAssocCommRing Ω (@Field.toCommRing Ω inst)))
-        (@UpperTheory.Reformulated.B.GenericMap.genMap X Ω inst ξ p)
+noncomputable def UpperTheory.Reformulated.B.GenericMap.regAt : {X : AlgebraicGeometry.Scheme} →
+  {Ω : Type} →
+    [inst : Field Ω] →
+      (ξ : AlgebraicGeometry.Spec (CommRingCat.of Ω) ⟶ X) → UpperTheory.Reformulated.B.GenericMap.Cpt ξ → Subring Ω := fun {X} {Ω} [Field Ω] ξ p => (UpperTheory.Reformulated.B.GenericMap.genMap ξ p).range
 
 noncomputable def UpperTheory.Reformulated.B.GenericMap.unitAt :
     {X : AlgebraicGeometry.Scheme} →

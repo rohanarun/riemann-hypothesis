@@ -136,7 +136,7 @@ end GlobalTheory.Per.LangUnit
 
 namespace GlobalTheory.Per
 
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc
 
 
 set_option synthInstance.maxHeartbeats 400000 in

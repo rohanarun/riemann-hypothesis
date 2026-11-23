@@ -802,23 +802,11 @@ theorem UpperTheory.Reformulated.B.RootEquality.aux7 :
   exact fun ρ _ c _ hx ↦ ⟨hx.1.comp (fun m ↦ c • m), fun g h ↦ by
     simp only [Pi.smul_apply, hx.2 g h, map_smul, smul_add]⟩
 
-noncomputable def UpperTheory.Reformulated.B.RootEquality.Zl :
-    {R Γ M : Type} →
-      [inst : CommRing R] →
-        [inst_1 : Group Γ] →
-          [inst_2 : AddCommGroup M] →
-            [inst_3 :
-                @_root_.Module R M (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))
-                  (@AddCommGroup.toAddCommMonoid M inst_2)] →
-              @Representation R Γ M (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))
-                  (@DivInvMonoid.toMonoid Γ (@Group.toDivInvMonoid Γ inst_1)) (@AddCommGroup.toAddCommMonoid M inst_2)
-                  inst_3 →
-                [TopologicalSpace Γ] →
-                  @Submodule R (Γ → M) (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))
-                    (@Pi.addCommMonoid Γ (fun (a : Γ) ↦ M) fun (i : Γ) ↦ @AddCommGroup.toAddCommMonoid M inst_2)
-                    (@Pi.Function.module Γ R M (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))
-                      (@AddCommGroup.toAddCommMonoid M inst_2) inst_3) :=
-    fun {R Γ M : Type} [inst : CommRing R] [inst_1 : Group Γ] [inst_2 : AddCommGroup M]
+noncomputable def UpperTheory.Reformulated.B.RootEquality.Zl : {R Γ M : Type} →
+  [inst : CommRing R] →
+    [inst_1 : Group Γ] →
+      [inst_2 : AddCommGroup M] →
+        [inst_3 : Module R M] → Representation R Γ M → [TopologicalSpace Γ] → Submodule R (Γ → M) := fun {R Γ M : Type} [inst : CommRing R] [inst_1 : Group Γ] [inst_2 : AddCommGroup M]
         [inst_3 :
           @_root_.Module R M (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))
             (@AddCommGroup.toAddCommMonoid M inst_2)]

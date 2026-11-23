@@ -115,7 +115,7 @@ noncomputable section
 
 namespace GlobalTheory.BdryUnit
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.AllWt
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {Dw : Datum H} {l : Level H}

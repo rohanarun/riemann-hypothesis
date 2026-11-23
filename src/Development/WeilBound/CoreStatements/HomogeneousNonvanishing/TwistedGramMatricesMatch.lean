@@ -22,7 +22,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.SpecStalkMap
 
-open AlgebraicGeometry CategoryTheory Limits NumberField ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.CompanionTheory.Ar
+open AlgebraicGeometry CategoryTheory Limits NumberField ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo.Tor _root_.GlobalTheory.CompanionTheory.Ar
 
 theorem genPt_specializes {R : CommRingCat} {Ω : Type} [Field Ω] (φ : R ⟶ CommRingCat.of Ω)
     (hφ : Function.Injective φ.hom) (q : Spec R) : genPt (Spec.map φ) ⤳ q := by

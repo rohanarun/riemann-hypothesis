@@ -88,7 +88,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Top.KerOne.CertEq.TopStep
 
-open Formalism Formalism.L2 Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG Formalism.MainNotions.G.CmpJ.PStabEq Matrix
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.G Formalism.L2.G.Cmp Formalism.L2.Forms Formalism.UG Formalism.MainNotions.G.CmpJ.PStabEq Matrix
 open scoped TensorProduct
 
 section Stab

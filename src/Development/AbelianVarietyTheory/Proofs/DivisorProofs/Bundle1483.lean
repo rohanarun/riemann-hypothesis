@@ -378,7 +378,7 @@ noncomputable section
 
 namespace GlobalTheory.CompHS
 
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits NumberField
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj
 open GlobalTheory.CechPic GlobalTheory.TangentOrigin GlobalTheory.Vanishing
 open GlobalTheory.FlagMod (FlagCover)

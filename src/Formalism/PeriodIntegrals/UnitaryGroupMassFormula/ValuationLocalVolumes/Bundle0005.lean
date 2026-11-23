@@ -22,8 +22,8 @@ section Gen
 
 variable {F E : Type} [Field F] [Field E] [Algebra F E] (R : Type) [CommRing R] [Algebra F R] (σ : E →ₐ[F] E)
 
-theorem sigR_inclR (e : E) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR R e) = inclR R (σ e) := by
-  simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR, inclR]
+theorem sigR_inclR (e : E) : _root_.Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR R e) = inclR R (σ e) :=
+  DFunLike.congr_fun (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id F R) σ) e
 
 theorem sigR_tmul_one (x : R) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (x ⊗ₜ[F] (1 : E)) = x ⊗ₜ[F] (1 : E) := by
   simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR]

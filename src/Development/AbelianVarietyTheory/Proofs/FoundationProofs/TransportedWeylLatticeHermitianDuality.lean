@@ -293,7 +293,7 @@ theorem nabDelDual : NabDelDual := by
     choose B' hB' using fun τ => exists_dual_frame (G τ) (hG τ) (B τ)
     exact ⟨B, B', hB', hB, fun τ =>
       isBasisAt_hdual (G τ) (M τ) (hM τ).fg w (B τ) (B' τ) (hB τ) (hB' τ)⟩
-  have hnab : ∀ F ∈ nabP lam M, F ∈ VV K lam := GlobalTheory.T.transportedLattice_localization_free_le_coefficientSpace.2.2 K ι n lam M hM
+  have hnab : ∀ F ∈ nabP lam M, F ∈ VV K lam := _root_.GlobalTheory.TransLoc.nabDelLoc_free_leVV.2.2 K ι n lam M hM
   have hdel : ∀ F ∈ delP lam M, F ∈ VV K lam := fun F hF =>
     hnab F (transLat_mono lam (delStd_le_nabStd K lam) M hF)
   constructor
@@ -303,13 +303,13 @@ theorem nabDelDual : NabDelDual := by
       simp only [hone]
     · intro w
       obtain ⟨B, B', h1, h2, h3⟩ := hfr w
-      exact ⟨B, B', h1, (GlobalTheory.T.transportedLattice_localization_free_le_coefficientSpace.1 K ι n lam M hM _ B h2).1, (GlobalTheory.T.transportedLattice_localization_free_le_coefficientSpace.1 K ι n lam _ hM' _ B' h3).2⟩
+      exact ⟨B, B', h1, (_root_.GlobalTheory.TransLoc.nabDelLoc_free_leVV.1 K ι n lam M hM _ B h2).1, (_root_.GlobalTheory.TransLoc.nabDelLoc_free_leVV.1 K ι n lam _ hM' _ B' h3).2⟩
   · refine dual_of_local lam G (delStd K lam) (nabStd K lam) _ _ (GlobalTheory.StdLatSpan.std_fg_span K ι n lam).2.1 ?_ hdel ?_
     · intro x hx
       rw [← (_root_.GlobalTheory.StdDual.std_dual K ι n lam x hx).1]
       simp only [hone]
     · intro w
       obtain ⟨B, B', h1, h2, h3⟩ := hfr w
-      exact ⟨B, B', h1, (GlobalTheory.T.transportedLattice_localization_free_le_coefficientSpace.1 K ι n lam M hM _ B h2).2, (GlobalTheory.T.transportedLattice_localization_free_le_coefficientSpace.1 K ι n lam _ hM' _ B' h3).1⟩
+      exact ⟨B, B', h1, (_root_.GlobalTheory.TransLoc.nabDelLoc_free_leVV.1 K ι n lam M hM _ B h2).2, (_root_.GlobalTheory.TransLoc.nabDelLoc_free_leVV.1 K ι n lam _ hM' _ B' h3).1⟩
 
 end GlobalTheory.TransDual

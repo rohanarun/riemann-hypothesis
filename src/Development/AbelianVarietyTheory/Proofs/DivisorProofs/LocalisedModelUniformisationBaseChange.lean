@@ -15,7 +15,7 @@ noncomputable section
 
 namespace GlobalTheory.KeyUnitModels
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.IndefiniteRowSideFullHecke.FibreFramesOnModels
 
 section Sections

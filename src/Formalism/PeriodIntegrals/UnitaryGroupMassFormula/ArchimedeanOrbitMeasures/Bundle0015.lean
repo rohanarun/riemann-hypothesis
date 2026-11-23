@@ -208,24 +208,6 @@ def ProperOne : Prop := ∀ {D : D7} (X : HidaSetting D) (u' : D.what₂.Word) (
 def InvNbhd : Prop := ∀ {D : D7} (X : HidaSetting D),
     ∃ N ∈ 𝓝 (1 : MfI X), ∃ Nc : Set (MfI X), IsCompact Nc ∧ ∀ b ∈ N, ∃ c ∈ Nc, c * b = 1
 
-theorem rmulT_rmulT {D : D7} (X : HidaSetting D) (b c : MfI X) (Y : TupI X) :
-    rmulT X c (rmulT X b Y) = rmulT X (b * c) Y := by
-  funext a i
-  simp only [rmulT, Matrix.mul_apply, Finset.mul_sum, Finset.sum_mul]
-  rw [Finset.sum_comm]
-  exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
-
-theorem smul_rmulT {D : D7} (X : HidaSetting D) (g : HA (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J) (b : MfI X)
-    (Y : TupI X) : g • rmulT X b Y = rmulT X b (g • Y) := by
-  change (fun a => ((HA.mat (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J g : GL (Fin X.B.I.n) (Ainf X.B.I.F ⊗[X.B.I.F] X.B.I.E)) :
-      Matrix (Fin X.B.I.n) (Fin X.B.I.n) _).mulVec (rmulT X b Y a)) =
-    rmulT X b (fun a => ((HA.mat (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J g : GL (Fin X.B.I.n) (Ainf X.B.I.F ⊗[X.B.I.F] X.B.I.E)) :
-      Matrix (Fin X.B.I.n) (Fin X.B.I.n) _).mulVec (Y a))
-  funext a i
-  simp only [rmulT, Matrix.mulVec, dotProduct, Finset.mul_sum]
-  rw [Finset.sum_comm]
-  exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
-
 theorem continuous_right_mul_tuple {D : D7} (X : HidaSetting D) :
     Continuous (fun p : MfI X × TupI X => rmulT X p.1 p.2) := by
   have : FiniteDimensional X.B.I.F X.B.I.E := fd_of X

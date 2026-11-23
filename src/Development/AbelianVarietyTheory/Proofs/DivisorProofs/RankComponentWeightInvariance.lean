@@ -68,7 +68,7 @@ open ReciprocityTheory.ChartRestriction.G.Out (nonzeroLocus)
 open GlobalTheory GlobalTheory.CechPic
 open GlobalTheory.ThickeningDetermines (secIdeal)
 open scoped TensorProduct
-open Limits
+open _root_.CategoryTheory.Limits
 
 namespace GlobalTheory.JetRank
 

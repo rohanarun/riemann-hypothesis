@@ -322,7 +322,7 @@ noncomputable section
 
 namespace GlobalTheory.CMRam
 
-open WeierstrassCurve
+open _root_.WeierstrassCurve
 
 theorem exists_conj_lattice (σ : ℂ ≃+* ℂ) (L : PeriodPair) :
     ∃ L' : PeriodPair, L'.g₂ = σ L.g₂ ∧ L'.g₃ = σ L.g₃ := by

@@ -314,7 +314,7 @@ namespace GlobalTheory.DepthStages
 
 theorem lowA_statement : LowAStatement := by
   intro C _ _ _ v p hp _ hv d h h0 hh ty G μ j K hj
-  obtain ⟨γ₀, hγ₀⟩ := (GlobalTheory.T.typicalCurveEigenspace_and_basisExists.2 C v p hp hv d h h0 ty G μ).1
+  obtain ⟨γ₀, hγ₀⟩ := (_root_.GlobalTheory.TypicalCurveBases.typical_curves_tangent_and_bases.2 C v p hp hv d h h0 ty G μ).1
   have key : ∃ (γ : Fin d → Fin d → PowerSeries C) (dp : Fin d → ℤ), StageInv G p ty j K γ dp := by
     induction K with
     | zero => exact exists_stageInv_zero hp hv h0 hh hγ₀ hj

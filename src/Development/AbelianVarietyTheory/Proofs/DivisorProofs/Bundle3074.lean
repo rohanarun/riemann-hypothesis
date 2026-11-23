@@ -255,7 +255,7 @@ open CategoryTheory AlgebraicGeometry TensorProduct GlobalTheory GlobalTheory.PD
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo.Tor
 attribute [local instance] CategoryTheory.Over.cartesianMonoidalCategory
 
-open Limits MonoidalCategory CartesianMonoidalCategory
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.MonObj
 
 namespace GlobalTheory.Dieu.AbsDet

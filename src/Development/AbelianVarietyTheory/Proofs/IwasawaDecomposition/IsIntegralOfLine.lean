@@ -18,7 +18,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.RowCoord
 
-open NumberField Module Formalism.DivisionValues Formalism.L2.DIV Formalism.L2.Col
+open NumberField Module Formalism.DivisionValues Formalism.L2.DIV _root_.Formalism.L2.Col
 
 section Alg
 

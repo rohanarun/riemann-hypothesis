@@ -253,7 +253,7 @@ noncomputable section
 
 namespace GlobalTheory.TwU.CongTwo
 
-open NumberField IsDedekindDomain Matrix Formalism.L2.Col
+open NumberField IsDedekindDomain Matrix _root_.Formalism.L2.Col
 open scoped TensorProduct
 
 theorem val_cong_of_mul_eq {K Γ : Type} [Field K] [LinearOrderedCommGroupWithZero Γ] (v : Valuation K Γ) {ι : Type} [Fintype ι]
@@ -322,7 +322,7 @@ end GlobalTheory.TwU.CongTwo
 
 namespace GlobalTheory.TwU.CongTwo
 
-open NumberField IsDedekindDomain Matrix Formalism.L2.Col
+open NumberField IsDedekindDomain Matrix _root_.Formalism.L2.Col
 open Formalism.L2.DIV (AfE)
 open scoped TensorProduct
 

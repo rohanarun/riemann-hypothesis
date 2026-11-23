@@ -150,7 +150,7 @@ theorem isLocus_of_isAffineOpen_of_meets_fibres : ∀ (R : Type) [CommRing R] [I
   obtain ⟨U, c, hU, hc⟩ := _root_.GlobalTheory.DivStart.exists_locus_over_dense_open R A hA V hV hfib
   have hVW : V ≤ A.hom ⁻¹ᵁ U ⊔ V := le_sup_right
   have h0 : GlobalTheory.CechPic.pull (A.left.homOfLE hVW) c = 0 := by
-    refine GlobalTheory.T.nonvanishingLocus_pullback_and_vanish_into_locus.2 _ _ _ c _ hc fun y => ?_
+    refine _root_.GlobalTheory.LocusPull.locus_pull.2 _ _ _ c _ hc fun y => ?_
     show (A.left.homOfLE hVW ≫ (A.hom ⁻¹ᵁ U ⊔ V).ι) y ∈ V
     rw [Scheme.homOfLE_ι]
     exact y.2

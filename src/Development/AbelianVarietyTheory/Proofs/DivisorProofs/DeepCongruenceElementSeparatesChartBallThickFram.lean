@@ -21,7 +21,7 @@ noncomputable section
 
 namespace GlobalTheory.ThickSep
 
-open ReciprocityTheory.ChartRestriction.G.AR.Inst ReciprocityTheory.L2DbarEstimates Module Submodule
+open ReciprocityTheory.ChartRestriction.G.AR.Inst ReciprocityTheory.L2DbarEstimates Module _root_.Submodule
 open scoped ComplexConjugate Matrix
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {r : ℕ}

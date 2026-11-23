@@ -269,7 +269,7 @@ theorem c4 : Big fun ch => ∀ t Φ β M, IsTermVol t ch.S.toGridChoice Φ β M 
   | core i => exact hX.elim
 
 theorem basicAt : Big fun ch => BasicAt ch := by
-  have hall := (((((((GlobalTheory.T.besselColumnScalarFunction_continuous_leftInvariant.and _root_.GlobalTheory.FormTopAut.formTop_cont_left).and c3).and c4).and _root_.GlobalTheory.ThetaJoint.main).and _root_.GlobalTheory.FlipRowTheta.row_isThetaFunO).and _root_.GlobalTheory.RowCombGood.comb_good).and _root_.GlobalTheory.CombsExist.combs_exist)
+  have hall := (((((((_root_.GlobalTheory.RowClaim.colFn_cont_left.and _root_.GlobalTheory.FormTopAut.formTop_cont_left).and c3).and c4).and _root_.GlobalTheory.ThetaJoint.main).and _root_.GlobalTheory.FlipRowTheta.row_isThetaFunO).and _root_.GlobalTheory.RowCombGood.comb_good).and _root_.GlobalTheory.CombsExist.combs_exist)
   refine GlobalTheory.RowReal.big_mono (fun ch h => ?_) hall
   rcases h with ⟨⟨⟨⟨⟨⟨⟨h1, h2⟩, h3⟩, h4⟩, h5a⟩, h5b⟩, h6⟩, h7⟩
   refine ⟨fun a => ⟨(h1 a).2, (h1 a).1⟩, fun t y => ⟨(h2 t y).2, (h2 t y).1⟩, h3, h4, ?_, h6, h7⟩

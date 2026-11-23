@@ -132,10 +132,8 @@ theorem weight_sum {N m : ℕ} (hN : N ≠ 0) (hm : m ∣ N) (hm1 : m ≠ 1) :
 
 variable {N : ℕ} [NeZero N]
 
-private theorem natCast_val_zmod_eq_self (x : ZMod N) : ((x.val : ℕ) : ZMod N) = x := by
-  first
-  | exact ZMod.natCast_zmod_val x
-  | simp
+private theorem natCast_val_zmod_eq_self (x : ZMod N) : ((x.val : ℕ) : ZMod N) = x :=
+  ZMod.natCast_zmod_val x
 
 private theorem intCast_zmod_eq_zero_iff_dvd' (a : ℤ) : ((a : ZMod N) = 0) ↔ (N : ℤ) ∣ a := by
   first

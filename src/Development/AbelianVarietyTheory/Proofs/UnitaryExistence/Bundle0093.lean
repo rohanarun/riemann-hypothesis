@@ -191,7 +191,7 @@ noncomputable section
 
 namespace GlobalTheory.Frames
 
-open AlgebraicGeometry CategoryTheory Limits NumberField IsDedekindDomain
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField IsDedekindDomain
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD Formalism.L2.Pj
 
 namespace ComplexTransfer

@@ -155,7 +155,7 @@ theorem subst_sub_subst_dvd {Y Z : PowerSeries O} (hY : constantCoeff Y = 0)
   rw [map_sub, PowerSeries.coeff_mul, coeff_subst_eq_sum_range_of_lt hY a hm,
     coeff_subst_eq_sum_range_of_lt hZ a hm, ← Finset.sum_sub_distrib]
   have h1 : ∀ n, coeff n a * coeff m (Y ^ n) - coeff n a * coeff m (Z ^ n) =
-      ∑ p ∈ Finset.antidiagonal m, coeff p.1 (Y - Z) * (coeff n a * coeff p.2 (qn Y Z n)) := by
+      ∑ p ∈ Finset.HasAntidiagonal.antidiagonal m, coeff p.1 (Y - Z) * (coeff n a * coeff p.2 (qn Y Z n)) := by
     intro n
     have e := congrArg (coeff m) (hYZ n)
     rw [map_sub, PowerSeries.coeff_mul] at e
@@ -165,7 +165,7 @@ theorem subst_sub_subst_dvd {Y Z : PowerSeries O} (hY : constantCoeff Y = 0)
   conv_rhs => rw [Finset.sum_comm]
   refine Finset.sum_congr rfl fun p hp => ?_
   rw [PowerSeries.coeff_mk, ← Finset.mul_sum,
-    stab p.2 (m + 2) (by rw [Finset.mem_antidiagonal] at hp; omega)]
+    stab p.2 (m + 2) (by rw [Finset.HasAntidiagonal.mem_antidiagonal] at hp; omega)]
 
 end Formalism.MainNotions.N.WachTwistedLattices.PowerSeriesTruncation
 end

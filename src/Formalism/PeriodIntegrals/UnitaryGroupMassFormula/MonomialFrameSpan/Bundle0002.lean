@@ -231,7 +231,7 @@ theorem prod_mem_span (nu : Lt → YoungDiagram) (g : Lt → MvPolynomial (ℕ �
       have H1 := H Finset.univ
       have hf : (fun J : ColChoice N0 nu =>
           ∏ s, rename (emb s) (∏ c : Fin ((nu s).rowLen 0), minorX ℤ N0 ((nu s).colLen c) (J s c))) = nablaX N0 nu :=
-        funext fun J => (nablaX_eq nu J).symm
+        funext fun J => (_root_.GenFrameSpan.SatP.nablaX_eq nu J).symm
       rw [hf] at H1
       exact H1
     intro F

@@ -87,11 +87,6 @@ theorem mat_one' : mat (1 : G D n) = 1 := by
 
 theorem G_ext' {a b : G D n} (h : mat a = mat b) : a = b := Subtype.ext (Units.ext h)
 
-theorem reidx_mul (A B : M2 n) : reidx (A * B) = reidx A * reidx B := by
-  simp [reidx, Matrix.submatrix_mul_equiv]
-
-theorem reidx_one : reidx (1 : M2 n) = 1 := by simp [reidx, Matrix.submatrix_one_equiv]
-
 theorem reidx_ct (A : M2 n) : reidx Aᴴ = (reidx A)ᴴ := by simp [reidx, Matrix.conjTranspose_submatrix]
 
 theorem reidx_inj {A B : M2 n} (h : reidx A = reidx B) : A = B := by

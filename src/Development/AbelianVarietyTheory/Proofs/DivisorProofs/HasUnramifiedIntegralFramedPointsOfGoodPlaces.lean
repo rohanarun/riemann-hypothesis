@@ -47,7 +47,7 @@ namespace GlobalTheory.UnramPoint
 
 section Curve
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.PureType GlobalTheory.CompRat
 open scoped CategoryTheory.Obj
 
@@ -148,7 +148,7 @@ end Curve
 
 section Point
 
-open AlgebraicGeometry CategoryTheory Limits NumberField TopologicalSpace
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField TopologicalSpace
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.CompRat GlobalTheory.CompRat.FixedConst
   GlobalTheory.AllWt GlobalTheory.FlatLine GlobalTheory.FixedPoint
 

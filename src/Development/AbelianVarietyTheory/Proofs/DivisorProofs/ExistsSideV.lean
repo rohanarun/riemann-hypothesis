@@ -64,7 +64,7 @@ theorem Q_base (hL : R.toLevCh.Is A.μ0) : R.Q A.μ0 = ∅ :=
     exact fun _ _ => rfl)
 
 
-open Formalism.L2.Host Formalism.L2.Col GlobalTheory.RationalValues in
+open Formalism.L2.Host _root_.Formalism.L2.Col GlobalTheory.RationalValues in
 theorem xiR_mem (hL : R.toLevCh.Is A.μ0) (hF : R.IsFam) {χ xi Q xiR} (h : TwLev R χ xi Q xiR) :
     ∀ PP ∈ Q, ∀ x, ((xiR PP x : ℂˣ) : ℂ) ∈ D.what₂.embLL.fieldRange := by
   classical

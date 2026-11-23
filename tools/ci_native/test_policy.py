@@ -9,19 +9,14 @@ import rpc
 
 
 class PolicyTransitionTests(unittest.TestCase):
-    def test_released_baseline_and_current_proof_scope_agree(self):
-        policy = rpc.proof_policy()
-        root = Path(rpc.__file__).resolve().parents[2]
-        baselines = rpc.read(root/'scripts/cache-baselines.json')
-        self.assertEqual(policy['snapshot']['toolchain'],baselines['active_toolchain'])
-        official = baselines['toolchains'][baselines['active_toolchain']]
-        self.assertEqual(policy['snapshot']['manifest_sha256'],official['dependency_manifest_sha256'])
-        self.assertEqual({key:policy['baseline'][key] for key in official['baseline']},official['baseline'])
-        self.assertEqual(policy['baseline']['modules'],149396)
-        self.assertEqual(policy['worklist_modules'],99240)
-        self.assertEqual(policy['baseline']['unchanged_modules'],50156)
-        self.assertEqual(policy['worklist_modules']+policy['baseline']['unchanged_modules'],
-                         policy['baseline']['modules'])
+    def test_fresh_policy_does_not_activate_or_restore_main_baseline(self):
+        policy=rpc.proof_policy()
+        self.assertEqual(policy['snapshot']['toolchain'],'leanprover/lean4:v4.37.0-rc1')
+        self.assertEqual(policy['baseline'],{'fresh_project':True,'unchanged_modules':0,'unchanged_module_names':[]})
+        self.assertEqual(policy['worklist_modules'],policy['candidate_modules'])
+        self.assertEqual(policy['worklist_modules'],149216)
+        self.assertEqual(policy['approval_mode'],'ancestor-of-open-pr')
+        self.assertEqual(policy['pr_number'],185)
 
     def test_previous_policy_seal_cannot_reuse_the_new_expansion(self):
         with tempfile.TemporaryDirectory() as temporary:

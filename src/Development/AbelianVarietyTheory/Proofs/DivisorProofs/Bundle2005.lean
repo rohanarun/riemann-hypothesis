@@ -57,7 +57,7 @@ noncomputable section
 
 namespace GlobalTheory.FlagMod.FieldFlag
 
-open AlgebraicGeometry CategoryTheory TopologicalSpace Limits NumberField
+open AlgebraicGeometry CategoryTheory TopologicalSpace _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.Reg GlobalTheory.FlagEmb GlobalTheory.ProjSpace GlobalTheory.FlagMod
 open GlobalTheory.FlagMod.LowRank (ECh Proj str)
 open MonoidalCategory CartesianMonoidalCategory MonObj
@@ -335,7 +335,7 @@ noncomputable section
 
 namespace GlobalTheory.FlagMod.FieldFlag
 
-open AlgebraicGeometry CategoryTheory TopologicalSpace Limits NumberField ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.Reg GlobalTheory.FlagEmb GlobalTheory.ProjSpace GlobalTheory.FlagMod GlobalTheory.FlagMod.FieldFlag
+open AlgebraicGeometry CategoryTheory TopologicalSpace _root_.CategoryTheory.Limits NumberField ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.Reg GlobalTheory.FlagEmb GlobalTheory.ProjSpace GlobalTheory.FlagMod GlobalTheory.FlagMod.FieldFlag
 open GlobalTheory.FlagMod.LowRank (ECh Proj str)
 open MonoidalCategory CartesianMonoidalCategory MonObj
 open ReciprocityTheory.ChartRestriction.G.PullbackSections (TanM tv mkT tanM_ext tv_mem actR)

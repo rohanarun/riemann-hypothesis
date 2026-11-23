@@ -2,3 +2,8 @@ __pycache__/
 backend/.lake/
 backend/lake-manifest.json
 backend/binary-receipt.json
+
+backend/proof-binary-receipt.json
+backend437/.lake/
+backend437/lake-manifest.json
+backend437/proof-binary-receipt.json

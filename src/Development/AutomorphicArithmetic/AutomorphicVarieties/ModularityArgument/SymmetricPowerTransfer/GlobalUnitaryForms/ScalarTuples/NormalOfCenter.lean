@@ -132,9 +132,6 @@ namespace UpperTheory.V.Z.Sym.Glob
 
 open NumberField IsDedekindDomain Matrix Loc MulAction Fib
 
-private lemma dx_ext {K : Type} [Field K] {Δ : K} {g g' : DX Δ} (h : mt g = mt g') : g = g' :=
-  Subtype.ext (Units.ext h)
-
 private lemma comm_abs {G A : Type} [Group G] [CommGroup A] (d : G →* A) (a b : G) : a * b * a⁻¹ * b⁻¹ ∈ d.ker := by
   rw [MonoidHom.mem_ker, map_mul, map_mul, map_mul, map_inv, map_inv, mul_right_comm (d a), mul_inv_cancel, one_mul,
     mul_inv_cancel]

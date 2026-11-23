@@ -346,7 +346,7 @@ open NumberField IsDedekindDomain Matrix
 
 namespace GlobalTheory.Proof.mem_integralGLAtPrime_of_congruent_one_mod_pow
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {E : Type} [Field E] [NumberField E]
 

@@ -283,7 +283,7 @@ theorem kappa_unique (R : Type) [CommRing R] [IsDomain R] (R' : Type) [CommRing 
 theorem half_exists : ∀ (R : Type) [CommRing R] [IsDomain R] (R' : Type) [CommRing R'] [IsDomain R'] [IsLocalRing R'] [IsNoetherianRing R'] (Q : Data R) (ρ : R →+* R') (P : PolAV (Sp R')) (β : P.A.left ⟶ Q.B.left) (β₂ : (G2 P.A).left ⟶ (G2 Q.B).left), Function.Injective ρ → IsGrpPullback P.A Q.B (spMap ρ) β → IsSquare β β₂ → (letI := P.isAb.comm; LBIso (abelian₂ P.A P.L) ((abelian₂ Q.B Q.M.L).pull β₂)) → ∃ (D : DegPre R') (e : D.X ≃+ Q.X) (f : D.X → D.X → (FractionRing R')ˣ), Half Q ρ D e f := by
   intro R _ _ R' _ _ _ _ Q ρ P β β₂ hρ hpb hsq hiso
   obtain ⟨rig, hrig⟩ := P.rigid
-  obtain ⟨cub⟩ := (GlobalTheory.T.all_six_abelian_scheme_laws_hold.1.cube _ P ⟨P.L, rig, P.isLB, hrig⟩ rfl).1
+  obtain ⟨cub⟩ := (_root_.GlobalTheory.allSixLaws.1.cube _ P ⟨P.L, rig, P.isLB, hrig⟩ rfl).1
   obtain ⟨sym, hsym, hsr⟩ := GlobalTheory.SelfUnif.exists_sym P
   have hF := hpb.1
   obtain ⟨c, hc⟩ : ∃ c : Q.X → (𝟙_ (Over (Sp R')) ⟶ P.A), ∀ x,
@@ -357,7 +357,7 @@ noncomputable section
 
 namespace GlobalTheory.HTSympCover
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.UPel.HT GlobalTheory.SiegelTor GlobalTheory.HTSympCover
 
 theorem exists_sympCond_geom : ∀ (p : ℕ) [Fact p.Prime] (D : Datum p) (R : Type) [CommRing R] (b : Base D R) (N M e : ℕ),

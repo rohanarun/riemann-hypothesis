@@ -26,7 +26,7 @@ public import Development.AbelianVarietyTheory.Proofs.SatakeParameters.Bundle014
 section
 namespace GlobalTheory.ColPeriod
 
-open NumberField IsDedekindDomain Formalism.L2.Col Formalism.L2.DIV
+open NumberField IsDedekindDomain _root_.Formalism.L2.Col Formalism.L2.DIV
 open GlobalTheory.IndefiniteRowSideFullHecke.SourceLatticeInvariance (DegOneUnram)
 
 section Split

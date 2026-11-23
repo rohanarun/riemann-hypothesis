@@ -177,7 +177,7 @@ theorem nKer_eq_sum {k : Type} [Field k] [Finite k] {m n t d : ℕ} (h : n = m +
     nKer d w = ∑ j ∈ Finset.range (min d m + 1),
       Nat.card k ^ ((m - j) * (d - j)) * Formalism.L2.Col.gaussBin (Nat.card k) t (d - j) * nKer j wᵀ := by
   letI := Fintype.ofFinite k
-  have h1 := GlobalTheory.T.card_ker_subspaces_and_heckePolyOf_convolution.1 k (Fin n → k) (Fin m → k) m t d w.mulVecLin (by rw [Module.finrank_fin_fun, h])
+  have h1 := _root_.GlobalTheory.KerRangeCount.card_ker_and_heckePolyOf_conv.1 k (Fin n → k) (Fin m → k) m t d w.mulVecLin (by rw [Module.finrank_fin_fun, h])
     (Module.finrank_fin_fun k)
   rw [← h] at h1
   rw [nKer, h1, Nat.card_eq_fintype_card (α := k)]

@@ -51,17 +51,7 @@ private theorem krullDim_le_height_lemma_3 {α β : Type*} [Preorder α] [Preord
   exact_mod_cast h
 
 private theorem height_le_krullDim_lemma_6 {α : Type*} [Preorder α] (a : α) :
-    (Order.height a : WithBot ℕ∞) ≤ Order.krullDim α := by
-  first
-  | exact Order.height_le_krullDim a
-  | (have H : ∀ s : LTSeries α, ((s.length : ℕ∞) : WithBot ℕ∞) ≤ Order.krullDim α := fun s => by
-       have := le_iSup (fun s : LTSeries α => (s.length : WithBot ℕ∞)) s
-       exact_mod_cast this
-     obtain ⟨k, hk⟩ := WithBot.ne_bot_iff_exists.mp
-       (ne_bot_of_le_ne_bot WithBot.coe_ne_bot (H (RelSeries.singleton _ a)))
-     rw [← hk]
-     refine WithBot.coe_le_coe.mpr (Order.height_le_iff.mpr fun s _ => ?_)
-     exact WithBot.coe_le_coe.mp (by rw [hk]; exact H s))
+    (Order.height a : WithBot ℕ∞) ≤ Order.krullDim α := Order.height_le_krullDim a
 
 theorem ringKrullDim_localization_quotient_eq_height {P : Type*} [CommRing P] (p q : Ideal P)
     [p.IsPrime] [q.IsPrime] (hpq : p ≤ q) :

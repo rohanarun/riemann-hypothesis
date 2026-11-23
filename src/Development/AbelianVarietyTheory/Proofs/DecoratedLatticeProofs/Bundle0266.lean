@@ -175,7 +175,7 @@ theorem sum_inner_rieszVector_rightTranslate (hK : X.LevelSubgroupCharacter) {ι
     simp only [mul_assoc]
   simpa only [e] using hs (h * δ⁻¹)
 
-open Formalism.MainNotions Formalism.L2 Formalism.L2.DIV
+open Formalism.MainNotions _root_.Formalism.L2 Formalism.L2.DIV
 
 variable {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {Kc : Formalism.MainNotions.G.Consts}
   {Yd : DivX D} {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Yd cX} {R : Formalism.L2.RecT ex}

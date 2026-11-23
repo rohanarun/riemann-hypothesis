@@ -327,7 +327,7 @@ end GlobalTheory.LevelMoveCong
 
 namespace GlobalTheory.LevelMoveCong
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.BasicNotions.TH Formalism.L2 Formalism.L2.Theta Formalism.L2.Pj
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.BasicNotions.TH _root_.Formalism.L2 Formalism.L2.Theta Formalism.L2.Pj
 open scoped TensorProduct Matrix
 
 

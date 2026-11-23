@@ -12,7 +12,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.SW.HermCoord
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField MeasureTheory _root_.Topology
 open scoped TensorProduct
 
 theorem exists_basis {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E]

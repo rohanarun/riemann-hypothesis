@@ -192,7 +192,7 @@ noncomputable section
 
 namespace GlobalTheory.FlatLine
 
-open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory Limits TopologicalSpace
+open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits TopologicalSpace
 open ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD Formalism.BasicNotions Formalism.L2.Pj GlobalTheory.AllWt
 
 theorem exists_finite_point {K : Type} [Field K] {X : Scheme.{0}} (s : X ⟶ Sp K) [LocallyOfFiniteType s]

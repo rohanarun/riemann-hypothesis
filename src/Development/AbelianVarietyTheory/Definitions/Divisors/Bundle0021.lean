@@ -17,7 +17,7 @@ noncomputable section
 namespace GlobalTheory.ColRows
 
 open Module NumberField
-open Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Indef Formalism.L2.Col GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds
+open Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Indef _root_.Formalism.L2.Col GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds
 open Formalism.LatticeIndexTer (ph)
 
 section Generic

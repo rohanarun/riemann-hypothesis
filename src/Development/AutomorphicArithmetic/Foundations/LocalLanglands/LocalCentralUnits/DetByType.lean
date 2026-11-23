@@ -267,7 +267,7 @@ private theorem isTypeMap_of {n : ℕ} (τ : FDRep ℂ (Gn g n)) (hτ : IsCusp �
     IsTypeMap (τ.ρ.comp (glMap i hi n)) π φ := by
   constructor
   · have hsimp := DiscreteGroups.sglob.DzType.Kon.simple_of_isIrr τ hτ.2.1
-    have hirr := (GlobalTheory.T.simple_iff_irreducible.1 _ τ).mp hsimp
+    have hirr := (_root_.GlobalTheory.CompanionTheory.TyFin.simpleIffIrr.1 _ τ).mp hsimp
     rcases hirr.2 (LinearMap.ker φ) (by
         intro γ v hv
         obtain ⟨κ, rfl⟩ := GlobalTheory.GLp.Model.red_surjective n γ
@@ -295,9 +295,9 @@ theorem UpperTheory.Zero.LLC.detByType :
   haveI := DiscreteGroups.sglob.DzType.Kon.simple_of_isIrr τ hτ.2.1
   haveI := DiscreteGroups.sglob.DzType.Kon.simple_of_isIrr τ' hirr'
   have hiso : Nonempty (τ ≅ τ') := GlobalTheory.Top.Lq.iso_of_char τ τ' (fun x => by rw [hττ'])
-  obtain ⟨e, he⟩ := (GlobalTheory.T.simple_iff_irreducible.2 _ τ τ').mp hiso
+  obtain ⟨e, he⟩ := (_root_.GlobalTheory.CompanionTheory.TyFin.simpleIffIrr.2 _ τ τ').mp hiso
   have hτc : IsCusp τ'.character := hττ' ▸ hτ
-  haveI : Nontrivial τ.V := ((GlobalTheory.T.simple_iff_irreducible.1 _ τ).mp inferInstance).1
+  haveI : Nontrivial τ.V := ((_root_.GlobalTheory.CompanionTheory.TyFin.simpleIffIrr.1 _ τ).mp inferInstance).1
   let ψ : τ →ₗ[ℂ] σ'.V := φ'.comp e.toLinearMap
   have hψ0 : ψ ≠ 0 := by
     intro h

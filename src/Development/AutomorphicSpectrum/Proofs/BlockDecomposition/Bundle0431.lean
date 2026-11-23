@@ -105,7 +105,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.BZPhiPG.Onto.Topo
 
-open GlobalTheory.SplitWeil Topology
+open GlobalTheory.SplitWeil _root_.Topology
 
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
 

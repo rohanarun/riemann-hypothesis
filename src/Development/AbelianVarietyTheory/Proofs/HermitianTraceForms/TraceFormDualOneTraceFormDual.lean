@@ -8,8 +8,9 @@ public import ReciprocityTheory.SemistableReduction.Bundle0002
 
 namespace GlobalTheory
 
-open NumberField ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing
-open ReciprocityTheory.ChartRestriction.G.FD hiding cc_cc cc_mul
+open NumberField
+open ReciprocityTheory.ChartRestriction.G.FD (cc herm EFf)
+open ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing
 open scoped nonZeroDivisors
 
 noncomputable section
@@ -36,13 +37,13 @@ private theorem fractionRing_conj (x : E) :
 theorem mem_conjFrac {a : FractionalIdeal (𝓞 E)⁰ E} {x : E} : x ∈ conjFrac a ↔ cc x ∈ a := by
   constructor
   · rintro ⟨y, hy, rfl⟩
-    have h := (congrArg cc (fractionRing_conj y)).trans (cc_cc y)
+    have h := (congrArg cc (fractionRing_conj y)).trans (_root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc y)
     exact h.symm ▸ hy
   · intro h
-    exact ⟨cc x, h, (fractionRing_conj (cc x)).trans (cc_cc x)⟩
+    exact ⟨cc x, h, (fractionRing_conj (cc x)).trans (_root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc x)⟩
 
 theorem cc_mem_conjFrac {a : FractionalIdeal (𝓞 E)⁰ E} {x : E} : cc x ∈ conjFrac a ↔ x ∈ a := by
-  rw [mem_conjFrac, cc_cc]
+  rw [mem_conjFrac, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc]
 
 @[simp] theorem conjFrac_conjFrac (a : FractionalIdeal (𝓞 E)⁰ E) : conjFrac (conjFrac a) = a := by
   ext x; rw [mem_conjFrac, cc_mem_conjFrac]
@@ -61,10 +62,10 @@ theorem conjFrac_spanSingleton (x : E) :
   constructor
   · rintro ⟨z, hz⟩
     refine ⟨IsCMField.ringOfIntegersComplexConj E z, ?_⟩
-    rw [← cc_cc y, ← hz, Algebra.smul_def, Algebra.smul_def, cc_mul]; rfl
+    rw [← _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc y, ← hz, Algebra.smul_def, Algebra.smul_def, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_mul]; rfl
   · rintro ⟨z, hz⟩
     refine ⟨IsCMField.ringOfIntegersComplexConj E z, ?_⟩
-    rw [← hz, Algebra.smul_def, Algebra.smul_def, cc_mul, cc_cc]; rfl
+    rw [← hz, Algebra.smul_def, Algebra.smul_def, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_mul, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc]; rfl
 
 omit [IsCMField E] in
 theorem mem_one_fractionalIdeal_iff {x : E} :
@@ -98,10 +99,10 @@ theorem conjFrac_different :
   rw [mem_conjFrac, mem_inv_different_iff, mem_inv_different_iff]
   constructor
   · intro h a ha
-    rw [← trace_cc, cc_mul]
+    rw [← trace_cc, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_mul]
     exact h _ (isIntegral_cc ha)
   · intro h a ha
-    rw [← trace_cc, cc_mul, cc_cc]
+    rw [← trace_cc, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_mul, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc]
     exact h _ (isIntegral_cc ha)
 
 omit [IsCMField E] in
@@ -232,7 +233,7 @@ theorem hermDual_smul {a : FractionalIdeal (𝓞 E)⁰ E} (ha : a ≠ 0) :
   · intro h y hy
     rw [FractionalIdeal.mem_inv_iff (conjFrac_ne_zero ha)]
     intro α hα
-    rw [mem_one_fractionalIdeal_iff, mul_comm, ← cc_cc α, ← herm_smul_right]
+    rw [mem_one_fractionalIdeal_iff, mul_comm, ← _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc α, ← herm_smul_right]
     exact h _ (Submodule.smul_mem_smul (mem_conjFrac.1 hα) hy)
   · intro h y hy
     refine Submodule.smul_induction_on (p := fun y => IsIntegral ℤ (herm G x y)) hy ?_ ?_
@@ -261,7 +262,7 @@ def traceFormBilin (ξ : E) (G : Matrix (Fin r) (Fin r) E) : LinearMap.BilinForm
 
 theorem EFf_smul_left (ξ : E) (G : Matrix (Fin r) (Fin r) E) (a : E) (x y : Fin r → E) :
     EFf ξ G (a • x) y = EFf ξ G x (cc a • y) := by
-  rw [EFf, EFf, herm_smul_left, herm_smul_right, cc_cc]
+  rw [EFf, EFf, herm_smul_left, herm_smul_right, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc]
 
 theorem traceFormBilin_nondegenerate {ξ : E} (hξ : ξ ≠ 0) (hG : G.det ≠ 0) :
     (traceFormBilin ξ G).Nondegenerate := by
@@ -319,7 +320,7 @@ theorem traceFormDual_eq {ξ : E} (hξ : ξ ≠ 0) :
     rw [key]
     intro a ha
     have := h _ (smul_mem_of_isIntegral Λ (isIntegral_cc ha) hy)
-    rwa [EFf, herm_smul_right, cc_cc] at this
+    rwa [EFf, herm_smul_right, _root_.ReciprocityTheory.ChartRestriction.G.FD.HermitianTraceFormVanishing.cc_cc] at this
   · intro h y hy
     have := (key _).1 (h y hy) 1 isIntegral_one
     rwa [one_mul] at this

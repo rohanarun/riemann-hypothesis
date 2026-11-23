@@ -107,7 +107,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Rec.FinRd.Roots
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 section Act
 

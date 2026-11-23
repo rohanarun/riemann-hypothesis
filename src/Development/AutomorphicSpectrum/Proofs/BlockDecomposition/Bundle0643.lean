@@ -317,7 +317,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory.CompanionTheory.CfFJ
 
-open Metric Set
+open _root_.Metric Set
 
 variable {D : D7} {n ρ p : ℕ}
 

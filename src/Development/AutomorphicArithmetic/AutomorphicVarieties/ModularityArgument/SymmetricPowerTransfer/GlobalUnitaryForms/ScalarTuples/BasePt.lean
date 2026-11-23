@@ -170,28 +170,6 @@ private theorem posF_one {F : Type} [Field F] [NumberField F] {Δ τ : F} (hΔ :
   exact Prod.ext (QuadraticAlgebra.ext e1 e2)
     (QuadraticAlgebra.ext (QuadraticAlgebra.ext e4 e6) (QuadraticAlgebra.ext e3 e5))
 
-private theorem ae_unit {F : Type} [Field F] [NumberField F] {x : F} (hx : x ≠ 0) :
-    ∀ᶠ v : Pl F in Filter.cofinite, ∃ u : (Ov v)ˣ, algebraMap (Ov v) (Kv v) u = cv v x := by
-  have integ : ∀ y : F, ∀ᶠ v : Pl F in Filter.cofinite,
-      cv v y ∈ HeightOneSpectrum.adicCompletionIntegers F v := by
-    intro y
-    simp only [Filter.eventually_cofinite, HeightOneSpectrum.mem_adicCompletionIntegers, not_le]
-    refine (HeightOneSpectrum.Support.finite (𝓞 F) y).subset fun v hv => ?_
-    simp only [Set.mem_setOf_eq] at hv
-    show 1 < v.valuation F y
-    have e : Valued.v (cv v y) = v.valuation F y :=
-      HeightOneSpectrum.valuedAdicCompletion_eq_valuation' v y
-    rw [← e]
-    exact hv
-  filter_upwards [integ x, integ x⁻¹] with v h1 h2
-  refine ⟨⟨⟨cv v x, h1⟩, ⟨cv v x⁻¹, h2⟩, ?_, ?_⟩, rfl⟩
-  · apply Subtype.ext
-    show cv v x * cv v x⁻¹ = 1
-    rw [← map_mul, mul_inv_cancel₀ hx, map_one]
-  · apply Subtype.ext
-    show cv v x⁻¹ * cv v x = 1
-    rw [← map_mul, inv_mul_cancel₀ hx, map_one]
-
 private theorem fp_mul {I : Type} (S : Finset I) (a b c g k : I → ℂ) (ha : {v | a v ≠ 1}.Finite) (hb : {v | b v ≠ 1}.Finite)
     (hc : {v | c v ≠ 1}.Finite) (hg : ∀ᶠ v in Filter.cofinite, g v = 1) (hS : ∀ v ∈ S, a v = 1 ∧ b v = 1 ∧ c v = 1)
     (hk : ∀ v ∉ S, k v = a v * b v * c v * g v) :

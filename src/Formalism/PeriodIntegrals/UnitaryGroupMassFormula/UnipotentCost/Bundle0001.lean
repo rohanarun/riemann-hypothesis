@@ -185,33 +185,6 @@ theorem continuous_zjH {p s : ℕ} (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ)
   · exact continuous_const
   · exact continuous_apply_apply a' b'
 
-theorem det_zjH_ne {p s : ℕ} (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ) (hd : ∀ i, d i ≠ 0) (η : XiH p s σ)
-    (Z : G.Mat s) (hZ : G.detM Z ≠ 0) : (ZjH σ d η Z).det ≠ 0 := by
-  unfold ZjH Zj headH
-  simp only [Matrix.det_mul, blk2, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
-    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, one_mul, mul_one]
-  unfold wP lowW G.upper
-  repeat' apply mul_ne_zero
-  all_goals first
-    | exact hZ
-    | (rw [Matrix.det_diagonal]; exact Finset.prod_ne_zero_iff.2 fun i _ => hd i)
-    | (have hP : (of fun a b => if σ a = b then (1 : ℂ) else 0) =
-          (1 : Matrix (Fin p) (Fin p) ℂ).submatrix σ id := by
-         ext a b
-         simp [Matrix.one_apply]
-       rw [hP, Matrix.det_permute]
-       simp)
-    | (first | rw [Matrix.det_of_lowerTriangular _ ?_] | rw [Matrix.det_of_lowerTriangular ?_]
-       · simp
-       · intro i j hij
-         have hij' : i < j := hij
-         simp [Matrix.one_apply, hij'.ne, not_lt.2 hij'.le])
-    | (first | rw [Matrix.det_of_upperTriangular ?_] | rw [Matrix.det_of_upperTriangular _ ?_]
-       · simp [G.strictUpper]
-       · intro i j hij
-         have hij' : j < i := hij
-         simp [G.strictUpper, Matrix.one_apply, hij'.ne', not_lt.2 hij'.le])
-
 theorem rn_mem_of (hR : RadicalParam) (k j ρ : ℕ) (x : RC k j ρ) : Rn k j ρ x ∈ B.GV k (j + ρ) := by
   unfold RadicalParam at hR
   obtain ⟨-, hrange, hsub⟩ := hR k j ρ
@@ -224,14 +197,14 @@ theorem gaXi_mem_of (hM : SliceMem) (hR : RadicalParam) (k p s ρ : ℕ) (σ : E
   unfold gaXi
   exact Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_mul
     (Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_mul (Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_inv (rn_mem_of hR _ _ _ _))
-      ((hM k (p + s) ρ).1 _ γ (det_zjH_ne σ d hd ξ.2 Z hZ) hγ)) (rn_mem_of hR _ _ _ _)
+      ((hM k (p + s) ρ).1 _ γ (det_zjH_ne hd ξ.2 hZ) hγ)) (rn_mem_of hR _ _ _ _)
 
 theorem gaXi_contAt (k p s ρ : ℕ) (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ) (hd : ∀ i, d i ≠ 0)
     (ξ : Xi k p s ρ σ) (Z : G.Mat s) (γ : B.Mat k ρ) (hZ : G.detM Z ≠ 0) :
     ContinuousAt (fun Z' : G.Mat s => gaXi k ρ σ d ξ Z' γ) Z := by
   have hZj := continuous_zjH σ d ξ.2 (s := s)
   have hdet : ((ZjH σ d ξ.2 Z)ᴴ).det ≠ 0 := by
-    rw [Matrix.det_conjTranspose]; exact star_ne_zero.2 (det_zjH_ne σ d hd ξ.2 Z hZ)
+    rw [Matrix.det_conjTranspose]; exact star_ne_zero.2 (det_zjH_ne hd ξ.2 hZ)
   have hinvC : ContinuousAt Ring.inverse ((ZjH σ d ξ.2 Z)ᴴ).det := by
     simpa using NormedRing.inverse_continuousAt (Units.mk0 _ hdet)
   have hinv : ContinuousAt (fun Z' : G.Mat s => (ZjH σ d ξ.2 Z')ᴴ⁻¹) Z :=

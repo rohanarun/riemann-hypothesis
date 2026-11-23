@@ -209,7 +209,7 @@ end Free
 
 namespace SncLine
 
-open Metric GroundTheory.Heights₂.Heights.LowerBoundFree.Line
+open _root_.Metric GroundTheory.Heights₂.Heights.LowerBoundFree.Line
 open GroundTheory.Heights₂.Heights (CP)
 open scoped Matrix ComplexOrder
 

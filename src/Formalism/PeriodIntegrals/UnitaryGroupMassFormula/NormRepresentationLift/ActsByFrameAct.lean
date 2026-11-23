@@ -20,12 +20,8 @@ variable {E : Type} [Field E] [NumberField E] [StarRing E] {S : HSpace E}
 theorem smul_coe (o : 𝓞 E) (w : S.V) : (o : E) • w = o • w := by
   exact IsScalarTower.algebraMap_smul E o w
 
-theorem herm_eq (x y : S.V) : S.hT y x = star (S.hT x y) := by
-  first
-    | exact (S.herm x y).symm
-    | exact (S.herm.eq x y).symm
-    | (rw [← S.herm x y]; rfl)
-    | (rw [← S.herm.eq x y]; rfl)
+theorem herm_eq (x y : S.V) : S.hT y x = star (S.hT x y) :=
+  (S.herm.eq x y).symm
 
 theorem tvMap_isom (e v : S.V) (l : E) (hee : S.hT e e = 0) (hev : S.hT e v = 0)
     (hl : l + star l = -S.hT v v) (x y : S.V) :

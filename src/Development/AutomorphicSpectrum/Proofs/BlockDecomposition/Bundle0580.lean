@@ -56,7 +56,7 @@ open ReciprocityTheory.ChartRestriction.G.AI.I2 (IsRatSectionOn logNormRat)
 noncomputable section
 namespace GlobalTheory.CompanionTheory.MixZ.ArchEq
 
-open Topology
+open _root_.Topology
 open scoped CommRingCat.HomTopology
 
 theorem secondCountable_hom_of_finiteType (A : CommRingCat.{0}) [Algebra.FiniteType ℤ A] :

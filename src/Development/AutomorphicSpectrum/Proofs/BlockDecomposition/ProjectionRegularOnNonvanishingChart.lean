@@ -27,7 +27,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.MixZ.ArchEq.PieceAt
 
-open Filter Topology
+open Filter _root_.Topology
 open ReciprocityTheory.ChartRestriction.G.Geo (scaleBlock scaleBlock_mem_zeroLocus eval_scaleBlock segre_differentiableAt)
 open GroundTheory.Heights₂.Heights.PtsSheetOnlyNull (ratio inv_smul_eq_cons segre_scaleBlock differentiableAt_ratio)
 

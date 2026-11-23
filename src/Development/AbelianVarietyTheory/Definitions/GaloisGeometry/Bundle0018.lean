@@ -56,7 +56,7 @@ open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatt
 
 namespace GlobalTheory.Hk3.FamModel
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 theorem nb_congr {E : Type} [Field E] [NumberField E] [StarRing E] {n : ℕ}
     {ST SG : Finset (HeightOneSpectrum (𝓞 E))} {P : Ideal (𝓞 E)} {s y : List ℕ}

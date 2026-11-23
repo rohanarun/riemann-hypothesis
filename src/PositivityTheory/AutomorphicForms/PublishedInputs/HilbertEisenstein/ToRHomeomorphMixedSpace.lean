@@ -11,7 +11,7 @@ public import Development.AbelianVarietyTheory.Proofs.IwasawaDecomposition.Bundl
 noncomputable section
 
 open NumberField NumberField.mixedEmbedding MeasureTheory GroundTheory.Global
-open scoped FourierTransform Matrix Classical
+open scoped FourierTransform _root_.Matrix Classical
 open GlobalTheory.CuspRep
 
 namespace UpperTheory.HilbertEisensteinWeightOne.PoissonSummationAdelic

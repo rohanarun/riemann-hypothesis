@@ -138,7 +138,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory.MovedIdem
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {D : D7}
 

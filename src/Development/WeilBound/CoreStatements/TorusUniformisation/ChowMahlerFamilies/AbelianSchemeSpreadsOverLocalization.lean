@@ -25,7 +25,7 @@ namespace PositivityTheory.Xgn.AbelianSchemeSpreading
 
 section Norm
 
-open ReciprocityTheory.ChartRestriction.G.Out GlobalTheory GlobalTheory.AbLaw GlobalTheory.UU GlobalTheory.FlatNorm TopologicalSpace GlobalTheory.LB GlobalTheory.LBGerm
+open ReciprocityTheory.ChartRestriction.G.Out _root_.GlobalTheory GlobalTheory.AbLaw GlobalTheory.UU GlobalTheory.FlatNorm TopologicalSpace GlobalTheory.LB GlobalTheory.LBGerm
 
 theorem exists_norm_lb_all (X Y : Scheme.{0}) [IsLocallyNoetherian X] (π : Y ⟶ X) [IsFinite π] [Flat π] (L : LB Y)
     (hL : L.IsLB) : ∃ N : LB X, N.IsLB ∧ ∀ s : LB.Sec L, ∃ n : LB.Sec N,
@@ -129,7 +129,7 @@ theorem isProjOver_abelian (K : Type) [Field K] (A : Over (Sp K)) [GrpObj A] (hA
 end Norm
 
 
-open GlobalTheory GlobalTheory.SpreadAb in
+open _root_.GlobalTheory GlobalTheory.SpreadAb in
 theorem exists_model (R K : Type) [CommRing R] [IsDomain R] [IsNoetherianRing R] [Field K] [Algebra R K]
     [IsFractionRing R K] (A : Over (Sp K)) [GrpObj A] (hA : IsAbelianScheme A) {J : Type} [Fintype J]
     (w : J → (A ⟶ A)) (M : LB A.left) (hM : M.IsLB) :
@@ -214,7 +214,7 @@ theorem exists_model (R K : Type) [CommRing R] [IsDomain R] [IsNoetherianRing R]
 
 end PositivityTheory.Xgn.AbelianSchemeSpreading
 
-open PositivityTheory.Xgn.AbelianSchemeSpreading GlobalTheory GlobalTheory.SpreadAb in
+open PositivityTheory.Xgn.AbelianSchemeSpreading _root_.GlobalTheory GlobalTheory.SpreadAb in
 theorem PositivityTheory.Xgn.abelian_scheme_spreads_over_localization : ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (H : Host E) (L : Type) [Field L] [NumberField L] (tL : SAB H (Sp L)), IsProper tL.G.hom → ∃ (n : 𝓞 L) (_ : n ≠ 0) (T : SAB H (Sp (Localization.Away n))) (f : Localization.Away n →+* L), (∀ x : 𝓞 L, f (algebraMap _ _ x) = (x : L)) ∧ Nonempty (SABMap tL T (spMap f)) := by
   intro E _ _ _ H L _ _ tL hp
   have hA : IsAbelianScheme tL.G := ⟨tL.comm, tL.semi.smooth, hp, tL.semi.geomConnected⟩

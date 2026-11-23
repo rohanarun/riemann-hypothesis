@@ -688,10 +688,7 @@ theorem UpperTheory.Reformulated.B.InvolutionInvariants.laurent_T_neg_one_mul_T_
       Units.continuous_val) continuous_const
   exact hc.locallyCompactSpace
 
-noncomputable def UpperTheory.Reformulated.B.InvolutionInvariants.muG :
-    {n : Nat} →
-      (ε : Fin n → Bool) → @MeasureTheory.Measure (↥(@UpperTheory.Reformulated.B.InvolutionInvariants.UJ n ε)) (UpperTheory.Reformulated.B.InvolutionInvariants.instMeasurableSpaceUJ n ε) :=
-    fun {n : Nat} (ε : Fin n → Bool) ↦
+noncomputable def UpperTheory.Reformulated.B.InvolutionInvariants.muG : {n : ℕ} → (ε : Fin n → Bool) → MeasureTheory.Measure ↥(UpperTheory.Reformulated.B.InvolutionInvariants.UJ ε) := fun {n : Nat} (ε : Fin n → Bool) ↦
       @MeasureTheory.Measure.haar (↥(@UpperTheory.Reformulated.B.InvolutionInvariants.UJ n ε))
         (@Subgroup.toGroup
           (@Units (Matrix (Fin n) (Fin n) Complex)

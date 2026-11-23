@@ -175,7 +175,7 @@ end Gen
 
 section Forms
 
-open Formalism Formalism.IndefR Formalism.IndefR.FWT Formalism.MainNotions Formalism.IndefR.Links
+open _root_.Formalism Formalism.IndefR Formalism.IndefR.FWT Formalism.MainNotions Formalism.IndefR.Links
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

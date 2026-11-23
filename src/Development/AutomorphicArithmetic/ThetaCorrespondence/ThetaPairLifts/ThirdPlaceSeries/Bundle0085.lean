@@ -167,7 +167,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 noncomputable section
 namespace GlobalTheory.Fam.PkOf
 section Heq
-open Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
+open _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
 variable {D : D7}
 end Heq
 end GlobalTheory.Fam.PkOf

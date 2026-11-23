@@ -69,7 +69,7 @@ noncomputable section
 namespace GlobalTheory.CoverOnto
 
 open NumberField IsDedekindDomain ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD Formalism.BasicNotions Formalism.MainNotions Formalism.BasicNotions.TH Formalism.L2.Theta Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes Formalism.L2.Pj
-open AlgebraicGeometry CategoryTheory Limits ReciprocityTheory.ChartRestriction.G.Semi
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Semi
 open scoped TensorProduct Matrix
 open GlobalTheory.ShortMove GlobalTheory.ShortMoveIso GlobalTheory.TwistTie
 
@@ -318,7 +318,7 @@ theorem exists_covers_rep (T : CoreJ D) [Algebra T.Q.c.F D.what₂.LL] (R : Real
   have hpos : 1 ≤ (T.Q.Dw ((i : ℕ) + 1)).p + (T.Q.Dw ((i : ℕ) + 1)).q := by omega
   have hX : ∀ t, ∃ (Xo₂ : Moduli (T.Q.Dw ((i : ℕ) + 1)) (l₂ t)) (c₀ : Coeff (l₂ t)),
       ∀ c'' : Coeff (l₂ t), c₀.F ≤ c''.F → FnAlgClosed (Xo := Xo₂) (c := c'') := fun t => by
-    obtain ⟨Xo₂⟩ := GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.1 _ _ (T.Q.Dw ((i : ℕ) + 1)) (l₂ t) hpos
+    obtain ⟨Xo₂⟩ := _root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.1 _ _ (T.Q.Dw ((i : ℕ) + 1)) (l₂ t) hpos
     obtain ⟨c₀, -⟩ := exists_coeff_ge (l₂ t) ⊥
     obtain ⟨c₁, -, h⟩ := (GlobalTheory.GeomIrr.compNe_and_exists_fnAlgClosed _ _ _ _ Xo₂ c₀ hpos).2
     exact ⟨Xo₂, c₁, h⟩

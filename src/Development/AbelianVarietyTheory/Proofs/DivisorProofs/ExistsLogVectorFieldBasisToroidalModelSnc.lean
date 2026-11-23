@@ -249,7 +249,7 @@ end Algebra
 
 section Geometry
 
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace
+open CategoryTheory _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.AnForm.R
 open GlobalTheory GlobalTheory.Cartier GlobalTheory.TopForm GlobalTheory.AdaptedFrame
 open ReciprocityTheory.ChartRestriction.G.DVR.FlatBC (algX)

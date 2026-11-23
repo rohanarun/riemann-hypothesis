@@ -17,7 +17,7 @@ universe u
 
 namespace GlobalTheory
 
-open Submodule
+open _root_.Submodule
 
 theorem lagrangian_of_idempotent_split_univ :
  ∀ (R : Type) [CommRing R] (H : Type u) [AddCommGroup H] [Module R H] (O : Type) [Ring O] (ρ : O →+* Module.End R H) (bar : O → O) (φ : LinearMap.BilinForm R H) (e : Module.End R H), e * e = e → (∀ a, ρ a * e = e * ρ a) → (∀ a, bar (bar a) = a) → (∀ a x y, φ (ρ a x) y = φ x (ρ (bar a) y)) → (∀ x y, φ (e x) y = φ x (y - e y)) → Function.Bijective φ → φ.IsRefl → ∀ G M : Submodule R H, G ⊓ M = ⊥ → G ⊔ M = LinearMap.range e → (∀ a, ∀ x ∈ G, ρ a x ∈ G) → let E := G ⊔ (LinearMap.ker e ⊓ ⨅ x ∈ G, LinearMap.ker (φ x)); (∃ N : Submodule R H, IsCompl E N) ∧ E ⊓ LinearMap.range e = G ∧ (∀ x ∈ E, ∀ y ∈ E, φ x y = 0) ∧ ∀ a, ∀ x ∈ E, ρ a x ∈ E := by

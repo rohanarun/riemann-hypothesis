@@ -113,7 +113,7 @@ namespace GlobalTheory.ClosingSixth
 theorem conclusionG6_of_adm_alt : ∀ D : D7, _root_.Formalism.MainNotions.SumRepresentations.AdmissibleDatum D → RbEx D → SumRepresentations.ConclusionG6 D :=
   _root_.GlobalTheory.T.prvG6_of_admissible_of_g6_decomposition _root_.GlobalTheory.T.centred_string_decomposition _root_.GlobalTheory.T.purity_string_weight _root_.GlobalTheory.T.hecke_char_eq_of_l_adic_realisation _root_.UpperTheory.GalS.muChar_holds_alt _root_.GlobalTheory.eigenCharTwist_holds
     (_root_.GlobalTheory.T.resCount_of_valRing_ssList_ssRank _root_.GlobalTheory.ValRing.valRingModel GlobalTheory.T.exists_irreducible_constituents_charpoly_product _root_.GlobalTheory.SSRank.ssRankUnique_holds)
-    GlobalTheory.T.stringRankOneLength_and_multisetSumSingleton.1 GlobalTheory.T.stringRankOneLength_and_multisetSumSingleton.2
+    _root_.GlobalTheory.SixthNumerics.numerics_and_rest.1 _root_.GlobalTheory.SixthNumerics.numerics_and_rest.2
 end GlobalTheory.ClosingSixth
 end
 end

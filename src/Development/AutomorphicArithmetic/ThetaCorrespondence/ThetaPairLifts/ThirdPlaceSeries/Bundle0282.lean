@@ -277,7 +277,7 @@ theorem galois_side_at_place_alt : _root_.GlobalTheory.HeightCounting.Up.Publish
   intro hP hS hL
   have htr : _root_.GlobalTheory.HeightCounting.Up.MemberAtLayerPoint hL fun _ _ _ _ w Z _ _ t nch n c => _root_.GlobalTheory.Triple.IsGaloisTriple (w.D Z) :=
     _root_.GlobalTheory.GalLoc.galLoc_triple_at_place_alt hP hS hL (_root_.GlobalTheory.T.eigTrue_and_eigOcc_withLoc hP hS hL) (_root_.GlobalTheory.T.valLL0_roots_of_unity_mem_star_closed_at_members hP hS hL) (_root_.GlobalTheory.T.local_param_at_member_of_serN hP hS hL) (_root_.GlobalTheory.T.commAll_fullAll_at_members_of_serN hP hS hL)
-  refine (GlobalTheory.T.eventually_sizes_congruences_hostFacts_columnChoices.inter htr).imp fun K _ _ _ _ H => ?_
+  refine (_root_.GlobalTheory.HeightCounting.Up.sizes_host_at_record.inter htr).imp fun K _ _ _ _ H => ?_
   refine (H.1.inter H.2).imp fun B f T _ H => ?_
   intro hK w Z Wt p0 t nch n xd c hE hX hC
   obtain ⟨e⟩ := hE

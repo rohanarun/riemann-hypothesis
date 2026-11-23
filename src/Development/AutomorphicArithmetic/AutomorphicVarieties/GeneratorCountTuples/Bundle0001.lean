@@ -39,8 +39,8 @@ private theorem lmul_single (h : G) (m : ℕ) (x : Fin m → G) (a : A) :
   simp [lmul]
 
 private theorem lmul_cone (h a : G) (m : ℕ) (y : Ch A G m) :
-    lmul A h (m + 1) (cone A a m y) = cone A (h * a) m (lmul A h m y) := by
-  simp only [lmul, cone, Finsupp.lmapDomain_apply, ← Finsupp.mapDomain_comp]
+    lmul A h (m + 1) (PM.cone A a m y) = PM.cone A (h * a) m (lmul A h m y) := by
+  simp only [lmul, PM.cone, Finsupp.lmapDomain_apply, ← Finsupp.mapDomain_comp]
   congr 1
   funext x i
   refine Fin.cases ?_ (fun j => ?_) i <;> simp

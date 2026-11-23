@@ -235,7 +235,7 @@ noncomputable section
 
 namespace GlobalTheory.TwV
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Col Formalism.L2.Ker Formalism.L2.DIV GlobalTheory.TwU
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.Ker Formalism.L2.DIV GlobalTheory.TwU
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

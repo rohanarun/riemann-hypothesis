@@ -45,9 +45,9 @@ theorem exists_lift_retract : ∀ (A K : Type) [CommRing A] [IsDomain A] [IsNoet
     ext x
     simp [hc]
   have hinj := IsFractionRing.injective A K
-  have hE : ∀ e ∈ GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ, ∀ w : Module.Dual K Li, eigProj D.ρΩ (σ.comp c.toRingHom) w e = w e :=
+  have hE : ∀ e ∈ _root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ, ∀ w : Module.Dual K Li, eigProj D.ρΩ (σ.comp c.toRingHom) w e = w e :=
     fun e he w => eigProj_apply D ρ hc hact (σ.comp c.toRingHom) (by rw [hττ]; exact he) w
-  have hvec0 : ∀ g : Module.Dual A (D.omHT (σ.comp c.toRingHom)), ∃ e ∈ GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ,
+  have hvec0 : ∀ g : Module.Dual A (D.omHT (σ.comp c.toRingHom)), ∃ e ∈ _root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ,
       ∀ z : D.omHT (σ.comp c.toRingHom),
         algebraMap A K d * (z : Module.Dual K Li) e = algebraMap A K (g z) := by
     intro g
@@ -64,13 +64,13 @@ theorem exists_lift_retract : ∀ (A K : Type) [CommRing A] [IsDomain A] [IsNoet
     change (a • k) • v = algebraMap A K a • (k • v)
     rw [Algebra.smul_def, mul_smul]⟩
   have hsmul : ∀ (a : A) (v : Li), a • v = algebraMap A K a • v := fun _ _ => rfl
-  have hvW : ∀ g, vec g ∈ latOn D (GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ) (algebraMap A K d) (algebraMap A K).range := fun g =>
+  have hvW : ∀ g, vec g ∈ latOn D (_root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ) (algebraMap A K d) (algebraMap A K).range := fun g =>
     ⟨hvecS g, fun w hw => by
       obtain ⟨z, hz⟩ := hmem w hw
       rw [← hE _ (hvecS g) w, ← hz, hvec]
       exact ⟨_, rfl⟩⟩
   let Wsub : Submodule A Li :=
-    { carrier := latOn D (GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ) (algebraMap A K d) (algebraMap A K).range
+    { carrier := latOn D (_root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ) (algebraMap A K d) (algebraMap A K).range
       add_mem' := fun {a b} ha hb => ⟨Submodule.add_mem _ ha.1 hb.1, fun w hw => by
         rw [map_add (f := _), mul_add]
         exact add_mem (ha.2 w hw) (hb.2 w hw)⟩
@@ -113,7 +113,7 @@ theorem exists_lift_retract : ∀ (A K : Type) [CommRing A] [IsDomain A] [IsNoet
     (((Algebra.linearMap A K).compLeft (Fin N)) ∘ₗ i ∘ₗ eval)
   obtain ⟨⟨r, hr⟩, -⟩ := hex
   let Rr : (Fin N → K) →ₗ[K] Li := Fintype.linearCombination K fun k => vec (r (Pi.single k 1))
-  have hRrS (y : Fin N → K) : Rr y ∈ GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ := by
+  have hRrS (y : Fin N → K) : Rr y ∈ _root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ := by
     simp only [Rr, Fintype.linearCombination_apply]
     exact Submodule.sum_mem _ fun k _ => Submodule.smul_mem _ _ (hvecS _)
   have hRr (y : Fin N → A) (z : D.omHT (σ.comp c.toRingHom)) :
@@ -140,7 +140,7 @@ theorem exists_lift_retract : ∀ (A K : Type) [CommRing A] [IsDomain A] [IsNoet
     let q := (p : K) ^ m
     have hq : q ≠ 0 := pow_ne_zero _ (Nat.cast_ne_zero.2 (Fact.out : p.Prime).ne_zero)
     let e' := q⁻¹ • (Rr (G e) - e)
-    have he'S : e' ∈ GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ :=
+    have he'S : e' ∈ _root_.GlobalTheory.CompanionTheory.Ar.HT.eigSp ρ σ :=
       Submodule.smul_mem _ _ (Submodule.sub_mem _ (hRrS _) he.1)
     refine ⟨e', ⟨he'S, ?_⟩, ?_⟩
     · intro w hw
@@ -470,7 +470,7 @@ open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.S
 
 namespace GlobalTheory.CompanionTheory.Ar
 
-theorem stalk_isDiscreteValuationRing_of_dim_one : ∀ (X : Scheme.{0}) [IsLocallyNoetherian X], IsNormalScheme X → ∀ p : X, ringKrullDim (X.presheaf.stalk p) = 1 → ∃ _ : IsDomain (X.presheaf.stalk p), IsDiscreteValuationRing (X.presheaf.stalk p) :=
+theorem stalk_isDiscreteValuationRing_of_dim_one : ∀ (X : Scheme.{0}) [IsLocallyNoetherian X], _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.IsNormalScheme X → ∀ p : X, ringKrullDim (X.presheaf.stalk p) = 1 → ∃ _ : IsDomain (X.presheaf.stalk p), IsDiscreteValuationRing (X.presheaf.stalk p) :=
   @PositivityTheory.UnitarySelfGeneration.normal_scheme_height_one_stalk_dvr
 
 end GlobalTheory.CompanionTheory.Ar

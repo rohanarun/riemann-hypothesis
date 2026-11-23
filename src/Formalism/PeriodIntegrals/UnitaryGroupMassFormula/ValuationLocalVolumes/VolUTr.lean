@@ -3,6 +3,7 @@ module
 public import Mathlib
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalJacobianType.ContinuousTrESymm
 public import Formalism.LocalToGlobal.SiegelLatticeTheory.CokernelGLCounts.RankPointCounts.DualFamilyCounting.Bundle0018
+public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalUnitaryOrbits.Bundle0002
 
 @[expose] public section
 
@@ -90,39 +91,8 @@ theorem alg_mem {c : Fv F v} (hc : c ∈ v.adicCompletionIntegers F) :
   exact oev_smul' v hc (one_mem v)
 
 theorem mul_mem {x y : Fv F v ⊗[F] E} (hx : x ∈ OEv (E := E) v) (hy : y ∈ OEv (E := E) v) :
-    x * y ∈ OEv (E := E) v := by
-  have hx' : x ∈ Submodule.span (v.adicCompletionIntegers F)
-      ((fun x : 𝓞 E => inclR (F := F) (Fv F v) (x : E)) '' Set.univ) := hx
-  have hy' : y ∈ Submodule.span (v.adicCompletionIntegers F)
-      ((fun x : 𝓞 E => inclR (F := F) (Fv F v) (x : E)) '' Set.univ) := hy
-  show x * y ∈ Submodule.span (v.adicCompletionIntegers F)
-      ((fun x : 𝓞 E => inclR (F := F) (Fv F v) (x : E)) '' Set.univ)
-  clear hx hy
-  induction hx' using Submodule.span_induction with
-  | mem a ha =>
-    obtain ⟨a, -, rfl⟩ := ha
-    induction hy' using Submodule.span_induction with
-    | mem b hb =>
-      obtain ⟨b, -, rfl⟩ := hb
-      exact Submodule.subset_span ⟨a * b, Set.mem_univ _, by simp⟩
-    | zero =>
-      rw [mul_zero]
-      exact Submodule.zero_mem _
-    | add y z _ _ hy hz =>
-      rw [mul_add]
-      exact Submodule.add_mem _ hy hz
-    | smul c y _ hy =>
-      rw [mul_smul_comm]
-      exact Submodule.smul_mem _ c hy
-  | zero =>
-    rw [zero_mul]
-    exact Submodule.zero_mem _
-  | add x z _ _ hx hz =>
-    rw [add_mul]
-    exact Submodule.add_mem _ hx hz
-  | smul c x _ hx =>
-    rw [smul_mul_assoc]
-    exact Submodule.smul_mem _ c hx
+    x * y ∈ OEv (E := E) v :=
+  (PI.OmLocU.Orb.oSub (E := E) v).2 x hx y hy
 
 theorem trace_mem {x : Fv F v ⊗[F] E} (hx : x ∈ OEv (E := E) v) :
     Algebra.trace (Fv F v) (Fv F v ⊗[F] E) x ∈ v.adicCompletionIntegers F := by

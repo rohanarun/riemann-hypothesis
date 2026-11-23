@@ -121,10 +121,8 @@ def sigQ : QE (E := E) v →+* QE (E := E) v := Ideal.quotientMap (IE (E := E) v
 
 theorem sigQ_mk (x : 𝓞 E) : sigQ σ v (Ideal.Quotient.mk _ x) = Ideal.Quotient.mk _ (sigO σ x) := rfl
 
-theorem sig_sig (h : IsCMExt F E σ) (x : E) : σ (σ x) = x := by
-  obtain ⟨τ⟩ : Nonempty (E →+* ℂ) := inferInstance
-  apply τ.injective
-  rw [h.2.2.2 τ, h.2.2.2 τ, star_star]
+theorem sig_sig (h : IsCMExt F E σ) (x : E) : σ (σ x) = x :=
+  PI.OmLocU.Orb.sigma_invol σ h x
 
 theorem sigQ_sigQ (h : IsCMExt F E σ) (x : QE (E := E) v) : sigQ σ v (sigQ σ v x) = x := by
   obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x

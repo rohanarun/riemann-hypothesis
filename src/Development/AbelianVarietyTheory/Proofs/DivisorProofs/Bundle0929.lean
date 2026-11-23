@@ -81,7 +81,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 namespace GlobalTheory
 
 
-open SplitOffPlaces Formalism.L2.Col Formalism.HermitianLatticesTheory in
+open SplitOffPlaces _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory in
 theorem offS_not_type_places : ∀ {D : D7} (Pb : Formalism.L2.Host.PiBar D.host) (Pg : Finset (HeightOneSpectrum (𝓞 D.host.E))) (S : Finset (HeightOneSpectrum (𝓞 D.host.F))) (P : HeightOneSpectrum (𝓞 D.host.E)), (∀ PP, PP ∈ Pg ↔ ∃ k, Pb.Div k PP) → (∀ PP ∈ Pg, (_root_.IsDedekindDomain.HeightOneSpectrum.under (𝓞 D.host.F) PP) ∈ S) → OffS D S P → ((D.host.g 0 * D.host.g 1 : ℕ) : 𝓞 D.host.E) ∉ P.asIdeal ∧ ∀ PP ∈ Pg, PP ≠ P ∧ ¬ Formalism.IndefR.Lev.IsConjPl PP P := by
   intro D Pb Pg S P hPg hS hP
   have key : ∀ PP ∈ Pg, PP ≠ P ∧ ¬ Formalism.IndefR.Lev.IsConjPl PP P := by
@@ -466,7 +466,7 @@ noncomputable section
 
 
 
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace Opposite in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace Opposite in
 open Scheme.IdealSheafData in
 theorem _root_.GlobalTheory.RedFibreField.isReduced_nilradical_subscheme (X : Scheme.{0}) : IsReduced X.nilradical.subscheme := by
   have h : X.nilradical = vanishingIdeal (⊥ : X.IdealSheafData).support := by

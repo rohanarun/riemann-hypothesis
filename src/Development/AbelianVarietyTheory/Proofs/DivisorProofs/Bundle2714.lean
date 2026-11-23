@@ -179,7 +179,7 @@ noncomputable section
 
 namespace GlobalTheory.CompHS
 
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits Filter Topology NumberField
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits Filter Topology NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj
 open GlobalTheory.CechPic GlobalTheory.Vanishing
 open GlobalTheory.FlagMod (FlagCover)
@@ -200,7 +200,7 @@ end GlobalTheory.CompHS
 
 namespace GlobalTheory.CompHS
 
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits NumberField
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.GeometryOfNumbersTheory Formalism.L2.Pj Formalism.BasicNotions
 open ReciprocityTheory.ChartRestriction.G.Out (nonzeroLocus)
 open GlobalTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.HermTools GlobalTheory.Adelic GlobalTheory.CompHS GlobalTheory.CovTop

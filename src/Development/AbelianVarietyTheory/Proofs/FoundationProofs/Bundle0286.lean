@@ -215,7 +215,7 @@ noncomputable section
 
 namespace GlobalTheory.ModelDouble
 
-open WeierstrassCurve
+open _root_.WeierstrassCurve
 
 theorem weierstrassP_two_mul (L : PeriodPair) {P : ℂ} (hP : P ∉ L.lattice) (h2 : 2 * P ∉ L.lattice) :
     L.derivWeierstrassP P ≠ 0 ∧

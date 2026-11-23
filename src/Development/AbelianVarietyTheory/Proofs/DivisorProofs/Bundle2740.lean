@@ -62,7 +62,7 @@ theorem surj_of_comp {R R' : Type} [CommRing R] [CommRing R'] {X X' X₀ : Schem
     (he : e ≫ s' = s ≫ spMap (RingHom.id R)) (hψ : ψ ≫ s = s₀ ≫ spMap σ) (hc : (ψ ≫ e) ≫ s' = s₀ ≫ spMap σ) :
     (Function.Surjective (pullHO1 hc) → Function.Surjective (pullHO1 hψ)) ∧
     (Function.Surjective (pullHO2 hc) → Function.Surjective (pullHO2 hψ)) := by
-  have H := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R X' X s' s (RingHom.id R) e he R' X₀ s₀ σ ψ hψ σ (ψ ≫ e) hc rfl (fun _ ↦ rfl))
+  have H := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R X' X s' s (RingHom.id R) e he R' X₀ s₀ σ ψ hψ σ (ψ ≫ e) hc rfl (fun _ ↦ rfl))
   refine ⟨fun h y ↦ ?_, fun h y ↦ ?_⟩
   · obtain ⟨a, rfl⟩ := h y
     exact ⟨pullHO1 he a, H.1 a⟩
@@ -107,9 +107,9 @@ theorem pO1_bc {R K : Type} [CommRing R] [CommRing K] [Algebra R K] {A Y : Over 
   have h1 : (f'.left ≫ pr') ≫ A.hom = Z.hom ≫ spMap (algebraMap R K) := by
     rw [Category.assoc, hpb', ← Category.assoc, Over.w]
   have h2 : (pr ≫ f.left) ≫ A.hom = Z.hom ≫ spMap (algebraMap R K) := by rw [← hc]; exact h1
-  have E1 := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R K A.left B.left A.hom B.hom (algebraMap R K) pr' hpb' K Z.left Z.hom (RingHom.id K)
+  have E1 := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R K A.left B.left A.hom B.hom (algebraMap R K) pr' hpb' K Z.left Z.hom (RingHom.id K)
     f'.left (ovw f') (algebraMap R K) (f'.left ≫ pr') h1 rfl (fun _ ↦ rfl)).1 c
-  have E2 := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R A.left Y.left A.hom Y.hom (RingHom.id R) f.left (ovw f) K Z.left Z.hom (algebraMap R K)
+  have E2 := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R A.left Y.left A.hom Y.hom (RingHom.id R) f.left (ovw f) K Z.left Z.hom (algebraMap R K)
     pr hpb (algebraMap R K) (pr ≫ f.left) h2 rfl (fun _ ↦ rfl)).1 c
   unfold pO1
   rw [E1, E2]
@@ -260,7 +260,7 @@ noncomputable section
 
 namespace GlobalTheory.PELU
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
 open scoped Matrix
 

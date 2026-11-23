@@ -15,7 +15,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.KerRat
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.Ker GlobalTheory.Mem.Col2 GlobalTheory.TopStep GlobalTheory.GO
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.Ker GlobalTheory.Mem.Col2 GlobalTheory.TopStep GlobalTheory.GO
 open GlobalTheory.LvT.Built (kAt)
 
 theorem sum_cl {E K M : Type} [Field E] [NumberField E] [Field K] [AddCommMonoid M] {n : ℕ} (S : GStep E K n) {i : Fintype S.Cl}

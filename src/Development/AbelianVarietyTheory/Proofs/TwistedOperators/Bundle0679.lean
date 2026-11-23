@@ -233,7 +233,7 @@ theorem placeAt_of (hc : ChrP ch) (ha : ArrP ch) (hl : LocP ch) (hd : DblP ch) (
 theorem big_placeAt : Big fun ch => ∃ s, PlaceAt ch s :=
   big_mono (fun ch ⟨⟨⟨⟨⟨⟨⟨⟨⟨lat, chr⟩, loc⟩, bes⟩, jac⟩, scal⟩, arr⟩, comb⟩, dbl⟩, last⟩ =>
     ⟨-1, placeAt_of ch chr (arr lat chr) loc (dbl chr (arr lat chr) loc bes jac) (last chr (arr lat chr) loc bes jac) (comb lat) scal⟩)
-  (((((((((GlobalTheory.T.frameLattice_points_eq_integralMatrices_largeDepth.and _root_.GlobalTheory.FlatPlace.chrP_big).and GlobalTheory.T.dictionaryPoints_localMatrices_largeDepth).and _root_.GlobalTheory.FlatPlace.Big₂).and _root_.GlobalTheory.FlatPlace.big_jacP).and _root_.GlobalTheory.FlatScal.scal).and
+  (((((((((_root_.GlobalTheory.FlatPlace.big_latP.and _root_.GlobalTheory.FlatPlace.chrP_big).and GlobalTheory.T.dictionaryPoints_localMatrices_largeDepth).and _root_.GlobalTheory.FlatPlace.Big₂).and _root_.GlobalTheory.FlatPlace.big_jacP).and _root_.GlobalTheory.FlatScal.scal).and
     _root_.GlobalTheory.ArrowModel.arrow_model).and _root_.GlobalTheory.FlatPlace.eventually_combination_of_lattice).and _root_.GlobalTheory.FlatPlace.dblP_big).and _root_.GlobalTheory.FlatPlace.lastStep_eventually)
 
 end GlobalTheory.FlatPlace

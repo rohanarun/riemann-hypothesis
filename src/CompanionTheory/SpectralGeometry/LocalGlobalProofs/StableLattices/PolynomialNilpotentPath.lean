@@ -198,7 +198,7 @@ end Abstract
 
 section Grading
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Dec.J
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Dec.J
 open ReciprocityTheory.ChartRestriction.DS renaming actM → aM
 
 section Act

@@ -104,7 +104,7 @@ theorem equiv_of_qkToAkU {R : Type} [CommRing R] [IsDomain R] {J : Ideal R} (hB 
     (U : Unif J D A G) {k : ℕ} (hk : 1 ≤ k) (p p' : QkPt D.toPre (FractionRing R) k)
     (x : TFK (R := R) (FractionRing R) ⟶ A.A) (h : QkToAkU U.toUnifPre (FractionRing R) k p x)
     (h' : QkToAkU U.toUnifPre (FractionRing R) k p' x) : QkPt.Equiv D.toPre (FractionRing R) p p' := by
-  have hL : Laws := GlobalTheory.T.abelianScheme_laws_unconditional.1
+  have hL : Laws := _root_.GlobalTheory.abelianSchemeLaws_all.1
   let F := AlgebraicClosure (FractionRing R)
   have hf : (algebraMap (FractionRing R) F).comp (algebraMap (FractionRing R) (FractionRing R)) =
       algebraMap (FractionRing R) F := RingHom.ext fun _ => rfl

@@ -238,7 +238,7 @@ noncomputable section
 
 namespace GlobalTheory.CoverLift
 
-open Limits GlobalTheory.MixHt
+open _root_.CategoryTheory.Limits GlobalTheory.MixHt
 
 theorem exists_cover_over_modification : ∀ (k : Type) [CommRing k] (X X' Y : Scheme.{0}) [IsIntegral X] [IsIntegral X']
     [IsIntegral Y] (p : X ⟶ Sp k) (D E : ℕ) (ρ : X' ⟶ X) (π : Y ⟶ X), IsArithVar p D → IsArithVar (ρ ≫ p) D →

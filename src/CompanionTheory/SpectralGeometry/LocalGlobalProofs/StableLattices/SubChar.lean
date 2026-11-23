@@ -18,7 +18,7 @@ namespace GlobalTheory.CompanionTheory.RgCOBlock
 open Finset Polynomial
 open Formalism.REAL (GlRel KHighest IsWeight qdet Tm qminor)
 open CompanionTheory.D.LK (Pos Cn ann cre lift bd cpt allT wt ev)
-open CompanionTheory.RgExh CompanionTheory.RgExh.U
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.U
 open GlobalTheory.CuspRep GlobalTheory.UnitaryBC GlobalTheory.SmGL GlobalTheory.DiscSpec
 
 theorem sub_char {W : Type} [AddCommGroup W] [Module ℂ W] (R : Subalgebra ℂ (Module.End ℂ W))

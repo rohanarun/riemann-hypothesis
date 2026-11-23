@@ -191,7 +191,7 @@ theorem alg_of_closedSubscheme : ∀ (R : Type) [CommRing R] (I : Ideal R) (W : 
   intro R _ I W f a hA t ht hp
   set ι := a.subschemeι with hι
   have hbase : ∀ J : Ideal R, (baseIdeal f J).comap ι = baseIdeal (ι ≫ f) J :=
-    fun J => GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.1 R W a.subscheme f ι J
+    fun J => _root_.GlobalTheory.FormalAlg.baseIdeal_calculus.1 R W a.subscheme f ι J
   have hms := _root_.GlobalTheory.ClosedImmIdeal.map_sup_comap_and_comap_map a.subscheme W ι inferInstance
   let s : ℕ → a.subscheme.IdealSheafData := fun e => (t e).comap ι
   have hs : IsSystem (ι ≫ f) I s := fun e => by

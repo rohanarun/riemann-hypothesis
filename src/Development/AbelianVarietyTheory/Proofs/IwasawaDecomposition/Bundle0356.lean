@@ -413,7 +413,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2
 
-open NumberField Formalism.BasicNotions Formalism.L2.Col
+open NumberField Formalism.BasicNotions _root_.Formalism.L2.Col
 
 theorem le_N_of_mem_gamRanks (R : Ranks) {n : ℕ} (hn : n ∈ gamRanks R) : n ≤ R.N R.m := by
   have hY : ∀ j, j ≤ R.m → R.rankY j ≤ R.N R.m := by

@@ -73,7 +73,7 @@ set_option autoImplicit false
 
 noncomputable section
 
-open CategoryTheory CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open CategoryTheory CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory _root_.CategoryTheory.MonObj
   AlgebraicGeometry
 open scoped CategoryTheory.Obj
 

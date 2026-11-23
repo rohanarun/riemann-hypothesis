@@ -153,7 +153,7 @@ theorem exists_unit_norm_eq : ∀ (E : Type) [Field E] [NumberField E] [IsCMFiel
   obtain ⟨-, ⟨ϖ, q, hI, -⟩, -, -⟩ := hns hw
   obtain ⟨-, -, -, -, ⟨x₀, hx₀, hx⟩, hq, hcard⟩ := hI
   haveI : HenselianLocalRing (w.adicCompletionIntegers E) := by
-    open HeightOneSpectrum WithZero Filter Topology in
+    open HeightOneSpectrum WithZero Filter _root_.Topology in
     let Ov := w.adicCompletionIntegers E
     let Kv := w.adicCompletion E
     have adicInt_dvd_iff (x y : Ov) :

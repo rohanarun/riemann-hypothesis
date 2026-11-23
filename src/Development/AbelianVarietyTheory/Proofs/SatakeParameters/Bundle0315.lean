@@ -52,7 +52,7 @@ noncomputable section
 
 namespace GlobalTheory.TwUChiRat
 
-open GlobalTheory.TwU Formalism.L2.Forms Formalism.L2.Ker Formalism.MainNotions Formalism.L2.Col Formalism.L2.DIV Formalism.UG NumberField IsDedekindDomain
+open GlobalTheory.TwU Formalism.L2.Forms Formalism.L2.Ker Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.UG NumberField IsDedekindDomain
 
 section Gen
 

@@ -274,7 +274,7 @@ noncomputable section
 
 namespace GlobalTheory.InertExchange
 
-open NumberField IsDedekindDomain Formalism.HermitianLatticesTheory Formalism.L2.Col
+open NumberField IsDedekindDomain Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col
 
 theorem exists_smul_mem_of_fg {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
     (S : Submonoid R) (A B : Submodule R M) (hA : A.FG)

@@ -246,12 +246,12 @@ section Deriv
 variable {σ W : Type*} [NormedAddCommGroup W] [NormedSpace ℂ W] {F : W → ℂ}
 
 theorem differentiable_polyDeriv (hF : ContDiff ℂ (⊤ : ℕ∞) F) (P : MvPolynomial σ ℂ) (u : σ → W) :
-    Differentiable ℂ fun y => polyDeriv P u F y := by
+    Differentiable ℂ fun y => _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P u F y := by
   simp only [polyDeriv_eq_of_subset P u F _ subset_rfl, pdTerm_eq_itD]
   exact Differentiable.fun_sum fun m _ => (itD_differentiable hF _).const_mul _
 
 theorem polyDeriv_mul_X (hF : ContDiff ℂ (⊤ : ℕ∞) F) (P : MvPolynomial σ ℂ) (u : σ → W) (l : σ)
-    (x : W) : polyDeriv (P * X l) u F x = fderiv ℂ (fun y => polyDeriv P u F y) x (u l) := by
+    (x : W) : _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv (P * X l) u F x = fderiv ℂ (fun y => _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P u F y) x (u l) := by
   classical
   induction P using MvPolynomial.induction_on' with
   | monomial m c =>
@@ -272,7 +272,7 @@ theorem polyDeriv_mul_X (hF : ContDiff ℂ (⊤ : ℕ∞) F) (P : MvPolynomial �
 theorem polyDeriv_algHom (hF : ContDiff ℂ (⊤ : ℕ∞) F) (Φ : MvPolynomial σ ℂ →ₐ[ℂ] MvPolynomial σ ℂ)
     (s : σ → ℂ) (j : σ → σ) (hΦ : ∀ l, Φ (X l) = X l + C (s l) * X (j l)) (u : σ → W)
     (P : MvPolynomial σ ℂ) (x : W) :
-    polyDeriv (Φ P) u F x = polyDeriv P (fun l => u l + s l • u (j l)) F x := by
+    _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv (Φ P) u F x = _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P (fun l => u l + s l • u (j l)) F x := by
   induction P using MvPolynomial.induction_on generalizing x with
   | C a =>
     have h : (C a : MvPolynomial σ ℂ) = a • monomial 0 1 := by simp [smul_eq_C_mul]
@@ -340,12 +340,12 @@ theorem polyDeriv_triangular {T κ W : Type*} [Fintype T] [Fintype κ] {p q : �
     {c : T → Fin p → ℕ} {c' : T → Fin q → ℕ} {P : Poly ℂ T p q κ} (hP : P ∈ rowHighest ℂ c c')
     (N : T × (Fin p ⊕ Fin q) → T × (Fin p ⊕ Fin q) → ℂ)
     (hN : ∀ i j, i ≠ j → ¬ (i.1 = j.1 ∧ RowLT i.2 j.2) → N i j = 0) (u : Var T p q κ → W) (x : W) :
-    polyDeriv P (fun l => ∑ i, N i (l.1, l.2.1) • u (i.1, i.2, l.2.2)) F x =
-      (∏ j, N j j ^ Sum.elim (partOf (c j.1)) (partOf (c' j.1)) j.2) * polyDeriv P u F x := by
+    _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P (fun l => ∑ i, N i (l.1, l.2.1) • u (i.1, i.2, l.2.2)) F x =
+      (∏ j, N j j ^ Sum.elim (partOf (c j.1)) (partOf (c' j.1)) j.2) * _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P u F x := by
   classical
   obtain ⟨-, hdeg, hinv⟩ := mem_rowHighest_iff_rowAdd.1 hP
   have h := eigen_of_triangular
-    (fun w : T × (Fin p ⊕ Fin q) → κ → W => polyDeriv P (fun l => w (l.1, l.2.1) l.2.2) F x)
+    (fun w : T × (Fin p ⊕ Fin q) → κ → W => _root_.ReciprocityTheory.ChartRestriction.G.I2.polyDeriv P (fun l => w (l.1, l.2.1) l.2.2) F x)
     (fun i j => i.1 = j.1 ∧ RowLT i.2 j.2) (fun i => Sum.elim Fin.val Fin.val i.2) ?_
     (fun j => Sum.elim (partOf (c j.1)) (partOf (c' j.1)) j.2) ?_ ?_ N hN
     fun i k => u (i.1, i.2, k)

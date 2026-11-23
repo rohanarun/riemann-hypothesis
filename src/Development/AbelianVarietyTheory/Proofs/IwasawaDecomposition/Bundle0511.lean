@@ -341,7 +341,7 @@ noncomputable section
 
 namespace GlobalTheory.ShFam.CoordComp
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.FactorDepth
 
 attribute [local instance] Over.cartesianMonoidalCategory

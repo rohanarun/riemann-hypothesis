@@ -186,7 +186,7 @@ open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Pj ReciprocityThe
 open GlobalTheory GlobalTheory.AllWt GlobalTheory.CompHt GlobalTheory.CovTop GlobalTheory.CovHt GlobalTheory.ShFam GlobalTheory.ShFam.Pad GlobalTheory.TrueGeo GlobalTheory.ProjVar GlobalTheory.Cartier
   GlobalTheory.Mean4 GlobalTheory.Mean4O
 open scoped ENNReal
-open CategoryTheory AlgebraicGeometry TopologicalSpace Limits ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi GlobalTheory.CechPic
+open CategoryTheory AlgebraicGeometry TopologicalSpace _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi GlobalTheory.CechPic
 open GlobalTheory.LB (toMod)
 open GlobalTheory.VB (degOfRank)
 

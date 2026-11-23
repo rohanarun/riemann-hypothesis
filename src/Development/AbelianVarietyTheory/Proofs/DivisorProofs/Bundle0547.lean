@@ -270,15 +270,15 @@ variable {R : Type} [CommRing R]
 theorem isAffine_unit : IsAffine (𝟙_ (Over (Sp R))).left := inferInstanceAs (IsAffine (Sp R))
 
 theorem pO1_comp {X Y Z : Over (Sp R)} (g : X ⟶ Y) (f : Y ⟶ Z) (a) : pO1 g (pO1 f a) = pO1 (g ≫ f) a :=
-  ((GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
+  ((_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
     (ovw g) (RingHom.id R) (g ≫ f).left (ovw (g ≫ f)) (Over.comp_left _ _ _ g f) fun _ ↦ rfl).1 a)
 
 theorem pF_comp {X Y Z : Over (Sp R)} (g : X ⟶ Y) (f : Y ⟶ Z) (a) : pF g (pF f a) = pF (g ≫ f) a :=
-  ((GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
+  ((_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
     (ovw g) (RingHom.id R) (g ≫ f).left (ovw (g ≫ f)) (Over.comp_left _ _ _ g f) fun _ ↦ rfl).2.2.1 a)
 
 theorem pH1_comp {X Y Z : Over (Sp R)} (g : X ⟶ Y) (f : Y ⟶ Z) (a) : deRhamH1Pullback g (deRhamH1Pullback f a) = deRhamH1Pullback (g ≫ f) a :=
-  ((GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
+  ((_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R Z.left Y.left Z.hom Y.hom (RingHom.id R) f.left (ovw f) R X.left X.hom (RingHom.id R) g.left
     (ovw g) (RingHom.id R) (g ≫ f).left (ovw (g ≫ f)) (Over.comp_left _ _ _ g f) fun _ ↦ rfl).2.2.2.1 a)
 
 theorem pO1_unit {X Y : Over (Sp R)} (u : X ⟶ 𝟙_ (Over (Sp R))) (f : 𝟙_ (Over (Sp R)) ⟶ Y) (a) :
@@ -301,7 +301,7 @@ theorem pH1_unit {X Y : Over (Sp R)} (u : X ⟶ 𝟙_ (Over (Sp R))) (f : 𝟙_ 
 
 theorem main : ∀ (R : Type) [CommRing R] (A : Over (Sp R)) [GrpObj A], (∀ a, pO1 (lift (𝟙 A) (toUnit A ≫ η[A])) (pO1 (fst A A) a) = a ∧ pO1 (lift (𝟙 A) (toUnit A ≫ η[A])) (pO1 (snd A A) a) = 0 ∧ pO1 (lift (𝟙 A) (toUnit A ≫ η[A])) (pO1 μ[A] a) = a ∧ pO1 (lift (toUnit A ≫ η[A]) (𝟙 A)) (pO1 (fst A A) a) = 0 ∧ pO1 (lift (toUnit A ≫ η[A]) (𝟙 A)) (pO1 (snd A A) a) = a ∧ pO1 (lift (toUnit A ≫ η[A]) (𝟙 A)) (pO1 μ[A] a) = a) ∧ (∀ a, pF (lift (𝟙 A) (toUnit A ≫ η[A])) (pF (fst A A) a) = a ∧ pF (lift (𝟙 A) (toUnit A ≫ η[A])) (pF (snd A A) a) = 0 ∧ pF (lift (𝟙 A) (toUnit A ≫ η[A])) (pF μ[A] a) = a ∧ pF (lift (toUnit A ≫ η[A]) (𝟙 A)) (pF (fst A A) a) = 0 ∧ pF (lift (toUnit A ≫ η[A]) (𝟙 A)) (pF (snd A A) a) = a ∧ pF (lift (toUnit A ≫ η[A]) (𝟙 A)) (pF μ[A] a) = a) ∧ (∀ a, deRhamH1Pullback (lift (𝟙 A) (toUnit A ≫ η[A])) (deRhamH1Pullback (fst A A) a) = a ∧ deRhamH1Pullback (lift (𝟙 A) (toUnit A ≫ η[A])) (deRhamH1Pullback (snd A A) a) = 0 ∧ deRhamH1Pullback (lift (𝟙 A) (toUnit A ≫ η[A])) (deRhamH1Pullback μ[A] a) = a ∧ deRhamH1Pullback (lift (toUnit A ≫ η[A]) (𝟙 A)) (deRhamH1Pullback (fst A A) a) = 0 ∧ deRhamH1Pullback (lift (toUnit A ≫ η[A]) (𝟙 A)) (deRhamH1Pullback (snd A A) a) = a ∧ deRhamH1Pullback (lift (toUnit A ≫ η[A]) (𝟙 A)) (deRhamH1Pullback μ[A] a) = a) := by
   intro R _ A _
-  have hid := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.2.2 R A)
+  have hid := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.2.2 R A)
   refine ⟨fun a ↦ ?_, fun a ↦ ?_, fun a ↦ ?_⟩
   · simp only [pO1_comp, lift_fst, lift_snd, lift_comp_one_right, lift_comp_one_left, pO1_unit, hid.1, and_self]
   · simp only [pF_comp, lift_fst, lift_snd, lift_comp_one_right, lift_comp_one_left, pF_unit, hid.2.2.1, and_self]

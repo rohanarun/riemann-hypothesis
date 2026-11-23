@@ -95,9 +95,9 @@ theorem pull_comm {R K : Type} [CommRing R] [CommRing K] {σ : R →+* K} {A A' 
     (h' : pr' ≫ A'.hom = B'.hom ≫ spMap σ) (f : A' ⟶ A) (f' : B' ⟶ B) (e : f'.left ≫ pr = pr' ≫ f.left)
     (c : HO2 A.hom) : pullHO2 h' (structureSheafH2Pullback f c) = structureSheafH2Pullback f' (pullHO2 h c) := by
   have h'' : (pr' ≫ f.left) ≫ A.hom = B'.hom ≫ spMap σ := by rw [Category.assoc, Over.w f, h']
-  have a1 := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R R _ _ A.hom A'.hom (RingHom.id R) f.left (ovw f) K _ B'.hom σ pr' h' σ _ h''
+  have a1 := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R R _ _ A.hom A'.hom (RingHom.id R) f.left (ovw f) K _ B'.hom σ pr' h' σ _ h''
     rfl (fun _ ↦ rfl)).2.1 c
-  have a2 := (GlobalTheory.T.structureSheafCohomology_pullback_comp_cup_id.1 R K _ _ A.hom B.hom σ pr h K _ B'.hom (RingHom.id K) f'.left (ovw f') σ _ h''
+  have a2 := (_root_.GlobalTheory.AbCoh.pull_comp_cup_id.1 R K _ _ A.hom B.hom σ pr h K _ B'.hom (RingHom.id K) f'.left (ovw f') σ _ h''
     e.symm (fun _ ↦ rfl)).2.1 c
   exact a1.trans a2.symm
 

@@ -19,7 +19,7 @@ open CategoryTheory AlgebraicGeometry MonoidalCategory CartesianMonoidalCategory
 noncomputable section
 
 namespace PositivityTheory.HtPt.Ge.Fargues
-open GlobalTheory.CompanionTheory
+open _root_.GlobalTheory.CompanionTheory
 
 theorem lie_free_finite (S : Scheme.{0}) (G : Over S) [GrpObj G] (hG : Smooth G.hom) (R : Type) [CommRing R]
     [IsLocalRing R] (x : Spec (CommRingCat.of R) ⟶ S) (E : Type) [AddCommGroup E] [Module R E]

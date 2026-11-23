@@ -446,9 +446,9 @@ theorem fibre_subsingleton_of_isClosedImmersion_restrict :
   intro R _ I X Z φ p hci z hz
   have hmem : ∀ x : X, φ x = z → x ∈ Set.range ((baseIdeal p I).comap φ).subschemeι := by
     intro x hx
-    rw [Scheme.IdealSheafData.range_subschemeι, GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.1 R Z X p φ I]
+    rw [Scheme.IdealSheafData.range_subschemeι, _root_.GlobalTheory.FormalAlg.baseIdeal_calculus.1 R Z X p φ I]
     show x ∈ (baseIdeal (φ ≫ p) I).support
-    refine (GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.2.2 R X (φ ≫ p) I x).mpr ?_
+    refine (_root_.GlobalTheory.FormalAlg.baseIdeal_calculus.2.2 R X (φ ≫ p) I x).mpr ?_
     have e : (φ ≫ p) x = p (φ x) := by simp
     rw [e, hx]
     exact hz

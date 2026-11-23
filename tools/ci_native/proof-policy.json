@@ -1,23 +1,20 @@
 {
   "snapshot": {
-    "git_commit": "d4663eed405af528c67a3b1213021373cf8c0a5c",
-    "source_tree": "612386007adebbfa6651fdca9b1ab8f560ab2722",
-    "toolchain": "leanprover/lean4:v4.36.0",
-    "lakefile_sha256": "e12dd96eb155851de5107571dbfc959e5d9b230ead90331b4778b55b048590bb",
-    "manifest_sha256": "ee003c5c7a9b2b2a82a142b6633916661c07117199dd143d94d1af63910237df",
-    "fingerprint": "cd9e3d6d147eb4056625f0a6f271cf345c1f1ed7197cf36905e42367721cde9e"
+    "toolchain": "leanprover/lean4:v4.37.0-rc1",
+    "lakefile_sha256": "8672b307e6ff65f6d3ffcd33f18b30bc2a7f4212cd4d931c78a9337a8c49580d",
+    "manifest_sha256": "6b5ad855ab2f8544071569928d1b84e8e6be14636e7b2809e7ccabb3937934ee"
   },
-  "worklist_modules": 99240,
-  "worklist_sha256": "dd1a8c221df34517f4706718cab2490a669dcda267b5c924b73c795caf9dbbf5",
-  "max_batch_modules": 256,
+  "worklist_modules": 149216,
+  "worklist_sha256": "b567310f8067a47f4a12db3f7ee8992cfe65a2b7e0c069a0a0e2f2fcc5f38def",
+  "max_batch_modules": 4096,
   "minimum_cpus": 16,
   "minimum_memory_mib": 65536,
   "baseline": {
-    "revision": "9e273ce65776c200fb97b7edaa288d637632bf7d",
-    "source_tree": "69b331ce0e429c7632dac6aa642e5875a50b1218",
-    "map_sha256": "ac2bd247d281bbbcf648954ac3bee8de4e6881d49cd0d8e705e3f5272a753852",
-    "manifest_sha256": "651214f93c4c4bb05590ec1b717984f71e5511ddd973a89ca481d1cc1b51b232",
-    "modules": 149396,
-    "unchanged_modules": 50156
-  }
+    "fresh_project": true,
+    "unchanged_modules": 0,
+    "unchanged_module_names": []
+  },
+  "candidate_modules": 149216,
+  "pr_number": 185,
+  "approval_mode": "ancestor-of-open-pr"
 }

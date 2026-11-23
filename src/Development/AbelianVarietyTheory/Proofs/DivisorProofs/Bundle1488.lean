@@ -282,7 +282,7 @@ theorem tan_triv_eq_zero : ∀ (k K E : Type) [Field k] [IsAlgClosed k] [CharZer
   haveI : IsIntegral C := LieSemineg.isIntegral_curve hx.1.1 hx.1.2.2
   haveI : Smooth G.hom := hG.smooth
   obtain ⟨h₀, -, -⟩ := _root_.GlobalTheory.Nef.isGen_evAt_frac K C x hx.2.1 V₀ hV₀
-  have hp₀ : x (IsLocalRing.closedPoint K) ∈ V₀ := (GlobalTheory.T.evalSectionAtRingPoint_spMap_comp_restrict_stalk.2.2.2.1 K C x V₀).1 h₀
+  have hp₀ : x (IsLocalRing.closedPoint K) ∈ V₀ := (_root_.GlobalTheory.Nef.evAt_calculus.2.2.2.1 K C x V₀).1 h₀
   obtain ⟨U₁, n, om, hpU₁, hom⟩ := exists_isFrame_omega G (x (IsLocalRing.closedPoint K))
   obtain ⟨V', U, hpV', hV'le, c⟩ := GlobalTheory.Conormal.exists_isChart (he := sec_hom η[G])
     (show x (IsLocalRing.closedPoint K) ∈ V₀ ⊓ U₁ from ⟨hp₀, hpU₁⟩)
@@ -291,7 +291,7 @@ theorem tan_triv_eq_zero : ∀ (k K E : Type) [Field k] [IsAlgClosed k] [CharZer
   obtain ⟨hx', hinj, -⟩ := _root_.GlobalTheory.Nef.isGen_evAt_frac K C x hx.2.1 V' ⟨_, hpV'⟩
   have hb : ⊤ ≤ (spMap (algebraMap K E) ≫ x) ⁻¹ᵁ V' := fun z _ => hx' (Set.mem_univ _)
   have hev : ∀ g : Γ(C, V'), evAt (spMap (algebraMap K E) ≫ x) hb g = algebraMap K E (evAt x hx' g) :=
-    fun g => GlobalTheory.T.evalSectionAtRingPoint_spMap_comp_restrict_stalk.1 K E C (algebraMap K E) x V' hx' hb g
+    fun g => _root_.GlobalTheory.Nef.evAt_calculus.1 K E C (algebraMap K E) x V' hx' hb g
   have key : ∀ f : Γ(G.left, U), ∑ j, w j * algebraMap K E (evAt x hx'
       (dualApp (i.app V₀ (s j)) hV (dUnit G c.le f))) = 0 := by
     intro f
@@ -301,7 +301,7 @@ theorem tan_triv_eq_zero : ∀ (k K E : Type) [Field k] [IsAlgClosed k] [CharZer
     simp only [hev] at this
     rw [← this]
     have e1 : evAt (triv G (spMap (algebraMap K E) ≫ x)) hU f = PowerSeries.C (R := E) (evAt _ h2 f) :=
-      GlobalTheory.T.evalSectionAtRingPoint_spMap_comp_restrict_stalk.1 E (PowerSeries E) G.left (PowerSeries.C (R := E)) _ U h2 hU f
+      _root_.GlobalTheory.Nef.evAt_calculus.1 E (PowerSeries E) G.left (PowerSeries.C (R := E)) _ U h2 hU f
     rw [e1]
     simp
   have key2 : ∀ e' : Γ(omega G, V'), ∑ j, w j * algebraMap K E (evAt x hx'

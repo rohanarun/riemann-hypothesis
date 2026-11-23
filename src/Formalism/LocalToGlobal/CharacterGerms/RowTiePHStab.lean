@@ -271,12 +271,6 @@ variable {dd : ℕ}
 
 def Tg (dd : ℕ) (g : Fin 2) : Set (Fin 2 × Fin dd) := {s | s.1 = g}
 
-theorem van_X {τ : Type} {T : Set τ} {s : τ} (hs : s ∈ T) : Van T (X s : MvPowerSeries τ C) := by
-  intro ν hν
-  rw [coeff_X, if_neg]
-  intro h
-  exact hν s (by rw [h]; simp) hs
-
 def bil (F : PS C 2 dd) (w v : Fin dd → C) : C :=
   ∑ i, ∑ j, coeff (E2 ((0 : Fin 2), i) ((1 : Fin 2), j)) F * (w i * v j)
 

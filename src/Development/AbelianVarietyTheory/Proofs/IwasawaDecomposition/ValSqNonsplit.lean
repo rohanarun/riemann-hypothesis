@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.HeightCounting.FitTw
 
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal Formalism.L2 Formalism.L2.Host NumberField IsDedekindDomain Neutral.B1
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal _root_.Formalism.L2 Formalism.L2.Host NumberField IsDedekindDomain Neutral.B1
 
 theorem val_mem_of_ae {L : Type} [Field L] [NumberField L] (χ : HChar L) (Λ : Subgroup ℂˣ)
     (S : Finset (HeightOneSpectrum (𝓞 L))) (ht : ∀ v, χ.TameAt v)

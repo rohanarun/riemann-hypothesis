@@ -34,7 +34,7 @@ section Homog
 
 variable {κ : Type} [Fintype κ] {ι : κ → Type} [∀ k, Fintype (ι k)]
 
-theorem isMultiHomog_C (c : ℤ) : IsMultiHomog (C c : MRing ι) 0 := by
+theorem isMultiHomog_C (c : ℤ) : _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (C c : MRing ι) 0 := by
   classical
   intro m hm k
   rw [mem_support_iff, coeff_C] at hm
@@ -44,7 +44,7 @@ theorem isMultiHomog_C (c : ℤ) : IsMultiHomog (C c : MRing ι) 0 := by
   · exact absurd rfl hm
 
 theorem isMultiHomog_prod {σ : Type} (s : Finset σ) (f : σ → MRing ι) (d : σ → κ → ℕ)
-    (h : ∀ a ∈ s, IsMultiHomog (f a) (d a)) : IsMultiHomog (∏ a ∈ s, f a) (∑ a ∈ s, d a) := by
+    (h : ∀ a ∈ s, _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (f a) (d a)) : _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (∏ a ∈ s, f a) (∑ a ∈ s, d a) := by
   classical
   induction s using Finset.induction_on with
   | empty => simpa using ProjLine.isMultiHomog_one
@@ -54,7 +54,7 @@ theorem isMultiHomog_prod {σ : Type} (s : Finset σ) (f : σ → MRing ι) (d :
       (ih fun b hb => h b (Finset.mem_insert_of_mem hb))
 
 theorem isMultiHomog_chartMonomial (c : ∀ k, ι k) :
-    IsMultiHomog (∏ k, (X ⟨k, c k⟩ : MRing ι)) (fun _ => 1) := by
+    _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (∏ k, (X ⟨k, c k⟩ : MRing ι)) (fun _ => 1) := by
   classical
   have h := isMultiHomog_prod (Finset.univ : Finset κ) (fun k => (X ⟨k, c k⟩ : MRing ι))
     (fun k => fun k1 => if k1 = k then 1 else 0) (fun k _ => ProjLine.isMultiHomog_X ⟨k, c k⟩)
@@ -70,7 +70,7 @@ section Values
 variable {κ : Type} [Fintype κ] {ι : κ → Type} [∀ k, Fintype (ι k)] {Ω : Type} [Field Ω]
   {y : (Σ k, ι k) → Ω} {z : (Σ k, ι k) → ℂ}
 
-theorem mem_mCoordIdeal_of_aeval {f : MRing ι} {d : κ → ℕ} (hf : IsMultiHomog f d)
+theorem mem_mCoordIdeal_of_aeval {f : MRing ι} {d : κ → ℕ} (hf : _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog f d)
     (h0 : aeval y f = 0) : f ∈ mCoordIdeal y := by
   rw [mCoordIdeal, RingHom.mem_ker, ConeTrdeg.mConeMap_of_isMultiHomog y hf, h0, map_zero, zero_mul]
 
@@ -78,7 +78,7 @@ theorem IsValueAt.unique {a : Ω} {v v' : ℂ} (hz : z ∈ mcPts (mCoordIdeal y)
     (h : IsValueAt y a z v) (h' : IsValueAt y a z v') : v = v' := by
   obtain ⟨d, g, h1, hg, hh, hy, hyg, hz1, hzg⟩ := h
   obtain ⟨d', g', h1', hg', hh', hy', hyg', hz1', hzg'⟩ := h'
-  have hm : IsMultiHomog (g * h1' - g' * h1) (d + d') := by
+  have hm : _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (g * h1' - g' * h1) (d + d') := by
     rw [sub_eq_add_neg]
     refine ProjLine.mhAdd (ProjLine.mhMul hg hh') (ProjLine.mhNeg ?_)
     rw [add_comm]
@@ -124,7 +124,7 @@ theorem IsValueAt.add {a b : Ω} {v w : ℂ} (ha : IsValueAt y a z v) (hb : IsVa
     IsValueAt y (a + b) z (v + w) := by
   obtain ⟨d, g, h, hg, hh, hy, hyg, hz, hzg⟩ := ha
   obtain ⟨d', g', h', hg', hh', hy', hyg', hz', hzg'⟩ := hb
-  have hd : IsMultiHomog (g' * h) (d + d') := by
+  have hd : _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog (g' * h) (d + d') := by
     rw [add_comm]
     exact ProjLine.mhMul hg' hh
   refine ⟨d + d', g * h' + g' * h, h * h', ProjLine.mhAdd (ProjLine.mhMul hg hh') hd,

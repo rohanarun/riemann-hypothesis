@@ -14,7 +14,7 @@ noncomputable section
 namespace GlobalTheory.LvT.Built.RealM
 
 open NumberField IsDedekindDomain Matrix
-open Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2 GlobalTheory.LvT.Pts
+open Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2 GlobalTheory.LvT.Pts
 open Formalism.HermitianLatticesTheory (localization₂)
 
 def UG (E : Type) [Field E] [StarRing E] (n : ℕ) : Subgroup (GL (Fin n) E) where

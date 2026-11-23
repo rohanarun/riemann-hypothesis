@@ -15,35 +15,35 @@ open PI.FglGram MvPowerSeries
 
 variable {p : ℕ} [Fact p.Prime] {σ : Type*}
 
-theorem intP_add {x y : ℂ_[p]} (hx : IsIntP x) (hy : IsIntP y) : IsIntP (x + y) :=
+theorem intP_add {x y : ℂ_[p]} (hx : _root_.PI.FglGram.IsIntP x) (hy : _root_.PI.FglGram.IsIntP y) : _root_.PI.FglGram.IsIntP (x + y) :=
   (IsUltrametricDist.norm_add_le_max x y).trans (max_le hx hy)
 
-theorem valuation_coeff_mul_nonneg {x y : ℂ_[p]} (hx : IsIntP x) (hy : IsIntP y) : IsIntP (x * y) := by
+theorem valuation_coeff_mul_nonneg {x y : ℂ_[p]} (hx : _root_.PI.FglGram.IsIntP x) (hy : _root_.PI.FglGram.IsIntP y) : _root_.PI.FglGram.IsIntP (x * y) := by
   show ‖x * y‖ ≤ 1
   rw [norm_mul]
   exact (mul_le_mul hx hy (norm_nonneg _) zero_le_one).trans_eq (one_mul 1)
 
-theorem isIntegralAt_neg {x : ℂ_[p]} (hx : IsIntP x) : IsIntP (-x) := by
+theorem isIntegralAt_neg {x : ℂ_[p]} (hx : _root_.PI.FglGram.IsIntP x) : _root_.PI.FglGram.IsIntP (-x) := by
   show ‖-x‖ ≤ 1
   rw [norm_neg]
   exact hx
 
-theorem intP_sum {ι : Type*} (s : Finset ι) (f : ι → ℂ_[p]) (h : ∀ i ∈ s, IsIntP (f i)) :
-    IsIntP (∑ i ∈ s, f i) := by
+theorem intP_sum {ι : Type*} (s : Finset ι) (f : ι → ℂ_[p]) (h : ∀ i ∈ s, _root_.PI.FglGram.IsIntP (f i)) :
+    _root_.PI.FglGram.IsIntP (∑ i ∈ s, f i) := by
   revert h
-  refine Finset.induction_on s (fun _ => by simp [IsIntP]) ?_
+  refine Finset.induction_on s (fun _ => by simp [_root_.PI.FglGram.IsIntP]) ?_
   intro a s ha ih h
   rw [Finset.sum_insert ha]
   exact intP_add (h a (Finset.mem_insert_self a s)) (ih fun i hi => h i (Finset.mem_insert_of_mem hi))
 
-theorem int_mul {F G : MvPowerSeries σ ℂ_[p]} (hF : IntegralMv F) (hG : IntegralMv G) :
-    IntegralMv (F * G) := fun n => by
+theorem int_mul {F G : MvPowerSeries σ ℂ_[p]} (hF : _root_.PI.FglGram.IntegralMv F) (hG : _root_.PI.FglGram.IntegralMv G) :
+    _root_.PI.FglGram.IntegralMv (F * G) := fun n => by
   rw [MvPowerSeries.coeff_mul]
   exact intP_sum _ _ fun x _ => valuation_coeff_mul_nonneg (hF _) (hG _)
 
-theorem int_one : IntegralMv (1 : MvPowerSeries σ ℂ_[p]) := fun n => by
+theorem int_one : _root_.PI.FglGram.IntegralMv (1 : MvPowerSeries σ ℂ_[p]) := fun n => by
   rw [MvPowerSeries.coeff_one]
-  split_ifs <;> simp [IsIntP]
+  split_ifs <;> simp [_root_.PI.FglGram.IsIntP]
 
 private lemma low_mul_lemma {X Y : MvPowerSeries σ ℂ_[p]} {a b : ℕ}
     (hX : ∀ β : σ →₀ ℕ, β.degree < a → coeff β X = 0) (hY : ∀ β : σ →₀ ℕ, β.degree < b → coeff β Y = 0) :
@@ -80,12 +80,12 @@ theorem coeff_pow_mul_pow_eq_zero {D E : MvPowerSeries σ ℂ_[p]} (hD : constan
   low_mul_lemma (low_pow_lemma_2 hD i) (low_pow_lemma_2 hE j) α h
 
 theorem coeff_expMv (F : MvPowerSeries σ ℂ_[p]) (α : σ →₀ ℕ) :
-    coeff α (expMv F) =
+    coeff α (_root_.PI.FglGram.expMv F) =
       ∑ n ∈ Finset.range (α.degree + 1), coeff α (F ^ n) / (n.factorial : ℂ_[p]) := rfl
 
 theorem coeff_expMv_of_le {F : MvPowerSeries σ ℂ_[p]} (hF : constantCoeff F = 0) {α : σ →₀ ℕ}
     (N : ℕ) (hN : α.degree ≤ N) :
-    coeff α (expMv F) = ∑ n ∈ Finset.range (N + 1), coeff α (F ^ n) / (n.factorial : ℂ_[p]) := by
+    coeff α (_root_.PI.FglGram.expMv F) = ∑ n ∈ Finset.range (N + 1), coeff α (F ^ n) / (n.factorial : ℂ_[p]) := by
   rw [coeff_expMv]
   apply Finset.sum_subset
   · intro x hx
@@ -117,12 +117,12 @@ theorem reindex {M : Type*} [AddCommMonoid M] (N : ℕ) (g : ℕ → ℕ → M)
     exact hg i j (by omega)
 
 theorem expMv_add {D E : MvPowerSeries σ ℂ_[p]} (hD : constantCoeff D = 0) (hE : constantCoeff E = 0) :
-    expMv (D + E) = expMv D * expMv E := by
+    _root_.PI.FglGram.expMv (D + E) = _root_.PI.FglGram.expMv D * _root_.PI.FglGram.expMv E := by
   ext α
-  have hR : coeff α (expMv D * expMv E) = ∑ i ∈ Finset.range (α.degree + 1), ∑ j ∈ Finset.range (α.degree + 1),
+  have hR : coeff α (_root_.PI.FglGram.expMv D * _root_.PI.FglGram.expMv E) = ∑ i ∈ Finset.range (α.degree + 1), ∑ j ∈ Finset.range (α.degree + 1),
       coeff α (D ^ i * E ^ j) / ((i.factorial : ℂ_[p]) * (j.factorial : ℂ_[p])) := by
     rw [MvPowerSeries.coeff_mul]
-    have step : ∀ x ∈ Finset.HasAntidiagonal.antidiagonal α, coeff x.1 (expMv D) * coeff x.2 (expMv E) =
+    have step : ∀ x ∈ Finset.HasAntidiagonal.antidiagonal α, coeff x.1 (_root_.PI.FglGram.expMv D) * coeff x.2 (_root_.PI.FglGram.expMv E) =
         ∑ i ∈ Finset.range (α.degree + 1), ∑ j ∈ Finset.range (α.degree + 1),
           coeff x.1 (D ^ i) * coeff x.2 (E ^ j) / ((i.factorial : ℂ_[p]) * (j.factorial : ℂ_[p])) := by
       intro x hx
@@ -137,7 +137,7 @@ theorem expMv_add {D E : MvPowerSeries σ ℂ_[p]} (hD : constantCoeff D = 0) (h
     rw [Finset.sum_comm]
     refine Finset.sum_congr rfl fun j _ => ?_
     rw [MvPowerSeries.coeff_mul, Finset.sum_div]
-  have hL : coeff α (expMv (D + E)) = ∑ n ∈ Finset.range (α.degree + 1), ∑ m ∈ Finset.range (n + 1),
+  have hL : coeff α (_root_.PI.FglGram.expMv (D + E)) = ∑ n ∈ Finset.range (α.degree + 1), ∑ m ∈ Finset.range (n + 1),
       coeff α (D ^ m * E ^ (n - m)) / ((m.factorial : ℂ_[p]) * ((n - m).factorial : ℂ_[p])) := by
     rw [coeff_expMv]
     refine Finset.sum_congr rfl fun n _ => ?_
@@ -155,7 +155,7 @@ theorem expMv_add {D E : MvPowerSeries σ ℂ_[p]} (hD : constantCoeff D = 0) (h
   exact reindex _ (fun i j => coeff α (D ^ i * E ^ j) / ((i.factorial : ℂ_[p]) * (j.factorial : ℂ_[p])))
     (fun i j hij => by rw [coeff_pow_mul_pow_eq_zero hD hE hij, zero_div])
 
-theorem expMv_zero : expMv (0 : MvPowerSeries σ ℂ_[p]) = 1 := by
+theorem expMv_zero : _root_.PI.FglGram.expMv (0 : MvPowerSeries σ ℂ_[p]) = 1 := by
   ext α
   rw [coeff_expMv, Finset.sum_eq_single 0]
   · simp
@@ -164,17 +164,17 @@ theorem expMv_zero : expMv (0 : MvPowerSeries σ ℂ_[p]) = 1 := by
   · intro h
     exact absurd (Finset.mem_range.mpr (Nat.succ_pos _)) h
 
-theorem constantCoeff_expMv (F : MvPowerSeries σ ℂ_[p]) : constantCoeff (expMv F) = 1 := by
+theorem constantCoeff_expMv (F : MvPowerSeries σ ℂ_[p]) : constantCoeff (_root_.PI.FglGram.expMv F) = 1 := by
   rw [← MvPowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_expMv]
   simp
 
 theorem int_expMv_neg {D : MvPowerSeries σ ℂ_[p]} (hD : constantCoeff D = 0)
-    (h : IntegralMv (expMv D)) : IntegralMv (expMv (-D)) := by
+    (h : _root_.PI.FglGram.IntegralMv (_root_.PI.FglGram.expMv D)) : _root_.PI.FglGram.IntegralMv (_root_.PI.FglGram.expMv (-D)) := by
   have hnD : constantCoeff (-D) = 0 := by rw [map_neg, hD, neg_zero]
-  have hX : expMv (-D) * expMv D = 1 := by rw [← expMv_add hnD hD, neg_add_cancel, expMv_zero]
-  have hU0 : coeff 0 (expMv D) = 1 := by
+  have hX : _root_.PI.FglGram.expMv (-D) * _root_.PI.FglGram.expMv D = 1 := by rw [← expMv_add hnD hD, neg_add_cancel, expMv_zero]
+  have hU0 : coeff 0 (_root_.PI.FglGram.expMv D) = 1 := by
     rw [MvPowerSeries.coeff_zero_eq_constantCoeff_apply, constantCoeff_expMv]
-  suffices H : ∀ n, ∀ α : σ →₀ ℕ, α.degree < n → IsIntP (coeff α (expMv (-D))) from
+  suffices H : ∀ n, ∀ α : σ →₀ ℕ, α.degree < n → _root_.PI.FglGram.IsIntP (coeff α (_root_.PI.FglGram.expMv (-D))) from
     fun α => H _ α (Nat.lt_succ_self _)
   intro n
   induction n with
@@ -197,9 +197,9 @@ theorem int_expMv_neg {D : MvPowerSeries σ ℂ_[p]} (hD : constantCoeff D = 0)
     omega
 
 def Good (D : MvPowerSeries σ ℂ_[p]) : Prop :=
-  constantCoeff D = 0 ∧ IntegralMv (expMv D)
+  constantCoeff D = 0 ∧ _root_.PI.FglGram.IntegralMv (_root_.PI.FglGram.expMv D)
 
-theorem simeq_iff_good (f g : MvPowerSeries σ ℂ_[p]) : Simeq f g ↔ Good (f - g) := Iff.rfl
+theorem simeq_iff_good (f g : MvPowerSeries σ ℂ_[p]) : _root_.PI.FglGram.Simeq f g ↔ Good (f - g) := Iff.rfl
 
 theorem good_add {D E : MvPowerSeries σ ℂ_[p]} (hD : Good D) (hE : Good E) : Good (D + E) := by
   refine ⟨by rw [map_add (f := _), hD.1, hE.1, add_zero], ?_⟩

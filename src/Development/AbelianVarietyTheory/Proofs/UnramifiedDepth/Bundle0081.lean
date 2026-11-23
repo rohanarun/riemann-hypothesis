@@ -246,7 +246,7 @@ namespace GlobalTheory.ChartCharacters
 
 section Unif
 
-open AlgebraicGeometry CategoryTheory Limits NumberField IsLocalRing
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField IsLocalRing
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Out ReciprocityTheory.ChartRestriction.G.Geo.Tor
 open scoped CategoryTheory.Obj
 open GlobalTheory.UnifAfterExt

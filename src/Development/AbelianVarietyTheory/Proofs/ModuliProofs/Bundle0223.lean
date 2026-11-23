@@ -46,8 +46,8 @@ open scoped CategoryTheory.Obj
 namespace GlobalTheory
 
 theorem modelsSt_of_semistableReduction : GlobalTheory.Published.SemistableReductionSt → GlobalTheory.LN.ModelsSt :=
-  fun S => _root_.GlobalTheory.Models.exists_localSystems_ample GlobalTheory.homExtension_semiAbelian_dvr GlobalTheory.T.all_six_abelian_scheme_laws_hold.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.1
-    GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.1 (_root_.GlobalTheory.topAmpExists_of_semistableReduction S) _root_.GlobalTheory.moduliScheme_levelMaps_heckePoints
+  fun S => _root_.GlobalTheory.Models.exists_localSystems_ample GlobalTheory.homExtension_semiAbelian_dvr _root_.GlobalTheory.allSixLaws.1 _root_.GlobalTheory.allSixLaws.2.1
+    _root_.GlobalTheory.allSixLaws.2.2.1 (_root_.GlobalTheory.topAmpExists_of_semistableReduction S) _root_.GlobalTheory.moduliScheme_levelMaps_heckePoints
 
 end GlobalTheory
 end

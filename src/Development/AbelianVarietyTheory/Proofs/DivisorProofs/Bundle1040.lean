@@ -477,7 +477,7 @@ noncomputable section
 namespace GlobalTheory.ColNorms
 
 open NumberField IsDedekindDomain
-open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Col Formalism.L2.Ker
+open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV _root_.Formalism.L2.Col Formalism.L2.Ker
 
 theorem periodLattices : PeriodLattices := by
   intro D X s cc δ B χ cD _hX hok _h1 _h2 hcc hδ _hχ _hdg _hY a b S ha hb hconj hU

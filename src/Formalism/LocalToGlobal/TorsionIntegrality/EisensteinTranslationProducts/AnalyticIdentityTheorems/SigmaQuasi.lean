@@ -11,14 +11,12 @@ namespace Formalism.L2.Th1.F
 namespace PeriodLatticeBasisLemmas
 
 private theorem mem_lattice_iff_exists_int_comb' (L : PeriodPair) {x : ℂ} :
-    x ∈ L.lattice ↔ ∃ m n : ℤ, (m : ℂ) * L.ω₁ + (n : ℂ) * L.ω₂ = x := by
-  exact L.mem_lattice
+    x ∈ L.lattice ↔ ∃ m n : ℤ, (m : ℂ) * L.ω₁ + (n : ℂ) * L.ω₂ = x := L.mem_lattice
 
-private theorem periodPair_basis_zero_eq_omega_one (L : PeriodPair) : L.basis 0 = L.ω₁ := by
-  exact L.basis_zero
+private theorem periodPair_basis_zero_eq_omega_one (L : PeriodPair) : L.basis 0 = L.ω₁ :=
+  L.basis_zero
 
-private theorem periodPair_basis_one_eq_omega_two (L : PeriodPair) : L.basis 1 = L.ω₂ := by
-  exact L.basis_one
+private theorem periodPair_basis_one_eq_omega_two (L : PeriodPair) : L.basis 1 = L.ω₂ := L.basis_one
 
 private theorem basis_equivFun_real_comb_periods (L : PeriodPair) (s t : ℝ) :
     L.basis.equivFun ((s : ℂ) * L.ω₁ + (t : ℂ) * L.ω₂) = ![s, t] := by

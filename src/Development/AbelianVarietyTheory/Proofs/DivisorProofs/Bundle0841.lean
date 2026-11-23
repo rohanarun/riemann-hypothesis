@@ -18,7 +18,7 @@ noncomputable section
 
 namespace GlobalTheory.LieLocBasis
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj
 open scoped CategoryTheory.Obj
 open ReciprocityTheory.ChartRestriction.G.Chart (tvec IsUnivChart scaleD sp)

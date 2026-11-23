@@ -112,10 +112,10 @@ open GlobalTheory.StepData GlobalTheory.SplitWeil
 noncomputable section
 namespace GlobalTheory.LevProd.Bwd
 section Dense
-open Formalism.HermitianLatticesTheory Formalism.L2.Col GlobalTheory.RootEx GlobalTheory.TwBridge ValuativeRel
+open Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col GlobalTheory.RootEx GlobalTheory.TwBridge ValuativeRel
 end Dense
 section Rat
-open Formalism.L2.Col Formalism.UG
+open _root_.Formalism.L2.Col Formalism.UG
 attribute [local instance] GlobalTheory.Mem.Col2.starE
 end Rat
 set_option maxHeartbeats 2000000 in

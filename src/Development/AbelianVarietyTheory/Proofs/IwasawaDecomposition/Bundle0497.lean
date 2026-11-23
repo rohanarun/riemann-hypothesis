@@ -151,7 +151,7 @@ open scoped Matrix
 
 namespace GlobalTheory.Mem.R3.DefLatBC
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 section LiftBasis
 
@@ -421,7 +421,7 @@ end Analytic
 
 section Geometric
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD Formalism.L2.Pj GlobalTheory.ArcQ GlobalTheory.Toroidal GlobalTheory.ShFam
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}

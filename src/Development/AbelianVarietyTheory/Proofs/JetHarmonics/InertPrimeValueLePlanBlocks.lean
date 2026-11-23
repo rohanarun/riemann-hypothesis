@@ -210,7 +210,7 @@ theorem val_le_plan : ∀ (P : RF.Par) (l : ℕ) (C1 : ℝ), ParOK P → 5 ≤ l
   intro p hlev hatt
   have hk := hP.mk_le
   have hi0 : 1 ≤ i0 P.k V.l := by
-    have := (GlobalTheory.T.levelsUsed_balancedValue_orbitSums.1 P.k V.l (by omega) (by omega)).2.1
+    have := (_root_.GlobalTheory.LevelsOrbits.main.1 P.k V.l (by omega) (by omega)).2.1
     omega
   have key := val (fun z => blocks (X z) (p z) (ga z) P.r) ?_ ?_ ?_
   · refine key.trans ?_
@@ -224,7 +224,7 @@ theorem val_le_plan : ∀ (P : RF.Par) (l : ℕ) (C1 : ℝ), ParOK P → 5 ≤ l
     rcases hq with rfl | rfl | ⟨a, -, rfl⟩ | ⟨x, hx, rfl⟩
     · exact (GlobalTheory.MonBlock.monSupply.2 C V _ _ _ (X z) (F z) 0 _ _).1
     · exact (GlobalTheory.MonBlock.monSupply.2 C V _ _ _ (X z) (F z) 1 _ _).1
-    · exact (GlobalTheory.T.characterBlocks_attain_bound.2 C V _ _ _ (X z) (F z) _ a (big_bg _ (alt z hz) a) _).1 (alt z hz)
+    · exact (_root_.GlobalTheory.CharBlock.chSupply.2 C V _ _ _ (X z) (F z) _ a (big_bg _ (alt z hz) a) _).1 (alt z hz)
     · rw [(hn z).1, (hn z).2]
       exact hatt z hz _ _ (Finset.mem_filter.1 hx).2
   · refine le_trans ?_ what₂

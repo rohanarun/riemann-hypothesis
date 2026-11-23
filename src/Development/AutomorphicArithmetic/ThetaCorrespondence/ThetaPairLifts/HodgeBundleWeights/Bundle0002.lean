@@ -316,7 +316,7 @@ open GlobalTheory.HSApp
 set_option synthInstance.maxHeartbeats 400000
 noncomputable section
 namespace GlobalTheory.FlatLine
-open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD
+open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD
   Formalism.L2.Pj GlobalTheory.AllWt
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}
   {l : Level H} {Xo : Moduli Dw l} {c : Coeff l} {r : ℕ}

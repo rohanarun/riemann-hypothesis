@@ -329,6 +329,12 @@ public noncomputable abbrev target
 
 end I195MixedCoordinates_7149a82cc25e6f9e668c8c61
 
+public noncomputable abbrev _root_.I195MixedCoordinates_00549d7c7323d43c39912169.source :=
+  @_root_.I195MixedCoordinates_7149a82cc25e6f9e668c8c61.source
+
+public noncomputable abbrev _root_.I195MixedCoordinates_00549d7c7323d43c39912169.target :=
+  @_root_.I195MixedCoordinates_7149a82cc25e6f9e668c8c61.target
+
 @[expose] public section
 
 noncomputable section

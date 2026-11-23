@@ -14,7 +14,7 @@ noncomputable section
 namespace GlobalTheory.CompanionTheory.Hypotheses₂.OneV.FouCoord
 
 open GroundTheory.Global GroundTheory.Automorphic.GJMatrix GroundTheory.Heights₂.Theta NumberField NumberField.mixedEmbedding
-  IsDedekindDomain MeasureTheory Matrix
+  IsDedekindDomain MeasureTheory _root_.Matrix
 open scoped NumberField.AdeleRing ENNReal NNReal SchwartzMap nonZeroDivisors Classical
 
 set_option synthInstance.maxSize 1000

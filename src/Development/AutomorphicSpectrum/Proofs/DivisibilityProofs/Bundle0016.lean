@@ -75,7 +75,7 @@ theorem cycNum_subst_of_add {O : Type} [CommRing O] [IsDomain O] [IsDiscreteValu
     cycNum Z (fun t => ∑ i, M t i • cls i) H Q =
       cycNum Z cls (aeval (fun t => ∑ i, (C (M t i : ℝ) * X i : MvPolynomial σ ℝ)) H) Q :=
   _root_.GlobalTheory.CompanionTheory.Ar.Num.subst_abs_list (K → ℤ) d (fun l => (cycList Z l : ℝ))
-    (fun l l' h => by rw [GlobalTheory.T.cycle_list_perm_invariant.2 O K ι Z l l' h])
+    (fun l l' h => by rw [_root_.GlobalTheory.CompanionTheory.Ar.Num.numbers_list_perm.2 O K ι Z l l' h])
     (fun b b' l h => by rw [hadd b b' l h]; push_cast; rfl)
     σ σ' cls M H m hH Q hQ
 

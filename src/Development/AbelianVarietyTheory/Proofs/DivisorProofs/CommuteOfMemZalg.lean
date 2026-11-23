@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.QuantumMinorCharts
 
-open Equiv Formalism.REAL
+open _root_.Equiv Formalism.REAL
 
 section Capelli
 

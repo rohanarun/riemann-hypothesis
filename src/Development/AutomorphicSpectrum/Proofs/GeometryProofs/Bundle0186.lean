@@ -23,7 +23,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Top.LevelZero
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.Semi
 open GlobalTheory.Models GlobalTheory.Models.RankZero
 
@@ -235,7 +235,7 @@ namespace GlobalTheory.CompanionTheory.Ar.Rec.FinRd.Roots.FrameValue
 
 set_option backward.isDefEq.respectTransparency false
 
-open Limits MonObj
+open _root_.CategoryTheory.Limits MonObj
 
 section Grp
 

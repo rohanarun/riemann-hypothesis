@@ -58,7 +58,7 @@ theorem self_neg {x : R} (h : x = -x) : x = 0 := by
   have : (2 : ℂ) • x = 0 := by rw [two_smul]; exact add_eq_zero_iff_eq_neg.2 h
   rw [← one_smul ℂ x, ← inv_mul_cancel₀ (two_ne_zero' ℂ), mul_smul, this, smul_zero]
 
-theorem koszul_differential_sq (hE : KRel ε E) (h1 : ∀ a b i, Commute (E a b) (an i)) (haa : ∀ i j, an i * an j + an j * an i = 0) :
+theorem koszul_differential_sq (hE : _root_.CompanionTheory.D.DSIC.KRel ε E) (h1 : ∀ a b i, Commute (E a b) (an i)) (haa : ∀ i j, an i * an j + an j * an i = 0) :
     (∑ i, cc ε i • (E i.1.1 i.1.2 * an i)) * (∑ i, cc ε i • (E i.1.1 i.1.2 * an i)) =
       ∑ i, ∑ j, ∑ k, tc ε i j k • (E k.1.1 k.1.2 * (an i * an j)) := by
   set T : Pos n → Pos n → R := fun i j => ∑ k, tc ε i j k • (E k.1.1 k.1.2 * (an i * an j)) with hT
@@ -197,7 +197,7 @@ theorem koszul_differential_sq_zero : BdSq := by
   have e : bd ε E = (∑ i, cc ε i • ((lift n (E i.1.1 i.1.2) : Module.End ℂ (Cn n V)) * ann i)) +
       ∑ i, ∑ j, ∑ k, tc ε i j k • (cre k * ann j * ann i : Module.End ℂ (Cn n V)) := by
     simp only [bd, cc, tc, ite_smul, one_smul, zero_smul]
-  have hL : KRel ε fun a b => (lift n (E a b) : Module.End ℂ (Cn n V)) := by
+  have hL : _root_.CompanionTheory.D.DSIC.KRel ε fun a b => (lift n (E a b) : Module.End ℂ (Cn n V)) := by
     intro a b c d h1 h2
     refine LinearMap.ext fun x => funext fun A => ?_
     have := LinearMap.congr_fun (hE a b c d h1 h2) (x A)

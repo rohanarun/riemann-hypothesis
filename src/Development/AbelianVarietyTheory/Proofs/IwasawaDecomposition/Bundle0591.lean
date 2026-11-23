@@ -102,8 +102,8 @@ theorem exists_of_closedPoint {A : Type} [CommRing A] [IsLocalRing A] {X : Schem
 theorem indep_cellVec {T : Type} {m : T → ℕ} {k : Type} [Field k] {M : ℕ} (D c : Let m → Fin (M + 1) → k) (w : Pm m)
     (x : CellVar m → k) (h : LeftInv D c) (τ : T) :
     LinearIndependent k fun j : Fin (m τ) => cellVec c w x ⟨τ, j⟩ := by
-  have h1 := (GlobalTheory.T.cauchyBinet_plucker_and_cellCoordinates.2 T m k M D c w x h).1 _ _ (down_std τ (m τ) le_rfl)
-  rw [GlobalTheory.T.cauchyBinet_plucker_and_cellCoordinates.1] at h1
+  have h1 := (_root_.GlobalTheory.FlagEmb.CauchyBinet.main.2 T m k M D c w x h).1 _ _ (down_std τ (m τ) le_rfl)
+  rw [_root_.GlobalTheory.FlagEmb.CauchyBinet.main.1] at h1
   have h2 := Matrix.linearIndependent_rows_of_det_ne_zero (h1.trans_ne one_ne_zero)
   let L : (Fin (M + 1) → k) →ₗ[k] (Fin (m τ) → k) :=
     Matrix.toLin' (Matrix.of fun l' r => D ((wLet w ∘ std τ (m τ) le_rfl) l') r)

@@ -334,7 +334,7 @@ theorem gc_leviV_comp (n d : ℕ) (g : V d → ℂ) (F : V n → V d) (U : Set (
       wd d b (wdb d a g) (F v) * fderiv ℂ F v (bas n j) b *
         (starRingEnd ℂ) (fderiv ℂ F v (bas n k) a) := by
     intro j k
-    rw [wd_congr n j _ _ v (hwdb k),
+    rw [@wd_congr n j _ _ v (hwdb k),
       fc_wd_sum n j Finset.univ (fun a y => wdb d a g (F y) *
         (starRingEnd ℂ) (fderiv ℂ F y (bas n k) a)) v (fun a _ => (hWa a).mul (hCa k a))]
     refine Finset.sum_congr rfl fun a _ => ?_

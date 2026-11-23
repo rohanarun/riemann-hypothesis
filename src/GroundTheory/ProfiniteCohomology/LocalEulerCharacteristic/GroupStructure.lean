@@ -278,7 +278,7 @@ end LemmaG
 
 section Galois
 
-open GroundTheory.LocalField ValuativeRel IntermediateField
+open GroundTheory.LocalField ValuativeRel _root_.IntermediateField
 
 theorem algEquiv_apply_eq_of_pow_prime_pow_apply_eq {K L : Type*} [Field K] [Field L]
     [Algebra K L] {l : ℕ} (hl : l.Prime) {ζ : L} (hζ : ζ ^ l = 1) (σ : L ≃ₐ[K] L) {n : ℕ}

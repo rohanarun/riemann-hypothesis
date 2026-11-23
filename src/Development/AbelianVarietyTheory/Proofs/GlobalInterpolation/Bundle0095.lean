@@ -95,7 +95,7 @@ noncomputable section
 namespace GlobalTheory.KerT.Bar
 
 open NumberField IsDedekindDomain
-open Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Col Formalism.L2.Ker GlobalTheory.KerT
+open Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.MainNotions Formalism.L2.DIV _root_.Formalism.L2.Col Formalism.L2.Ker GlobalTheory.KerT
 open GlobalTheory.IndefiniteRowSideFullHecke.IndexExponentDegree (InBox)
 
 section Box
@@ -440,7 +440,7 @@ namespace GlobalTheory.LvT.Inh
 
 open Formalism.BasicNotions Classical NumberField IsDedekindDomain Matrix GlobalTheory.LvT GlobalTheory.LvT.Inh
 open Formalism.MainNotions.product_first_zeroth_parts (Ow ten blk CSpan IntSpan wSh)
-open Formalism.L2.Col (conjPrime₂ PosStar hStd UF Sp)
+open _root_.Formalism.L2.Col (conjPrime₂ PosStar hStd UF Sp)
 
 theorem mem_valO_of_below {K L : Type} [Field K] [NumberField K] [Field L] [NumberField L] (j : K →+* L)
     (W : HeightOneSpectrum (𝓞 L)) (Q : HeightOneSpectrum (𝓞 K))

@@ -14,7 +14,7 @@ section
 namespace GroundTheory.Automorphic
 
 open Module Matrix TensorProduct Topology Filter IsDedekindDomain NumberField
-open scoped RestrictedProduct NumberField.AdeleRing
+open scoped _root_.RestrictedProduct NumberField.AdeleRing
 
 noncomputable section
 

@@ -20,7 +20,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Top.Bl.TieModel
 
-open Formalism.BasicNotions Formalism.MainNotions GlobalTheory.Mem GlobalTheory.Mem.Col2 NumberField IsDedekindDomain Formalism.L2.DIV Formalism.L2.Col
+open Formalism.BasicNotions Formalism.MainNotions GlobalTheory.Mem GlobalTheory.Mem.Col2 NumberField IsDedekindDomain Formalism.L2.DIV _root_.Formalism.L2.Col
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

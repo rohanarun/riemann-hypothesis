@@ -38,7 +38,7 @@ namespace GlobalTheory.TrueBranch
 
 section Gen
 
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 
 variable {ι : Type} [Fintype ι] {N n : ℕ}
 

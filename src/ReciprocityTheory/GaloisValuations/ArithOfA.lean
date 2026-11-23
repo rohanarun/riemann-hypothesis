@@ -19,13 +19,8 @@ variable {F : Type*} [Field F] [NumberField F]
 def locDegree (v : HeightOneSpectrum (𝓞 F)) : ℕ :=
   v.asIdeal.ramificationIdx ℤ * v.asIdeal.inertiaDeg ℤ
 
-theorem isMaximal_span_prime (l : ℕ) [hl : Fact l.Prime] : (Ideal.span {(l : ℤ)}).IsMaximal := by
-  first
-    | exact PrincipalIdealRing.isMaximal_of_irreducible (Nat.prime_iff_prime_int.mp hl.out).irreducible
-    | exact Ideal.IsPrime.isMaximal
-        ((Ideal.span_singleton_prime (by exact_mod_cast hl.out.ne_zero)).2
-          (Nat.prime_iff_prime_int.mp hl.out))
-        (by simp [hl.out.ne_zero])
+theorem isMaximal_span_prime (l : ℕ) [hl : Fact l.Prime] : (Ideal.span {(l : ℤ)}).IsMaximal :=
+  Int.ideal_span_isMaximal_of_prime l
 
 theorem liesOver_span_iff (l : ℕ) [Fact l.Prime] (P : Ideal (𝓞 F)) [P.IsPrime] :
     P.LiesOver (Ideal.span {(l : ℤ)}) ↔ ((l : ℕ) : 𝓞 F) ∈ P := by

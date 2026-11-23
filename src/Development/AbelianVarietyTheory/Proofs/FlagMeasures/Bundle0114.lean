@@ -427,7 +427,7 @@ theorem herm_inv {k r : ℕ} {γ : Mat k r} (h : γ ∈ GG k r) (v w : Fin (2 * 
 theorem zhat_inv {k r : ℕ} (z z' : Fin (2 * r + k + 1) → ℂ) {γ : Mat k r} (h : γ ∈ GG k r) :
     Zhat k r z' z γ⁻¹ = (Zhat k r z z' γ)ᴴ := by
   ext a b
-  simp only [Formalism.QuantumDeterminants.Zhat, Matrix.conjTranspose_apply, Matrix.of_apply]
+  simp only [_root_.Formalism.QuantumDeterminants.Zhat, Matrix.conjTranspose_apply, Matrix.of_apply]
   exact herm_inv h _ _
 
 theorem dmin_inv {k r : ℕ} (z z' : Fin (2 * r + k + 1) → ℂ) {γ : Mat k r} (h : γ ∈ GG k r)

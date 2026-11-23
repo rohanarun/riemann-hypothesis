@@ -400,7 +400,7 @@ noncomputable section
 
 namespace GlobalTheory.HtCardProof
 
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions.N Formalism.L2 Module
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions.N _root_.Formalism.L2 Module
 
 section Local
 

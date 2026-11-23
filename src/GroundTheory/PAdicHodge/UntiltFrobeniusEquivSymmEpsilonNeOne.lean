@@ -31,7 +31,7 @@ end IsPerfectoidField
 
 section Cp
 
-open PowerSeries
+open _root_.PowerSeries
 
 variable {p : ℕ} [Fact p.Prime]
 

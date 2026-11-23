@@ -391,7 +391,7 @@ noncomputable section
 
 namespace GlobalTheory.Adelic.IndepBaseChange
 
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace TensorProduct
+open CategoryTheory _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace TensorProduct
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor
 
 theorem exists_contract {k E : Type} [Field k] [Field E] [Algebra k E] {A B : CommRingCat.{0}}

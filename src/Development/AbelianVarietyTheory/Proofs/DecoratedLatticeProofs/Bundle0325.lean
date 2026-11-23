@@ -169,7 +169,7 @@ open GlobalTheory.SeeSaw GlobalTheory.Unf
 namespace GlobalTheory.SBMove
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem isFrame_one_std {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [StarRing E] [Algebra F E]
     (n : ℕ) : Formalism.L2.DIV.IsFrame (F := F) 1 (Formalism.L2.Col.stdLat E n) := by
   rcases Nat.eq_zero_or_pos n with rfl | hn

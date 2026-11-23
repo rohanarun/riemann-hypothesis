@@ -49,7 +49,7 @@ open CategoryTheory AlgebraicGeometry TensorProduct GlobalTheory GlobalTheory.PD
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Geo.Tor
 attribute [local instance] CategoryTheory.Over.cartesianMonoidalCategory
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 open scoped CategoryTheory.Obj CategoryTheory.MonObj
 
 set_option autoImplicit false

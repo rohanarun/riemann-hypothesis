@@ -295,7 +295,7 @@ noncomputable section
 
 namespace GlobalTheory.MtIn
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 theorem map_inv_mat {E K : Type} [Field E] [Field K] (f : E →+* K) {n : ℕ} (γE : GL (Fin n) E) :
     ((γE : Matrix (Fin n) (Fin n) E).map f)⁻¹ = ((γE : Matrix (Fin n) (Fin n) E)⁻¹).map f := by

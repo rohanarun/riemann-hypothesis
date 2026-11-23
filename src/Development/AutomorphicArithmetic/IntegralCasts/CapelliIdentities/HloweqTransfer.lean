@@ -690,10 +690,7 @@ theorem UpperTheory.Reformulated.B.Re4.laurent_T_neg_one_mul_T_one :
     isClosed_eq ((hv.matrix_conjTranspose.matrix_mul continuous_const).matrix_mul hv) continuous_const
   exact hc.locallyCompactSpace
 
-noncomputable def UpperTheory.Reformulated.B.Re4.muG :
-    {n : Nat} →
-      (ε : Fin n → Bool) → @MeasureTheory.Measure (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε) :=
-    fun {n : Nat} (ε : Fin n → Bool) ↦
+noncomputable def UpperTheory.Reformulated.B.Re4.muG : {n : ℕ} → (ε : Fin n → Bool) → MeasureTheory.Measure ↥(UpperTheory.Reformulated.B.Re4.UJ ε) := fun {n : Nat} (ε : Fin n → Bool) ↦
       @MeasureTheory.Measure.haar (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε))
         (@Subgroup.toGroup
           (@Units (Matrix (Fin n) (Fin n) Complex)
@@ -906,9 +903,7 @@ theorem UpperTheory.Reformulated.B.Re4.complex_normed_instance_compat :
                     (@CommCStarAlgebra.toNonUnitalCommCStarAlgebra Complex instCommCStarAlgebraComplex)))))))) := by
   infer_instance
 
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Re4.umat :
-    {n : Nat} → {ε : Fin n → Bool} → ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε) → Matrix (Fin n) (Fin n) Complex :=
-    fun {n : Nat} {ε : Fin n → Bool} (g : ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) ↦
+@[reducible] noncomputable def UpperTheory.Reformulated.B.Re4.umat : {n : ℕ} → {ε : Fin n → Bool} → ↥(UpperTheory.Reformulated.B.Re4.UJ ε) → Matrix (Fin n) (Fin n) ℂ := fun {n : Nat} {ε : Fin n → Bool} (g : ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) ↦
       @Units.val (Matrix (Fin n) (Fin n) Complex)
         (@Semiring.toMonoid (Matrix (Fin n) (Fin n) Complex)
           (@Matrix.semiring (Fin n) Complex Complex.instSemiring (Fin.fintype n) (instDecidableEqFin n)))
@@ -953,102 +948,10 @@ theorem UpperTheory.Reformulated.B.Re4.complex_normed_instance_compat :
               (@UpperTheory.Reformulated.B.Re4.UJ n ε) x)
           g)
 
-noncomputable def UpperTheory.Reformulated.B.Re4.rregG :
-    {n : Nat} →
-      (ε : Fin n → Bool) →
-        ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε) →
-          @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-            (@UniformSpace.toTopologicalSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@PseudoMetricSpace.toUniformSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                (@SeminormedAddCommGroup.toPseudoMetricSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                    (@MeasureTheory.Lp.instNormedAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                      (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                      (@OfNat.ofNat ENNReal (nat_lit 2)
-                        (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                          (@AddMonoidWithOne.toNatCast ENNReal
-                            (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                          UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                      (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup fact_one_le_two_ennreal)))))
-            (@AddCommGroup.toAddCommMonoid (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@MeasureTheory.Lp.instAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                (@OfNat.ofNat ENNReal (nat_lit 2)
-                  (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                    (@AddMonoidWithOne.toNatCast ENNReal
-                      (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                    UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup))
-            (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-            (@UniformSpace.toTopologicalSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@PseudoMetricSpace.toUniformSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                (@SeminormedAddCommGroup.toPseudoMetricSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                    (@MeasureTheory.Lp.instNormedAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                      (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                      (@OfNat.ofNat ENNReal (nat_lit 2)
-                        (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                          (@AddMonoidWithOne.toNatCast ENNReal
-                            (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                          UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                      (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup fact_one_le_two_ennreal)))))
-            (@AddCommGroup.toAddCommMonoid (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@MeasureTheory.Lp.instAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                (@OfNat.ofNat ENNReal (nat_lit 2)
-                  (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                    (@AddMonoidWithOne.toNatCast ENNReal
-                      (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                    UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup))
-            (@MeasureTheory.Lp.instModule (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex Complex
-              (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-              (@OfNat.ofNat ENNReal (nat_lit 2)
-                (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                  (@AddMonoidWithOne.toNatCast ENNReal
-                    (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                  UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-              (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup
-              (@CStarAlgebra.toNormedRing Complex (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex))
-              (@Semiring.toModule Complex
-                (@Ring.toSemiring Complex
-                  (@NormedRing.toRing Complex
-                    (@CStarAlgebra.toNormedRing Complex
-                      (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-              (@NormedSpace.toIsBoundedSMul Complex Complex Complex.instNormedField
-                (@NonUnitalSeminormedRing.toSeminormedAddCommGroup Complex
-                  (@NonUnitalSeminormedCommRing.toNonUnitalSeminormedRing Complex
-                    (@SeminormedCommRing.toNonUnitalSeminormedCommRing Complex
-                      (@NormedCommRing.toSeminormedCommRing Complex
-                        (@CommCStarAlgebra.toNormedCommRing Complex instCommCStarAlgebraComplex)))))
-                (@NonUnitalCStarAlgebra.toNormedSpace Complex
-                  (@NonUnitalCommCStarAlgebra.toNonUnitalCStarAlgebra Complex
-                    (@CommCStarAlgebra.toNonUnitalCommCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-            (@MeasureTheory.Lp.instModule (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex Complex
-              (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-              (@OfNat.ofNat ENNReal (nat_lit 2)
-                (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                  (@AddMonoidWithOne.toNatCast ENNReal
-                    (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                  UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-              (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup
-              (@CStarAlgebra.toNormedRing Complex (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex))
-              (@Semiring.toModule Complex
-                (@Ring.toSemiring Complex
-                  (@NormedRing.toRing Complex
-                    (@CStarAlgebra.toNormedRing Complex
-                      (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-              (@NormedSpace.toIsBoundedSMul Complex Complex Complex.instNormedField
-                (@NonUnitalSeminormedRing.toSeminormedAddCommGroup Complex
-                  (@NonUnitalSeminormedCommRing.toNonUnitalSeminormedRing Complex
-                    (@SeminormedCommRing.toNonUnitalSeminormedCommRing Complex
-                      (@NormedCommRing.toSeminormedCommRing Complex
-                        (@CommCStarAlgebra.toNormedCommRing Complex instCommCStarAlgebraComplex)))))
-                (@NonUnitalCStarAlgebra.toNormedSpace Complex
-                  (@NonUnitalCommCStarAlgebra.toNonUnitalCStarAlgebra Complex
-                    (@CommCStarAlgebra.toNonUnitalCommCStarAlgebra Complex instCommCStarAlgebraComplex))))) :=
-    fun {n : Nat} (ε : Fin n → Bool) (y : ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) ↦
+noncomputable def UpperTheory.Reformulated.B.Re4.rregG : {n : ℕ} →
+  (ε : Fin n → Bool) →
+    ↥(UpperTheory.Reformulated.B.Re4.UJ ε) →
+      UpperTheory.Reformulated.B.Re4.L2 ε →L[ℂ] UpperTheory.Reformulated.B.Re4.L2 ε := fun {n : Nat} (ε : Fin n → Bool) (y : ↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) ↦
       @dite
         (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
           (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) (@UpperTheory.Reformulated.B.Re4.L2 n ε)
@@ -1506,102 +1409,9 @@ noncomputable def UpperTheory.Reformulated.B.Re4.rregG :
                         (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex)))))
                 UpperTheory.Reformulated.B.Re4.complex_normed_instance_compat)))
 
-noncomputable def UpperTheory.Reformulated.B.Re4.rreg :
-    {n : Nat} →
-      (ε : Fin n → Bool) →
-        Matrix (Fin n) (Fin n) Complex →
-          @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-            (@UniformSpace.toTopologicalSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@PseudoMetricSpace.toUniformSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                (@SeminormedAddCommGroup.toPseudoMetricSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                    (@MeasureTheory.Lp.instNormedAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                      (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                      (@OfNat.ofNat ENNReal (nat_lit 2)
-                        (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                          (@AddMonoidWithOne.toNatCast ENNReal
-                            (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                          UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                      (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup fact_one_le_two_ennreal)))))
-            (@AddCommGroup.toAddCommMonoid (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@MeasureTheory.Lp.instAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                (@OfNat.ofNat ENNReal (nat_lit 2)
-                  (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                    (@AddMonoidWithOne.toNatCast ENNReal
-                      (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                    UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup))
-            (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-            (@UniformSpace.toTopologicalSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@PseudoMetricSpace.toUniformSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                (@SeminormedAddCommGroup.toPseudoMetricSpace (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-                    (@MeasureTheory.Lp.instNormedAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                      (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                      (@OfNat.ofNat ENNReal (nat_lit 2)
-                        (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                          (@AddMonoidWithOne.toNatCast ENNReal
-                            (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                          UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                      (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup fact_one_le_two_ennreal)))))
-            (@AddCommGroup.toAddCommMonoid (@UpperTheory.Reformulated.B.Re4.L2 n ε)
-              (@MeasureTheory.Lp.instAddCommGroup (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex
-                (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-                (@OfNat.ofNat ENNReal (nat_lit 2)
-                  (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                    (@AddMonoidWithOne.toNatCast ENNReal
-                      (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                    UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-                (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup))
-            (@MeasureTheory.Lp.instModule (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex Complex
-              (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-              (@OfNat.ofNat ENNReal (nat_lit 2)
-                (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                  (@AddMonoidWithOne.toNatCast ENNReal
-                    (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                  UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-              (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup
-              (@CStarAlgebra.toNormedRing Complex (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex))
-              (@Semiring.toModule Complex
-                (@Ring.toSemiring Complex
-                  (@NormedRing.toRing Complex
-                    (@CStarAlgebra.toNormedRing Complex
-                      (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-              (@NormedSpace.toIsBoundedSMul Complex Complex Complex.instNormedField
-                (@NonUnitalSeminormedRing.toSeminormedAddCommGroup Complex
-                  (@NonUnitalSeminormedCommRing.toNonUnitalSeminormedRing Complex
-                    (@SeminormedCommRing.toNonUnitalSeminormedCommRing Complex
-                      (@NormedCommRing.toSeminormedCommRing Complex
-                        (@CommCStarAlgebra.toNormedCommRing Complex instCommCStarAlgebraComplex)))))
-                (@NonUnitalCStarAlgebra.toNormedSpace Complex
-                  (@NonUnitalCommCStarAlgebra.toNonUnitalCStarAlgebra Complex
-                    (@CommCStarAlgebra.toNonUnitalCommCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-            (@MeasureTheory.Lp.instModule (↥(@UpperTheory.Reformulated.B.Re4.UJ n ε)) Complex Complex
-              (UpperTheory.Reformulated.B.Re4.instMeasurableSpaceUJ n ε)
-              (@OfNat.ofNat ENNReal (nat_lit 2)
-                (@instOfNatAtLeastTwo ENNReal (nat_lit 2)
-                  (@AddMonoidWithOne.toNatCast ENNReal
-                    (@AddCommMonoidWithOne.toAddMonoidWithOne ENNReal ENNReal.instAddCommMonoidWithOne))
-                  UpperTheory.Reformulated.B.Re4.algebra_smulCommClass_complex))
-              (@UpperTheory.Reformulated.B.Re4.muG n ε) Complex.instNormedAddCommGroup
-              (@CStarAlgebra.toNormedRing Complex (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex))
-              (@Semiring.toModule Complex
-                (@Ring.toSemiring Complex
-                  (@NormedRing.toRing Complex
-                    (@CStarAlgebra.toNormedRing Complex
-                      (@CommCStarAlgebra.toCStarAlgebra Complex instCommCStarAlgebraComplex)))))
-              (@NormedSpace.toIsBoundedSMul Complex Complex Complex.instNormedField
-                (@NonUnitalSeminormedRing.toSeminormedAddCommGroup Complex
-                  (@NonUnitalSeminormedCommRing.toNonUnitalSeminormedRing Complex
-                    (@SeminormedCommRing.toNonUnitalSeminormedCommRing Complex
-                      (@NormedCommRing.toSeminormedCommRing Complex
-                        (@CommCStarAlgebra.toNormedCommRing Complex instCommCStarAlgebraComplex)))))
-                (@NonUnitalCStarAlgebra.toNormedSpace Complex
-                  (@NonUnitalCommCStarAlgebra.toNonUnitalCStarAlgebra Complex
-                    (@CommCStarAlgebra.toNonUnitalCommCStarAlgebra Complex instCommCStarAlgebraComplex))))) :=
-    fun {n : Nat} (ε : Fin n → Bool) (g : Matrix (Fin n) (Fin n) Complex) ↦
+noncomputable def UpperTheory.Reformulated.B.Re4.rreg : {n : ℕ} →
+  (ε : Fin n → Bool) →
+    Matrix (Fin n) (Fin n) ℂ → UpperTheory.Reformulated.B.Re4.L2 ε →L[ℂ] UpperTheory.Reformulated.B.Re4.L2 ε := fun {n : Nat} (ε : Fin n → Bool) (g : Matrix (Fin n) (Fin n) Complex) ↦
       @dite
         (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
           (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) (@UpperTheory.Reformulated.B.Re4.L2 n ε)
@@ -1921,288 +1731,21 @@ noncomputable def UpperTheory.Reformulated.B.Re4.d21 :
                 Complex.instAddCommMonoid)
               (@UpperTheory.Reformulated.B.Re4.Jm n ε) g))
 
-noncomputable def UpperTheory.Reformulated.B.Re4.IsKStableOn.{u_1} :
-    {n : Nat} →
-      {H : Type u_1} →
-        [inst : NormedAddCommGroup H] →
-          [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)] →
-            (Fin n → Bool) →
-              (Matrix (Fin n) (Fin n) Complex →
-                  @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-                    (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))) →
-                @Submodule Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)) →
-                  Prop :=
-    fun {n : Nat} {H : Type u_1} [inst : NormedAddCommGroup H]
-        [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)]
-        (ε : Fin n → Bool)
-        (σ :
-          Matrix (Fin n) (Fin n) Complex →
-            @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-              (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-        (S :
-          @Submodule Complex H Complex.instSemiring
-            (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-            (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))) ↦
-      ∀ (g : Matrix (Fin n) (Fin n) Complex),
-        @Membership.mem (Matrix (Fin n) (Fin n) Complex) (Set (Matrix (Fin n) (Fin n) Complex))
-            (@Set.instMembership (Matrix (Fin n) (Fin n) Complex)) (@UpperTheory.Reformulated.B.Re4.d21 n ε) g →
-          ∀ (v : H),
-            @Membership.mem H
-                (@Submodule Complex H Complex.instSemiring
-                  (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                  (@NormedSpace.toModule Complex H Complex.instNormedField
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                    (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                (@SetLike.instMembership
-                  (@Submodule Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                  H
-                  (@Submodule.setLike Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))))
-                S v →
-              @Membership.mem H
-                (@Submodule Complex H Complex.instSemiring
-                  (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                  (@NormedSpace.toModule Complex H Complex.instNormedField
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                    (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                (@SetLike.instMembership
-                  (@Submodule Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                  H
-                  (@Submodule.setLike Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))))
-                S
-                (@DFunLike.coe
-                  (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-                    (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                  H (fun (x : H) ↦ H)
-                  (@ContinuousLinearMap.funLike Complex Complex Complex.instSemiring Complex.instSemiring
-                    (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                  (σ g) v)
+noncomputable def UpperTheory.Reformulated.B.Re4.IsKStableOn.{u_1} : {n : ℕ} →
+  {H : Type u_1} →
+    [inst : NormedAddCommGroup H] →
+      [inst_1 : InnerProductSpace ℂ H] → (Fin n → Bool) → (Matrix (Fin n) (Fin n) ℂ → H →L[ℂ] H) → Submodule ℂ H → Prop := fun {n} {H} [NormedAddCommGroup H] [InnerProductSpace ℂ H] ε σ S =>
+  ∀ g ∈ UpperTheory.Reformulated.B.Re4.d21 ε, ∀ v ∈ S, (σ g) v ∈ S
 
-noncomputable def UpperTheory.Reformulated.B.Re4.IsWtOn.{u_1} :
-    {n : Nat} →
-      {H : Type u_1} →
-        [inst : NormedAddCommGroup H] →
-          [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)] →
-            Set (Matrix (Fin n) (Fin n) Complex) →
-              (Matrix (Fin n) (Fin n) Complex →
-                  @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-                    (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))) →
-                (Fin n → Real) → H → Prop :=
-    fun {n : Nat} {H : Type u_1} [inst : NormedAddCommGroup H]
-        [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)]
-        (G : Set (Matrix (Fin n) (Fin n) Complex))
-        (σ :
-          Matrix (Fin n) (Fin n) Complex →
-            @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-              (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-        (μ : Fin n → Real) (v : H) ↦
-      ∀ (θ : Fin n → Real),
-        @Membership.mem (Matrix (Fin n) (Fin n) Complex) (Set (Matrix (Fin n) (Fin n) Complex))
-            (@Set.instMembership (Matrix (Fin n) (Fin n) Complex)) G
-            (@Matrix.diagonal (Fin n) Complex (instDecidableEqFin n) Complex.instZero fun (a : Fin n) ↦
-              Complex.exp
-                (@HMul.hMul Complex Complex Complex (@instHMul Complex Complex.instMul) (↑(θ a) : Complex) Complex.I)) →
-          @Eq H
-            (@DFunLike.coe
-              (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-                (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                (@UniformSpace.toTopologicalSpace H
-                  (@PseudoMetricSpace.toUniformSpace H
-                    (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                (@UniformSpace.toTopologicalSpace H
-                  (@PseudoMetricSpace.toUniformSpace H
-                    (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                (@NormedSpace.toModule Complex H Complex.instNormedField
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                  (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                (@NormedSpace.toModule Complex H Complex.instNormedField
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                  (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-              H (fun (x : H) ↦ H)
-              (@ContinuousLinearMap.funLike Complex Complex Complex.instSemiring Complex.instSemiring
-                (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                (@UniformSpace.toTopologicalSpace H
-                  (@PseudoMetricSpace.toUniformSpace H
-                    (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                (@UniformSpace.toTopologicalSpace H
-                  (@PseudoMetricSpace.toUniformSpace H
-                    (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                (@NormedSpace.toModule Complex H Complex.instNormedField
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                  (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                (@NormedSpace.toModule Complex H Complex.instNormedField
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                  (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-              (σ
-                (@Matrix.diagonal (Fin n) Complex (instDecidableEqFin n) Complex.instZero fun (a : Fin n) ↦
-                  Complex.exp
-                    (@HMul.hMul Complex Complex Complex (@instHMul Complex Complex.instMul) (↑(θ a) : Complex) Complex.I)))
-              v)
-            (@HSMul.hSMul Complex H H
-              (@instHSMul Complex H
-                (@SMulZeroClass.toSMul Complex H
-                  (@AddZero.toZero H
-                    (@AddZeroClass.toAddZero H
-                      (@AddMonoid.toAddZeroClass H
-                        (@SubNegMonoid.toAddMonoid H
-                          (@AddGroup.toSubNegMonoid H
-                            (@AddCommGroup.toAddGroup H (@NormedAddCommGroup.toAddCommGroup H inst)))))))
-                  (@DistribSMul.toSMulZeroClass Complex H
-                    (@AddMonoid.toAddZeroClass H
-                      (@SubNegMonoid.toAddMonoid H
-                        (@AddGroup.toSubNegMonoid H
-                          (@AddCommGroup.toAddGroup H (@NormedAddCommGroup.toAddCommGroup H inst)))))
-                    (@DistribMulAction.toDistribSMul Complex H (@Semiring.toMonoid Complex Complex.instSemiring)
-                      (@SubNegMonoid.toAddMonoid H
-                        (@AddGroup.toSubNegMonoid H
-                          (@AddCommGroup.toAddGroup H (@NormedAddCommGroup.toAddCommGroup H inst))))
-                      (@Module.toDistribMulAction Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))))))
-              (Complex.exp
-                (@HMul.hMul Complex Complex Complex (@instHMul Complex Complex.instMul)
-                  (↑(∑ a : Fin n, @HMul.hMul Real Real Real (@instHMul Real Real.instMul) (μ a) (θ a)) : Complex)
-                  Complex.I))
-              v)
+noncomputable def UpperTheory.Reformulated.B.Re4.IsWtOn.{u_1} : {n : ℕ} →
+  {H : Type u_1} →
+    [inst : NormedAddCommGroup H] →
+      [inst_1 : InnerProductSpace ℂ H] →
+        Set (Matrix (Fin n) (Fin n) ℂ) → (Matrix (Fin n) (Fin n) ℂ → H →L[ℂ] H) → (Fin n → ℝ) → H → Prop := fun {n} {H} [NormedAddCommGroup H] [InnerProductSpace ℂ H] G σ μ v =>
+  ∀ (θ : Fin n → ℝ),
+    (Matrix.diagonal fun a => Complex.exp (↑(θ a) * Complex.I)) ∈ G →
+      (σ (Matrix.diagonal fun a => Complex.exp (↑(θ a) * Complex.I))) v =
+        Complex.exp (↑(∑ a, μ a * θ a) * Complex.I) • v
 
 noncomputable def UpperTheory.Reformulated.B.Re4.root :
     {n : Nat} → Fin n → Fin n → Fin n → Real :=
@@ -2214,9 +1757,7 @@ noncomputable def UpperTheory.Reformulated.B.Re4.root :
         (@Pi.single (Fin n) (fun (a : Fin n) ↦ Real) (fun (i : Fin n) ↦ Real.instZero) (instDecidableEqFin n) b
           (@OfNat.ofNat Real (nat_lit 1) (@One.toOfNat1 Real Real.instOne)))
 
-noncomputable def UpperTheory.Reformulated.B.Re4.CDom :
-    {n : Nat} → (Fin n → Bool) → (Fin n → Real) → (Fin n → Real) → Prop :=
-    fun {n : Nat} (ε : Fin n → Bool) (μ Λ : Fin n → Real) ↦
+noncomputable def UpperTheory.Reformulated.B.Re4.CDom : {n : ℕ} → (Fin n → Bool) → (Fin n → ℝ) → (Fin n → ℝ) → Prop := fun {n : Nat} (ε : Fin n → Bool) (μ Λ : Fin n → Real) ↦
       ∃ (c : Fin n → Fin n → Nat),
         And
           (∀ (a b : Fin n),
@@ -2231,221 +1772,20 @@ noncomputable def UpperTheory.Reformulated.B.Re4.CDom :
                   (@instHSMul Real (Fin n → Real) (@Function.hasSMul (Fin n) Real Real (@instSMulOfMul Real Real.instMul)))
                   (@Nat.cast Real Real.instNatCast (c a b)) (@UpperTheory.Reformulated.B.Re4.root n a b)))
 
-noncomputable def UpperTheory.Reformulated.B.Re4.IsKTypeOf.{u_1} :
-    {n : Nat} →
-      {H : Type u_1} →
-        [inst : NormedAddCommGroup H] →
-          [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)] →
-            (Fin n → Bool) →
-              (Matrix (Fin n) (Fin n) Complex →
-                  @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-                    (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-                    (@UniformSpace.toTopologicalSpace H
-                      (@PseudoMetricSpace.toUniformSpace H
-                        (@SeminormedAddCommGroup.toPseudoMetricSpace H
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))) →
-                (Fin n → Real) →
-                  @Submodule Complex H Complex.instSemiring
-                      (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                      (@NormedSpace.toModule Complex H Complex.instNormedField
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                        (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)) →
-                    Prop :=
-    fun {n : Nat} {H : Type u_1} [inst : NormedAddCommGroup H]
-        [inst_1 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)]
-        (ε : Fin n → Bool)
-        (σ :
-          Matrix (Fin n) (Fin n) Complex →
-            @ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
-              (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst)) H
-              (@UniformSpace.toTopologicalSpace H
-                (@PseudoMetricSpace.toUniformSpace H
-                  (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst))))
-              (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-              (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-        (Λ : Fin n → Real)
-        (S :
-          @Submodule Complex H Complex.instSemiring
-            (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-            (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))) ↦
-      And
-        (@FiniteDimensional Complex (↥S) (@Field.toDivisionRing Complex Complex.instField)
-          (@Submodule.addCommGroup Complex H Complex.instRing (@NormedAddCommGroup.toAddCommGroup H inst)
-            (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-            S)
-          (@Submodule.module Complex H Complex.instSemiring
-            (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-            (@NormedSpace.toModule Complex H Complex.instNormedField (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))
-            S))
-        (And (@UpperTheory.Reformulated.B.Re4.IsKStableOn n H inst inst_1 ε σ S)
-          (And
-            (∀
-              (S' :
-                @Submodule Complex H Complex.instSemiring
-                  (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                  (@NormedSpace.toModule Complex H Complex.instNormedField
-                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                    (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))),
-              @LE.le
-                  (@Submodule Complex H Complex.instSemiring
-                    (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                    (@NormedSpace.toModule Complex H Complex.instNormedField
-                      (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                      (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                  (@Preorder.toLE
-                    (@Submodule Complex H Complex.instSemiring
-                      (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                      (@NormedSpace.toModule Complex H Complex.instNormedField
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                        (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                    (@PartialOrder.toPreorder
-                      (@Submodule Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                      (@Submodule.instPartialOrder Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))))
-                  S' S →
-                @UpperTheory.Reformulated.B.Re4.IsKStableOn n H inst inst_1 ε σ S' →
-                  Or
-                    (@Eq
-                      (@Submodule Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                      S'
-                      (@Bot.bot
-                        (@Submodule Complex H Complex.instSemiring
-                          (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                          (@NormedSpace.toModule Complex H Complex.instNormedField
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                        (@Submodule.instBot Complex H Complex.instSemiring
-                          (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                          (@NormedSpace.toModule Complex H Complex.instNormedField
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))))
-                    (@Eq
-                      (@Submodule Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                      S' S))
-            (And
-              (∃ (v : H),
-                And
-                  (@Membership.mem H
-                    (@Submodule Complex H Complex.instSemiring
-                      (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                      (@NormedSpace.toModule Complex H Complex.instNormedField
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                        (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                    (@SetLike.instMembership
-                      (@Submodule Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                      H
-                      (@Submodule.setLike Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))))
-                    S v)
-                  (And
-                    (@Ne H v
-                      (@OfNat.ofNat H (nat_lit 0)
-                        (@Zero.toOfNat0 H
-                          (@NegZeroClass.toZero H
-                            (@SubNegZeroMonoid.toNegZeroClass H
-                              (@SubtractionMonoid.toSubNegZeroMonoid H
-                                (@SubtractionCommMonoid.toSubtractionMonoid H
-                                  (@AddCommGroup.toDivisionAddCommMonoid H
-                                    (@NormedAddCommGroup.toAddCommGroup H inst)))))))))
-                    (@UpperTheory.Reformulated.B.Re4.IsWtOn n H inst inst_1 (@UpperTheory.Reformulated.B.Re4.d21 n ε) σ Λ v)))
-              (∀ (μ : Fin n → Real) (v : H),
-                @Membership.mem H
-                    (@Submodule Complex H Complex.instSemiring
-                      (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                      (@NormedSpace.toModule Complex H Complex.instNormedField
-                        (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                        (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                    (@SetLike.instMembership
-                      (@Submodule Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1)))
-                      H
-                      (@Submodule.setLike Complex H Complex.instSemiring
-                        (@AddCommGroup.toAddCommMonoid H (@NormedAddCommGroup.toAddCommGroup H inst))
-                        (@NormedSpace.toModule Complex H Complex.instNormedField
-                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst)
-                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
-                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst) inst_1))))
-                    S v →
-                  @Ne H v
-                      (@OfNat.ofNat H (nat_lit 0)
-                        (@Zero.toOfNat0 H
-                          (@NegZeroClass.toZero H
-                            (@SubNegZeroMonoid.toNegZeroClass H
-                              (@SubtractionMonoid.toSubNegZeroMonoid H
-                                (@SubtractionCommMonoid.toSubtractionMonoid H
-                                  (@AddCommGroup.toDivisionAddCommMonoid H
-                                    (@NormedAddCommGroup.toAddCommGroup H inst)))))))) →
-                    @UpperTheory.Reformulated.B.Re4.IsWtOn n H inst inst_1 (@UpperTheory.Reformulated.B.Re4.d21 n ε) σ μ v →
-                      @UpperTheory.Reformulated.B.Re4.CDom n ε μ Λ))))
+noncomputable def UpperTheory.Reformulated.B.Re4.IsKTypeOf.{u_1} : {n : ℕ} →
+  {H : Type u_1} →
+    [inst : NormedAddCommGroup H] →
+      [inst_1 : InnerProductSpace ℂ H] →
+        (Fin n → Bool) → (Matrix (Fin n) (Fin n) ℂ → H →L[ℂ] H) → (Fin n → ℝ) → Submodule ℂ H → Prop := fun {n} {H} [NormedAddCommGroup H] [InnerProductSpace ℂ H] ε σ Λ S =>
+  FiniteDimensional ℂ ↥S ∧
+    UpperTheory.Reformulated.B.Re4.IsKStableOn ε σ S ∧
+      (∀ S' ≤ S, UpperTheory.Reformulated.B.Re4.IsKStableOn ε σ S' → S' = ⊥ ∨ S' = S) ∧
+        (∃ v ∈ S, v ≠ 0 ∧ UpperTheory.Reformulated.B.Re4.IsWtOn (UpperTheory.Reformulated.B.Re4.d21 ε) σ Λ v) ∧
+          ∀ (μ : Fin n → ℝ),
+            ∀ v ∈ S,
+              v ≠ 0 →
+                UpperTheory.Reformulated.B.Re4.IsWtOn (UpperTheory.Reformulated.B.Re4.d21 ε) σ μ v →
+                  UpperTheory.Reformulated.B.Re4.CDom ε μ Λ
 
 private theorem UpperTheory.Reformulated.B.Re4.ktype_map {n : ℕ} {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
     (ε : Fin n → Bool) (σ : Matrix (Fin n) (Fin n) ℂ → H →L[ℂ] H) (Λ : Fin n → ℝ) (A : H →ₗ[ℂ] H)

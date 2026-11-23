@@ -66,7 +66,7 @@ end GlobalTheory.GenFrame
 
 namespace GlobalTheory.GenFrame
 
-open Matrix Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G.PullbackSections Formalism.BasicNotions GlobalTheory.CxPts GlobalTheory.LieMet
+open Matrix _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj ReciprocityTheory.ChartRestriction.G.PullbackSections Formalism.BasicNotions GlobalTheory.CxPts GlobalTheory.LieMet
 
 attribute [local instance] Over.cartesianMonoidalCategory
 

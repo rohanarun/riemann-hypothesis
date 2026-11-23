@@ -20,7 +20,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.SiegelND.Integ.MapHerm
 
-open Topology
+open _root_.Topology
 
 section Tensor
 

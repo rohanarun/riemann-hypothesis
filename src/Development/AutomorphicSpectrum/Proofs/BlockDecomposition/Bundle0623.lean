@@ -24,7 +24,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.ValuationCompleteness
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gunr Filter Topology
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gunr Filter _root_.Topology
 open scoped TensorProduct
 
 section Abstract

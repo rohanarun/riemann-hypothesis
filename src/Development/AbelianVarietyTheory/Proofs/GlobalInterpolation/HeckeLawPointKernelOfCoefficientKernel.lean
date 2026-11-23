@@ -14,7 +14,7 @@ noncomputable section
 namespace GlobalTheory.LvT.Built.UK
 
 open NumberField IsDedekindDomain Matrix
-open Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2 GlobalTheory.LvT GlobalTheory.LvT.Pts
+open Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2 GlobalTheory.LvT GlobalTheory.LvT.Pts
 open Formalism.HermitianLatticesTheory (localization₂)
 
 section Corr

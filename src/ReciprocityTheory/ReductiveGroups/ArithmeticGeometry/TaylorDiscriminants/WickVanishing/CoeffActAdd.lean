@@ -59,7 +59,7 @@ theorem homK (B : FB R d O) (a : O) (c : Fin d) :
       ev (n := 2) ![comp1 (B.actK k a) (pt k (n := 2) d 0), comp1 (B.actK k a) (pt k (n := 2) d 1)] (B.FK k c) := by
   have h := congrArg (fun P : Pt R 2 d => MvPowerSeries.map (algebraMap R k) (P c)) (B.A.hom a)
   simp only [comp1, FGLaw.add, addOf] at h
-  have c01 : CZ (![pt R (n := 2) d 0, pt R d 1] : Fin 2 → Pt R 2 d) := CZ.cons (cc_pt 0) (CZ.cons (cc_pt 1) CZ.nil)
+  have c01 : CZ (![pt R (n := 2) d 0, pt R d 1] : Fin 2 → Pt R 2 d) := CZ.cons (_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.cc_pt 0) (CZ.cons (_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.cc_pt 1) CZ.nil)
   have cL : CZ (![addOf B.G.F (pt R (n := 2) d 0) (pt R d 1)] : Fin 1 → Pt R 2 d) :=
     CZ.cons (fun i => constantCoeff_ev c01 (B.G.const i)) CZ.nil
   have cR : CZ (![comp1 (B.A.act a) (pt R (n := 2) d 0), comp1 (B.A.act a) (pt R (n := 2) d 1)] : Fin 2 → Pt R 2 d) :=
@@ -72,13 +72,13 @@ theorem homK (B : FB R d O) (a : O) (c : Fin d) :
     have : (fun j c => MvPowerSeries.map (algebraMap R k) ((![pt R (n := 2) d 0, pt R d 1] : Fin 2 → Pt R 2 d) j c)) =
         fun j => pt k (n := 2) d j := by
       funext j c; fin_cases j <;> simp [pt_apply]
-    rw [this, ev_pt]
+    rw [this, _root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_pt]
     rfl
   have m2 : ∀ (l : Fin 2) (i : Fin d), MvPowerSeries.map (algebraMap R k) (comp1 (B.A.act a) (pt R (n := 2) d l) i) =
       comp1 (B.actK k a) (pt k (n := 2) d l) i := by
     intro l i
     show MvPowerSeries.map (algebraMap R k) (ev (n := 2) ![pt R d l] (B.A.act a i)) = ev (n := 2) ![pt k d l] (B.actK k a i)
-    rw [map_ev _ (CZ.cons (cc_pt l) CZ.nil)]
+    rw [map_ev _ (CZ.cons (_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.cc_pt l) CZ.nil)]
     congr 1
     funext j c; fin_cases j; simp [pt_apply]
   have fL : (fun j i => MvPowerSeries.map (algebraMap R k)
@@ -109,17 +109,17 @@ theorem hom_rel (B : FB R d O) (a : O) (c b : Fin d) :
       (ev (n := 2) ![comp1 (B.actK k a) (pt k (n := 2) d 0), comp1 (B.actK k a) (pt k (n := 2) d 1)] g) =
       ev (n := 1) ![B.actK k a] (ev (n := 1) ![pt k d 0, 0] g) := by
     intro g
-    rw [ev_ev cz1 cP, ev_ev cAk cz1]
+    rw [_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_ev cz1 cP, _root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_ev cAk cz1]
     congr 1
     funext j c
     fin_cases j
     · show ev (n := 1) ![pt k d 0, 0] (ev (n := 2) ![pt k d 0] (B.actK k a c)) = _
-      rw [ev_ev cz1 zero_constant_first_point]
+      rw [_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_ev cz1 zero_constant_first_point]
       have : (fun j c => ev (n := 1) ![pt k d 0, 0] ((![pt k (n := 2) d 0] : Fin 1 → Pt k 2 d) j c)) =
           (![pt k (n := 1) d 0] : Fin 1 → Pt k 1 d) := by
-        funext j c; fin_cases j; simp [pt_apply, ev_X cz1]
+        funext j c; fin_cases j; simp [pt_apply, _root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_X cz1]
       rw [this, gt_ev_pt_self]
-      simp [pt_apply, ev_X cAk]
+      simp [pt_apply, _root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.ev_X cAk]
     · show ev (n := 1) ![pt k d 0, 0] (ev (n := 2) ![pt k d 1] (B.actK k a c)) = _
       rw [ez_y, const_actK', map_zero]
       simp [ev_zero' cAk]

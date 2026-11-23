@@ -29,7 +29,7 @@ noncomputable section
 
 namespace GlobalTheory.CoverPinCompare
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj
 open GlobalTheory.ClsVal.Cmp (OverBase overBase_of_ne eq_incl coe_incl spMap_comp')
 

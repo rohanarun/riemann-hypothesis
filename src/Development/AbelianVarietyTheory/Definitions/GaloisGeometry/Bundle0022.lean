@@ -16,7 +16,7 @@ noncomputable section
 
 namespace GlobalTheory.KerJ
 
-open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Ker Formalism.L2.Forms Formalism.L2.Col Formalism.L2.DIV NumberField IsDedekindDomain
+open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Ker Formalism.L2.Forms _root_.Formalism.L2.Col Formalism.L2.DIV NumberField IsDedekindDomain
 
 def stabSet {D : D7} {X : Fields} (s : Seam D X) {n : ℕ} {ST SG Q : Finset (HeightOneSpectrum (𝓞 X.E))} (Λ : LevFam X.E X.K n SG)
     (Θ : LevQFam X.E X.K n Q) (p : DecoF X.E n ST SG Q) (q : UF X.E n → Prop) : Set (Matrix (Fin n) (Fin n) D.host.E × ℂ) :=

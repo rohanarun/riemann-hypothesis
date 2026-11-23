@@ -181,7 +181,7 @@ private theorem xd_gal {Ω : Type} [Field Ω] [Algebra ℚ Ω] [IsAlgClosure ℚ
       (ZMod.natCast_eq_natCast_iff _ _ _).2 ha2, ZMod.natCast_zmod_val, hb]
     simp
 
-private theorem main (hX : LemmaX) (h16 : UnramifiedCocycleIsCoboundaryOfBernoulliUnit) (Ω : Type) [Field Ω] [Algebra ℚ Ω] [IsAlgClosure ℚ Ω] (l : ℕ) [Fact l.Prime]
+private theorem chrInvNeg (hX : LemmaX) (h16 : UnramifiedCocycleIsCoboundaryOfBernoulliUnit) (Ω : Type) [Field Ω] [Algebra ℚ Ω] [IsAlgClosure ℚ Ω] (l : ℕ) [Fact l.Prime]
     (c : HV.Coef l) (k : Type) [Field k] [CharP k l] (red : c.O →+* k) (d f n : ℕ) [NeZero (f * 2 ^ n)]
     (φ : DirichletCharacter c.O f) (ξ : DirichletCharacter c.O (2 ^ n)) (h : XData l d φ ξ) (z : G ℚ Ω → k)
     (hz : IsCoc (redChar Ω red (prodX φ ξ)) z) (hu : UnrEv l (redChar Ω red (prodX φ ξ)) z) :
@@ -207,7 +207,7 @@ theorem UpperTheory.V.X.corX :
     LemmaX → UnramifiedCocycleIsCoboundaryOfBernoulliUnit → CorX := by
   intro hX h16 Ω _ _ _ l _ c k _ _ red d f n _ φ ξ h γ hγ z hz hu
   rcases hγ with rfl | rfl
-  · exact main hX h16 Ω l c k red d f n φ ξ h z hz hu
+  · exact chrInvNeg hX h16 Ω l c k red d f n φ ξ h z hz hu
   · have e : (redChar Ω red (prodX φ ξ))⁻¹ = redChar Ω red (prodX φ⁻¹ ξ⁻¹) := by
       rw [← prodX_inv, inv_eq_iff_mul_eq_one]
       ext g
@@ -216,7 +216,7 @@ theorem UpperTheory.V.X.corX :
       rw [MonoidHom.mul_apply, Units.val_mul, this, this, ← map_mul, ← MulChar.mul_apply, mul_inv_cancel, MulChar.one_apply_coe]
       simp
     rw [e] at hz hu ⊢
-    exact main hX h16 Ω l c k red d f n _ _ (xd_inv h) z hz hu
+    exact chrInvNeg hX h16 Ω l c k red d f n _ _ (xd_inv h) z hz hu
 end
 
 -- bundled from Development.AutomorphicArithmetic.AutomorphicVarieties.LevelCohomology.HcDirData

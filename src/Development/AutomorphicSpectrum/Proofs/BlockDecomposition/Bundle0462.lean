@@ -213,7 +213,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.WeakHolo
 
-open Metric Set Filter Topology Complex Real
+open _root_.Metric Set Filter _root_.Topology Complex Real
 
 theorem taylor_two {f : ℂ → ℂ} {U : Set ℂ} (hU : IsOpen U) (hf : DifferentiableOn ℂ f U) {s₀ : ℂ} {r M : ℝ}
     (hr : 0 < r) (hb : closedBall s₀ (3 * r) ⊆ U) (hM : ∀ z ∈ closedBall s₀ (3 * r), ‖f z‖ ≤ M) {η : ℂ}
@@ -367,7 +367,7 @@ end GlobalTheory.CompanionTheory.WeakHolo
 namespace GlobalTheory.CompanionTheory.WeakHolo
 
 open scoped TensorProduct NNReal Matrix
-open NumberField IsDedekindDomain MeasureTheory Filter Topology Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes
+open NumberField IsDedekindDomain MeasureTheory Filter _root_.Topology Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes
 open GlobalTheory.WeilM GlobalTheory.AdelicU GlobalTheory.LFun GlobalTheory.IndefiniteRowSideFullHecke.WeilTensorModels GlobalTheory.ThK.Dbl SiegelEisensteinSeries
 open GlobalTheory.Doubling (absE)
 

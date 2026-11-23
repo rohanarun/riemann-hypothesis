@@ -14,11 +14,12 @@ class ProofProtocolTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.policy = rpc.proof_policy()
-        self.snapshot = self.policy['snapshot']
+        self.snapshot = {**self.policy['snapshot'],'git_commit':'a'*40,'source_tree':'b'*40}
+        self.snapshot['fingerprint']=hashlib.sha256(json.dumps(self.snapshot,sort_keys=True).encode()).hexdigest()
         self.names = [f'Fixture.M{i:03d}' for i in range(300)]
         self.worklist = self.root / 'worklist.txt'
         self.worklist.write_text('\n'.join(self.names) + '\n')
-        self.policy = {**self.policy, 'worklist_modules': len(self.names),
+        self.policy = {**self.policy, 'max_batch_modules':256,'worklist_modules': len(self.names),
                        'worklist_sha256': rpc.digest(self.worklist)}
         self.patch = patch.object(rpc, 'proof_policy', return_value=self.policy)
         self.patch.start()

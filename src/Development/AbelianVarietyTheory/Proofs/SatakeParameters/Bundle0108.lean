@@ -362,7 +362,7 @@ open CategoryTheory AlgebraicGeometry ReciprocityTheory.ChartRestriction.G.Geo.T
 
 set_option autoImplicit false
 
-open Opposite TensorProduct Limits GlobalTheory.Points
+open Opposite TensorProduct _root_.CategoryTheory.Limits GlobalTheory.Points
 
 noncomputable section
 namespace GlobalTheory.GalTrace

@@ -43,7 +43,7 @@ theorem integral_and_conj {k N : IntermediateField ℚ ℂ} [NumberField k] [Num
       ∀ z ∈ (L (s.comp ((IntermediateField.inclusion hk).toRingHom.comp (algebraMap (𝓞 k) k)))).lattice,
         s a * z ∈ (L' (s.comp ((IntermediateField.inclusion hk).toRingHom.comp (algebraMap (𝓞 k) k)))).lattice := by
   have hU := _root_.GlobalTheory.thetaUnifAV_all
-  have hB := GlobalTheory.T.abelianScheme_laws_unconditional.1.polBaseChange
+  have hB := _root_.GlobalTheory.abelianSchemeLaws_all.1.polBaseChange
   obtain ⟨_, b, hb, h⟩ := h
   obtain rfl : b = a := Subtype.ext hb
   refine ⟨?_, fun s => (EllipticHom.multiplier_iff_exists_hom hU hB _ P Q v t _ _ _ _ hP.1 hQ.1 hP.isTangent
@@ -70,7 +70,7 @@ theorem exists_family (h2 : Module.finrank ℚ K = 2) (σ : K →+* ℂ) (hσ : 
       (∑ s, Real.log (latticeArea (L s))) / Module.finrank ℚ N =
         (∑ C, Real.log (latticeNormDisc (Lc C))) / (6 * Fintype.card (ClassGroup (𝓞 K))) := by
   have hU := _root_.GlobalTheory.thetaUnifAV_all
-  have hB := GlobalTheory.T.abelianScheme_laws_unconditional.1.polBaseChange
+  have hB := _root_.GlobalTheory.abelianSchemeLaws_all.1.polBaseChange
   obtain ⟨k, hk, hσk, HI⟩ := CMData.exists_field h2 σ hσ
   have hNF : NumberField k := ⟨⟩
   choose W hW hc using HI

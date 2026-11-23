@@ -204,7 +204,7 @@ end Exchange
 
 section Primes
 
-open Formalism.L2.Col UniqueFactorizationMonoid
+open _root_.Formalism.L2.Col UniqueFactorizationMonoid
 
 theorem notMem_sq {E : Type} [Field E] [NumberField E] {p : ℕ} (hp : p.Prime)
     (h : (placesOver E p).ncard = Module.finrank ℚ E) {P : Ideal (𝓞 E)} (hP : P.IsPrime) : (p : 𝓞 E) ∉ P * P := by
@@ -292,7 +292,7 @@ end Primes
 
 section Places
 
-open Formalism.L2.Col Formalism.L2.NTheta GlobalTheory.IdemModTwo
+open _root_.Formalism.L2.Col Formalism.L2.NTheta GlobalTheory.IdemModTwo
 
 theorem mem_of_placeOver {e : AE D} {P : HeightOneSpectrum (𝓞 D.host.E)} (he : IsIdemAt e P) {𝔭 : Ideal (𝓞 D.host.K)}
     (h : PlaceOver D e 𝔭) : ∀ x ∈ 𝔭, algebraMap _ (𝓞 D.host.E) x ∈ P.asIdeal := fun x hx => by
@@ -334,7 +334,7 @@ theorem exists_list (S : AE D → Prop) (N : ℕ) (hN : N ≠ 0)
 end Places
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem nonempty_besselPeriodPositionOneData : ∀ D : D7, Nonempty (Pos1 D) := by
   intro D
   choose π hπ1 hπ2 hπ3 using exists_levelGen D

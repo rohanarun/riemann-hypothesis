@@ -194,7 +194,7 @@ open GlobalTheory.Hk3
 
 section Transfer
 open Polynomial GlobalTheory.Hk3.SplitChain
-open Formalism.L2.Col (heckePolyOf blockPoly)
+open _root_.Formalism.L2.Col (heckePolyOf blockPoly)
 
 theorem blockPoly_ne_zero (ν : ℂ) (q t : ℕ) : blockPoly ν q t ≠ 0 := by
   intro h

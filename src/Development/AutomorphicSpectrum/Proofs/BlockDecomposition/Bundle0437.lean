@@ -19,7 +19,7 @@ public import Development.AutomorphicSpectrum.Proofs.BlockDecomposition.Bundle04
 section
 open NumberField GlobalTheory.CuspRep GroundTheory.Global GroundTheory.Automorphic GroundTheory.Automorphic.Reduction
 open scoped NumberField.AdeleRing
-open IsDedekindDomain Matrix Topology
+open IsDedekindDomain _root_.Matrix Topology
 
 noncomputable section
 

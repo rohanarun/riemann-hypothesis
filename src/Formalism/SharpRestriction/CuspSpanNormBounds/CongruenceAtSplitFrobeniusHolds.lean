@@ -581,8 +581,8 @@ def stHH (large₂ : SizeData₂ D) (u u' : D.what₂.Word) (C' Cl Cg cb Cu cT C
   ∀ Λ : LatV D, IsRowLat D F0 Λ →
   ∀ F' : FlagU D u', IsTermF D Λ (lf D F0) F' → RelZ D (ZhatL (lf D F0) F') →
     NT D u ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧
-    ∏ τ, max 1 (Formalism.MainNotions.S.Cnt.Gz D (Tu D u) (Tu D u') (ZhatL (lf D F0) F') τ) ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧
-    ∏ τ, max 1 (Formalism.MainNotions.S.Cnt.Gz D (Tu D u) (Tu D u') (ZhatL (lf D F0) F') τ)⁻¹ ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧
+    ∏ τ, max 1 (_root_.Formalism.MainNotions.S.Cnt.Gz D (Tu D u) (Tu D u') (ZhatL (lf D F0) F') τ) ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧
+    ∏ τ, max 1 (_root_.Formalism.MainNotions.S.Cnt.Gz D (Tu D u) (Tu D u') (ZhatL (lf D F0) F') τ)⁻¹ ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧
     ∃ Z : GramM D, ZEquiv (ZhatL (lf D F0) F') Z ∧
       ∀ (j : ℕ) (I J : Fin j ↪o Fin (D.R.rS + 1)), (Z.submatrix I J).det ≠ 0 →
         ∏ τ, max 1 (absMinor D Z I J τ) ≤ HHZ D large₂.sc.b C (ZhatL (lf D F0) F') ∧

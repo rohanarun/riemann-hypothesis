@@ -4,88 +4,14 @@ public import Mathlib
 
 @[expose] public section
 
-noncomputable def UpperTheory.Reformulated.B.Qf10.GlRel.{u_1} :
-    {A : Type u_1} → [Ring A] → {n : Nat} → (Fin n → Fin n → A) → Prop :=
-    fun {A : Type u_1} [inst : Ring A] {n : Nat} (E : Fin n → Fin n → A) ↦
-      ∀ (a b c d : Fin n),
-        @Eq A
-          (@HSub.hSub A A A
-            (@instHSub A
-              (@SubNegMonoid.toSub A
-                (@AddGroup.toSubNegMonoid A (@AddGroupWithOne.toAddGroup A (@Ring.toAddGroupWithOne A inst)))))
-            (@HMul.hMul A A A (@instHMul A (@Distrib.toMul A (@instDistribOfSemiring A (@Ring.toSemiring A inst)))) (E a b)
-              (E c d))
-            (@HMul.hMul A A A (@instHMul A (@Distrib.toMul A (@instDistribOfSemiring A (@Ring.toSemiring A inst)))) (E c d)
-              (E a b)))
-          (@HSub.hSub A A A
-            (@instHSub A
-              (@SubNegMonoid.toSub A
-                (@AddGroup.toSubNegMonoid A (@AddGroupWithOne.toAddGroup A (@Ring.toAddGroupWithOne A inst)))))
-            (@ite A (@Eq (Fin n) b c) (instDecidableEqFin n b c) (E a d)
-              (@OfNat.ofNat A (nat_lit 0)
-                (@Zero.toOfNat0 A (@MulZeroClass.toZero A (@instMulZeroClassOfSemiring A (@Ring.toSemiring A inst))))))
-            (@ite A (@Eq (Fin n) d a) (instDecidableEqFin n d a) (E c b)
-              (@OfNat.ofNat A (nat_lit 0)
-                (@Zero.toOfNat0 A (@MulZeroClass.toZero A (@instMulZeroClassOfSemiring A (@Ring.toSemiring A inst)))))))
+noncomputable def UpperTheory.Reformulated.B.Qf10.GlRel.{u_1} : {A : Type u_1} → [Ring A] → {n : ℕ} → (Fin n → Fin n → A) → Prop := fun {A} [Ring A] {n} E =>
+  ∀ (a b c d : Fin n), E a b * E c d - E c d * E a b = (if b = c then E a d else 0) - if d = a then E c b else 0
 
-noncomputable def UpperTheory.Reformulated.B.Qf10.Tm.{u_1} :
-    {A : Type u_1} →
-      [inst : Ring A] →
-        [@Algebra Complex A Complex.instCommSemiring (@Ring.toSemiring A inst)] →
-          {n : Nat} → (Fin n → Fin n → A) → Complex → Fin n → Fin n → A :=
-    fun {A : Type u_1} [inst : Ring A] [inst_1 : @Algebra Complex A Complex.instCommSemiring (@Ring.toSemiring A inst)]
-        {n : Nat} (E : Fin n → Fin n → A) (u : Complex) (a b : Fin n) ↦
-      @HAdd.hAdd A A A (@instHAdd A (@Distrib.toAdd A (@instDistribOfSemiring A (@Ring.toSemiring A inst))))
-        (@ite A (@Eq (Fin n) a b) (instDecidableEqFin n a b)
-          (@DFunLike.coe
-            (@RingHom Complex A
-              (@Semiring.toNonAssocSemiring Complex (@CommSemiring.toSemiring Complex Complex.instCommSemiring))
-              (@Semiring.toNonAssocSemiring A (@Ring.toSemiring A inst)))
-            Complex (fun (x : Complex) ↦ A)
-            (@RingHom.instFunLike Complex A
-              (@Semiring.toNonAssocSemiring Complex (@CommSemiring.toSemiring Complex Complex.instCommSemiring))
-              (@Semiring.toNonAssocSemiring A (@Ring.toSemiring A inst)))
-            (@Algebra.algebraMap Complex A Complex.instCommSemiring (@Ring.toSemiring A inst) inst_1) u)
-          (@OfNat.ofNat A (nat_lit 0)
-            (@Zero.toOfNat0 A (@MulZeroClass.toZero A (@instMulZeroClassOfSemiring A (@Ring.toSemiring A inst))))))
-        (E a b)
+noncomputable def UpperTheory.Reformulated.B.Qf10.Tm.{u_1} : {A : Type u_1} → [inst : Ring A] → [Algebra ℂ A] → {n : ℕ} → (Fin n → Fin n → A) → ℂ → Fin n → Fin n → A := fun {A} [Ring A] [Algebra ℂ A] {n} E u a b => (if a = b then (algebraMap ℂ A) u else 0) + E a b
 
-noncomputable def UpperTheory.Reformulated.B.Qf10.qminor.{u_1} :
-    {A : Type u_1} →
-      [inst : Ring A] →
-        [@Algebra Complex A Complex.instCommSemiring (@Ring.toSemiring A inst)] →
-          {n t : Nat} → (Fin n → Fin n → A) → (Fin t → Fin n) → (Fin t → Fin n) → Complex → A :=
-    fun {A : Type u_1} [inst : Ring A] [inst_1 : @Algebra Complex A Complex.instCommSemiring (@Ring.toSemiring A inst)]
-        {n t : Nat} (E : Fin n → Fin n → A) (a b : Fin t → Fin n) (u : Complex) ↦
-      ∑ σ : Equiv.Perm (Fin t),
-        @HMul.hMul A A A (@instHMul A (@Distrib.toMul A (@instDistribOfSemiring A (@Ring.toSemiring A inst))))
-          (@Int.cast A (@AddGroupWithOne.toIntCast A (@Ring.toAddGroupWithOne A inst))
-            (@Units.val Int Int.instMonoid
-              (@DFunLike.coe
-                (@MonoidHom (Equiv.Perm (Fin t)) (@Units Int Int.instMonoid)
-                  (@MulOneClass.toMulOne (Equiv.Perm (Fin t))
-                    (@Monoid.toMulOneClass (Equiv.Perm (Fin t))
-                      (@DivInvMonoid.toMonoid (Equiv.Perm (Fin t))
-                        (@Group.toDivInvMonoid (Equiv.Perm (Fin t)) (@Equiv.Perm.permGroup (Fin t))))))
-                  (@MulOneClass.toMulOne (@Units Int Int.instMonoid) (@Units.instMulOneClass Int Int.instMonoid)))
-                (Equiv.Perm (Fin t)) (fun (x : Equiv.Perm (Fin t)) ↦ @Units Int Int.instMonoid)
-                (@MonoidHom.instFunLike (Equiv.Perm (Fin t)) (@Units Int Int.instMonoid)
-                  (@MulOneClass.toMulOne (Equiv.Perm (Fin t))
-                    (@Monoid.toMulOneClass (Equiv.Perm (Fin t))
-                      (@DivInvMonoid.toMonoid (Equiv.Perm (Fin t))
-                        (@Group.toDivInvMonoid (Equiv.Perm (Fin t)) (@Equiv.Perm.permGroup (Fin t))))))
-                  (@MulOneClass.toMulOne (@Units Int Int.instMonoid) (@Units.instMulOneClass Int Int.instMonoid)))
-                (@Equiv.Perm.sign (Fin t) (instDecidableEqFin t) (Fin.fintype t)) σ)))
-          (@List.prod A (@Distrib.toMul A (@instDistribOfSemiring A (@Ring.toSemiring A inst)))
-            (@AddMonoidWithOne.toOne A (@AddGroupWithOne.toAddMonoidWithOne A (@Ring.toAddGroupWithOne A inst)))
-            (@List.ofFn A t fun (k : Fin t) ↦
-              @UpperTheory.Reformulated.B.Qf10.Tm A inst inst_1 n E
-                (@HSub.hSub Complex Complex Complex (@instHSub Complex Complex.instSub) u
-                  (@Nat.cast Complex Complex.instNatCast (@Fin.val t k)))
-                (a
-                  (@DFunLike.coe (Equiv.Perm (Fin t)) (Fin t) (fun (x : Fin t) ↦ Fin t)
-                    (@EquivLike.toFunLike (Equiv.Perm (Fin t)) (Fin t) (Fin t) (@Equiv.instEquivLike (Fin t) (Fin t))) σ k))
-                (b k)))
+noncomputable def UpperTheory.Reformulated.B.Qf10.qminor.{u_1} : {A : Type u_1} →
+  [inst : Ring A] → [Algebra ℂ A] → {n t : ℕ} → (Fin n → Fin n → A) → (Fin t → Fin n) → (Fin t → Fin n) → ℂ → A := fun {A} [Ring A] [Algebra ℂ A] {n t} E a b u =>
+  ∑ σ, ↑↑(Equiv.Perm.sign σ) * (List.ofFn fun k => UpperTheory.Reformulated.B.Qf10.Tm E (u - ↑↑k) (a (σ k)) (b k)).prod
 
 noncomputable def UpperTheory.Reformulated.B.Qf10.qdet.{u_1} :
     {A : Type u_1} →

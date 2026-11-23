@@ -12,7 +12,7 @@ set_option maxSynthPendingDepth 1
 
 namespace GlobalTheory.CompanionTheory.EpConvB
 
-open NumberField NumberField.mixedEmbedding IsDedekindDomain Matrix MeasureTheory Filter Topology
+open NumberField NumberField.mixedEmbedding IsDedekindDomain Matrix MeasureTheory Filter _root_.Topology
 open scoped NumberField.AdeleRing SchwartzMap Classical nonZeroDivisors Pointwise
 open GroundTheory.Global GroundTheory.Automorphic GroundTheory.Global.IdeleGroup PositivityTheory.RgEis
 

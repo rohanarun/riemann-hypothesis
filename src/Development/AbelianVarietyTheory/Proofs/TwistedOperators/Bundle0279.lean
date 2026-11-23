@@ -148,7 +148,7 @@ open Formalism.MainNotions.StandardLattice Formalism.MainNotions.S Formalism.L2.
 open GlobalTheory.LiftRows
 
 namespace GlobalTheory.UnderConj
-open Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.SplitOffPlaces
+open _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.SplitOffPlaces
 
 theorem isConjPl_of_under_eq_of_ne : ∀ (D : D7) (PP PP' : Pl D.host.E), (_root_.IsDedekindDomain.HeightOneSpectrum.under (𝓞 D.host.F) PP) = (_root_.IsDedekindDomain.HeightOneSpectrum.under (𝓞 D.host.F) PP') →
     PP ≠ PP' → Formalism.IndefR.Lev.IsConjPl PP PP' := by

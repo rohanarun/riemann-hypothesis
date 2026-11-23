@@ -38,7 +38,7 @@ noncomputable section
 
 namespace GlobalTheory.FixedPoint
 
-open AlgebraicGeometry CategoryTheory Limits NumberField TopologicalSpace
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField TopologicalSpace
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.CompRat GlobalTheory.CompRat.FixedConst
   GlobalTheory.AllWt GlobalTheory.FlatLine
 

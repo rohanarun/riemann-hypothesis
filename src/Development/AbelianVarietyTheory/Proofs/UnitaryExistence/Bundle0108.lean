@@ -121,7 +121,7 @@ theorem exists_point_over {E : Type} [Field E] [NumberField E] [IsCMField E]
 theorem exists_deltaDat_isLev : ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E) (Dw : Datum H) (l : Level H) (Xo : Moduli Dw l) (c : Coeff l), 1 ≤ Dw.p + Dw.q → ∀ (n pd : ℕ) (I : Ideal (𝓞 E)) (l₂ : Level H) (Xo₂ : Moduli Dw l₂) (c₂ : Coeff l₂), c₂.F = c.F → l.Dvd l₂ → l₂.M = l.M * pd → pd.Coprime l.M → l₂.Mb = l.Mb * I → I ⊔ I.map (H.bar : 𝓞 E →+* 𝓞 E) = ⊤ → ∃ d : DeltaDat Xo c n, d.pd = pd ∧ d.I = I ∧ d.l₂ = l₂ ∧ HEq d.Xo₂ Xo₂ ∧ HEq d.c₂ c₂ ∧ d.cδ = 1 ∧ d.IsLev ∧ ∃ _ : StarRing (𝓞 E), IsNab d.Xo₂ d.c₂ d.nab₂ := by
   intro E _ _ _ H Dw l Xo c hr n pd I l₂ Xo₂ c₂ hF hd hM hcop hMb hI
   have hL := GlobalTheory.firstFiveLaws.1
-  obtain ⟨r, jK, m, -, -, he, heA, -, hrF⟩ := (GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.2 E H Dw hr).1 l l₂ Xo Xo₂ hd
+  obtain ⟨r, jK, m, -, -, he, heA, -, hrF⟩ := (_root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.2 E H Dw hr).1 l l₂ Xo Xo₂ hd
   obtain ⟨rF, h₁, h₂, hfin, -, hsur, -⟩ := hrF c c₂ hF.symm
   obtain ⟨st, nab, hnab⟩ := GlobalTheory.CanonConn.exists_isNab hL E H Dw l₂ Xo₂ c₂
   let d : DeltaDat Xo c n :=

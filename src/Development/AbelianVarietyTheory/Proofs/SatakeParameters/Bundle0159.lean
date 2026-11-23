@@ -382,7 +382,7 @@ noncomputable section
 
 namespace GlobalTheory.ColPeriod
 
-open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Col
+open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV _root_.Formalism.L2.Col
 open GlobalTheory.IndefiniteRowSideFullHecke.BadPrimesPeriodBound (recWts)
 
 theorem nuRow_succ_eq_wt (D : D7) (u : D.what₂.Word) (j : ℕ) (hj : j < D.R.m) (τ : D.what₂.Tau) (n : ℕ) (hn : n < D.R.N j) :

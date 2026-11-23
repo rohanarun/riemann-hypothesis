@@ -138,7 +138,7 @@ namespace GlobalTheory.CompanionTheory.Hypotheses₂.OneV.Fth
 section Gen
 open NumberField IsDedekindDomain MeasureTheory
 open GroundTheory.Global GroundTheory.Automorphic.GJMatrix GroundTheory.Heights₂.Theta
-open scoped TensorProduct ENNReal Matrix NumberField.AdeleRing
+open scoped TensorProduct ENNReal _root_.Matrix NumberField.AdeleRing
 
 variable {F : Type} [Field F] [NumberField F] {ι : Type} [Fintype ι] [DecidableEq ι]
 

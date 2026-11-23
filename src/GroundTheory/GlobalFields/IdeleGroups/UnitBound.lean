@@ -10,7 +10,7 @@ namespace GroundTheory.Global
 
 open NumberField IsDedekindDomain Topology Filter NumberField.Units
   NumberField.Units.dirichletUnitTheorem
-open scoped NumberField.AdeleRing RestrictedProduct
+open scoped NumberField.AdeleRing _root_.RestrictedProduct
 
 noncomputable section
 

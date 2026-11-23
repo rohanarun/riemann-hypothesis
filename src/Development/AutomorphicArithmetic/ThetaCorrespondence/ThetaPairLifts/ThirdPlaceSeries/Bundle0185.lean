@@ -146,7 +146,7 @@ noncomputable section
 namespace GlobalTheory.QuotientNormCoisometry
 section Bound
 open Formalism.BasicNotions Formalism.MainNotions NumberField IsDedekindDomain
-open Formalism.L2 Formalism.L2.DIV Formalism.IndefR Formalism.IndefR.Links Formalism.L2.Indef.Tree
+open _root_.Formalism.L2 Formalism.L2.DIV Formalism.IndefR Formalism.IndefR.Links Formalism.L2.Indef.Tree
 open GlobalTheory.BigTop GlobalTheory.BigTop.Fun GlobalTheory.SumSize
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {Kc : Formalism.MainNotions.G.Consts} {Y : DivX D} {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Y cX} {Csz : ℝ}
@@ -350,7 +350,7 @@ theorem loopRows_of_rowsFinDim_alt :
     Formalism.L2.SG.RowsDef.RowsFinDim → (∀ D : D7, RT.MassRatioUnderVolume D) → ∀ (𝒞 : FamClass), _root_.Formalism.L2.TwistSelection 𝒞 →
       ∀ sel : SSel 𝒞, (∀ {eps : ℝ} (Fm : FamP eps), 𝒞 Fm → TuSize Fm) → LoopRowS 3 𝒞 sel := by
   intro hFin hUT 𝒞 hT sel hTu
-  exact _root_.GlobalTheory.LoopRowsCloseGap.loop_rows_closed_gap (GlobalTheory.GapIn.hyp_of_uniqGap GlobalTheory.T.bessel_multiplicity_one_large_gap_and_whittaker_bessel.1) GlobalTheory.T.bessel_multiplicity_one_large_gap_and_whittaker_bessel.2 _root_.GlobalTheory.discreteSeriesCoef_pointwiseBound
+  exact _root_.GlobalTheory.LoopRowsCloseGap.loop_rows_closed_gap (GlobalTheory.GapIn.hyp_of_uniqGap _root_.GlobalTheory.uniqGap_and_besselOfW.1) _root_.GlobalTheory.uniqGap_and_besselOfW.2 _root_.GlobalTheory.discreteSeriesCoef_pointwiseBound
     GlobalTheory.wuDecayOfGap hFin 𝒞 sel hTu (_root_.GlobalTheory.ranks_and_frame_of_tied_class_alt hUT 𝒞 hT).1
 end GlobalTheory.LoopRowsByName
 end

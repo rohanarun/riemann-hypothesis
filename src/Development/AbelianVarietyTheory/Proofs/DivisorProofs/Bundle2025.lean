@@ -456,7 +456,7 @@ theorem map_inf_eq_of_reductions : ∀ (C : Type) [CommRing C] [IsNoetherianRing
   refine ⟨k₀, fun k hk T' T'' h' h'' => ?_⟩
   have e' : T' = τ.comap π := by
     refine eq_of_sup_baseIdeal_pow_eq hJ π _ _ fun e => ?_
-    rw [h' e, Scheme.IdealSheafData.comap_sup, GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.1, Category.comp_id]
+    rw [h' e, Scheme.IdealSheafData.comap_sup, _root_.GlobalTheory.FormalAlg.baseIdeal_calculus.1, Category.comp_id]
   have e'' : T'' = τ ⊔ K ^ k := by
     refine eq_of_sup_baseIdeal_pow_eq hJ (𝟙 _) _ _ fun e => ?_
     rw [h'' e, sup_right_comm]

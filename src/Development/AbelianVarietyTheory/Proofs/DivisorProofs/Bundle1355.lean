@@ -52,7 +52,7 @@ noncomputable section
 namespace GlobalTheory.DGamOnRecord
 
 open Formalism.BasicNotions Formalism.MainNotions NumberField
-open Formalism.L2.Col (Sp hStd autLat PosStar)
+open _root_.Formalism.L2.Col (Sp hStd autLat PosStar)
 open Formalism.HermitianLatticesTheory (isom IsUnimodular)
 open GlobalTheory.Mem.Col2 (DGam autOrd autO gamOrd gamRanks)
 

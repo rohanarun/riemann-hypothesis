@@ -49,6 +49,7 @@ set_option maxSynthPendingDepth 1
 namespace GroundTheory.Heights₂.Heights.Kleiman.SectionsOverLocalization
 
 open MvPolynomial ReciprocityTheory.ChartRestriction.G.Geo
+open ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.KH renaming Cell → KHCell
 open ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.KH (cellMon CechC cellRes faceSign cechD locPart cechCc cechZc cechBc cechHc
   mIdealOver quotPart)
 
@@ -72,7 +73,7 @@ theorem face_subset (I : ∀ k, Finset (ι k)) (k : K) (i : ι k) (l : K) :
 
 open Classical in
 theorem cechD_apply' {M : Type} [AddCommGroup M] [Module (MRingOver S ι) M] (n : ℕ) (f : CechC S ι M n)
-    (I : Cell K ι (n + 1)) :
+    (I : KHCell K ι (n + 1)) :
     cechD S ι M n f I = ∑ k, ∑ i ∈ I.1 k,
       if h : (∀ l, (Function.update I.1 k ((I.1 k).erase i) l).Nonempty) ∧
           ∑ l, ((Function.update I.1 k ((I.1 k).erase i) l).card - 1) = n then
@@ -83,7 +84,7 @@ theorem cechD_apply' {M : Type} [AddCommGroup M] [Module (MRingOver S ι) M] (n 
   split_ifs <;> rfl
 
 theorem cechD_mem_locPart (γ : K → ℤ) (n : ℕ) {f : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n}
-    (hf : f ∈ cechCc ι (quotPart S (mIdealOver S y)) γ n) (I : Cell K ι (n + 1)) :
+    (hf : f ∈ cechCc ι (quotPart S (mIdealOver S y)) γ n) (I : KHCell K ι (n + 1)) :
     cechD S ι _ n f I ∈ locPart ι (quotPart S (mIdealOver S y)) (cellMon S I.1) γ := by
   rw [cechD_apply']
   refine Submodule.sum_mem _ fun k _ => Submodule.sum_mem _ fun i _ => ?_
@@ -101,11 +102,11 @@ theorem cechD_mem_cechCc (γ : K → ℤ) (n : ℕ) {f : CechC S ι (MRingOver S
     cechD S ι _ n f ∈ cechCc ι (quotPart S (mIdealOver S y)) γ (n + 1) :=
   Submodule.mem_pi.mpr fun I _ => cechD_mem_locPart y γ n hf I
 
-def evC (n : ℕ) : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n →ₗ[S] (Cell K ι n → Ω) :=
+def evC (n : ℕ) : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n →ₗ[S] (KHCell K ι n → Ω) :=
   LinearMap.pi fun I => (evMap y I.1).comp (LinearMap.proj (R := S)
-    (φ := fun J : Cell K ι n => LocalizedModule (cellMon S J.1) (MRingOver S ι ⧸ mIdealOver S y)) I)
+    (φ := fun J : KHCell K ι n => LocalizedModule (cellMon S J.1) (MRingOver S ι ⧸ mIdealOver S y)) I)
 
-theorem evC_apply (n : ℕ) (w : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n) (I : Cell K ι n) :
+theorem evC_apply (n : ℕ) (w : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n) (I : KHCell K ι n) :
     evC y n w I = evMap y I.1 (w I) := rfl
 
 theorem evC_cechD (n : ℕ) (w : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n) :
@@ -139,9 +140,9 @@ theorem evC_mem (n : ℕ) {w : CechC S ι (MRingOver S ι ⧸ mIdealOver S y) n}
   · rw [evMap_of_not y hI]
     exact Submodule.zero_mem _
 
-theorem evC_lift (n : ℕ) {w' : Cell K ι n → Ω} (hw' : w' ∈ cellC S y γ n) :
+theorem evC_lift (n : ℕ) {w' : KHCell K ι n → Ω} (hw' : w' ∈ cellC S y γ n) :
     ∃ w ∈ cechCc ι (quotPart S (mIdealOver S y)) γ n, evC y n w = w' := by
-  have h : ∀ I : Cell K ι n, ∃ x ∈ locPart ι (quotPart S (mIdealOver S y)) (cellMon S I.1) γ,
+  have h : ∀ I : KHCell K ι n, ∃ x ∈ locPart ι (quotPart S (mIdealOver S y)) (cellMon S I.1) γ,
       evMap y I.1 x = w' I := by
     intro I
     have hI' : w' I ∈ cellSec S y γ I.1 := Submodule.mem_pi.mp hw' I (Set.mem_univ _)
@@ -254,12 +255,13 @@ set_option maxSynthPendingDepth 1
 
 namespace GroundTheory.Heights₂.Heights.Kleiman.SectionsOverLocalization
 
-open ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.KH (Cell faceSign)
+open ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.KH renaming Cell → KHCell
+open ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.KH (faceSign)
 
 
 open Classical in
 def constD (K : Type*) [Fintype K] [LinearOrder K] (ι : K → Type*) [∀ k, LinearOrder (ι k)] (V : Type*)
-    [AddCommGroup V] (n : ℕ) (f : Cell K ι n → V) : Cell K ι (n + 1) → V :=
+    [AddCommGroup V] (n : ℕ) (f : KHCell K ι n → V) : KHCell K ι (n + 1) → V :=
   fun I => ∑ k, ∑ i ∈ I.1 k,
     if h : (∀ l, (Function.update I.1 k ((I.1 k).erase i) l).Nonempty) ∧
         ∑ l, ((Function.update I.1 k ((I.1 k).erase i) l).card - 1) = n then
@@ -268,12 +270,12 @@ def constD (K : Type*) [Fintype K] [LinearOrder K] (ι : K → Type*) [∀ k, Li
 
 def CechConstVanish.Statement : Prop :=
   ∀ (K : Type) [Fintype K] [LinearOrder K] (ι : K → Type) [∀ k, LinearOrder (ι k)] (V : Type) [AddCommGroup V]
-    (G : ∀ k, Finset (ι k)) (z : Cell K ι 1 → V),
-    (∀ I : Cell K ι 2, (∀ k, I.1 k ⊆ G k) → constD K ι V 1 z I = 0) →
-    ∃ f : Cell K ι 0 → V, ∀ J : Cell K ι 1, (∀ k, J.1 k ⊆ G k) → constD K ι V 0 f J = z J
+    (G : ∀ k, Finset (ι k)) (z : KHCell K ι 1 → V),
+    (∀ I : KHCell K ι 2, (∀ k, I.1 k ⊆ G k) → constD K ι V 1 z I = 0) →
+    ∃ f : KHCell K ι 0 → V, ∀ J : KHCell K ι 1, (∀ k, J.1 k ⊆ G k) → constD K ι V 0 f J = z J
 
 theorem constVanish_hyp_segment :
-    ∀ I : Cell Unit (fun _ => Fin 2) 2, (∀ k, I.1 k ⊆ Finset.univ) →
+    ∀ I : KHCell Unit (fun _ => Fin 2) 2, (∀ k, I.1 k ⊆ Finset.univ) →
       constD Unit (fun _ => Fin 2) ℤ 1 (fun _ => 1) I = 0 := by
   intro I _
   exfalso

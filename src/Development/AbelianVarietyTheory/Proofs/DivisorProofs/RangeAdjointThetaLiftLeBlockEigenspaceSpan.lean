@@ -32,7 +32,7 @@ namespace GlobalTheory.LiftAdjointBlock
 
 section Abstract
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {K V W I : Type} [Field K] [AddCommGroup V] [Module K V] [AddCommGroup W] [Module ℂ W] {σ : K →+* ℂ}
 

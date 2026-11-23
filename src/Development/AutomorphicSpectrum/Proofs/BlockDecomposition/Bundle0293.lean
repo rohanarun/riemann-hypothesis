@@ -147,7 +147,7 @@ namespace GlobalTheory.CompanionTheory.GeomLemmaUniform
 section Filtration
 
 open GroundTheory.Automorphic GroundTheory.Automorphic.Parabolic Matrix GroundTheory.Automorphic.Iwasawa
-  GroundTheory.Automorphic.GLnLocal ValuativeRel Topology Set DoubleCoset Filter
+  GroundTheory.Automorphic.GLnLocal ValuativeRel _root_.Topology Set DoubleCoset Filter
 
 variable {F : Type} [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F]
   {n : ℕ} {β γ : Fin n → ℕ}

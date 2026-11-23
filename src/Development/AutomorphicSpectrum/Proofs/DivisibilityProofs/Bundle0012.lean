@@ -187,7 +187,7 @@ theorem val_psumExpansion_mul : ∀ (O : Type) [CommRing O] [IsDomain O] [IsDisc
     rw [(_root_.GlobalTheory.CompanionTheory.Ar.Num.cycNum_linear O K ι (σ ⊕ σ) (ratDiv P (T.f i) (T.g i)) (Sum.elim T.x T.x') L).2.2.1]
     refine Finset.sum_congr rfl fun a ha => ?_
     obtain rfl : e a = i := (Finset.mem_filter.mp ha).2
-    rw [GlobalTheory.T.cycle_number_rename.1 O K ι (Fin r ⊕ Fin r) (σ ⊕ σ) (Sum.map e e) _ (Sum.elim T.x T.x') _ L, hcomp]
+    rw [_root_.GlobalTheory.CompanionTheory.Ar.Num.numbers_rename.1 O K ι (Fin r ⊕ Fin r) (σ ⊕ σ) (Sum.map e e) _ (Sum.elim T.x T.x') _ L, hcomp]
     exact (cycNum_int_and_comb O K ι (Fin r ⊕ Fin r) (Sum.elim (T.x ∘ e) (T.x' ∘ e)) L).1 _
       (hfin _ _) _
   have hck : ∀ L : List (K → ℤ), (((T.comp e).ck P k L : ℤ) : ℝ) =

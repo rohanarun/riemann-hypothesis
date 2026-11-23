@@ -166,7 +166,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Cusp.Dict
 
-open NumberField Matrix GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.Cusp GroundTheory.Automorphic GroundTheory.Heights₂.Heights.FiniteCovolume
+open NumberField Matrix _root_.GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.Cusp GroundTheory.Automorphic GroundTheory.Heights₂.Heights.FiniteCovolume
 
 section Pure
 

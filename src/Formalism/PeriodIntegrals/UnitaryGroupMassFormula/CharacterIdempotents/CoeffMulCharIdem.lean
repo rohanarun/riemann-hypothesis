@@ -1,7 +1,5 @@
 module
 
-public import Mathlib
-public import Formalism.PeriodIntegrals.Bundle0001
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.CharacterIdempotents.Development
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.CharacterIdempotents.Bundle0001
 
@@ -14,10 +12,6 @@ namespace PI.CharIdemW
 open PI.CharIdem
 
 variable {G : Type} [Group G] [Fintype G]
-
--- [dedup] theorem act_single (W : FDRep ℂ G) (g : G) (r : ℂ) :
--- [dedup]     act W (MonoidAlgebra.single g r) = r • W.ρ g := by
--- [dedup]   simp [act, MonoidAlgebra.lift_single]
 
 theorem coeff_mul_charIdem (W : FDRep ℂ G) (x : MonoidAlgebra ℂ G) (h : G) :
     (x * charIdem W).coeff h =

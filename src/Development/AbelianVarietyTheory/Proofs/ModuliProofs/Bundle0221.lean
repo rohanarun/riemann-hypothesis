@@ -38,7 +38,7 @@ namespace GlobalTheory
 
 theorem arcFam_closed : GlobalTheory.LN.ArcFamSt :=
   _root_.GlobalTheory.Ex.arcFam GlobalTheory.lawsAndExpansions GlobalTheory.allSixLaws.2.2.2.2.2 _root_.GlobalTheory.LN.uDvrSt_holds _root_.GlobalTheory.homExtension_semiAbelian_dvr
-    GlobalTheory.T.thetaPoint_determines_and_end_determined_torsion.1 GlobalTheory.T.thetaPoint_determines_and_end_determined_torsion.2 GlobalTheory.thetaUnifAV_closed
+    _root_.GlobalTheory.thetaPtDetermines_and_endDeterminedOnTorsion.1 _root_.GlobalTheory.thetaPtDetermines_and_endDeterminedOnTorsion.2 GlobalTheory.thetaUnifAV_closed
 
 end GlobalTheory
 end

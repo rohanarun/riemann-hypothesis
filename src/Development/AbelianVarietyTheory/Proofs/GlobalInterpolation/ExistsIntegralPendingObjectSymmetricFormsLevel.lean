@@ -173,7 +173,7 @@ end Dual
 
 section Localisation
 
-open Formalism.L2.DIV Formalism.L2.Col
+open Formalism.L2.DIV _root_.Formalism.L2.Col
 
 theorem mem_localization_delAtr_of_basis {E K : Type} [Field E] [NumberField E] [Field K] [NumberField K] (Pl : Rows.Places K)
     (pw : Pl.Pl → HeightOneSpectrum (𝓞 K))

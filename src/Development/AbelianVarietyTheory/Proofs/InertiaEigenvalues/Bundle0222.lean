@@ -333,6 +333,8 @@ theorem integral_mem (L : IntermediateField ℚ_[l] (Om l)) [FiniteDimensional �
     ((x : L) : Om l) ∈ MaximalUnramifiedExtension l := by
   have hl1 : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
   have hl0 : (l : L) ≠ 0 := by exact_mod_cast (Fact.out : l.Prime).ne_zero
+  have : IsLocalRing (integralClosure ℤ_[l] L) :=
+    (GlobalTheory.isDiscreteValuationRing_integralClosure_padicInt l L).toIsLocalRing
   have hmax : ∀ y : integralClosure ℤ_[l] L,
       y ∈ maximalIdeal (integralClosure ℤ_[l] L) ↔ ‖((y : L) : Om l)‖ < 1 := fun y => by
     rw [GlobalTheory.DiscEval.mem_maximalIdeal_iff_norm, GlobalTheory.DiscEval.intEmb_apply,

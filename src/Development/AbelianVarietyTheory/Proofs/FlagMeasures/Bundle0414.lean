@@ -98,7 +98,7 @@ theorem oneLength_moment_lowestType_largeGap (hH : GlobalTheory.GapIn.Hyp) (k r 
   have hHG : HypsG := hH.1
   have hK : PI.KFinSmooth := hHG.1.2.2.1
   have hSG : SetupG lam u b bv ga h q0 z π μW μN μG νq R l dg :=
-    (GlobalTheory.T.families_have_largeGap_of_numericalHypotheses.2 k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg).1 hS
+    (_root_.GlobalTheory.GapSetup.families_gap.2 k r Wp lam u b bv ga h q0 z π μW μN μG νq R l dg).1 hS
   have hNum := hS.1
   have hFam := hS.2.1
   have hSide := hS.2.2.1

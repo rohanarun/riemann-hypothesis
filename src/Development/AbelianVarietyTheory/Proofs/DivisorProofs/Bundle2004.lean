@@ -412,7 +412,7 @@ open IsLocalRing
 
 
 set_option autoImplicit false in
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open NumberField IsDedekindDomain in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj TensorProduct NNReal in
 attribute [local instance] Over.cartesianMonoidalCategory in

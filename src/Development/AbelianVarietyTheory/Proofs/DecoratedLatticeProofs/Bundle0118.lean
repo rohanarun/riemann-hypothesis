@@ -426,7 +426,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.PtUniq
 
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2
 
 theorem mem_iff_hatL {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] [StarRing E]
     {n : ℕ} {N : Submodule (𝓞 E) (Sp E n)} (hN : Submodule.IsLattice E N) (v : Sp E n) :

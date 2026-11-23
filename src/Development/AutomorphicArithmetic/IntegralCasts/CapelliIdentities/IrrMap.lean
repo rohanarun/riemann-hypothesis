@@ -79,55 +79,16 @@ noncomputable def UpperTheory.Reformulated.B.Qi38.Irr :
               (@Semiring.toAddCommMonoid R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))
               (@Semiring.toModule R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst))))))
 
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Qi38.modFun :
-    {O M ι : Type} →
-      [inst : CommRing O] →
-        [inst_1 : AddCommGroup M] →
-          [@_root_.Module O M (@CommSemiring.toSemiring O (@CommRing.toCommSemiring O inst))
-                (@AddCommGroup.toAddCommMonoid M inst_1)] →
-            @_root_.Module O (ι → M) (@CommSemiring.toSemiring O (@CommRing.toCommSemiring O inst))
-              (@Pi.addCommMonoid ι (fun (a : ι) ↦ M) fun (i : ι) ↦ @AddCommGroup.toAddCommMonoid M inst_1) :=
-    fun {O M ι : Type} [inst : CommRing O] [inst_1 : AddCommGroup M]
-        [inst_2 :
-          @_root_.Module O M (@CommSemiring.toSemiring O (@CommRing.toCommSemiring O inst))
-            (@AddCommGroup.toAddCommMonoid M inst_1)] ↦
-      @Pi.Function.module ι O M (@CommSemiring.toSemiring O (@CommRing.toCommSemiring O inst))
-        (@AddCommGroup.toAddCommMonoid M inst_1) inst_2
+@[reducible] noncomputable def UpperTheory.Reformulated.B.Qi38.modFun : {O M ι : Type} → [inst : CommRing O] → [inst_1 : AddCommGroup M] → [Module O M] → Module O (ι → M) := fun {O M ι} [CommRing O] [AddCommGroup M] [Module O M] => Pi.Function.module ι O M
 attribute [local instance] UpperTheory.Reformulated.B.Qi38.modFun
 
-noncomputable def UpperTheory.Reformulated.B.Qi38.mapRep :
-    {R R' : Type} →
-      [inst : CommRing R] →
-        [inst_1 : CommRing R'] →
-          {H : Type} →
-            [inst_2 : Group H] →
-              {n : Type} →
-                [inst_3 : Fintype n] →
-                  [inst_4 : DecidableEq n] →
-                    @RingHom R R'
-                        (@Semiring.toNonAssocSemiring R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))
-                        (@Semiring.toNonAssocSemiring R'
-                          (@CommSemiring.toSemiring R' (@CommRing.toCommSemiring R' inst_1))) →
-                      @MonoidHom H (Matrix n n R)
-                          (@MulOneClass.toMulOne H
-                            (@Monoid.toMulOneClass H (@DivInvMonoid.toMonoid H (@Group.toDivInvMonoid H inst_2))))
-                          (@Matrix.instMulOneOfFintypeOfDecidableEqOfAddCommMonoid n R inst_3 inst_4
-                            (@MulOneClass.toMulOne R
-                              (@MulZeroOneClass.toMulOneClass R
-                                (@instMulZeroOneClassOfSemiring R
-                                  (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))))
-                            (@Semiring.toAddCommMonoid R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))) →
-                        @MonoidHom H (Matrix n n R')
-                          (@MulOneClass.toMulOne H
-                            (@Monoid.toMulOneClass H (@DivInvMonoid.toMonoid H (@Group.toDivInvMonoid H inst_2))))
-                          (@Matrix.instMulOneOfFintypeOfDecidableEqOfAddCommMonoid n R' inst_3 inst_4
-                            (@MulOneClass.toMulOne R'
-                              (@MulZeroOneClass.toMulOneClass R'
-                                (@instMulZeroOneClassOfSemiring R'
-                                  (@CommSemiring.toSemiring R' (@CommRing.toCommSemiring R' inst_1)))))
-                            (@Semiring.toAddCommMonoid R'
-                              (@CommSemiring.toSemiring R' (@CommRing.toCommSemiring R' inst_1)))) :=
-    fun {R R' : Type} [inst : CommRing R] [inst_1 : CommRing R'] {H : Type} [inst_2 : Group H] {n : Type}
+noncomputable def UpperTheory.Reformulated.B.Qi38.mapRep : {R R' : Type} →
+  [inst : CommRing R] →
+    [inst_1 : CommRing R'] →
+      {H : Type} →
+        [inst_2 : Group H] →
+          {n : Type} →
+            [inst_3 : Fintype n] → [inst_4 : DecidableEq n] → (R →+* R') → (H →* Matrix n n R) → H →* Matrix n n R' := fun {R R' : Type} [inst : CommRing R] [inst_1 : CommRing R'] {H : Type} [inst_2 : Group H] {n : Type}
         [inst_3 : Fintype n] [inst_4 : DecidableEq n]
         (f :
           @RingHom R R' (@Semiring.toNonAssocSemiring R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))

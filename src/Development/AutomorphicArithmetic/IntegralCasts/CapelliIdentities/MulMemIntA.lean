@@ -4,13 +4,7 @@ public import Mathlib
 
 @[expose] public section
 
-@[reducible] noncomputable def UpperTheory.Reformulated.B.Uc13.Af :
-    (F : Type) → [inst : Field F] → [@NumberField F inst] → Type :=
-    fun (F : Type) [inst : Field F] [inst_1 : @NumberField F inst] ↦
-      @IsDedekindDomain.FiniteAdeleRing (@NumberField.RingOfIntegers F inst)
-        (@NumberField.instCommRingRingOfIntegers F inst) (@NumberField.RingOfIntegers.instIsDedekindDomain F inst inst_1) F
-        inst (@NumberField.RingOfIntegers.instAlgebra_1 F inst)
-        (@NumberField.RingOfIntegers.instIsFractionRing F inst inst_1)
+@[reducible] noncomputable def UpperTheory.Reformulated.B.Uc13.Af : (F : Type) → [inst : Field F] → [NumberField F] → Type := fun F [Field F] [NumberField F] => IsDedekindDomain.FiniteAdeleRing (NumberField.RingOfIntegers F) F
 
 @[reducible] noncomputable def UpperTheory.Reformulated.B.Uc13.Fv :
     (F : Type) →
@@ -2736,42 +2730,11 @@ theorem UpperTheory.Reformulated.B.Uc13.aux4 :
   intro F _ _ v x
   rfl
 
-noncomputable def UpperTheory.Reformulated.B.Uc13.evalV :
-    (F : Type) →
-      [inst : Field F] →
-        [inst_1 : @NumberField F inst] →
-          (v :
-              @IsDedekindDomain.HeightOneSpectrum (@NumberField.RingOfIntegers F inst)
-                (@NumberField.instCommRingRingOfIntegers F inst)) →
-            @AlgHom F (@UpperTheory.Reformulated.B.Uc13.Af F inst inst_1) (@UpperTheory.Reformulated.B.Uc13.Fv F inst inst_1 v)
-              (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-              (@CommSemiring.toSemiring (@UpperTheory.Reformulated.B.Uc13.Af F inst inst_1)
-                (@CommRing.toCommSemiring (@UpperTheory.Reformulated.B.Uc13.Af F inst inst_1)
-                  (@IsDedekindDomain.instCommRingFiniteAdeleRing (@NumberField.RingOfIntegers F inst)
-                    (@NumberField.instCommRingRingOfIntegers F inst)
-                    (@NumberField.RingOfIntegers.instIsDedekindDomain F inst inst_1) F inst
-                    (@NumberField.RingOfIntegers.instAlgebra_1 F inst)
-                    (@NumberField.RingOfIntegers.instIsFractionRing F inst inst_1))))
-              (@DivisionSemiring.toSemiring (@UpperTheory.Reformulated.B.Uc13.Fv F inst inst_1 v)
-                (@Semifield.toDivisionSemiring (@UpperTheory.Reformulated.B.Uc13.Fv F inst inst_1 v)
-                  (@Field.toSemifield (@UpperTheory.Reformulated.B.Uc13.Fv F inst inst_1 v)
-                    (@IsDedekindDomain.HeightOneSpectrum.adicCompletion.instField (@NumberField.RingOfIntegers F inst)
-                      (@NumberField.instCommRingRingOfIntegers F inst)
-                      (@NumberField.RingOfIntegers.instIsDedekindDomain F inst inst_1) F inst
-                      (@NumberField.RingOfIntegers.instAlgebra_1 F inst)
-                      (@NumberField.RingOfIntegers.instIsFractionRing F inst inst_1) v))))
-              (@IsDedekindDomain.FiniteAdeleRing.instAlgebra (@NumberField.RingOfIntegers F inst)
-                (@NumberField.instCommRingRingOfIntegers F inst)
-                (@NumberField.RingOfIntegers.instIsDedekindDomain F inst inst_1) F inst
-                (@NumberField.RingOfIntegers.instAlgebra_1 F inst)
-                (@NumberField.RingOfIntegers.instIsFractionRing F inst inst_1))
-              (@IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion (@NumberField.RingOfIntegers F inst)
-                (@NumberField.instCommRingRingOfIntegers F inst)
-                (@NumberField.RingOfIntegers.instIsDedekindDomain F inst inst_1) F F inst
-                (@Semifield.toCommSemiring F (@Field.toSemifield F inst)) (@NumberField.RingOfIntegers.instAlgebra_1 F inst)
-                (@NumberField.RingOfIntegers.instIsFractionRing F inst inst_1) v
-                (@Algebra.id F (@Semifield.toCommSemiring F (@Field.toSemifield F inst)))) :=
-    fun (F : Type) [inst : Field F] [inst_1 : @NumberField F inst]
+noncomputable def UpperTheory.Reformulated.B.Uc13.evalV : (F : Type) →
+  [inst : Field F] →
+    [inst_1 : NumberField F] →
+      (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers F)) →
+        UpperTheory.Reformulated.B.Uc13.Af F →ₐ[F] UpperTheory.Reformulated.B.Uc13.Fv F v := fun (F : Type) [inst : Field F] [inst_1 : @NumberField F inst]
         (v :
           @IsDedekindDomain.HeightOneSpectrum (@NumberField.RingOfIntegers F inst)
             (@NumberField.instCommRingRingOfIntegers F inst)) ↦

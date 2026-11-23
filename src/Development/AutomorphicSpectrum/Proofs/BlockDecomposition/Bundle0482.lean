@@ -186,7 +186,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.HCRep.ConvLap
 
-open Set Filter Topology MeasureTheory
+open Set Filter _root_.Topology MeasureTheory
 
 section General
 

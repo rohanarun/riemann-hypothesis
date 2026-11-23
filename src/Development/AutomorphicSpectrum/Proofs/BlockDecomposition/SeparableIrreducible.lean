@@ -73,7 +73,7 @@ theorem sepIrr : ReciprocityTheory.Ty.Fin.St.SepIrr := by
       IsSimpleModule (MonoidAlgebra ℂ Γ) N → ∀ n ∈ N, x * n = 0 := by
     intro N hN n hn
     have hS : Simple (FDRep.of (leftRep N)) :=
-      (GlobalTheory.T.simple_iff_irreducible.1 Γ (FDRep.of (leftRep N))).2 (by
+      (_root_.GlobalTheory.CompanionTheory.TyFin.simpleIffIrr.1 Γ (FDRep.of (leftRep N))).2 (by
         simpa using isIrr_leftRep N)
     have h0 := hx _ hS
     have h1 : Representation.asAlgebraHom (leftRep N) x = 0 := by

@@ -46,7 +46,7 @@ noncomputable section
 
 namespace GlobalTheory.TopSteps.CrysRules
 
-open GlobalTheory.AdmLoc Formalism Formalism.WeaklyAdmissibleFiltrations Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions.N TensorProduct Module
+open GlobalTheory.AdmLoc _root_.Formalism Formalism.WeaklyAdmissibleFiltrations Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions.N TensorProduct Module
 open GlobalTheory.TwistJump GlobalTheory.Cmp.JumpDict GlobalTheory.Cmp.SmallJumps
 
 section Generic

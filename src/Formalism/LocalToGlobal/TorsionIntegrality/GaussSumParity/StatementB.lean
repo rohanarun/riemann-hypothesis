@@ -63,7 +63,7 @@ def B0 : Prop :=
         ∀ g : Formalism.DworkPowerSeriesWeights.ZV d N0 N1 → MvPowerSeries (Formalism.DworkPowerSeriesWeights.ZV d N0 N1) K,
           (∀ y, MvPowerSeries.constantCoeff (g y) = 0) →
           (∀ y, MvPowerSeries.subst g (entLog (K := K) l y) = MvPowerSeries.X y) →
-          thetaInZ l j σ om oms (mvExp (-Φ) * U0) =
+          thetaInZ l j σ om oms (_root_.Formalism.DworkPowerSeriesWeights.mvExp (-Φ) * U0) =
             thetaZ g U (-1) (MvPowerSeries.map j (beMean l σ be0 om oms ζ))
 
 def OneLetterHalf : Prop :=

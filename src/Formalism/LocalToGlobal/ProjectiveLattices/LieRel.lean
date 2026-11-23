@@ -24,7 +24,7 @@ attribute [local instance] Over.cartesianMonoidalCategory
 section Vside
 
 variable {V : Type} [CommRing V] {G : Over (Sp V)} [GrpObj G] {n : ℕ}
-  {xc : ∀ m : ℕ, sp (R₀ := V) (JetR V (Fin n) m) ⟶ G} (hx : IsUnivChart G n xc)
+  {xc : ∀ m : ℕ, sp (R₀ := V) (_root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR V (Fin n) m) ⟶ G} (hx : IsUnivChart G n xc)
 
 theorem epsOver_hom : (epsOver V V).hom = (sp (R₀ := V) (DualNumber V)).hom := rfl
 

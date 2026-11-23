@@ -185,9 +185,9 @@ theorem GlobalTheory.ClassFin.exists_evC_blk_of_fibre_const : ∀ (ι : Type) [F
     have hx₀p : blk e x₀ ∈ pts (blk e '' Γ) ℂ := fun p hp => hp _ ⟨x₀, hx₀, rfl⟩
     have := _root_.GlobalTheory.ClassFin.evC_eq_zero_of_mem_pts_of_stable ι _ hpre.aut_mem (ltr z b₀) (by
       rintro _ ⟨h, hh, rfl⟩
-      rw [evC_ltr, ← evC_rtr]
+      rw [_root_.GlobalTheory.ClassFin.FibreDescent.evC_ltr, ← evC_rtr]
       exact hz _ (hstab h hh)) _ (hm _ (hadj z hzp) _ hx₀p)
-    rw [evC_ltr, ← Matrix.mul_assoc, Matrix.mul_adjugate, hdet z hzp, one_smul, Matrix.one_mul] at this
+    rw [_root_.GlobalTheory.ClassFin.FibreDescent.evC_ltr, ← Matrix.mul_assoc, Matrix.mul_adjugate, hdet z hzp, one_smul, Matrix.one_mul] at this
     exact hb₀ this
   have h1 : (1 : MvPolynomial (ι × ι) ℂ) ∈ multIdeal Γ (blk e) f := htop ▸ Submodule.mem_top
   obtain ⟨b, hb⟩ := h1 1 hΓ.one_mem

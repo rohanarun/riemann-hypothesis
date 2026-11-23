@@ -133,16 +133,6 @@ theorem van_X {τ : Type} {T : Set τ} {q : τ} (hq : q ∈ T) : Van T (X q : Mv
     exact hν q (by rw [h]; simp) hq
   · rfl
 
-theorem van_univ {τ : Type} {f : MvPowerSeries τ C} (hf : constantCoeff f = 0) : Van Set.univ f := by
-  intro ν hν
-  have h0 : ν = 0 := by
-    ext w
-    by_contra h
-    exact hν w (Finsupp.mem_support_iff.mpr h) (Set.mem_univ _)
-  subst h0
-  rw [MvPowerSeries.coeff_zero_eq_constantCoeff_apply]
-  exact hf
-
 variable [CharZero C] {V : VF C} {O : Type} [CommRing O] [StarRing O] {dd : ℕ}
 
 theorem constantCoeff_inCol (col : Fin 2) (f : MvPowerSeries (Fin dd) C) (hf : constantCoeff f = 0) :

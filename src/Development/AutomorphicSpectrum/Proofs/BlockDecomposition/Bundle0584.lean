@@ -229,7 +229,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.EllipticCM
 
-open WeierstrassCurve GroundTheory.Global.Elliptic GroundTheory.Arith.Abelian
+open _root_.WeierstrassCurve GroundTheory.Global.Elliptic GroundTheory.Arith.Abelian
 
 theorem variableChangePoint_latticePoint {X : WeierstrassCurve ℂ} {L : PeriodPair}
     {C : VariableChange ℂ} (h : C • X = GlobalTheory.latticeCurve L) (h' : C⁻¹ • weierstrassCurve L = X)
@@ -265,7 +265,7 @@ theorem isAnalyticUniformization_of_isAnalyticIso {K : Type} [Field K] [NumberFi
   have hΛ' : ∀ z, z ∈ idealLattice (algebraMap K ℂ) 𝔞 ↔ α * z ∈ L.lattice := fun z => by
     rw [← hΛ]
     rfl
-  open Complex Filter Topology Set in
+  open Complex Filter _root_.Topology Set in
   open scoped PeriodPair in
   have hf0 :
       IsAnalyticUniformization L.lattice (toPointHom L) := by

@@ -28,7 +28,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.IdxEx
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV GlobalTheory.QNormal
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.QNormal
 open GlobalTheory.IndefiniteRowSideFullHecke.SourceLatticeInvariance (DegOneUnram)
 open GlobalTheory.IndefiniteRowSideFullHecke.SandwichNormalForm (NF)
 open GlobalTheory.Proof.NormalFormAtPrime
@@ -601,7 +601,7 @@ end GlobalTheory.Mem.Col2.IdxEx
 
 namespace GlobalTheory.Mem.Col2
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV
 
 theorem exists_chIdx {X : Fields} {Pr : Primes X} {R : Ranks} (hX : X.Ok) (hPr : Pr.Ok) (Ch : Chars X Pr R.m)
     (sel : HeightOneSpectrum (𝓞 X.F) → HeightOneSpectrum (𝓞 X.E)) (hsel : IsSel X sel) {S : Set ℕ} (hS : ∀ i, Pr.g i ∈ S)

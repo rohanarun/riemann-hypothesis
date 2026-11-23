@@ -33,7 +33,7 @@ noncomputable section
 
 namespace GlobalTheory.Cp
 
-open Formalism Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Rows
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Rows
 
 section Col
 

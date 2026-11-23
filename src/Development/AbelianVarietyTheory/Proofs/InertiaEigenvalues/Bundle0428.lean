@@ -168,7 +168,7 @@ noncomputable section
 
 namespace GlobalTheory.LatticeSelfDual
 
-open GlobalTheory.TripleGal Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.BlochKatoReduction Formalism.MainNotions.BlochKatoReduction.Gen Formalism.ConjugateSelfDual ReciprocityTheory.Gal NumberField IsDedekindDomain Polynomial
+open GlobalTheory.TripleGal _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.BlochKatoReduction Formalism.MainNotions.BlochKatoReduction.Gen Formalism.ConjugateSelfDual ReciprocityTheory.Gal NumberField IsDedekindDomain Polynomial
 open GlobalTheory.AntiRamConj
 
 theorem trace_eq_of_charpoly_eq' {K : Type} [CommRing K] [Nontrivial K] {n : ℕ} {A B : Matrix (Fin n) (Fin n) K}

@@ -79,13 +79,6 @@ def wordOf (ε : Fin n → Bool) (w : List (Fin n × Fin n)) (s : Fin w.length �
 def coefOf (w : List (Fin n × Fin n)) (s : Fin w.length → Bool) : ℂ :=
   ∏ i, if s i then Complex.I else 1
 
-theorem dSW_smooth {ε : Fin n → Bool} {σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)} (hσ : IsURepOn (UJset ε) σ) :
-    ∀ (W : List (Matrix (Fin n) (Fin n) ℂ)), (∀ X ∈ W, inG ε X) → ∀ {v : H}, IsSmoothVecU ε σ v →
-      IsSmoothVecU ε σ (dSW σ W v)
-  | [], _, _, hv => hv
-  | X :: W, hW, _, hv => IsSmoothVecU.dS hσ (hW X (List.mem_cons_self ..))
-      (dSW_smooth hσ W (fun Y hY => hW Y (List.mem_cons_of_mem _ hY)) hv)
-
 theorem dS_fsum {ε : Fin n → Bool} {σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)} (hσ : IsURepOn (UJset ε) σ)
     {X : Matrix (Fin n) (Fin n) ℂ} (hX : inG ε X) {ι : Type*} (s : Finset ι) (c : ι → ℂ) (v : ι → H)
     (hv : ∀ i, IsSmoothVecU ε σ (v i)) : dS σ X (∑ i ∈ s, c i • v i) = ∑ i ∈ s, c i • dS σ X (v i) := by

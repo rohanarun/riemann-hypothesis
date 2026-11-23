@@ -19,10 +19,8 @@ theorem isOpen_lt_one (x : v.adicCompletion F) :
   exact h1.preimage (continuous_id.sub continuous_const)
 
 theorem valued_algebraMap (k : F) :
-    Valued.v (algebraMap F (v.adicCompletion F) k) = v.valuation F k := by
-  first
-  | exact valuedAdicCompletion_eq_valuation' v k
-  | rfl
+    Valued.v (algebraMap F (v.adicCompletion F) k) = v.valuation F k :=
+  IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_eq_valuation' v k
 
 theorem denseRange : DenseRange (algebraMap F (v.adicCompletion F)) := by
   exact denseRange_algebraMap F v

@@ -197,7 +197,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Df
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem GlobalTheory.Mem.Col2
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem GlobalTheory.Mem.Col2
 
 attribute [local instance] GlobalTheory.Mem.Col2.starE
 

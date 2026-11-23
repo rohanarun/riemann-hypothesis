@@ -18,7 +18,7 @@ noncomputable section
 
 namespace GlobalTheory.LvT.Built.ValLat
 
-open NumberField IsDedekindDomain Matrix Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2
+open NumberField IsDedekindDomain Matrix Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2
 open Formalism.MainNotions.product_first_zeroth_parts (Ow blk IntSpan)
 
 section Poly

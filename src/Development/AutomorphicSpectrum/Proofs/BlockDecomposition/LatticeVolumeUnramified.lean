@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.GunrVol
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gen Filter Topology
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain MeasureTheory PositivityTheory.PfSWUS.Loc PositivityTheory.SiegelWeilFormula.Gen Filter _root_.Topology
 open scoped TensorProduct
 open PositivityTheory.SiegelWeilFormula.Gunr
 

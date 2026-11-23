@@ -20,7 +20,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.R3.Rw.LiftUnit
 
-open Formalism.DivisionValues Formalism.L2.Col
+open Formalism.DivisionValues _root_.Formalism.L2.Col
 
 theorem exists_cast {E K : Type} [Field E] [NumberField E] [Field K] [NumberField K] [StarRing K] {ι : Type} [Fintype ι]
     {a n : ℕ} (h : n = a) (emb : ι → E →+* K) (lam : ι → DomWeight a) (lam' : ι → DomWeight n)

@@ -67,7 +67,7 @@ theorem inv_mul_finEmb_mul (k : AdelicGLn.AdelicGL K n) (y : AdelicGLn.FiniteAde
   ext <;> simp [finPart]
 
 theorem finEmb_mem_maxCompact {y : AdelicGLn.FiniteAdelicGL K n}
-    (hy : y ∈ AdelicGLn.integralFiniteGL K n) : finEmb K n y ∈ maxCompact := by
+    (hy : y ∈ AdelicGLn.integralFiniteGL K n) : finEmb K n y ∈ _root_.GroundTheory.Automorphic.Reduction.maxCompact := by
   rw [AdelicGLn.mem_integralFiniteGL_iff_forall] at hy
   refine ⟨fun w => ?_, fun v => ?_⟩
   · have : infAt w (finEmb K n y) = 1 := by
@@ -99,7 +99,7 @@ theorem IsSmooth.eventually_mul_finEmb_mul {φ : AdelicGLn.AdelicGL K n → ℂ}
       (𝓝 1) (𝓝 1) := by
     have : Continuous fun y : AdelicGLn.FiniteAdelicGL K n => (finPart k)⁻¹ * y * finPart k :=
       (continuous_const.mul continuous_id).mul continuous_const
-    simpa using this.tendsto 1
+    simpa only [mul_one, inv_mul_cancel] using this.tendsto 1
   refine (hc.eventually (hφ.2 (g * k))).mono fun y hy => ?_
   rw [← hy, ← inv_mul_finEmb_mul]
   congr 1
@@ -111,7 +111,7 @@ theorem exists_openSubgroup_rightInvariant {φ : AdelicGLn.AdelicGL K n → ℂ}
       (U : Set (AdelicGLn.FiniteAdelicGL K n)) ⊆ AdelicGLn.integralFiniteGL K n ∧
         ∀ g, ∀ u ∈ U, φ (g * finEmb K n u) = φ g := by
   classical
-  set Kc := (maxCompact : Subgroup (AdelicGLn.AdelicGL K n))
+  set Kc := (_root_.GroundTheory.Automorphic.Reduction.maxCompact : Subgroup (AdelicGLn.AdelicGL K n))
   set s : Set (AdelicGLn.AdelicGL K n → ℂ) :=
     range fun k : Kc => rightTranslate (k : AdelicGLn.AdelicGL K n) φ with hs_def
   set W := Submodule.span ℂ s

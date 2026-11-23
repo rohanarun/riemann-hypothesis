@@ -180,7 +180,7 @@ theorem flat_of_finite_rep : ∀ (R : Type) [CommRing R] [IsNoetherianRing R] (B
     (Localization.AtPrime m) f _ _ _ hpb
   have hML : (M.pull (pullback.fst B.hom f)).IsLB := pull_isLB hM _
   have hrep' := _root_.GlobalTheory.memKL_baseChange_rep _ _ f B M hM H j hrep
-  have hth := GlobalTheory.AbLaw.CubeAffine.triv_theta_of_isProjBy GlobalTheory.T.abelianScheme_laws_unconditional.1 _ ((Over.pullback f).obj B) hB' hP _ hML
+  have hth := GlobalTheory.AbLaw.CubeAffine.triv_theta_of_isProjBy _root_.GlobalTheory.abelianSchemeLaws_all.1 _ ((Over.pullback f).obj B) hB' hP _ hML
   have hcl : IsClosedImmersion ((Over.pullback f).map j).left := by
     exact MorphismProperty.overPullbackMap (P := @IsClosedImmersion) f j hj
   have hfin' : IsFinite ((Over.pullback f).obj H).hom := by

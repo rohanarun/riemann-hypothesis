@@ -279,7 +279,7 @@ theorem leafGood : LeafGoodSt := by
   · rw [hN.th_eq]; exact thl_nonneg_leaf _ _
   · rw [hN.ad_eq]
   · simp only [hN.th_eq]
-    refine (GlobalTheory.T.sum_level_tail_mul_log_primes_le.2 N.R.k Q hkN hQ).trans ?_
+    refine (_root_.GlobalTheory.TailPrimeSum.main.2 N.R.k Q hkN hQ).trans ?_
     rw [hN.k_eq]
     exact div_le_div_of_nonneg_right h20 (Nat.cast_nonneg _)
   · simp only [hN.ad_eq, zero_mul, Finset.sum_const_zero, mul_zero]

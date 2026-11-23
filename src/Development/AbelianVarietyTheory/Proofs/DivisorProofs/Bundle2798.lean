@@ -333,7 +333,7 @@ theorem htMap_quot {K : Type} [Field K] [NumberField K] [StarRing K] {n d D : â„
 section Bound
 
 open Formalism.BasicNotions Formalism.MainNotions NumberField IsDedekindDomain
-open Formalism.L2 Formalism.L2.DIV Formalism.IndefR Formalism.IndefR.Links Formalism.L2.Indef.Tree
+open _root_.Formalism.L2 Formalism.L2.DIV Formalism.IndefR Formalism.IndefR.Links Formalism.L2.Indef.Tree
 open GlobalTheory.BigTop GlobalTheory.BigTop.Fun GlobalTheory.SumSize
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar

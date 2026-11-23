@@ -46,12 +46,12 @@ theorem spMap_jetAug_surjective :
 
 
 omit u in
-theorem snd_evalPt_mul {v v' : epsR ℂ ⟶ A} (hv : IsTan (R := ℂ) (G := A) v) (hv' : IsTan (R := ℂ) (G := A) v')
+theorem snd_evalPt_mul {v v' : epsR ℂ ⟶ A} (hv : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) v) (hv' : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) v')
     (U : A.left.Opens) (h0 : ⊤ ≤ (1 : Chart.sp (R₀ := ℂ) ℂ ⟶ A).left ⁻¹ᵁ U)
     (h : ⊤ ≤ v.left ⁻¹ᵁ U) (h' : ⊤ ≤ v'.left ⁻¹ᵁ U) (h'' : ⊤ ≤ (v * v').left ⁻¹ᵁ U) (f : Γ(A.left, U)) :
     (evalPt (R := DualNumber ℂ) (v * v').left U h'' f).snd =
       (evalPt (R := DualNumber ℂ) v.left U h f).snd + (evalPt (R := DualNumber ℂ) v'.left U h' f).snd := by
-  let P : Chart.sp (R₀ := ℂ) (JetR ℂ (Fin 2) 1) ⟶ A := (Chart.spMap (qD 0) ≫ v) * (Chart.spMap (qD 1) ≫ v')
+  let P : Chart.sp (R₀ := ℂ) (_root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR ℂ (Fin 2) 1) ⟶ A := (Chart.spMap (qD 0) ≫ v) * (Chart.spMap (qD 1) ≫ v')
   have hP : Chart.spMap (jetAug ℂ (Fin 2) 1) ≫ P = 1 := by
     rw [MonObj.comp_mul, ← Category.assoc, ← Category.assoc, Chart.spMap_comp, Chart.spMap_comp,
       Chart.jetAug_comp_qD, Chart.jetAug_comp_qD, hv, hv', _root_.mul_one]
@@ -65,9 +65,9 @@ theorem snd_evalPt_mul {v v' : epsR ℂ ⟶ A} (hv : IsTan (R := ℂ) (G := A) v
     rw [MonObj.comp_mul, ← Category.assoc, ← Category.assoc, Chart.spMap_comp, Chart.spMap_comp,
       Chart.restrictDiag_comp_incl_fst, Chart.restrictDiag_comp_incl_snd]
   have key : ∀ (l : ℂ × ℂ →ₗ[ℂ] ℂ) (w : epsR ℂ ⟶ A) (hw : ⊤ ≤ w.left ⁻¹ᵁ U), Chart.spMap (rD l) ≫ P = w →
-      evalPt (R := DualNumber ℂ) w.left U hw f = rD l (evalPt (R := JetR ℂ (Fin 2) 1) P.left U hPU f) := by
+      evalPt (R := DualNumber ℂ) w.left U hw f = rD l (evalPt (R := _root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR ℂ (Fin 2) 1) P.left U hPU f) := by
     rintro l w hw rfl
-    exact evalPt_spMap_comp (rD l : JetR ℂ (Fin 2) 1 →+* DualNumber ℂ) P.left U hPU hw f
+    exact evalPt_spMap_comp (rD l : _root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR ℂ (Fin 2) 1 →+* DualNumber ℂ) P.left U hPU hw f
   rw [key (LinearMap.fst ℂ ℂ ℂ) v h, key (LinearMap.snd ℂ ℂ ℂ) v' h',
     key (LinearMap.fst ℂ ℂ ℂ + LinearMap.snd ℂ ℂ ℂ) (v * v') h'', Chart.snd_rD_add]
   · rw [hval]
@@ -80,8 +80,8 @@ theorem snd_evalPt_mul {v v' : epsR ℂ ⟶ A} (hv : IsTan (R := ℂ) (G := A) v
     simp only [LinearMap.fst_apply, LinearMap.snd_apply]
     rw [Chart.scaleD_one, Chart.spMap_id, Category.id_comp, Chart.spMap_scaleD_zero hv', _root_.mul_one]
 
-theorem isDiff_add {w w' : Fin g → ℂ} {v v' : epsR ℂ ⟶ A} (hv : IsTan (R := ℂ) (G := A) v)
-    (hv' : IsTan (R := ℂ) (G := A) v') (hd : u.IsDiff w v) (hd' : u.IsDiff w' v') : u.IsDiff (w + w') (v * v') := by
+theorem isDiff_add {w w' : Fin g → ℂ} {v v' : epsR ℂ ⟶ A} (hv : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) v)
+    (hv' : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) v') (hd : u.IsDiff w v) (hd' : u.IsDiff w' v') : u.IsDiff (w + w') (v * v') := by
   intro U h'' f
   have ht := Chart.isTan_mul hv hv'
   have h0 := (tangent_mem_iff (u := u) ((isTan_iff _).1 ht) U).1 h''
@@ -93,7 +93,7 @@ theorem isDiff_add {w w' : Fin g → ℂ} {v v' : epsR ℂ ⟶ A} (hv : IsTan (R
   rw [map_add (f := _), ← hd U h f, ← hd' U h' f]
   exact snd_evalPt_mul hv hv' U h1 h h' h'' f
 
-theorem isDiff_smul {w : Fin g → ℂ} {v : epsR ℂ ⟶ A} (hv : IsTan (R := ℂ) (G := A) v) (hd : u.IsDiff w v) (c : ℂ) :
+theorem isDiff_smul {w : Fin g → ℂ} {v : epsR ℂ ⟶ A} (hv : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) v) (hd : u.IsDiff w v) (c : ℂ) :
     u.IsDiff (c • w) (Chart.spMap (scaleD c) ≫ v) := by
   intro U h' f
   have h0 := (tangent_mem_iff (u := u) ((isTan_iff _).1 (Chart.isTan_scale c hv)) U).1 h'
@@ -105,7 +105,7 @@ theorem isDiff_smul {w : Fin g → ℂ} {v : epsR ℂ ⟶ A} (hv : IsTan (R := �
 
 theorem isDiff_zero : u.IsDiff 0 (1 : epsR ℂ ⟶ A) := by
   intro U h f
-  have ht : IsTan (R := ℂ) (G := A) (1 : epsR ℂ ⟶ A) := Chart.isTan_one
+  have ht : _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) (1 : epsR ℂ ⟶ A) := Chart.isTan_one
   have h1 : ⊤ ≤ (1 : Chart.sp (R₀ := ℂ) ℂ ⟶ A).left ⁻¹ᵁ U := by
     rw [← ht]
     exact fun p _ => h (Set.mem_univ _)
@@ -120,8 +120,8 @@ theorem isDiff_zero : u.IsDiff 0 (1 : epsR ℂ ⟶ A) := by
   exact left_eq_add.1 this
 
 theorem isDiff_list_prod : ∀ {k : ℕ} (w : Fin k → Fin g → ℂ) (v : Fin k → (epsR ℂ ⟶ A)),
-    (∀ i, IsTan (R := ℂ) (G := A) (v i)) → (∀ i, u.IsDiff (w i) (v i)) →
-    IsTan (R := ℂ) (G := A) (List.ofFn v).prod ∧ u.IsDiff (∑ i, w i) (List.ofFn v).prod := by
+    (∀ i, _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) (v i)) → (∀ i, u.IsDiff (w i) (v i)) →
+    _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) (List.ofFn v).prod ∧ u.IsDiff (∑ i, w i) (List.ofFn v).prod := by
   intro k
   induction k with
   | zero =>
@@ -168,7 +168,7 @@ open ReciprocityTheory.ChartRestriction.G.Chart (IsTan isTan_iff prodPts isLieCo
 theorem GlobalTheory.exists_lieBasis_of_holUnif : ∀ (A : Over (Sp ℂ)) [GrpObj A] (L : LB A.left) (g : ℕ) (u : HolUnif A L g), Smooth A.hom → (∀ v, IsTangent v → ∃! w, u.IsDiff w v) → (∀ w, ∃! v, IsTangent v ∧ u.IsDiff w v) → ∃ v : Fin g → (epsR ℂ ⟶ A), IsLieBasis v ∧ ∀ (f : A ⟶ A) (c : Fin g → ℂ), IsMonHom f → (∀ z, u.ex (fun k => c k * z k) = u.ex z ≫ f) → ∀ i, (v i ≫ f).left = spMap (epsScale (c i)) ≫ (v i).left := by
   intro A _ L g u _ h1 h2
   choose v hv using fun i : Fin g => (h2 (Pi.single i 1)).exists
-  have ht : ∀ i, IsTan (R := ℂ) (G := A) (v i) := fun i => (isTan_iff _).2 (hv i).1
+  have ht : ∀ i, _root_.ReciprocityTheory.ChartRestriction.G.Chart.IsTan (R := ℂ) (G := A) (v i) := fun i => (isTan_iff _).2 (hv i).1
   have hp : ∀ c : Fin g → ℂ, IsTangent (prodPts (R := ℂ) (G := A) c v) ∧ u.IsDiff c (prodPts (R := ℂ) (G := A) c v) := by
     intro c
     obtain ⟨a, b⟩ := isDiff_list_prod u (fun i => c i • (Pi.single i 1 : Fin g → ℂ)) _

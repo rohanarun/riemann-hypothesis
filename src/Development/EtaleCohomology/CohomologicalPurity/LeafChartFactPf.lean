@@ -86,6 +86,20 @@ theorem opn_mono {X : Scheme.{0}} (U : X.Opens) : Mono (opn U).hom := by
 def LeafWCov : Prop := Hyp → ∀ (q : ℕ) [NeZero q] (d : ℕ) (R : Type) [CommRing R], IsUnit (q : R) →
   Cover2 (ZMod q) (wb d R) (pr d R).hom
 
+theorem eqv_comp {R : Type} [CommRing R] {E E' E'' : Spc} {f : E ⟶ E'} {g : E' ⟶ E''} {F : Shv R}
+    (hf : Eqv R f F) (hg : Eqv R g F) : Eqv R (f ≫ g) F := by
+  intro n
+  have : (pull R (f ≫ g) F n : _ → _) = pull R f F n ∘ pull R g F n := funext fun x => pull_comp R f g F n x
+  rw [this]; exact (hf n).comp (hg n)
+
+theorem eqv_of_section {R : Type} [CommRing R] {E E' : Spc} {f : E ⟶ E'} {r : E' ⟶ E} {F : Shv R}
+    (h : f ≫ r = 𝟙 _) (hr : Eqv R r F) : Eqv R f F := by
+  intro n
+  have hc : (pull R f F n : _ → _) ∘ pull R r F n = id := by
+    funext x; change pull R f F n (pull R r F n x) = x; rw [← pull_comp, h, pull_id]
+  have : Function.Bijective ((pull R f F n : _ → _) ∘ pull R r F n) := by rw [hc]; exact Function.bijective_id
+  exact (Function.Bijective.of_comp_iff _ (hr n)).1 this
+
 def LeafWEqvR : Prop := Hyp → ∀ (q : ℕ) [NeZero q] (d : ℕ) (R : Type) [CommRing R], IsUnit (q : R) →
   ∀ i, Eqv _ (wa d R) (tw q i)
 
@@ -110,7 +124,7 @@ theorem LeafChartFact_of (hG : LeafGeo) (hC : LeafWCov) (hR : LeafWEqvR) (hL : L
   let β : P ⟶ pr d R := Arrow.homMk (pullback.snd _ _) (wb d R) pullback.condition.symm
   let α : opn (off (MvPolynomial (Fin d) R) I) ⟶ P :=
     Arrow.homMk (pullback.lift _ _ hw) (wa d R) (pullback.lift_fst _ _ _)
-  refine ⟨P, α, β, ?_, opn_mono _, (IsPullback.of_hasPullback (wb d R) (pr d R).hom).mono_fst_of_mono this,
+  refine ⟨P, α, β, ?_, _root_.LateralTheory.CohomologicalPurity.Thom.ExcP.Chart.opn_mono _, (IsPullback.of_hasPullback (wb d R) (pr d R).hom).mono_fst_of_mono this,
     hL hH q d R I hI hq _ (pullback.lift_fst _ _ _), hR hH q d R hq, IsPullback.of_hasPullback _ _, hC hH q d R hq⟩
   exact hom_ext (hG.1 d R) (by rw [Arrow.comp_right]; exact hab)
 

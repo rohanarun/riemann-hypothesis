@@ -233,7 +233,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.BZPsiPG.FibKer.SmFib
 
-open Topology
+open _root_.Topology
 
 theorem range_finite {X W : Type} [TopologicalSpace X] [AddCommGroup W] {φ : X → W}
     (hl : IsLocallyConstant φ) (hc : HasCompactSupport φ) : (Set.range φ).Finite := by

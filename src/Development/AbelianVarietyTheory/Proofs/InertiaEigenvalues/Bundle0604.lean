@@ -50,28 +50,6 @@ theorem al_ne (a : K.O) (ha : K.Small a) : al K a ≠ 0 := by
   intro h
   exact ha.1 ((IsFractionRing.injective K.O K.E) (by simpa using h))
 
-theorem isIntegral_sigma {r : B.A} (hr : IsIntegral K.O r) : IsIntegral K.O (B.σ r) := by
-  obtain ⟨q, hq, h0⟩ := hr
-  have hsub : ∀ x : K.O, K.c (algebraMap K.O K.E x) ∈ (algebraMap K.O K.E).range := fun x => by
-    obtain ⟨y, hy⟩ := K.c_int x; exact ⟨y, hy.symm⟩
-  let ψ : K.O ≃+* (algebraMap K.O K.E).range :=
-    RingEquiv.ofBijective (algebraMap K.O K.E).rangeRestrict
-      ⟨fun x y h => IsFractionRing.injective K.O K.E (congrArg Subtype.val h), (algebraMap K.O K.E).rangeRestrict_surjective⟩
-  let cO : K.O →+* K.O := ψ.symm.toRingHom.comp
-    (((K.c : K.E →+* K.E).comp (algebraMap K.O K.E)).codRestrict _ hsub)
-  have hcO : ∀ x, algebraMap K.O K.E (cO x) = K.c (algebraMap K.O K.E x) := fun x => by
-    have := ψ.apply_symm_apply ⟨K.c (algebraMap K.O K.E x), hsub x⟩
-    exact congrArg Subtype.val this
-  have hcomp : (algebraMap K.O B.A).comp cO = (B.σ : B.A →+* B.A).comp (algebraMap K.O B.A) := by
-    ext x
-    simp only [RingHom.comp_apply, RingHom.coe_coe]
-    rw [IsScalarTower.algebraMap_apply K.O K.E B.A, IsScalarTower.algebraMap_apply K.O K.E B.A x, B.σ_alg, hcO]
-  refine ⟨q.map cO, hq.map cO, ?_⟩
-  rw [eval₂_map, hcomp]
-  have := hom_eval₂ q (algebraMap K.O B.A) (B.σ : B.A →+* B.A) r
-  rw [h0, map_zero] at this
-  exact this.symm
-
 theorem sigma_smul (c : K.E) (x : B.A) : B.σ (c • x) = K.c c • B.σ x := by
   rw [Algebra.smul_def, Algebra.smul_def, map_mul, B.σ_alg]
 
@@ -229,13 +207,13 @@ theorem exists_pos : ∀ (K : UQ) (B : InvAlg K) (ι : Type) [Fintype ι] (e π 
             intro h2; apply hni; rw [hei, add_mul, smul_add]; exact h1.add h2
           have h3 : ¬ IsIntegral K.O ((t ^ (-(pi + 1))) • (f * B.σ m)) := by
             intro h3; apply h2
-            have := isIntegral_sigma B h3
+            have := isIntegral_sigma _ B _ h3
             rwa [sigma_smul, map_mul, B.σ_σ, map_zpow₀, hct] at this
           exact core f hf hfld (pi + 1) (B.σ m) (hM.2.2 m hm) h3
         · exact core f hf hfld (pi + 1) m hm h1
       rw [hei, add_mul, smul_add]
       refine M.add_mem (Hf r hr) ?_
-      have := hM.2.2 _ (Hf (B.σ r) (isIntegral_sigma B hr))
+      have := hM.2.2 _ (Hf (B.σ r) (isIntegral_sigma _ B _ hr))
       rwa [sigma_smul, map_mul, B.σ_σ, map_zpow₀, hct] at this
   choose p hp using hpos
   exact ⟨p, hp⟩

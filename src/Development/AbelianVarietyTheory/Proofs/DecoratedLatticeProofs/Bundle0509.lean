@@ -263,7 +263,7 @@ variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} {I : TC B X} {l : I.Laws
   {Yd : DivX (I.rec7 l Z)} {cX : ExtraC} {ex : Extra (I.rec7 l Z) L hT Gi Gl Kc Yd cX} {W : RealPack ex} {u : B.Word}
   {a : GeoAll W u} {t : W.P.T}
 
-open Formalism.L2.Col GlobalTheory.StepData GlobalTheory.SymBridge
+open _root_.Formalism.L2.Col GlobalTheory.StepData GlobalTheory.SymBridge
 
 theorem disjoint_vT (hI : I.Ok) (u : B.Word) (b : I.ι) : Disjoint ((B.primes X).vT u) (rowSG (B.primes X) I.sel (I.tup b)) := by
   refine Finset.disjoint_left.2 fun P h1 h2 => ?_

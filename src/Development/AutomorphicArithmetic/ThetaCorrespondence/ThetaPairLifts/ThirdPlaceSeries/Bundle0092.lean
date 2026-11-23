@@ -328,12 +328,12 @@ section Cls
 open Formalism.MainNotions.Pk
 end Cls
 section IndefiniteRowSideFullHecke
-open Formalism Formalism.L2 Formalism.L2.DIV Formalism.L2.Rows Formalism.L2.Indef NumberField IsDedekindDomain
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Rows Formalism.L2.Indef NumberField IsDedekindDomain
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : MainNotions.G.Inst D L} {Gl : MainNotions.G.LatInst D} {Kc : MainNotions.G.Consts} {Y : DivX D}
   {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Y cX}
 end IndefiniteRowSideFullHecke
 section At
-open Formalism
+open _root_.Formalism
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : MainNotions.G.Inst D L} {Gl : MainNotions.G.LatInst D} {K : MainNotions.G.Consts} {Y : DivX D}
   {cX : ExtraC} {ex : Extra D L hT Gi Gl K Y cX} {Rc : _root_.Formalism.L2.RecTAlt ex} {P : Formalism.L2.Rows.RowSideFamily ex}
   {Dcf : ∀ Zs : Formalism.L2.Indef.DefSub P.A3.fam3.amb3, Formalism.L2.Indef.DefCols (P.A3.side3 P.Ps P.ψs Zs)}
@@ -351,7 +351,7 @@ structure IndefiniteRealisationConstantBounds (Q : _root_.Formalism.IndefR.Indef
   kap : Formalism.L2.Rows.RowsHoldKap3 P
 end At
 section Serv
-open Formalism.MainNotions.Pk Formalism.L2
+open Formalism.MainNotions.Pk _root_.Formalism.L2
 structure SelectionServed (𝒞 : FamClass) (sel : _root_.Formalism.L2.TwistSelection 𝒞) : Prop where
   twU : Closed 𝒞 fun Fm _ => ∃ x0 : ℝ, ∀ x ≥ x0, ∀ (hx : Fm.x1 < x) (i : Fm.Ix x),
     ∃ LC, WeilJacquetShalikaLaw.CmpV (Fm.ex x hx i).cmp (Fm.X x i) (Fm.ex x hx i).tw (reW (Fm.Gy x i) LC) ∧ SysTw (Fm.D x i) (Fm.L x i)

@@ -112,7 +112,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory
 namespace LevelPlaces
-open Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.SplitOffPlaces
+open _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.SplitOffPlaces
 
 theorem under_eq_of_isConjPl {D : D7} {P P' : HeightOneSpectrum (𝓞 D.host.E)} (h : Formalism.IndefR.Lev.IsConjPl P P') :
     P.under (𝓞 D.host.F) = P'.under (𝓞 D.host.F) := by
@@ -323,7 +323,7 @@ theorem locK_mem (χ : HChar L) (Λ : Subgroup ℂˣ) (S : Finset (HeightOneSpec
 end General
 
 open Formalism.BasicNotions Formalism.MainNotions Formalism.BasicNotions.TH Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes Formalism.MainNotions.StandardLattice Formalism.L2.Theta Formalism.L2.DIV Formalism.IndefR Formalism.IndefR.Links Formalism.IndefR.FWT
-  Formalism.L2.Col GlobalTheory.RationalValues
+  _root_.Formalism.L2.Col GlobalTheory.RationalValues
 open scoped TensorProduct
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

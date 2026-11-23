@@ -92,14 +92,7 @@ theorem UpperTheory.Reformulated.B.BorelApproximation.aux4 :
   intro k _ _ _ _
   infer_instance
 
-noncomputable def UpperTheory.Reformulated.B.BorelApproximation.blk :
-    {α n : Type} → {m : α → Type} → Equiv (@Sigma α fun (a : α) ↦ m a) n → n → α :=
-    fun {α n : Type} {m : α → Type} (e : Equiv (@Sigma α fun (a : α) ↦ m a) n) (i : n) ↦
-      @Sigma.fst α (fun (a : α) ↦ m a)
-        (@DFunLike.coe (Equiv n (@Sigma α fun (a : α) ↦ m a)) n (fun (x : n) ↦ @Sigma α fun (a : α) ↦ m a)
-          (@EquivLike.toFunLike (Equiv n (@Sigma α fun (a : α) ↦ m a)) n (@Sigma α fun (a : α) ↦ m a)
-            (@Equiv.instEquivLike n (@Sigma α fun (a : α) ↦ m a)))
-          (@Equiv.symm (@Sigma α fun (a : α) ↦ m a) n e) i)
+noncomputable def UpperTheory.Reformulated.B.BorelApproximation.blk : {α n : Type} → {m : α → Type} → (a : α) × m a ≃ n → n → α := fun {α n} {m} e i => (e.symm i).fst
 
 theorem UpperTheory.Reformulated.B.BorelApproximation.aux6 :
     ∀ (R : Type) [inst : CommRing R] {α n : Type} {m : α → Type} [inst_1 : LinearOrder α] [inst_2 : Fintype n]
@@ -343,23 +336,11 @@ theorem UpperTheory.Reformulated.B.BorelApproximation.aux8 :
   rw [Matrix.coe_units_inv]
   exact Matrix.blockTriangular_inv_of_blockTriangular hx
 
-noncomputable def UpperTheory.Reformulated.B.BorelApproximation.parab :
-    (R : Type) →
-      [inst : CommRing R] →
-        {α n : Type} →
-          {m : α → Type} →
-            [LinearOrder α] →
-              [inst_2 : Fintype n] →
-                [inst_3 : DecidableEq n] →
-                  Equiv (@Sigma α fun (a : α) ↦ m a) n →
-                    @Subgroup
-                      (@Matrix.GeneralLinearGroup n R inst_3 inst_2
-                        (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))
-                      (@Units.instGroup (Matrix n n R)
-                        (@Semiring.toMonoid (Matrix n n R)
-                          (@Matrix.semiring n R (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)) inst_2
-                            inst_3))) :=
-    fun (R : Type) [inst : CommRing R] {α n : Type} {m : α → Type} [inst_1 : LinearOrder α] [inst_2 : Fintype n]
+noncomputable def UpperTheory.Reformulated.B.BorelApproximation.parab : (R : Type) →
+  [inst : CommRing R] →
+    {α n : Type} →
+      {m : α → Type} →
+        [LinearOrder α] → [inst_2 : Fintype n] → [inst_3 : DecidableEq n] → (a : α) × m a ≃ n → Subgroup (GL n R) := fun (R : Type) [inst : CommRing R] {α n : Type} {m : α → Type} [inst_1 : LinearOrder α] [inst_2 : Fintype n]
         [inst_3 : DecidableEq n] (e : Equiv (@Sigma α fun (a : α) ↦ m a) n) ↦
       @Subgroup.mk
         (@Matrix.GeneralLinearGroup n R inst_3 inst_2 (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst)))
@@ -1166,58 +1147,12 @@ theorem UpperTheory.Reformulated.B.BorelApproximation.zero_contDiffOn_supported 
       (Valued.v : Valuation (p.adicCompletion F) (WithZero (Multiplicative ℤ)))).2 inferInstance
   exact {}
 
-noncomputable def UpperTheory.Reformulated.B.BorelApproximation.iwGL :
-    {E : Type} →
-      [inst : Field E] →
-        [inst_1 : @NumberField E inst] →
-          (n : Nat) →
-            (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1) →
-              @Subgroup (@UpperTheory.Reformulated.B.BorelApproximation.GLw E inst inst_1 n w)
-                (@Units.instGroup
-                  (Matrix (Fin n) (Fin n)
-                    (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                      (@NumberField.instCommRingRingOfIntegers E inst)
-                      (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                      (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                      (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w))
-                  (@Semiring.toMonoid
-                    (Matrix (Fin n) (Fin n)
-                      (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                        (@NumberField.instCommRingRingOfIntegers E inst)
-                        (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                        (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                        (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w))
-                    (@Matrix.semiring (Fin n)
-                      (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                        (@NumberField.instCommRingRingOfIntegers E inst)
-                        (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                        (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                        (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w)
-                      (@DivisionSemiring.toSemiring
-                        (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                          (@NumberField.instCommRingRingOfIntegers E inst)
-                          (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                          (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                          (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w)
-                        (@Semifield.toDivisionSemiring
-                          (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                            (@NumberField.instCommRingRingOfIntegers E inst)
-                            (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                            (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                            (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w)
-                          (@Field.toSemifield
-                            (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
-                              (@NumberField.instCommRingRingOfIntegers E inst)
-                              (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                              (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                              (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w)
-                            (@IsDedekindDomain.HeightOneSpectrum.adicCompletion.instField
-                              (@NumberField.RingOfIntegers E inst) (@NumberField.instCommRingRingOfIntegers E inst)
-                              (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1) E inst
-                              (@NumberField.RingOfIntegers.instAlgebra_1 E inst)
-                              (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w))))
-                      (Fin.fintype n) (instDecidableEqFin n)))) :=
-    fun {E : Type} [inst : Field E] [inst_1 : @NumberField E inst] (n : Nat) (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1) ↦
+noncomputable def UpperTheory.Reformulated.B.BorelApproximation.iwGL : {E : Type} →
+  [inst : Field E] →
+    [inst_1 : NumberField E] →
+      (n : ℕ) →
+        (w : UpperTheory.Reformulated.B.BorelApproximation.Pl E) →
+          Subgroup (UpperTheory.Reformulated.B.BorelApproximation.GLw n w) := fun {E : Type} [inst : Field E] [inst_1 : @NumberField E inst] (n : Nat) (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1) ↦
       @UpperTheory.Reformulated.B.BorelApproximation.iwahori
         (@IsDedekindDomain.HeightOneSpectrum.adicCompletion (@NumberField.RingOfIntegers E inst)
           (@NumberField.instCommRingRingOfIntegers E inst) (@NumberField.RingOfIntegers.instIsDedekindDomain E inst inst_1)
@@ -1241,14 +1176,13 @@ noncomputable def UpperTheory.Reformulated.B.BorelApproximation.iwGL :
             (@NumberField.RingOfIntegers.instIsFractionRing E inst inst_1) w))
         (@UpperTheory.Reformulated.B.BorelApproximation.zero_contDiffOn_supported E inst inst_1 w) (Fin n) (Fin.fintype n) (instDecidableEqFin n) (@Fin.instLinearOrder n)
 
-noncomputable def UpperTheory.Reformulated.B.BorelApproximation.dcos :
-    {E : Type} →
-      [inst : Field E] →
-        [inst_1 : @NumberField E inst] →
-          (n : Nat) →
-            (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1) →
-              @UpperTheory.Reformulated.B.BorelApproximation.GLw E inst inst_1 n w → @UpperTheory.Reformulated.B.BorelApproximation.GLw E inst inst_1 n w → Complex :=
-    fun {E : Type} [inst : Field E] [inst_1 : @NumberField E inst] (n : Nat) (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1)
+noncomputable def UpperTheory.Reformulated.B.BorelApproximation.dcos : {E : Type} →
+  [inst : Field E] →
+    [inst_1 : NumberField E] →
+      (n : ℕ) →
+        (w : UpperTheory.Reformulated.B.BorelApproximation.Pl E) →
+          UpperTheory.Reformulated.B.BorelApproximation.GLw n w →
+            UpperTheory.Reformulated.B.BorelApproximation.GLw n w → ℂ := fun {E : Type} [inst : Field E] [inst_1 : @NumberField E inst] (n : Nat) (w : @UpperTheory.Reformulated.B.BorelApproximation.Pl E inst inst_1)
         (t y : @UpperTheory.Reformulated.B.BorelApproximation.GLw E inst inst_1 n w) ↦
       @ite Complex
         (∃ (x : @UpperTheory.Reformulated.B.BorelApproximation.GLw E inst inst_1 n w),

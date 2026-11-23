@@ -378,23 +378,9 @@ theorem UpperTheory.Reformulated.B.Yzd4.aux4 :
         simp only [Matrix.mul_assoc]
     _ = J := by rw [h1, h2, Matrix.one_mul, Matrix.mul_one]
 
-noncomputable def UpperTheory.Reformulated.B.Yzd4.UJ :
-    {A : Type} →
-      [inst : CommRing A] →
-        {n : Type} →
-          [inst_1 : Fintype n] →
-            [inst_2 : DecidableEq n] →
-              @RingHom A A (@Semiring.toNonAssocSemiring A (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst)))
-                  (@Semiring.toNonAssocSemiring A (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst))) →
-                Matrix n n A →
-                  @Subgroup
-                    (@Matrix.GeneralLinearGroup n A inst_2 inst_1
-                      (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst)))
-                    (@Units.instGroup (Matrix n n A)
-                      (@Semiring.toMonoid (Matrix n n A)
-                        (@Matrix.semiring n A (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst)) inst_1
-                          inst_2))) :=
-    fun {A : Type} [inst : CommRing A] {n : Type} [inst_1 : Fintype n] [inst_2 : DecidableEq n]
+noncomputable def UpperTheory.Reformulated.B.Yzd4.UJ : {A : Type} →
+  [inst : CommRing A] →
+    {n : Type} → [inst_1 : Fintype n] → [inst_2 : DecidableEq n] → (A →+* A) → Matrix n n A → Subgroup (GL n A) := fun {A : Type} [inst : CommRing A] {n : Type} [inst_1 : Fintype n] [inst_2 : DecidableEq n]
         (σ :
           @RingHom A A (@Semiring.toNonAssocSemiring A (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst)))
             (@Semiring.toNonAssocSemiring A (@CommSemiring.toSemiring A (@CommRing.toCommSemiring A inst))))
@@ -1138,28 +1124,17 @@ noncomputable def UpperTheory.Reformulated.B.Yzd4.topTens :
             (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1))) inst_2)
           (@UpperTheory.Reformulated.B.Yzd4.aux9 F inst R inst_3 inst_4))
 
-noncomputable def UpperTheory.Reformulated.B.Yzd4.d18 :
-    {F E : Type} →
-      [inst : Field F] →
-        [inst_1 : Field E] →
-          [inst_2 :
-              @Algebra F E (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-                (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))] →
-            (R : Type) →
-              [inst_3 : CommRing R] →
-                [inst_4 :
-                    @Algebra F R (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-                      (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst_3))] →
-                  (σ :
-                      @AlgHom F E E (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-                        (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))
-                        (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))
-                        inst_2 inst_2) →
-                    {M : Nat} →
-                      (J : Matrix (Fin M) (Fin M) E) →
-                        [TopologicalSpace R] →
-                          Set (@UpperTheory.Reformulated.B.Yzd4.HA F E inst inst_1 inst_2 R inst_3 inst_4 σ M J) → Prop :=
-    fun {F E : Type} [inst : Field F] [inst_1 : Field E]
+noncomputable def UpperTheory.Reformulated.B.Yzd4.d18 : {F E : Type} →
+  [inst : Field F] →
+    [inst_1 : Field E] →
+      [inst_2 : Algebra F E] →
+        (R : Type) →
+          [inst_3 : CommRing R] →
+            [inst_4 : Algebra F R] →
+              (σ : E →ₐ[F] E) →
+                {M : ℕ} →
+                  (J : Matrix (Fin M) (Fin M) E) →
+                    [TopologicalSpace R] → Set (UpperTheory.Reformulated.B.Yzd4.HA R σ J) → Prop := fun {F E : Type} [inst : Field F] [inst_1 : Field E]
         [inst_2 :
           @Algebra F E (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
             (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))]
@@ -1519,22 +1494,9 @@ noncomputable def UpperTheory.Reformulated.B.Yzd4.d18 :
               t)
             s)
 
-theorem UpperTheory.Reformulated.B.Yzd4.blockM_one_partner_eq_one :
-    ∀ {F E : Type} [inst : Field F] [inst_1 : Field E]
-      [inst_2 :
-        @Algebra F E (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-          (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))]
-      (R : Type) [inst_3 : CommRing R]
-      [inst_4 :
-        @Algebra F R (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-          (@CommSemiring.toSemiring R (@CommRing.toCommSemiring R inst_3))]
-      (σ :
-        @AlgHom F E E (@Semifield.toCommSemiring F (@Field.toSemifield F inst))
-          (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1)))
-          (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst_1))) inst_2 inst_2)
-      {M : Nat} (J : Matrix (Fin M) (Fin M) E) [inst_5 : TopologicalSpace R],
-      @UpperTheory.Reformulated.B.Yzd4.d18 F E inst inst_1 inst_2 R inst_3 inst_4 σ M J inst_5
-        (@Set.univ (@UpperTheory.Reformulated.B.Yzd4.HA F E inst inst_1 inst_2 R inst_3 inst_4 σ M J)) := by
+theorem UpperTheory.Reformulated.B.Yzd4.blockM_one_partner_eq_one : ∀ {F E : Type} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (R : Type) [inst_3 : CommRing R]
+  [inst_4 : Algebra F R] (σ : E →ₐ[F] E) {M : ℕ} (J : Matrix (Fin M) (Fin M) E) [inst_5 : TopologicalSpace R],
+  UpperTheory.Reformulated.B.Yzd4.d18 R σ J Set.univ := by
   intro F E _ _ _ R _ _ σ M J _
   letI : TopologicalSpace (TensorProduct F R E) := UpperTheory.Reformulated.B.Yzd4.topTens R
   exact ⟨Set.univ, isOpen_univ, rfl⟩

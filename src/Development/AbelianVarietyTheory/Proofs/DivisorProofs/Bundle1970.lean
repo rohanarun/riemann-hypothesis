@@ -188,7 +188,7 @@ theorem le_of_le_reductions : ∀ (R : Type) [CommRing R] (I : Ideal R), I ≤ I
         have := hle e U
         rwa [Scheme.IdealSheafData.ideal_sup, Pi.sup_apply, baseIdeal_ideal, Ideal.map_pow] at this)
     refine ⟨⟨V.affineBasicOpen (1 - r), ideal_le_on_basicOpen a a' U _ hr'⟩, ?_⟩
-    have hsupp : x ∈ (baseIdeal p I).support := (GlobalTheory.T.baseIdealSheafOfIdeal_comap_specMap_support.2.2 R V p I x).2 hx
+    have hsupp : x ∈ (baseIdeal p I).support := (_root_.GlobalTheory.FormalAlg.baseIdeal_calculus.2.2 R V p I x).2 hx
     rw [Scheme.IdealSheafData.mem_support_iff_of_mem hU, baseIdeal_ideal, Scheme.mem_zeroLocus_iff]
       at hsupp
     have hxr := hsupp r hr

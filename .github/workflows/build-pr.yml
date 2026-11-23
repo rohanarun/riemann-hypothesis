@@ -1,5 +1,5 @@
 name: Build PR
-run-name: "${{ inputs.mode == 'native-proof' && 'Proof shard' || 'Build PR' }} #${{ github.event.pull_request.number || inputs.pr_number }} ${{ github.event.pull_request.head.sha || 'manual' }}"
+run-name: "${{ inputs.mode == 'quick-check' && 'Quick check' || inputs.mode == 'native-proof' && 'Proof shard' || 'Build PR' }} #${{ github.event.pull_request.number || inputs.pr_number }} ${{ github.event.pull_request.head.sha || 'manual' }}"
 
 on:
   pull_request_target:
@@ -13,6 +13,19 @@ on:
         options:
           - build
           - native-proof
+          - quick-check
+      quick_head:
+        description: Optional immutable PR head selected by the small-runner scheduler
+        type: string
+        default: ''
+      quick_runner:
+        description: Registered small host for a bounded changed-module diagnostic
+        type: choice
+        default: ryzen-5900x
+        options:
+          - ryzen-5900x
+          - i9-12900ks
+          - gcp-small
       proof_seed_sha256:
         description: Content SHA of the reviewed proof seed in the fixed public cache
         type: string
@@ -22,12 +35,11 @@ on:
         type: number
         required: true
       runner_pool:
-        description: Runner pool (small requires reviewed warm cache and bounded build work)
+        description: Full-build pool (small hosts use quick-check mode)
         type: choice
         default: rh-build
         options:
           - rh-build
-          - rh-build-small
 
 permissions:
   contents: read
@@ -37,12 +49,12 @@ permissions:
 # heads may use separate available runners; repeat events for one head coalesce.
 # Manual dispatches serialize separately because they resolve the head at runtime.
 concurrency:
-  group: rh-build-pr-${{ github.event.pull_request.number || inputs.pr_number }}-${{ inputs.mode == 'native-proof' && format('native-proof-{0}', inputs.proof_seed_sha256) || github.event.pull_request.head.sha || 'manual' }}
+  group: ${{ inputs.mode == 'quick-check' && format('rh-quick-{0}', inputs.quick_runner) || format('rh-build-pr-{0}-{1}', github.event.pull_request.number || inputs.pr_number, inputs.mode == 'native-proof' && format('native-proof-{0}', inputs.proof_seed_sha256) || github.event.pull_request.head.sha || 'manual') }}
   cancel-in-progress: false
 
 jobs:
   resolve:
-    if: ${{ inputs.mode != 'native-proof' && (github.event_name == 'workflow_dispatch' || vars.RH_CI_MANUAL_ONLY != 'true') }}
+    if: ${{ inputs.mode != 'native-proof' && inputs.mode != 'quick-check' && (github.event_name == 'workflow_dispatch' || vars.RH_CI_MANUAL_ONLY != 'true') }}
     runs-on: ubuntu-latest
     outputs:
       candidate: ${{ steps.resolve.outputs.candidate }}
@@ -82,9 +94,8 @@ jobs:
     if: ${{ needs.resolve.outputs.reuse == '' }}
     runs-on:
       group: RiemannHypothesisBuild
-      # Automatic PR builds and unspecified dispatches always use the heavy pool.
-      # Select small only after reviewing cache warmth and the remaining build work.
-      labels: ${{ github.event_name == 'workflow_dispatch' && inputs.runner_pool == 'rh-build-small' && 'rh-build-small' || 'rh-build' }}
+      # Full builds never consume the small diagnostic pool.
+      labels: rh-build
     timeout-minutes: 1440
     steps:
       - name: Clear disposable outputs from earlier jobs
@@ -221,7 +232,7 @@ jobs:
           SEED_SHA: ${{ inputs.proof_seed_sha256 }}
           PR_NUMBER: ${{ inputs.pr_number }}
         run: |
-          test "$PR_NUMBER" = 91
+          test "$PR_NUMBER" = "$(python3 -c 'import json; print(json.load(open("trusted/tools/ci_native/proof-policy.json"))["pr_number"])')"
           python3 trusted/tools/ci_native/fetch_proof_seed.py --seed-sha256 "$SEED_SHA" --output seed
       - id: plan
         env:
@@ -229,6 +240,7 @@ jobs:
           RUN_ID: ${{ github.run_id }}
           ATTEMPT: ${{ github.run_attempt }}
           WORKFLOW_SHA: ${{ github.workflow_sha }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 trusted/tools/ci_native/prepare_proofs.py --seed seed/seed.json --seed-sha256 "$SEED_SHA" \
             --registry trusted/tools/ci_native/proof-runners.json --output control \
@@ -318,6 +330,12 @@ jobs:
           SECONDS_LIMIT: ${{ matrix.timeout_seconds }}
         run: |
           umask 077
+          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+          if [[ ! -S "$XDG_RUNTIME_DIR/bus" ]]; then
+            echo "The dedicated runner account has no systemd user bus at $XDG_RUNTIME_DIR/bus; check its user manager and loginctl linger setting." >&2
+            exit 1
+          fi
           systemd-run --user --wait --collect --pipe --unit="rh-proof-${RUN_ID}-${ATTEMPT}-${ID}" \
             -p "CPUQuota=$((CPUS*100))%" -p "MemoryMax=${MEMORY}M" -p MemorySwapMax=0 \
             -p TasksMax=16384 -p LimitSTACK=infinity -p "RuntimeMaxSec=$((SECONDS_LIMIT+120))" \
@@ -333,3 +351,105 @@ jobs:
           if-no-files-found: warn
           compression-level: 0
           retention-days: 3
+
+  quick_resolve:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.mode == 'quick-check' }}
+    runs-on: ubuntu-latest
+    outputs:
+      runnable: ${{ steps.resolve.outputs.runnable }}
+      candidate: ${{ steps.resolve.outputs.candidate }}
+      runner_label: ${{ steps.resolve.outputs.runner_label }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+          sparse-checkout: scripts
+      - id: resolve
+        name: Resolve a source-pinned small-runner diagnostic
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr_number }}
+          SMALL_RUNNER: ${{ inputs.quick_runner }}
+          QUICK_HEAD: ${{ inputs.quick_head }}
+        run: python3 scripts/quick-check.py resolve --pr "$PR" --head "$QUICK_HEAD" --runner "$SMALL_RUNNER" --output quick-request.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quick-input-${{ github.run_id }}-${{ github.run_attempt }}
+          path: quick-request.json
+          retention-days: 7
+
+  quick_check:
+    needs: quick_resolve
+    if: ${{ needs.quick_resolve.outputs.runnable == 'true' }}
+    runs-on:
+      group: RiemannHypothesisBuild
+      labels: ${{ needs.quick_resolve.outputs.runner_label }}
+    timeout-minutes: 40
+    env:
+      QUICK_OUTPUT: ${{ github.workspace }}/.quick-results/rh-quick-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: trusted
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            lakefile.toml
+            lake-manifest.json
+            lean-toolchain
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.quick_resolve.outputs.candidate }}
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: quick-input-${{ github.run_id }}-${{ github.run_attempt }}
+          path: quick-identity-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Check changed modules within the small-runner budget
+        env:
+          SMALL_RUNNER: ${{ inputs.quick_runner }}
+          RUN_ID: ${{ github.run_id }}
+          ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          umask 077
+          export PATH="$HOME/.elan/bin:$PATH"
+          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+          if [[ ! -S "$XDG_RUNTIME_DIR/bus" ]]; then
+            echo "The dedicated runner account has no systemd user bus at $XDG_RUNTIME_DIR/bus; check its user manager and loginctl linger setting." >&2
+            exit 1
+          fi
+          systemd-run --user --wait --collect --pipe --unit="rh-quick-${RUN_ID}-${ATTEMPT}" \
+            -p CPUQuota=800% -p MemoryMax=64G -p MemorySwapMax=0 -p TasksMax=16384 \
+            -p LimitNOFILE=65536 -p LimitSTACK=infinity -p RuntimeMaxSec=1800 \
+            --setenv="PATH=$PATH" --setenv="HOME=$HOME" --setenv="RUNNER_NAME=$RUNNER_NAME" \
+            python3 "$PWD/trusted/scripts/quick-check.py" run --candidate "$PWD/candidate" \
+            --request "$PWD/quick-identity-${RUN_ID}-${ATTEMPT}/quick-request.json" \
+            --state "${RH_CI_STATE_DIR:-$HOME/.local/share/riemann-build-state}" \
+            --runner "$SMALL_RUNNER" --output "$QUICK_OUTPUT"
+      - name: Upload diagnostic result; this is not a full-build cache
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quick-result-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.QUICK_OUTPUT }}
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Explain the diagnostic scope
+        if: always()
+        run: |
+          python3 - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          result=Path(os.environ['QUICK_OUTPUT'])/'result.json'
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out:
+              print('Changed-module diagnostic only; a complete PR build remains required.',file=out)
+              print('```json',file=out)
+              print(result.read_text() if result.exists() else json.dumps({'status':'infrastructure_or_outer_budget_failure','full_build':False}),file=out)
+              print('```',file=out)
+          PYTHON

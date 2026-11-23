@@ -785,7 +785,7 @@ private theorem exists_ne_zero_smul_mem_of_mem_span' {τ E : Type} [CommRing E] 
     subst this
     simp [hq]
 
-private theorem main {O R τ : Type} [CommRing O] [IsDomain O] [CommRing R] [Algebra O R] [Fintype τ] [DecidableEq τ]
+private theorem existsChartOfWeightZeroPart {O R τ : Type} [CommRing O] [IsDomain O] [CommRing R] [Algebra O R] [Fintype τ] [DecidableEq τ]
     (W : WPres O (ℤ × ℤ) R) (h : W.HasOrigin)
     (hw : ∀ i, (W.wt i).1 = -1 ∨ (W.wt i).1 = 0 ∨ (W.wt i).1 = 1) (A : Subalgebra O R)
     (hA : ∀ f, f ∈ A ↔ f ∈ ⨆ n : ℤ, W.part (0, n)) (wt : τ → ℤ × ℤ)
@@ -1148,5 +1148,5 @@ theorem UpperTheory.V.GradeZeroInterpolatingElement.aSmooth :
     simp only [wts, oddRoots, wAl, wBe, wTh, wPs, Finset.mem_union, Finset.mem_insert,
       Finset.mem_singleton] at this
     rcases this with ((h | h | h | h | h | h) | h | h | h) <;> rw [h] <;> simp
-  obtain ⟨ψ, hψ⟩ := main M.W M.org hw M.A (fun f => Iff.rfl) wt φ H b hb hτb
+  obtain ⟨ψ, hψ⟩ := existsChartOfWeightZeroPart M.W M.org hw M.A (fun f => Iff.rfl) wt φ H b hb hτb
   exact ⟨{i // i ≠ b}, inferInstance, _, ψ, hψ, hcount⟩

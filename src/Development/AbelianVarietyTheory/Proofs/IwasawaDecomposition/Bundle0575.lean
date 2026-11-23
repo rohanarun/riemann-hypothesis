@@ -419,7 +419,7 @@ theorem tower {F : Type} [Field F] {ι : Type} [Fintype ι] {m : ι → ℕ} (n 
     simp only [Nat.reduceAdd] at this
     omega
 
-open Limits NumberField Formalism.BasicNotions Formalism.L2.Pj GlobalTheory.Toroidal GlobalTheory.ShFam
+open _root_.CategoryTheory.Limits NumberField Formalism.BasicNotions Formalism.L2.Pj GlobalTheory.Toroidal GlobalTheory.ShFam
 
 section Component
 

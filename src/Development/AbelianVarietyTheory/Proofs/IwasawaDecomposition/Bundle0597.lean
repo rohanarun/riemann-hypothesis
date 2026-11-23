@@ -43,7 +43,7 @@ set_option autoImplicit false
 
 noncomputable section
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj Filter
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj Filter
 
 attribute [local instance] Over.cartesianMonoidalCategory
 

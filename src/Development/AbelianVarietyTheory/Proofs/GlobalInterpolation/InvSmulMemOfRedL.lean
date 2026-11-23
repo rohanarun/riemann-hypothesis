@@ -15,7 +15,7 @@ noncomputable section
 
 namespace GlobalTheory.LvT.Pts
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix GlobalTheory.Mem.Col2 GlobalTheory.LvT.Inh
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Matrix GlobalTheory.Mem.Col2 GlobalTheory.LvT.Inh
 open Formalism.HermitianLatticesTheory (localization₂ gmap IsUnimodular dual)
 
 section Loc

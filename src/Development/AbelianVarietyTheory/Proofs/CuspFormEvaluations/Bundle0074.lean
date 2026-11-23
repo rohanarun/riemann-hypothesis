@@ -437,7 +437,7 @@ theorem log_card_comp_le : ∀ (D : D7) (T : Top D) (_h : LawsP T) (large₂ : S
     · rw [b]; simp; linarith
     rw [Nat.cast_mul, Real.log_mul (by exact_mod_cast a.ne') (by exact_mod_cast b.ne')]
     linarith
-  have key := GlobalTheory.log_card_comp_unf_le _root_.GlobalTheory.QNorm.hasseNormSt _root_.GlobalTheory.thetaUnifAV_all GlobalTheory.T.abelianScheme_laws_unconditional.1 D.host.E _ _ _ (T.Q.Xo j) T.Q.c σ D.R.r
+  have key := GlobalTheory.log_card_comp_unf_le _root_.GlobalTheory.QNorm.hasseNormSt _root_.GlobalTheory.thetaUnifAV_all _root_.GlobalTheory.abelianSchemeLaws_all.1 D.host.E _ _ _ (T.Q.Xo j) T.Q.c σ D.R.r
     (Formalism.L2.PjFree.Unf.ofPj (T.U j σ)) hr hσ ((Formalism.L2.PjFree.isUnf_ofPj _).2 (h.unf j hj σ hσ))
     D.host.xi0 AA hsk hne hFG hA hdual large₂.sc.L (by rw [hfd]; exact_mod_cast h16) h2 hdE hrL
     (by rw [hfd]; exact_mod_cast hf) hML

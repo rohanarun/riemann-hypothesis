@@ -299,7 +299,7 @@ open GlobalTheory.IndefiniteRowSideFullHecke.LevelStructureAutomorphisms (LevelA
 open GlobalTheory.BadCount
 open scoped TensorProduct
 open GlobalTheory.CovInt IsDedekindDomain
-open MonoidalCategory CartesianMonoidalCategory MonObj IsLocalRing Limits
+open MonoidalCategory CartesianMonoidalCategory MonObj IsLocalRing _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits
 open ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Out Formalism.MainNotions.ModuliIntegralCharts.H1 ReciprocityTheory.ChartRestriction.G.Geo.Tor.Germ GlobalTheory.PtTie
 attribute [local instance] Over.cartesianMonoidalCategory
 open GlobalTheory.PlaceInt GlobalTheory.PlaceInt.ShortTriv GlobalTheory.IntCuspLat GlobalTheory.ShortBound

@@ -16,8 +16,8 @@ open scoped Matrix
 
 variable {E : Type} [Field E] [NumberField E] [StarRing E]
 
-theorem hT_swap (S : HSpace E) (x y : S.V) : S.hT y x = star (S.hT x y) := by
-  rw [← S.herm.eq x y, starRingEnd_apply]
+theorem hT_swap (S : HSpace E) (x y : S.V) : S.hT y x = star (S.hT x y) :=
+  (S.herm.eq x y).symm
 
 theorem gram_fvec {S : HSpace E} {r : ℕ} {T : E} (F : FlagG S r T) (c i : Fin (r + 1)) :
     S.hT (F.fvec c) (F.fvec i) = if c = Fin.last r ∧ i = Fin.last r then -T else 0 := by

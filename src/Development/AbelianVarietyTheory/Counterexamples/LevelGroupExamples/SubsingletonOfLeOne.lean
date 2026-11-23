@@ -171,7 +171,7 @@ theorem right_inverse_local {R : Type} [CommRing R] [IsLocalRing R] (e : ℕ) {m
 
 section Geometry
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.Serre GlobalTheory.EigenSplit GlobalTheory.LieEigen Matrix
 open Formalism.MainNotions.DIV.Cons GlobalTheory.ToricRank GlobalTheory.PeriodLaws
 open ReciprocityTheory.ChartRestriction.G.Chart (prodPts)
@@ -287,7 +287,7 @@ theorem finrank_le_local {R : Type} [CommRing R] [IsDomain R] [IsLocalRing R] [I
 
 end Geometry
 
-open AlgebraicGeometry CategoryTheory Limits NumberField IsLocalRing
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField IsLocalRing
 open ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.Out Formalism.L2.Pj
 open Formalism.MainNotions.DIV.Cons (SCF intO)
 

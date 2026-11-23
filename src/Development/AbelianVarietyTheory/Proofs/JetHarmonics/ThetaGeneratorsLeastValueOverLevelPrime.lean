@@ -279,7 +279,7 @@ theorem least_value_le : (∀ (p : ℕ) [Fact p.Prime], ReciprocityTheory.ChartR
         · exact (hm τ s h).2.trans (hmult2 τ)⟩)
       (hdeg ▸ hD1) (hdeg ▸ hD2) (hdeg ▸ hD3) _ hρg
   obtain ⟨θ, θα, k, aa, hh, c1, c2, c3, haa, hsum, hi⟩ :=
-    GlobalTheory.T.pointStatements_on_copies_hold.2.1 E H Dw l Xo c T io y C hTr P hP hy ϖ hϖ Q hQ g g' hg hg' hgg hog hog' π π' hπ hπ' hc hc' hnu
+    _root_.GlobalTheory.PowGerm.pointStatements_on_copies.2.1 E H Dw l Xo c T io y C hTr P hP hy ϖ hϖ Q hQ g g' hg hg' hgg hog hog' π π' hπ hπ' hc hc' hnu
       F v hv I _ D' A' G' pD pA pG U' PU oD' hx1 hx2 s s₂ p w ζ x t₀ t σ' h ⟨b1, b2, b3, b4, b5, b6, b7, b8, b9⟩
   letI := io.toAlgebra
   rw [← hmap F ((algebraMap T.Fr F).comp io), hsum,

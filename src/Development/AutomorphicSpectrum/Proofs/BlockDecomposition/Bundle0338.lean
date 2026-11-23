@@ -420,7 +420,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.MoyPrasadTop
 
-open PositivityTheory.LowerBoundConstant GlobalTheory GlobalTheory.Published GlobalTheory.PRep GlobalTheory.SmGL GlobalTheory.SplitWeil GlobalTheory.SplitRead Topology
+open PositivityTheory.LowerBoundConstant GlobalTheory GlobalTheory.Published GlobalTheory.PRep GlobalTheory.SmGL GlobalTheory.SplitWeil GlobalTheory.SplitRead _root_.Topology
 
 theorem moyPrasadJacquetIso : GlobalTheory.Published.MoyPrasadJacquetIso := by
   intro k _ _ _ _ n s d e V _ _ π hπ

@@ -388,7 +388,7 @@ section
 namespace GlobalTheory.CompanionTheory.Ar.BT
 
 open CategoryTheory Limits AlgebraicGeometry MonoidalCategory CartesianMonoidalCategory MonObj TensorProduct
-open GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.BT
+open _root_.GlobalTheory.CompanionTheory.Ar GlobalTheory.CompanionTheory.Ar.BT
 
 theorem valAt_sub_one {B : Type} [CommRing B] {X : Scheme.{0}} (y : Spec (CommRingCat.of B) ⟶ X) (a : Γ(X, ⊤)) :
     valAt y ⊤ le_top (a - 1) = valAt y ⊤ le_top a - 1 := by

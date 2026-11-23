@@ -193,7 +193,7 @@ theorem exists_pow_eq_translT (hL : LL) {S : Scheme.{0}} [IsLocallyNoetherian S]
 attribute [local instance] TorusExt.gtGroup
 
 
-open TorusExt in
+open _root_.GlobalTheory.TorusExt in
 theorem eq_pow_of_rel {R : Type} [CommRing R] [IsDomain R] {D : DegPre R} (hB : D.TauBimult) {F : Type} [Field F]
     [Algebra (FractionRing R) F] {k m : ℕ} (p : QkPt D F k) (g' : GtPtF D F) (hg' : GtPtF.IsNsmul m g' p.g)
     {E : Type} [Monoid E] (Ind : QkPt D F (k * m) → E → Prop)

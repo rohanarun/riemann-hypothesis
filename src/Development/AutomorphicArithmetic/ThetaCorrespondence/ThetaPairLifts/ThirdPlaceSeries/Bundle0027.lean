@@ -334,7 +334,7 @@ section
 noncomputable section
 namespace GlobalTheory.HeightCounting
 section
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N NumberField IsDedekindDomain Formalism.L2 Formalism.L2.NT
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N NumberField IsDedekindDomain _root_.Formalism.L2 Formalism.L2.NT
 set_option synthInstance.maxHeartbeats 400000 in
 structure NAllCAlt (D : D7) (C : NChoice D) where
   gal : _root_.Formalism.L2.NGalTiedAlt D
@@ -391,7 +391,7 @@ structure NAllCAlt (D : D7) (C : NChoice D) where
   embO_star : ∀ s (x y : ↥D.LL0), (y : D.what₂.LL) = star (x : D.what₂.LL) → chiD.embO s false x = chiD.embO s true y
 variable {D : D7} {C : NChoice D} {I : TwIn D}
 end
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal ReciprocityTheory.Aut Formalism.AUTREP Formalism.L2 Formalism.L2.Host NumberField IsDedekindDomain
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal ReciprocityTheory.Aut Formalism.AUTREP _root_.Formalism.L2 Formalism.L2.Host NumberField IsDedekindDomain
 def LpCmpAlt (_hL : _root_.UpperTheory.Zero.LLC.RecTExists) : Prop :=
   ∀ (D : D7) (_T : GlobalTheory.RowTie.WDTie D.nd D.naut), Nonempty (LPTiedPlaceholder D)
 def CgCmpAlt (hL : _root_.UpperTheory.Zero.LLC.RecTExists) : Prop :=

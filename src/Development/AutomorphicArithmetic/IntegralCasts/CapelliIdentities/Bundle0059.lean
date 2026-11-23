@@ -8,36 +8,13 @@ public import Mathlib
 section
 noncomputable def UpperTheory.Reformulated.B.StrictlyUpperRank.IsStrictUpper.{u_1, u_2} :
     {𝕜 : Type u_1} → [RCLike 𝕜] → {n : Type u_2} → [LinearOrder n] → Matrix n n 𝕜 → Prop :=
-    fun {𝕜 : Type u_1} [inst : RCLike 𝕜] {n : Type u_2} [inst_1 : LinearOrder n] (X : Matrix n n 𝕜) ↦
-      ∀ (i j : n),
-        @LE.le n
-            (@Preorder.toLE n
-              (@PartialOrder.toPreorder n
-                (@SemilatticeInf.toPartialOrder n
-                  (@Lattice.toSemilatticeInf n (@DistribLattice.toLattice n (@instDistribLatticeOfLinearOrder n inst_1))))))
-            j i →
-          @Eq 𝕜 (X i j)
-            (@OfNat.ofNat 𝕜 (nat_lit 0)
-              (@Zero.toOfNat0 𝕜
-                (@MulZeroClass.toZero 𝕜
-                  (@instMulZeroClassOfSemiring 𝕜
-                    (@DivisionSemiring.toSemiring 𝕜
-                      (@Semifield.toDivisionSemiring 𝕜
-                        (@Field.toSemifield 𝕜
-                          (@NormedField.toField 𝕜
-                            (@DenselyNormedField.toNormedField 𝕜 (@RCLike.toDenselyNormedField 𝕜 inst))))))))))
+  fun {𝕜} [RCLike 𝕜] {n} [LinearOrder n] X ↦
+    ∀ (i j : n), j ≤ i → X i j = 0
 
 noncomputable def UpperTheory.Reformulated.B.StrictlyUpperRank.rankBelow.{u_2} :
-    {n : Type u_2} → [Fintype n] → [LinearOrder n] → n → Nat :=
-    fun {n : Type u_2} [Fintype n] [inst_1 : LinearOrder n] (i : n) ↦
-      @Finset.card n
-        {x : n |
-          @LT.lt n
-            (@Preorder.toLT n
-              (@PartialOrder.toPreorder n
-                (@SemilatticeInf.toPartialOrder n
-                  (@Lattice.toSemilatticeInf n (@DistribLattice.toLattice n (@instDistribLatticeOfLinearOrder n inst_1))))))
-            x i}
+    {n : Type u_2} → [Fintype n] → [LinearOrder n] → n → ℕ :=
+  fun {n} [Fintype n] [LinearOrder n] i ↦
+    ({x : n | x < i} : Finset n).card
 
 theorem UpperTheory.Reformulated.B.StrictlyUpperRank.rank_add_le_of_pow_ne_zero.{u_1, u_2} :
     ∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {n : Type u_2} [inst_1 : Fintype n] [inst_2 : LinearOrder n] {X : Matrix n n 𝕜},

@@ -40,7 +40,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 noncomputable section
 namespace GlobalTheory.CompanionTheory.Ar.Rec.FinRd.Roots.LieBasis
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}
   {l : Level H} {Xo : Moduli Dw l} {c : Coeff l} {O : Type} [CommRing O] {β : O →+* c.F}

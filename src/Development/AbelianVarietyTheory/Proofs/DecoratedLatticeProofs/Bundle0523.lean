@@ -55,7 +55,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 namespace GlobalTheory.SeeSaw.LevelData
 
 open GlobalTheory.SplitWeil GlobalTheory.RootEx GlobalTheory.StepData GlobalTheory.SymChain GlobalTheory.SymBridge GlobalTheory.LocMod
-open Formalism.L2.Col (IntAt redP qOf)
+open _root_.Formalism.L2.Col (IntAt redP qOf)
 
 section Gen
 

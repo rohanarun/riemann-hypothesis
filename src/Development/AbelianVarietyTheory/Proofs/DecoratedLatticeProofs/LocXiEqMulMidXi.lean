@@ -33,7 +33,7 @@ open GlobalTheory.SymBridge GlobalTheory.SplitWeil GlobalTheory.RootEx GlobalThe
 
 noncomputable section
 namespace GlobalTheory.Fam.MidLoc
-open Formalism.L2.Col (IntAt redP qOf)
+open _root_.Formalism.L2.Col (IntAt redP qOf)
 
 section Loc
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
@@ -247,7 +247,7 @@ theorem toLoc_inFr (ι : E →+* k) {Y Y' : Type} [Fintype Y] [DecidableEq Y] [F
 end Mat
 
 section Tuple
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 theorem xiAt_tw_eq {X : Fields} {Pr : Primes X} {R : Ranks} (Ch : Chars X Pr R.m)
     (sel : HeightOneSpectrum (𝓞 X.F) → HeightOneSpectrum (𝓞 X.E)) {S : Set ℕ} (mu mu' : Formalism.L2.DIV.Tup X.F X.E X.K S) (G : ChGlob X R.m)

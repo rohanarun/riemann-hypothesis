@@ -144,7 +144,7 @@ theorem smul_gluedS_cases : ∀ (k : Type) [Field k] [ValuativeRel k] [Topologic
     obtain ⟨m₀, hm₀, hm₀'⟩ := hO
     have ht : IsUnit (⟨_, hq m₀ hm₀⟩ : 𝒪[k]) := by
       by_contra ht
-      obtain ⟨s, hs⟩ := q.mem_max_iff.1 ((IsLocalRing.mem_maximalIdeal _).2 ht)
+      obtain ⟨s, hs⟩ := q.mem_max_iff.1 ht
       apply hm₀'
       have h' : (q.1 : k) * m₀ (Sum.inr 0) = (q.1 : k) * s := congrArg Subtype.val hs
       rw [mul_left_cancel₀ q.ne_zero h']

@@ -111,8 +111,8 @@ theorem projH_adjoint_six (h : GlobalTheory.Hk3.Core R F) (i : Fin D.R.m) (σ : 
 theorem isConjChars_at_six (h : GlobalTheory.Hk3.Core R F) (i : Fin D.R.m) {σ : D.what₂.LL →+* ℂ} {s : ℂ ≃+* ℂ} (hσ : IsEmbOverK D σ s)
     {μ' η' : (AE D)ˣ →* Circle} (hμ : ChiAt R i σ μ') (hη : GlobalTheory.IndefiniteRowSideFullHecke.WeilGramSignature.IsEtaConj σ R.eta η') :
     IsConjChars R i A.μ0 s μ' η' (conjChar s (blkChar R i)) := by
-  obtain ⟨μH, a1, a2⟩ := GlobalTheory.T.principalLevel_eigenparts_and_conjugate_characters.2.2.1 R F (GlobalTheory.Core5.of_core h) i σ s hσ μ' hμ
-  obtain ⟨ηH, b1, b2⟩ := GlobalTheory.T.principalLevel_eigenparts_and_conjugate_characters.2.2.2 R F (GlobalTheory.Core5.of_core h) σ s hσ η' hη
+  obtain ⟨μH, a1, a2⟩ := _root_.GlobalTheory.FiveClauseParts.parts_conj_five.2.2.1 R F (GlobalTheory.Core5.of_core h) i σ s hσ μ' hμ
+  obtain ⟨ηH, b1, b2⟩ := _root_.GlobalTheory.FiveClauseParts.parts_conj_five.2.2.2 R F (GlobalTheory.Core5.of_core h) σ s hσ η' hη
   obtain ⟨μB, -, c1, -, -, -, c2⟩ := isConjChars_base_six R h i A.μ0
   refine ⟨μH, ηH, a1, b1, a2, b2, fun PP hP a k u hk hu => Units.ext ?_⟩
   have e1 := a1 PP k
@@ -207,7 +207,7 @@ theorem conjLift_lower_six (hA : GlobalTheory.LowRow.AdelC R F) (h : GlobalTheor
   refine (exists_full_lift_six hA h i hb ht hσ hv hd).elim fun T hT => ?_
   have p1 := projH_adjoint_six h i σ
   have p2 := projH_idem_six h i σ
-  have p3 := GlobalTheory.T.principalLevel_eigenparts_and_conjugate_characters.1 R F (GlobalTheory.Core5.of_core h) i σ (schurMult_of_models R h.models.HW i σ)
+  have p3 := _root_.GlobalTheory.FiveClauseParts.parts_conj_five.1 R F (GlobalTheory.Core5.of_core h) i σ (schurMult_of_models R h.models.HW i σ)
   have p4 := parts_scalar_six h i σ (b := b) hlog T hT.2
   exact lower_of_parts T th (projH R i σ) (partH R i σ) (IsNormSys R i) _ p1 p2 p3 p4 hT.1
 

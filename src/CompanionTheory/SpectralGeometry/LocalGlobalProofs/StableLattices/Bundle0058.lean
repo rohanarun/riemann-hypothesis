@@ -23,7 +23,7 @@ open Finset
 
 namespace GlobalTheory.CompanionTheory.RgTransport
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J Formalism.REAL ReciprocityTheory.ChartRestriction.DS GlobalTheory.SmGL
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J Formalism.REAL ReciprocityTheory.ChartRestriction.DS GlobalTheory.SmGL
 
 variable {n : ℕ}
 
@@ -156,7 +156,7 @@ open Finset
 
 namespace GlobalTheory.CompanionTheory.AdjointSignNormality
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Fin ReciprocityTheory.ChartRestriction.DS
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Fin ReciprocityTheory.ChartRestriction.DS
 open Formalism.REAL (GlRel qdet)
 
 variable {n : ℕ} {M : Type} [NormedAddCommGroup M] [InnerProductSpace ℂ M]

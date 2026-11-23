@@ -202,7 +202,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.JointsTrue
 
-open Formalism.L2 Formalism.L2.Host ReciprocityTheory.Neutral.Bridge.HCFR
+open _root_.Formalism.L2 Formalism.L2.Host ReciprocityTheory.Neutral.Bridge.HCFR
 
 
 set_option maxHeartbeats 1000000 in

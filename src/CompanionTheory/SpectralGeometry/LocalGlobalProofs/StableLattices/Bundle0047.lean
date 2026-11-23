@@ -222,7 +222,7 @@ namespace GlobalTheory.CompanionTheory.RgCOBlock
 open Finset Polynomial
 open Formalism.REAL (GlRel KHighest IsWeight qdet Tm qminor)
 open CompanionTheory.D.LK (Pos Cn ann cre lift bd cpt allT wt ev)
-open CompanionTheory.RgExh CompanionTheory.RgExh.U
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.U
 open GlobalTheory.CuspRep GlobalTheory.UnitaryBC GlobalTheory.SmGL GlobalTheory.DiscSpec
 open GroundTheory.BlockD.FourierDecayAlt.GaugeExists (qdetPoly tmPoly evU evU_apply evU_qdetPoly natDegree_qdetPoly_le
   coeff_qdetPoly_top prod_linear sum_fin_cast)

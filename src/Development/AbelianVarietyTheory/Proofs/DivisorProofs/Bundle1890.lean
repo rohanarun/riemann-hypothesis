@@ -297,7 +297,7 @@ namespace GlobalTheory.KeyArchNorm
 
 section Value
 
-open AlgebraicGeometry CategoryTheory Limits NumberField MeasureTheory
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField MeasureTheory
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.LamT GlobalTheory.KeyFourth
 
 theorem norm_rule_of_coord {κ : GlobalTheory.KeyCl.Rule} (hκ : GlobalTheory.KeyCl.ArchNorm (fun _ => 1) κ) (x : KeyIn ℂ) {g : ℕ}

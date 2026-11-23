@@ -99,7 +99,7 @@ noncomputable section
 
 namespace GlobalTheory.ColPeriod
 
-open Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.StdReps
+open _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory GlobalTheory.StdReps
 
 theorem splitNonConj_vG {X : Fields} {Pr : Primes X} (hPr : Pr.Ok) (i : Fin 2) :
     GlobalTheory.IndefiniteRowSideFullHecke.StandardDeterminantUnit.SplitNonConj (Pr.vG i) := by

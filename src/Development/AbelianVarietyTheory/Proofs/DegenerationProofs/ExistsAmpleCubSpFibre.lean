@@ -242,7 +242,7 @@ theorem cube_model {R K : Type} [CommRing R] [IsDomain R] [IsDiscreteValuationRi
   refine (pull_cubeCls_push h (fun i => y (x3 G i)) (x3 G) u (fun i => hy _) c).trans (cube_pts ?_ _)
   obtain ⟨M, hM, eM⟩ := cls_surj (CechPic.pull φ c)
   rw [← eM, ← cls_cube _ hM]
-  exact (cls_eq_zero_iff _).2 (GlobalTheory.T.cube_theorem_and_sections_finite_growth_abelianVariety.1 _ P M hM)
+  exact (cls_eq_zero_iff _).2 (_root_.GlobalTheory.AbLaw.CubeAssembly.cube_and_sections.1 _ P M hM)
 
 end GlobalTheory.SS.AmpCub
 

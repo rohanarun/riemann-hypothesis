@@ -150,7 +150,7 @@ theorem SecondVeronese.proof (hA : VeroneseArith.Statement) (hS : VeroneseSemipo
 
   have hgram : ∀ {r : ℕ} (b : Fin r → MvPolynomial (Ix (Idx D)) ℚ),
       (∀ k, ∃ f : MvPolynomial (Ix (Idx D)) ℤ, f.IsHomogeneous n ∧ b k = MvPolynomial.map (Int.castRingHom ℚ) f) →
-      resGram d n b = gram D n b := by
+      resGram d n b = _root_.GroundTheory.Heights₂.Heights.HilbertSamuel.Veronese.gram D n b := by
     intro r b hb
     ext k l
     have e1 := htr (fun z => pairVal (metric D) n (b k) (b l) z)
@@ -161,7 +161,7 @@ theorem SecondVeronese.proof (hA : VeroneseArith.Statement) (hS : VeroneseSemipo
         simp [conjPt]
       simp only [this]
       exact pairVal_smul (hb k) (hb l) _ _ ((map_ne_zero _).mpr hc)
-    unfold resGram gram resPt
+    unfold resGram _root_.GroundTheory.Heights₂.Heights.HilbertSamuel.Veronese.gram resPt
     rw [e1, e2]
   rw [← hC D hD n]
   unfold resChi Veronese.chi

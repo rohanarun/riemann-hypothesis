@@ -248,7 +248,7 @@ end Blocks
 def sq (d : ℕ) : ℂ := Complex.I * ((Real.sqrt d : ℝ) : ℂ)
 
 def kmat {m m' : Type} (d : ℕ) (A B : Matrix m m' ℚ) : Matrix m m' ℂ :=
-  A.map (fun q => (q : ℂ)) + sq d • B.map (fun q => (q : ℂ))
+  A.map (fun q => (q : ℂ)) + _root_.Formalism.L2.Th1.Top.FrP.UnitaryGroupMassFormula.HermFrame.sq d • B.map (fun q => (q : ℂ))
 
 def lmat {l : ℕ} [Fact l.Prime] {m m' : Type} (δ : MaximalUnramifiedExtension l) (A B : Matrix m m' ℚ) : Matrix m m' (MaximalUnramifiedExtension l) :=
   A.map (fun q => (q : MaximalUnramifiedExtension l)) + δ • B.map (fun q => (q : MaximalUnramifiedExtension l))
@@ -257,7 +257,7 @@ def FrobStep : Prop :=
   ∀ (l : ℕ) [Fact l.Prime] (dK : ℕ), 5 ≤ l → ¬ l ∣ dK → dK.Prime → dK % 8 = 7 →
     (¬ ∃ a : ZMod l, a ^ 2 = -(dK : ZMod l)) →
   ∀ (ι : ℂ ≃+* ℂ_[l]) (σ : MaximalUnramifiedExtension l →+* MaximalUnramifiedExtension l), UnrOK (MaximalUnramifiedExtension l) l σ →
-    (∀ x, ‖σ x‖ = ‖x‖) ∧ ∃ δ : MaximalUnramifiedExtension l, (δ : ℂ_[l]) = ι (sq dK) ∧ σ δ = -δ
+    (∀ x, ‖σ x‖ = ‖x‖) ∧ ∃ δ : MaximalUnramifiedExtension l, (δ : ℂ_[l]) = ι (_root_.Formalism.L2.Th1.Top.FrP.UnitaryGroupMassFormula.HermFrame.sq dK) ∧ σ δ = -δ
 
 def RatStep : Prop :=
   ∀ (a₀ : ℕ) (b₀ c₀ : ℤ) (dK : ℕ) (ha : 0 < a₀) (hdK : 0 < dK) (lam : ℂ) (hlam : lam ≠ 0), CmOK a₀ b₀ c₀ dK →

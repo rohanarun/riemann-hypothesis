@@ -380,9 +380,9 @@ theorem UpperTheory.V.Z.Tf.Orb.twOrbFin :
   have hs := ((hX k E).2.2 n).2 σ
   obtain ⟨ρ, hρ, -⟩ := hN _ g4 _ c1 μ hμ i3
   have hF : Continuous fun g => φ (twConj (sigmaGL σ) g δ) := hφ.comp ((continuous_inv.mul continuous_const).mul hs)
-  have hinv : ∀ h ∈ twCent (sigmaGL σ) δ, ∀ g, φ (twConj (sigmaGL σ) (h * g) δ) = φ (twConj (sigmaGL σ) g δ) :=
+  have hinv : ∀ h ∈ PositivityTheory.Rg.Tf.Loc.twCent (sigmaGL σ) δ, ∀ g, φ (twConj (sigmaGL σ) (h * g) δ) = φ (twConj (sigmaGL σ) g δ) :=
     fun h hh g => by rw [twConj_mul_left _ _ hh]
-  have hM : CptMod (twCent (sigmaGL σ) δ) fun g => φ (twConj (sigmaGL σ) g δ) := by
+  have hM : CptMod (PositivityTheory.Rg.Tf.Loc.twCent (sigmaGL σ) δ) fun g => φ (twConj (sigmaGL σ) g δ) := by
     obtain ⟨D, hD, h⟩ := hP k E σ hσ n δ hδ _ hc
     exact ⟨D, hD, fun g hg => h g (subset_tsupport _ hg)⟩
   exact ⟨⟨ρ, hρ⟩, hI _ μE hμE _ c1 μ hμ i2 _ hF hinv hM,
@@ -430,7 +430,7 @@ theorem UpperTheory.V.Z.Tf.Orb.untwist :
       rw [normGL, Module.finrank_self]
       simp [twNorm]
     rwa [IsTwRegSemisimple, this]
-  · have e : twCent (sigmaGL (1 : k ≃ₐ[k] k)) γ = Subgroup.centralizer {γ} := by
+  · have e : PositivityTheory.Rg.Tf.Loc.twCent (sigmaGL (1 : k ≃ₐ[k] k)) γ = Subgroup.centralizer {γ} := by
       ext x
       rw [mem_twCent, h1, Subgroup.mem_centralizer_singleton_iff, mul_assoc, inv_mul_eq_iff_eq_mul, eq_comm]
       rw [commute_iff_eq]

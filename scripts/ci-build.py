@@ -232,7 +232,9 @@ def stop_build_process(process, command, environment):
         return process.wait()
 
 
-def supervised_build(command, environment, log, filesystems, reserve_gib, visible_log=None):
+def supervised_build(command, environment, log, filesystems, reserve_gib, visible_log=None, timeout_seconds=None):
+    import time
+    started = time.monotonic()
     reserve = reserve_gib * 1024**3
     if any(shutil.disk_usage(path).free < reserve for path in filesystems):
         raise ValueError("insufficient free disk for the CI build reserve")
@@ -251,6 +253,12 @@ def supervised_build(command, environment, log, filesystems, reserve_gib, visibl
             return 130
         except subprocess.TimeoutExpired:
             sync_visible_log(log, visible_log)
+            if timeout_seconds is not None and time.monotonic() - started >= timeout_seconds:
+                log.write(b"\nCI controller: quick-check budget expired; retaining partial work.\n")
+                log.flush()
+                stop_build_process(process, command, environment)
+                sync_visible_log(log, visible_log)
+                return 124
             if all(shutil.disk_usage(path).free >= reserve for path in filesystems):
                 continue
             log.write(b"\nCI controller: free disk fell below the reserve; terminating candidate.\n")
@@ -471,7 +479,7 @@ def verify_private_packages(project, packages, private):
     return private
 
 
-def baseline(args, project, cache, restore=True):
+def baseline(args, project, cache, restore=True, modules=None):
     if args.baseline_manifest is None:
         return {}, [], None
     if not args.baseline_map or not args.baseline_cache:
@@ -498,7 +506,7 @@ def baseline(args, project, cache, restore=True):
         if filename in hashes and hashes[filename] != digest:
             raise ValueError("conflicting baseline archive digest")
         hashes[filename] = digest
-        if not restore:
+        if not restore or (modules is not None and name not in modules):
             continue
         module = Path(*name.split("."))
         source = project / "src" / module.with_suffix(".lean")

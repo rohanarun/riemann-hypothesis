@@ -371,7 +371,7 @@ theorem twist_pair : ∀ (S : Type) [CommRing S] [IsNoetherianRing S] (W X : Sch
   intro S _ _ W X f H a b n s hH hs
   have hM : (LB.LinComb H (K := PUnit) (fun _ => b) (fun _ => -1)).IsLB := LB.isLB_linComb hH _ _
   have hA : (H.pull a).IsLB := LB.isLB_pull hH a
-  obtain ⟨t₁, h₁⟩ := GlobalTheory.T.serre_vanishing_very_ample.1 S W f _ n s hA hs _ hM
+  obtain ⟨t₁, h₁⟩ := _root_.GlobalTheory.AbLaw.serre_h1Zero_and_sections_polynomial.1 S W f _ n s hA hs _ hM
   obtain ⟨t₂, h₂⟩ := GlobalTheory.TwistGen.twist_generated S W f _ n s hA hs _ hM
   refine ⟨max t₁ t₂, fun t ht => ⟨?_, ?_⟩⟩
   · rintro W₁ σ a₁ b₁ rfl rfl

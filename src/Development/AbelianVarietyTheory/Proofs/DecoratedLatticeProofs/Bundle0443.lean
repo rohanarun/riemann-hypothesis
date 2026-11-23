@@ -301,7 +301,7 @@ noncomputable section
 
 namespace GlobalTheory.KRamT
 
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.TC GlobalTheory.KerDia
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.TC GlobalTheory.KerDia
 
 section Entry
 attribute [local instance] GlobalTheory.Mem.Col2.starE
@@ -353,7 +353,7 @@ end GlobalTheory.KRamT
 
 namespace GlobalTheory.KRamT
 
-open Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.TC GlobalTheory.KerDia
+open _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Col2.TC GlobalTheory.KerDia
 
 section Dia
 attribute [local instance] GlobalTheory.Mem.Col2.starE

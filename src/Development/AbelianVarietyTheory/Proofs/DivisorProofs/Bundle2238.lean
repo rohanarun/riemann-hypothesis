@@ -326,8 +326,8 @@ theorem crystallineCohomology_computed_on_affinePairs : ∀ (R : Type) [CommRing
     ((Cx.single (Coef.ofAlg (O κ t))).resMap (pE κ t i)).PullbackBijectiveDegreesOneTwo := by
   intro R _ I κ X t Y i hY
   have ha := _root_.GlobalTheory.PDForm.pull_isSm_bijective R I κ X t Y i
-  have hc := GlobalTheory.T.affinePointPairs_comma_acyclic_degree_le_two.1 R I κ X t Y i hY
-  have hc2 := GlobalTheory.T.affinePointPairs_comma_acyclic_degree_le_two.2 R I κ X t Y i hY
+  have hc := _root_.GlobalTheory.PDForm.isSm_acyclic_two.1 R I κ X t Y i hY
+  have hc2 := _root_.GlobalTheory.PDForm.isSm_acyclic_two.2 R I κ X t Y i hY
   have h1 : Function.Bijective (CoefMap.restrict (coefSm κ t i) (smAff κ t i).ι).pull1 :=
     Desc.restrict_upwardClosed_subcategory_pull1_bijective R _ (coefSm κ t i) (smAff κ t i) (smAff_up κ t i)
       (fun T ↦ (hc T).1) (fun T ↦ (hc T).2.1) fun T ↦ (hc T).2.2

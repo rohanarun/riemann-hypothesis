@@ -167,7 +167,7 @@ end Algebra
 
 section Centre
 
-open TopologicalSpace Limits ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.GeometryOfNumbersTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.TangentOrigin
+open TopologicalSpace _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.GeometryOfNumbersTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.TangentOrigin
 open GlobalTheory.Adelic (ptOf le_iff_ptOf_mem ptOf_comp)
 open scoped NNReal
 
@@ -244,7 +244,7 @@ end Centre
 
 section Component
 
-open TopologicalSpace Limits ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.GeometryOfNumbersTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.TangentOrigin GlobalTheory.Vanishing.H0
+open TopologicalSpace _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.GeometryOfNumbersTheory GlobalTheory.CechPic GlobalTheory.Vanishing GlobalTheory.TangentOrigin GlobalTheory.Vanishing.H0
 open GlobalTheory.Adelic (ptOf le_iff_ptOf_mem ptOf_comp)
 open GlobalTheory.AllWt (secZ exOf suppOn)
 open GlobalTheory.FlagMod (FlagCover)

@@ -107,8 +107,8 @@ private theorem d_db_eq_zero_of_not_mem_tsupport {M : Type*} [TopologicalSpace M
       (e.continuousAt_symm (e.map_source hxe)).preimage_mem_nhds (by rw [e.left_inv hxe]; exact h1)
     filter_upwards [h2] with y hy
     exact image_eq_zero_of_notMem_tsupport (f := f) hy
-  exact ⟨(wd_congr n j _ _ _ hzero).trans (wd_zero_fun n j _),
-    (wdb_congr n j _ _ _ hzero).trans (wdb_zero_fun n j _)⟩
+  exact ⟨(@wd_congr n j _ _ _ hzero).trans (wd_zero_fun n j _),
+    (@wdb_congr n j _ _ _ hzero).trans (wdb_zero_fun n j _)⟩
 
 theorem integral_db_chart_eq_zero {M : Type*} [TopologicalSpace M] [T2Space M] [SecondCountableTopology M] [MeasurableSpace M] [BorelSpace M] (n : ℕ) (z : M → V n) (hz : IsLocalHomeomorph z)
     (e : OpenPartialHomeomorph M (V n)) (he : IsChart n z e) (j : Fin n) (h : M → ℂ) (hh : Ck n z 1 h)
@@ -122,10 +122,10 @@ theorem integral_db_chart_eq_zero {M : Type*} [TopologicalSpace M] [T2Space M] [
   have h1 : ∫ y in e.target, db n z j h (e.symm y) = ∫ y in e.target, wdb n j H y := by
     refine setIntegral_congr_fun e.open_target.measurableSet fun y hy => ?_
     rw [db_comp_symm n z e he j h y hy]
-    exact wdb_congr n j _ _ y (hHt y hy).symm
+    exact @wdb_congr n j _ _ y (hHt y hy).symm
   have h2 : ∫ y in e.target, wdb n j H y = ∫ y, wdb n j H y := by
     refine setIntegral_eq_integral_of_forall_compl_eq_zero fun y hy => ?_
-    exact (wdb_congr n j _ _ y (hHo y hy)).trans (wdb_zero_fun n j y)
+    exact (@wdb_congr n j _ _ y (hHo y hy)).trans (wdb_zero_fun n j y)
   rw [h1, h2, integral_wdb_eq_zero n j H hH1 hHc]
 
 private theorem wd_wdb_finset_sum {ι : Type*} {n : ℕ} (s : Finset ι) (G : ι → V n → ℂ) (y : V n)

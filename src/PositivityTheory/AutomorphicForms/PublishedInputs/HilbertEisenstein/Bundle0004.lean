@@ -20,7 +20,7 @@ open NumberField IsDedekindDomain Neutral.B1 Formalism.L2.Host Formalism.Conjuga
 open GlobalTheory.CuspRep GlobalTheory.HeckeGal GlobalTheory.GalOfCusp UpperTheory.V.Af UpperTheory.V.Base
 open scoped Matrix
 open MeasureTheory GroundTheory.Global GroundTheory.Global.IdeleGroup UpperTheory.V.Sd UpperTheory.V.Published
-open Matrix UpperTheory.V.Af.GlobalFixedVectors
+open _root_.Matrix UpperTheory.V.Af.GlobalFixedVectors
 
 namespace UpperTheory.HilbertEisensteinWeightOne.LibOpenLevel
 

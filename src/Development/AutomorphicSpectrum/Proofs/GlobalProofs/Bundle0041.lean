@@ -26,7 +26,7 @@ namespace GlobalTheory.CompanionTheory.Hypotheses₂.OneV.Ann
 
 section Core
 
-open GlobalTheory.CompanionTheory.SW.Core GlobalTheory.CompanionTheory.SW.Core.SelfDual Topology
+open GlobalTheory.CompanionTheory.SW.Core GlobalTheory.CompanionTheory.SW.Core.SelfDual _root_.Topology
 
 variable {F : Type} [Field F] [NumberField F]
 

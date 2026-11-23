@@ -82,7 +82,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.StokesCompare
 
-open MvPolynomial ReciprocityTheory.ChartRestriction.G.Geo Filter Topology MeasureTheory
+open MvPolynomial ReciprocityTheory.ChartRestriction.G.Geo Filter _root_.Topology MeasureTheory
 open GroundTheory.Heights₂.Heights.LowerBoundFree
 
 section Clauses

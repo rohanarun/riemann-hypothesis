@@ -102,7 +102,7 @@ private theorem szRow_eleven_le_splitBound : SzRow (fun _ D _ => 11 ≤ D.host.s
   exact h4.trans hH.split_tie
 
 theorem szRow_sizesAt : SzRow (fun _ _ L => SizesAt L) := by
-  have h := ((((((((((GlobalTheory.T.sizes_sizeN_sizeM_sizeK_sizeT_sizeTT_sizeDe2_sizeLw.and _root_.GlobalTheory.EX.szRow_sizeKRel).and _root_.GlobalTheory.EX.szRow_cond_qd_pde).and _root_.GlobalTheory.EX.szRow_la_rho_bot).and _root_.GlobalTheory.EX.szRow_sizeEta).and
+  have h := ((((((((((_root_.GlobalTheory.EX.szRow_rankSizes.and _root_.GlobalTheory.EX.szRow_sizeKRel).and _root_.GlobalTheory.EX.szRow_cond_qd_pde).and _root_.GlobalTheory.EX.szRow_la_rho_bot).and _root_.GlobalTheory.EX.szRow_sizeEta).and
     _root_.GlobalTheory.EX.szRow_sizeNodes).and _root_.GlobalTheory.EX.szRow_sizeLstar).and _root_.GlobalTheory.EX.szRow_sizeDel).and _root_.GlobalTheory.EX.szRow_sizeW_sizeBm_sizeXpp).and _root_.GlobalTheory.EX.szRow_sizeG_sizeWords).and
     szRow_eleven_le_splitBound)
   refine h.imp ?_

@@ -152,7 +152,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.TC
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV
 
 variable {B : Base} {X : PreX B.toPre} (I : TC B X)
 

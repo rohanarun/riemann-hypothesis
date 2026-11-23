@@ -31,7 +31,7 @@ noncomputable section
 
 namespace GlobalTheory.AdForm.TopMove
 
-open Formalism.MainNotions Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC GlobalTheory.TwU
+open Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.DIV GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC GlobalTheory.TwU
 
 variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre}
 

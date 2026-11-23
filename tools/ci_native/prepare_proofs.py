@@ -39,6 +39,8 @@ def main():
     parser.add_argument('--attempt', required=True, type=int)
     args = parser.parse_args()
     rpc.require(rpc.digest(args.seed) == args.seed_sha256, 'operator seed SHA mismatch')
+    from proof_approval import check
+    check(rpc.read(args.seed)['snapshot'])
     print(json.dumps(prepare(rpc.read(args.seed), rpc.read(args.registry), args.output,
                             args.run_id, args.attempt, args.workflow_sha, args.producer,
                             args.worklist, args.archive)))

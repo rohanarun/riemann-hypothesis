@@ -20,11 +20,6 @@ section Place
 variable {F E : Type} [Field F] [NumberField F] [Field E] [Algebra F E]
   (v : HeightOneSpectrum (𝓞 F)) {σ : E →ₐ[F] E} (A : AntiB F E σ)
 
-theorem sigR_incl (e : E) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR (Fv F v) σ (inclR (Fv F v) e) = inclR (Fv F v) (σ e) := by
-  first
-    | rfl
-    | simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR, inclR]
-
 theorem two_ne_zero_k (h2 : Valued.v (algebraMap F (Fv F v) 2) = 1) :
     (2 : 𝓞 F ⧸ v.asIdeal) ≠ 0 := by
   intro h0

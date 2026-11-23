@@ -164,9 +164,7 @@ private theorem isoSpec_hom_appTop_apply (Z : Scheme.{u}) [IsAffine Z] (a : Γ(Z
     (Scheme.ΓSpecIso Γ(Z, ⊤)).inv_hom_id
 
 private noncomputable def affineOpenIsoSpec {X' : Scheme.{u}} {W' : X'.Opens} (hW : IsAffineOpen W') :
-    W'.toScheme ≅ Spec Γ(X', W') :=
-  haveI : IsAffine W'.toScheme := hW
-  W'.toScheme.isoSpec ≪≫ Scheme.Spec.mapIso W'.topIso.symm.op
+    W'.toScheme ≅ Spec Γ(X', W') := IsAffineOpen.isoSpec hW
 
 private theorem affineOpenIsoSpec_hom_appTop_apply {X' : Scheme.{u}} {W' : X'.Opens}
     (hW : IsAffineOpen W') (a : Γ(X', W')) :

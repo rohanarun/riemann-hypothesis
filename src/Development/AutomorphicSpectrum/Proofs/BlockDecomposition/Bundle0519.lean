@@ -40,7 +40,7 @@ namespace GlobalTheory.CompanionTheory.PfSWUS.FockSplit.Box
 
 open NumberField IsDedekindDomain GlobalTheory.Published.SiegelOneVector GlobalTheory.CompanionTheory.Hypotheses₂.OneV.Coef.Dec
 open PI.VolStabS.PositiveNearLattice PI.VolStabS.AdmissibleCompactSupport
-open scoped Topology
+open scoped _root_.Topology
 
 variable {F : Type} [Field F] [NumberField F]
 variable {E : Type} [Field E] [Algebra F E] [FiniteDimensional F E] {d : ℕ} (b : Module.Basis (Fin d) F E)

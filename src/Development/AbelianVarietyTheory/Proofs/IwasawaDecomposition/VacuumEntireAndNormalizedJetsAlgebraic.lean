@@ -323,7 +323,7 @@ theorem ta_thMoved (hC : Crv D cc δ) {L : Submodule (𝓞 D.host.E) (Fin N → 
 
 end Vacuum
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.MainNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem.Col2.JetEx
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.MainNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem.Col2.JetEx
 
 theorem derivAt0_mul {ι : Type} [Fintype ι] {a b : ℕ} (c : ℂ) (f : VCx ι a b → ℂ) (hf : ∀ k : ℕ, ContDiff ℂ k f)
     (m : DVar ι a b →₀ ℕ) : derivAt0 (fun z => c * f z) m = c * derivAt0 f m := by

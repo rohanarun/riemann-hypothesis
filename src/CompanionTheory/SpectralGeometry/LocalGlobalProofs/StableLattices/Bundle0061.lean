@@ -15,7 +15,7 @@ open Finset
 
 namespace GlobalTheory.CompanionTheory.RgTransport
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J Formalism.REAL ReciprocityTheory.ChartRestriction.DS GlobalTheory.SmGL
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J Formalism.REAL ReciprocityTheory.ChartRestriction.DS GlobalTheory.SmGL
 
 theorem glRel_comp_inj {A : Type*} [Ring A] {m n : ℕ} {E : Fin n → Fin n → A} (hE : GlRel E)
     (e : Fin m → Fin n) (he : Function.Injective e) : GlRel (fun a b => E (e a) (e b)) := by

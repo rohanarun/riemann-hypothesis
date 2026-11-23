@@ -269,7 +269,7 @@ theorem gapAbs_of : Hilb → Design → Unfold → AEConst → GapAbs := by
   have hwB : LInv j B w := linv_mono j hBK1 hwi
   have hw2B : IntegrableOn (fun x => w x ^ 2) DB μ :=
     (int_iff_inv μ hU hj hBK1 i1 hD₁ hDB (hwm.pow_const 2) (linv_sq j hwi)).2 hw2
-  have hwG : PGap.Good j B μ DB w := (good_iff hwm hwB).2 hw2B
+  have hwG : _root_.PositivityTheory.KB.SpectralGap.PGap.Good j B μ DB w := (good_iff hwm hwB).2 hw2B
 
   set v := avg j (K₀ ⊓ K₁) K₀ w with hv
   have hvm : Measurable v := u_meas μ hU hj hE1K0 iE1K0 hwm
@@ -287,7 +287,7 @@ theorem gapAbs_of : Hilb → Design → Unfold → AEConst → GapAbs := by
     exact avg_sq_le j iE1K0 w x
   have hv2B : IntegrableOn (fun x => v x ^ 2) DB μ :=
     (int_iff_inv μ hU hj hBK0 i0 hD₀ hDB (hvm.pow_const 2) (linv_sq j hvK)).2 hv2
-  have hvG : PGap.Good j B μ DB v := (good_iff hvm (linv_mono j hBK0 hvK)).2 hv2B
+  have hvG : _root_.PositivityTheory.KB.SpectralGap.PGap.Good j B μ DB v := (good_iff hvm (linv_mono j hBK0 hvK)).2 hv2B
 
   have hwint1 : IntegrableOn w D₁ μ :=
     ((memLp_two_iff_integrable_sq hwm.aestronglyMeasurable).2 hw2).integrable (by norm_num)

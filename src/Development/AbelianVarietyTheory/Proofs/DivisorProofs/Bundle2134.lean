@@ -180,7 +180,7 @@ open GlobalTheory GlobalTheory.Cartier GlobalTheory.TopForm GlobalTheory.CechPic
 namespace GlobalTheory.Discrepancy
 
 set_option autoImplicit false in
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace Filter in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace Filter in
 private theorem unitAt_functionFieldMap_of_unitAt {X Y : Scheme} [IsIntegral X]
     [IsIntegral Y] (s : Y ⟶ X) [IsDominant s] {y : Y} {f : X.functionField}
     (hf : _root_.GlobalTheory.Cartier.UnitAt (s y) f) :
@@ -190,7 +190,7 @@ private theorem unitAt_functionFieldMap_of_unitAt {X Y : Scheme} [IsIntegral X]
     rw [← _root_.GlobalTheory.functionFieldMap_algebraMap, ha]⟩
 
 set_option autoImplicit false in
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace Filter in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace Filter in
 private theorem regAt_functionFieldMap_of_regAt {X Y : Scheme} [IsIntegral X]
     [IsIntegral Y] (s : Y ⟶ X) [IsDominant s] {y : Y} {f : X.functionField}
     (hf : _root_.GlobalTheory.Cartier.RegAt (s y) f) :
@@ -201,7 +201,7 @@ private theorem regAt_functionFieldMap_of_regAt {X Y : Scheme} [IsIntegral X]
 
 
 set_option autoImplicit false in
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace Filter in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace Filter in
 theorem _root_.GlobalTheory.Discrepancy.pullCart_supp_and_eff : ∀ (X Y : Scheme.{0}) [IsIntegral X]
     [IsIntegral Y] (s : Y ⟶ X) [IsDominant s] (D : _root_.GlobalTheory.Cartier.CartierDiv X),
     (∀ y : Y, y ∈ (_root_.GlobalTheory.Discrepancy.pullCart s D).supp →

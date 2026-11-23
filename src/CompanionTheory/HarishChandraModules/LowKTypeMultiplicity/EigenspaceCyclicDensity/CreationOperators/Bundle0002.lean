@@ -226,7 +226,7 @@ theorem Ft_cre {ε : Fin n → Bool} (E : Fin n → Fin n → Module.End ℂ V) 
   · simp [h]
 
 theorem differential_commutes_weight_operator : ∀ (n : ℕ) (ε₀ ε : Fin n → Bool) (V : Type) [AddCommGroup V] [Module ℂ V]
-    (E : Fin n → Fin n → Module.End ℂ V), (∀ a b, ε a = ε b → ε₀ a = ε₀ b) → KRel ε E →
+    (E : Fin n → Fin n → Module.End ℂ V), (∀ a b, ε a = ε b → ε₀ a = ε₀ b) → _root_.CompanionTheory.D.DSIC.KRel ε E →
     ∀ c, Commute (Ft ε₀ E c) (bd ε E) := by
   intro n ε₀ ε V _ _ E h0 hE c
   refine Commute.add_right (Commute.sum_right _ _ _ fun i _ => ?_) (Commute.sum_right _ _ _ fun i _ =>
@@ -362,7 +362,7 @@ theorem genCO_of (hS : BdSq) (hC : Cover2) : GenCO := by
     let EK : Fin n → Fin n → Module.End ℂ (LinearMap.ker π) := fun a b => (EY a b).restrict (hK a b)
     have hι : ∀ a b y, (LinearMap.ker π).subtype (EK a b y) = EY a b ((LinearMap.ker π).subtype y) :=
       fun _ _ _ => rfl
-    have hEK : KRel ε₀ EK := by
+    have hEK : _root_.CompanionTheory.D.DSIC.KRel ε₀ EK := by
       intro a b c d h1 h2
       ext y
       have := LinearMap.congr_fun (hY a b c d h1 h2) (y : Y)

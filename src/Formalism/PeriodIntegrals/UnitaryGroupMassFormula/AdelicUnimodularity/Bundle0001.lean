@@ -164,8 +164,8 @@ theorem exists_nat_adele (a : FiniteAdeleRing (𝓞 F) F) :
       exact hv (hfin.mem_toFinset.2 hc)
     exact mul_mem (natCast_mem _ _) hav
 
-theorem countable_field (K : Type) [Field K] [NumberField K] : Countable K := by
-  exact (Module.finBasis ℚ K).equivFun.injective.countable
+theorem countable_field (K : Type) [Field K] [NumberField K] : Countable K :=
+  Finsupp.Countable.of_moduleFinite (R := ℚ)
 
 theorem exists_close (v : HeightOneSpectrum (𝓞 F)) (c : F) (x : v.adicCompletion F) :
     ∃ k : F, algebraMap F (v.adicCompletion F) c * (x - algebraMap F (v.adicCompletion F) k) ∈

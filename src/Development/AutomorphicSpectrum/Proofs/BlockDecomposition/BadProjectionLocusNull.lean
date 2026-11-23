@@ -29,7 +29,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.MixZ.ArchEq.Crit
 
-open Filter Topology
+open Filter _root_.Topology
 open GroundTheory.Heights₂.Heights GroundTheory.Heights₂.Heights.PtsSheetOnlyNull
 open ReciprocityTheory.ChartRestriction.G.Geo (MRing fibreFinite sameOrbit_of_segre mem_mcPts_of_sameOrbit)
 

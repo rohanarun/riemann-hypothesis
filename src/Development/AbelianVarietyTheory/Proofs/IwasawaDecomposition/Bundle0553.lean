@@ -416,7 +416,7 @@ theorem span_plk_uvec_eq_top {X : Scheme.{0}} {T : Type} {m : T → ℕ} {M : �
     {c D : Let m → Fin (M + 1) → Γ(X, U.1)} (h : LeftInv D c) (w : Pm m) (en : En m) :
     Ideal.span (Set.range (plk (uvec c w) en.2.1)) = ⊤ :=
   (Ideal.eq_top_iff_one _).2 (Ideal.mem_span_range_iff_exists_fun.2 ⟨_,
-    (GlobalTheory.T.cauchyBinet_plucker_and_cellCoordinates.2 T m (CR m U) M _ _ w MvPolynomial.X
+    (_root_.GlobalTheory.FlagEmb.CauchyBinet.main.2 T m (CR m U) M _ _ w MvPolynomial.X
       (h.map (MvPolynomial.C : Γ(X, U.1) →+* CR m U))).1 en.1 en.2.1 en.2.2⟩)
 
 theorem exists_isPlk : ∀ (O K : Type) [CommRing O] [Field K] (β : O →+* K) (X : Scheme.{0}) (s : X ⟶ Sp O)

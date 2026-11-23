@@ -206,7 +206,7 @@ variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} {I : TC B X} {l : I.Laws
   {Ch : ℕ → Type} {A : TwDat I l Z u a Ch}
 end Level
 section Std
-open Formalism.L2.Col Formalism.L2.Ker Formalism.UG GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC GlobalTheory.Mem.Col2.MemChart
+open _root_.Formalism.L2.Col Formalism.L2.Ker Formalism.UG GlobalTheory.Mem.Chr GlobalTheory.Mem.Col2.TC GlobalTheory.Mem.Col2.MemChart
 variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} (I : TC B X)
 end Std
 section Main

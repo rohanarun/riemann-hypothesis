@@ -41,7 +41,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.Sandwich
 
-open NumberField Polynomial GlobalTheory.CompanionTheory.Ar
+open NumberField Polynomial _root_.GlobalTheory.CompanionTheory.Ar
 
 variable {E : Type} [Field E] [NumberField E]
 

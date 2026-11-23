@@ -223,7 +223,7 @@ theorem large_of_large_rings_alt : GlobalTheory.TwSys.Cheb → ∀ (D : D7) (cf 
 end GlobalTheory.CoefDuty
 end
 namespace GlobalTheory.StEta
-open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.L2 Formalism.L2.Host Formalism.L2.NT Formalism.IndefR.NX NumberField IsDedekindDomain GlobalTheory.Mem GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up
+open Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N _root_.Formalism.L2 Formalism.L2.Host Formalism.L2.NT Formalism.IndefR.NX NumberField IsDedekindDomain GlobalTheory.Mem GlobalTheory.Mem.Col2 GlobalTheory.Mem.Top GlobalTheory.Mem.Top.GroupRetwisting GlobalTheory.Mem.Top.Bl GlobalTheory.Mem.R3 GlobalTheory.Mem.R3.Rw GlobalTheory.HeightCounting GlobalTheory.HeightCounting.Up
 theorem sEta_alt_alt_alt : _root_.GlobalTheory.HeightCounting.Up.PublishedInputsThirdLayerAlt → ∀ hL : _root_.UpperTheory.Zero.LLC.RecTExists, _root_.GlobalTheory.HeightCounting.Up.PointStatement hL → _root_.GlobalTheory.HeightCounting.Up.EtaStatement' hL := by
   intro hP hL hPt
   refine ((((((hPt.and (_root_.GlobalTheory.T.eventually_etaJ_eq_eta_of_levelC hP hL hPt)).and (_root_.GlobalTheory.T.star_mem_LL0_at_level_c hP hL)).and (_root_.GlobalTheory.T.eExp_integer_of_levelC hP hL)).and (_root_.GlobalTheory.T.places_over_pde_isSplitPl_of_levelC hP hL)).and (_root_.GlobalTheory.T.chebSplit_of_published_inputs_at_level_c hP hL)).and

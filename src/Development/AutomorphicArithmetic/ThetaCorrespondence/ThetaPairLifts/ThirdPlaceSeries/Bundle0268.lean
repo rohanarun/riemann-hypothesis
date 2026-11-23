@@ -301,7 +301,7 @@ theorem exists_level_comparison_choice_alt (hP : _root_.GlobalTheory.HeightCount
 variable {K : Ctx} {B : Base} {f : Fr B.toPre} {T : TwDat B} {w : ColW B f T} {P : Pre2 K w}
 theorem stageCExists_of_harishChandra_serN : GlobalTheory.Published.DiscreteSeriesCover → GlobalTheory.Published.CasselmanWallach → GlobalTheory.Published.HarishChandraModules → _root_.GlobalTheory.HeightCounting.Up.PublishedInputsThirdLayerAlt → SerN → ∀ hL : _root_.UpperTheory.Zero.LLC.RecTExists, _root_.GlobalTheory.HeightCounting.Up.ThirdStageExists hL := by
   intro hCo hCW hHM hP hS hL
-  refine ((_root_.GlobalTheory.T.nonGalois_exists_choice_alt hCo hCW hHM hP hS hL).and ((_root_.GlobalTheory.T.gPlaces_of_levelA hL).and (GlobalTheory.T.twistConductors_avoid_excludedPrimes.and ((_root_.GlobalTheory.T.badV_subset_gPl_union_qPl_of_admTw hP hL).and ((_root_.GlobalTheory.T.paraShape_of_twisted_sideRead_readsHecke hP hL).and ((_root_.GlobalTheory.T.level_uniformity_of_cmDatum_alt hP hL).and
+  refine ((_root_.GlobalTheory.T.nonGalois_exists_choice_alt hCo hCW hHM hP hS hL).and ((_root_.GlobalTheory.T.gPlaces_of_levelA hL).and (_root_.GlobalTheory.LowAvoid.conductors_avoid_lowAll.and ((_root_.GlobalTheory.T.badV_subset_gPl_union_qPl_of_admTw hP hL).and ((_root_.GlobalTheory.T.paraShape_of_twisted_sideRead_readsHecke hP hL).and ((_root_.GlobalTheory.T.level_uniformity_of_cmDatum_alt hP hL).and
     ((_root_.GlobalTheory.T.joint_level_of_cm_datum_twOK hP hL).and (_root_.GlobalTheory.T.cellWt_of_sideRead_of_twOK hP hL)))))))).trans (StepW.of_all ?_)
   rintro K B f T w - - ⟨a0, a1, a2, a3, a4, a5, a6, a7⟩ P x l s hs c1
   have hl : ∀ v, (Dof x).ntw.l (s v) = B.places.resChar v := fun v => let ⟨_, h⟩ := hs v; h.l_eq

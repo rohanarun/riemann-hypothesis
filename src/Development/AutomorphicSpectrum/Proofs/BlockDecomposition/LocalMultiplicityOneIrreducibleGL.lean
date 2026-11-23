@@ -33,7 +33,7 @@ def Narrow : Prop :=
 end
 
 section
-open PositivityTheory.KCo GlobalTheory.PRep GlobalTheory.SplitWeil GlobalTheory.SmGL GlobalTheory.IndefiniteRowSideFullHecke.OpenClosedSequences GlobalTheory.RankStrataProof GlobalTheory.CompanionTheory.ThetaGLLen Matrix Topology
+open PositivityTheory.KCo GlobalTheory.PRep GlobalTheory.SplitWeil GlobalTheory.SmGL GlobalTheory.IndefiniteRowSideFullHecke.OpenClosedSequences GlobalTheory.RankStrataProof GlobalTheory.CompanionTheory.ThetaGLLen Matrix _root_.Topology
 open scoped TensorProduct
 
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
@@ -154,7 +154,7 @@ theorem irr_ind (hB : Narrow) (n t : ℕ) {μ : kˣ →* ℂˣ} (hμ : IsSmoothC
 end
 
 section
-open PositivityTheory.KCo GlobalTheory.PRep GlobalTheory.SplitWeil GlobalTheory.SmGL GlobalTheory.IndefiniteRowSideFullHecke.OpenClosedSequences GlobalTheory.RankStrataProof GlobalTheory.CompanionTheory.ThetaGLLen Matrix Topology GlobalTheory.SplitFlip
+open PositivityTheory.KCo GlobalTheory.PRep GlobalTheory.SplitWeil GlobalTheory.SmGL GlobalTheory.IndefiniteRowSideFullHecke.OpenClosedSequences GlobalTheory.RankStrataProof GlobalTheory.CompanionTheory.ThetaGLLen Matrix _root_.Topology GlobalTheory.SplitFlip
 
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] {n d : ℕ}
 
@@ -197,7 +197,7 @@ theorem irrF' (hB : Narrow) {ν α : kˣ →* ℂˣ} (hnd : n ≤ d) (hν : USm 
 end
 
 section
-open GlobalTheory.WeilM Filter Topology ValuativeRel Matrix PositivityTheory.KCo GlobalTheory.SplitFlip PositivityTheory.ThKG.LocalRamifiedLeviRestriction
+open GlobalTheory.WeilM Filter _root_.Topology ValuativeRel Matrix PositivityTheory.KCo GlobalTheory.SplitFlip PositivityTheory.ThKG.LocalRamifiedLeviRestriction
 
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] [T2Space k]
   {n d d₁ : ℕ} {e : Fin d₁ ⊕ Bool ≃ Fin d} {W : Type} [AddCommGroup W] [Module ℂ W]

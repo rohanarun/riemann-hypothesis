@@ -147,7 +147,7 @@ open scoped Matrix
 namespace GlobalTheory.Mem.R3.DefLatBC
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem repCSD_lift_of_reading {K K' : Type} [Field K] [NumberField K] [StarRing K] [Field K'] [NumberField K'] [StarRing K']
     (S : GSD K) (S' : GSD K') (hS : S.Ok) (hS' : S'.Ok) {A A' : Type} [Group A] [Group A']
     (ρ : Representation K A S.EqFun) (ρ' : Representation K' A' S'.EqFun) {T T' : Type} (rd : S.V → T) (rd' : S'.V → T')
@@ -179,7 +179,7 @@ end GlobalTheory.Mem.R3.DefLatBC
 namespace GlobalTheory.Mem.R3.DefLatBC
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem decoratedLattice_translates_heq_of_eq_primes {X : Fields} {n r : ℕ} (h : r ≤ n) {SG Q Q' : Finset (HeightOneSpectrum (𝓞 X.E))} (hQ : Q' = Q) :
     (∀ d' : DecoSet (E := X.E) (n := n) (ST := ∅) (SG := uSG SG Q'), ∃ d : DecoSet (E := X.E) (n := n) (ST := ∅) (SG := uSG SG Q), HEq d' d) ∧
     ∀ (g : G0 X.E SG r) (d : DecoSet (E := X.E) (n := n) (ST := ∅) (SG := uSG SG Q)) (d' : DecoSet (E := X.E) (n := n) (ST := ∅) (SG := uSG SG Q')), HEq d' d →
@@ -188,7 +188,7 @@ theorem decoratedLattice_translates_heq_of_eq_primes {X : Fields} {n r : ℕ} (h
   exact ⟨fun d' => ⟨d', HEq.rfl⟩, fun g d d' hd => by cases hd; rfl⟩
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem decoratedLattice_translates_heq_of_eq_preData (B B' : Base) (px : PreX B.toPre) (px' : PreX B'.toPre) (h : B'.toPre = B.toPre) (hp : HEq px' px)
     (sel : HeightOneSpectrum (𝓞 B.fields.F) → HeightOneSpectrum (𝓞 B.fields.E))
     (sel' : HeightOneSpectrum (𝓞 B'.fields.F) → HeightOneSpectrum (𝓞 B'.fields.E)) {S S' : Set ℕ}

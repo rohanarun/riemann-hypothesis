@@ -243,7 +243,7 @@ theorem GlobalTheory.PsType.theta_emb₂_std : ∀ (k : Type) [Field k] [Valuati
       refine Finset.prod_congr rfl fun j _ => ?_
       rw [minor_natAdd, nxt_natAdd]
       by_cases hT : Triv ((fun i => ψ (Fin.natAdd r i)) j / nxt (fun i => ψ (Fin.natAdd r i)) j) 1
-      · rw [GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, one_mul]
+      · rw [_root_.GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, _root_.GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, _root_.GlobalTheory.PsType.BlockTheta.ev_of_triv_one _ hT, one_mul]
       · exact ev_mul_of_val _ hda ((_root_.GlobalTheory.PsType.minor_mul_mod k t _ hord₂ j hT).1 b hb)
   rw [hsplit, prod_ev_nxt, ← mul_assoc, first_part]
 end

@@ -131,7 +131,7 @@ open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.G
 
 namespace PositivityTheory.Xgn.ShimuraDatumTate
 
-open GlobalTheory GlobalTheory.PointUnif
+open _root_.GlobalTheory GlobalTheory.PointUnif
 
 theorem adj_of_weil {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {S : Scheme.{0}} {G : Over S}
     [GrpObj G] {y : Sp ℂ ⟶ S} {g : ℕ} {e : (Fin g → ℂ) → (Over.mk y ⟶ G)} {act : OAct (𝓞 E) G} {L : LB G.left}
@@ -167,7 +167,7 @@ theorem weil_adj {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E}
 
 end PositivityTheory.Xgn.ShimuraDatumTate
 
-open GlobalTheory GlobalTheory.PointUnif PositivityTheory.Xgn.ShimuraDatumTate in
+open _root_.GlobalTheory GlobalTheory.PointUnif PositivityTheory.Xgn.ShimuraDatumTate in
 theorem PositivityTheory.Xgn.shimura_datum_tate_isomorphism : ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (H : Host E) (L : Type) [Field L] (t : SAB H (Sp L)), IsPrincipal t → ∀ (σ : L →+* ℂ) (p q : ℕ), (∀ τ : 𝓞 E →+* ℂ, (τ H.rt = H.rt0 → LieMult t.act (spMap σ) τ p) ∧ (τ H.rt ≠ H.rt0 → LieMult t.act (spMap σ) τ q)) → ∃ D : Datum H, D.p = p ∧ D.q = q ∧ Nonempty (TateIso D ℂ (Over.mk (spMap σ) ⟶ t.G) (fun a g => g ≫ t.act.act a) (fun n g g' c => Out.WeilIs t.G t.PP.L n g g' (unitOn c))) := by
   intro E _ _ _ H L _ t ht σ p q hdet
   obtain ⟨t', ⟨m⟩⟩ : ∃ t' : SAB H (Sp ℂ), Nonempty (SABMap t' t (spMap σ)) :=
@@ -267,7 +267,7 @@ open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.G
 
 namespace PositivityTheory.Xgn.TrivialTypeGoodReduction
 
-open GlobalTheory GlobalTheory.PointUnif GlobalTheory.EigenSplit
+open _root_.GlobalTheory GlobalTheory.PointUnif GlobalTheory.EigenSplit
 open scoped CategoryTheory.Obj
 
 noncomputable def fibPol {X : Scheme.{0}} (P : Out.PolAV X) {z : Sp ℂ ⟶ X} {A : Over (Sp ℂ)} [GrpObj A]

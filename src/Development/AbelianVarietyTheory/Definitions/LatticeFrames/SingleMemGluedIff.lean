@@ -234,7 +234,7 @@ end GlobalTheory.MiTop.Scale
 
 namespace GlobalTheory.MiTop
 
-open Formalism.MainNotions Formalism.DivisionValues Formalism.L2 Formalism.L2.Indef Formalism.L2.Rows Formalism.IndefR.Mult Formalism.IndefR.Cx Formalism.IndefR.Links GlobalTheory.MiS GlobalTheory.Core.Mi GlobalTheory.Fam GlobalTheory.MiTop.Scale
+open Formalism.MainNotions Formalism.DivisionValues _root_.Formalism.L2 Formalism.L2.Indef Formalism.L2.Rows Formalism.IndefR.Mult Formalism.IndefR.Cx Formalism.IndefR.Links GlobalTheory.MiS GlobalTheory.Core.Mi GlobalTheory.Fam GlobalTheory.MiTop.Scale
 
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {Kc : Formalism.MainNotions.G.Consts}
   {Yd : DivX D} {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Yd cX} {W : RealPack ex} {u : D.what₂.Word} {f : FamCh W u}

@@ -31,7 +31,7 @@ open Formalism.MainNotions.DIV.Cons (intO)
 
 namespace GlobalTheory.FlagEmb
 
-open AlgebraicGeometry CategoryTheory Limits NumberField in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits NumberField in
 private theorem wedgeForm_update_eq_zero_of_mem_span_others {S N : Type} [CommRing S]
     [AddCommGroup N] [Module S N] {k : ℕ} (F : N [⋀^Fin k]→ₗ[S] S) (v : Fin k → N) (i : Fin k)
     {x : N} (hx : x ∈ Submodule.span S (v '' {j | j ≠ i})) :
@@ -46,7 +46,7 @@ private theorem wedgeForm_update_eq_zero_of_mem_span_others {S N : Type} [CommRi
   | add y z _ _ hy hz => rw [F.map_update_add, hy, hz, add_zero]
   | smul a y _ hy => rw [F.map_update_smul, hy, smul_zero]
 
-open AlgebraicGeometry CategoryTheory Limits NumberField in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits NumberField in
 private theorem wedgeForm_eq_prod_mul_of_triangular_change {T : Type} {m : T → ℕ} {S N : Type}
     [CommRing S] [AddCommGroup N] [Module S N] {k : ℕ} (F : N [⋀^Fin k]→ₗ[S] S)
     (c c' : _root_.GlobalTheory.FlagEmb.Let m → N) (d : _root_.GlobalTheory.FlagEmb.Let m → S)
@@ -99,7 +99,7 @@ private theorem wedgeForm_eq_prod_mul_of_triangular_change {T : Type} {m : T →
   rwa [h1, h2] at this
 
 
-open AlgebraicGeometry CategoryTheory Limits NumberField in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits NumberField in
 theorem _root_.GlobalTheory.FlagEmb.plk_tri (T : Type) (m : T → ℕ) (S : Type) [CommRing S]
     (M : ℕ) (c c' : _root_.GlobalTheory.FlagEmb.Let m → Fin (M + 1) → S)
     (d : _root_.GlobalTheory.FlagEmb.Let m → S) (k : ℕ) (e : Fin k → _root_.GlobalTheory.FlagEmb.Let m)

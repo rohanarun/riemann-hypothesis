@@ -9,6 +9,7 @@ import rpc
 from producer import dependency_paths
 
 # Filled from the reviewed infrastructure source; never supplied by candidate data.
+SOURCE_SHA_437 = '3a4af1088bb6afe99d794b905d65e7fcf29f22872c66028a48920a11418f9b48'
 SOURCE_SHA = 'c3b7feb7f65935838d7a13f8c8f1954779b9f44753050ada63cddd9826e774a6'
 
 def main():
@@ -20,10 +21,12 @@ def main():
     request = rpc.read(args.request)
     names = [rpc.module_name(name) for name in request['modules']]
     rpc.require(0 < len(names) <= rpc.proof_policy()['max_batch_modules'], 'invalid proof batch')
-    package = Path(__file__).with_name('backend')
+    fresh=rpc.proof_policy()['baseline'].get('fresh_project',False)
+    expected=SOURCE_SHA_437 if fresh else SOURCE_SHA
+    package = Path(__file__).with_name('backend437' if fresh else 'backend')
     binary = package / '.lake/build/bin/proof-producer'
     receipt = rpc.read(package / 'proof-binary-receipt.json')
-    rpc.require(rpc.digest(package / 'ProofProducer.lean') == SOURCE_SHA == receipt['source_sha256'], 'unreviewed proof infrastructure source')
+    rpc.require(rpc.digest(package / 'ProofProducer.lean') == expected == receipt['source_sha256'], 'unreviewed proof infrastructure source')
     rpc.require(rpc.digest(binary) == receipt['elf_sha256'], 'proof infrastructure executable changed')
     dependencies = Path(os.environ['NATIVE_PACKAGE_ROOT']).resolve()
     toolchain = Path(os.environ['NATIVE_TOOLCHAIN_ROOT']).resolve()

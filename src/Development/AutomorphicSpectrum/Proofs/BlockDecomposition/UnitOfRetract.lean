@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.CellTop
 
-open scoped Matrix Topology
+open scoped Matrix _root_.Topology
 
 section Mix
 

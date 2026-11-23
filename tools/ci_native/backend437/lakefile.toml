@@ -1,0 +1,7 @@
+name="proofproducer437"
+
+[[lean_exe]]
+name="proof-producer"
+root="ProofProducer"
+supportInterpreter=true
+moreLinkArgs=["-lLake"]

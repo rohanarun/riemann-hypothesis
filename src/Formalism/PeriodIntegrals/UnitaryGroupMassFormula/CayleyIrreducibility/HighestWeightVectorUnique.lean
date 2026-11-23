@@ -20,10 +20,8 @@ section Common
 
 variable {ι : Type} [Fintype ι] [DecidableEq ι] {n : ℕ}
 
-theorem natW_anti_v (lam : DomWeight n) : Antitone lam.natW := by
-  unfold DomWeight.natW
-  intro a b hab
-  exact Int.toNat_le_toNat (sub_le_sub_right (lam.2 hab) _)
+theorem natW_anti_v (lam : DomWeight n) : Antitone lam.natW :=
+  fun _ _ hij => Int.toNat_le_toNat (sub_le_sub_right (lam.anti hij) _)
 
 theorem delSq_le_dual (lam : DomWeight n) : delSq ℂ n lam ≤ dualWeyl ℂ n n lam.natW :=
   weylLeDual_of highestWeightVectorMem dualWeylModuleRowDividedPowerStable ℂ n n le_rfl _ (natW_anti_v lam)

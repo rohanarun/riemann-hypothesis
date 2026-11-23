@@ -21,7 +21,7 @@ public import Development.WeilBound.CoreStatements.ThetaDilations.Bundle0001
 noncomputable section
 namespace GlobalTheory.CompanionTheory.WeilSiegel.Free
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 open GlobalTheory.CompanionTheory.WeilSiegel.Frame
 

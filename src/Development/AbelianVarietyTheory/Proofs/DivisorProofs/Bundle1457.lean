@@ -273,7 +273,7 @@ attribute [local instance] Over.cartesianMonoidalCategory
 
 namespace GlobalTheory.TateBaseChange
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj Pointwise in
 open IsLocalRing in
 attribute [local instance] Over.cartesianMonoidalCategory in
@@ -289,7 +289,7 @@ private lemma baseChangePtEquiv_galPts (K L Ω : Type) [Field K] [Field L] [Fiel
   rfl
 
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj Pointwise in
 open IsLocalRing in
 attribute [local instance] Over.cartesianMonoidalCategory in

@@ -447,7 +447,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.BT
 
-open CategoryTheory Limits AlgebraicGeometry MonoidalCategory CartesianMonoidalCategory MonObj TensorProduct
+open CategoryTheory _root_.CategoryTheory.Limits AlgebraicGeometry MonoidalCategory CartesianMonoidalCategory MonObj TensorProduct
 
 theorem lemmaBT_holds : LemmaBT := by
   unfold GlobalTheory.CompanionTheory.Ar.BT.LemmaBT

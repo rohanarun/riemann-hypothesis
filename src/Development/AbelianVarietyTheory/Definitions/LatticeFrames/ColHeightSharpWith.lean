@@ -13,7 +13,7 @@ noncomputable section
 namespace GlobalTheory.Core.Ht2
 
 open Module NumberField IsDedekindDomain
-open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Col Formalism.L2.Ker GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds
+open Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV _root_.Formalism.L2.Col Formalism.L2.Ker GlobalTheory.IndefiniteRowSideFullHecke.PlaceLogThetaBounds
 
 def SizeRowsS (CY : ℝ) (N : NumDatum) (δ : Code N) : Prop :=
   (Real.log N.rd ≤ N.sc.L ∧ Real.log N.q ≤ N.sc.L ∧ Real.log N.d ≤ N.sc.L ∧ Real.log (4 * N.sc.x) ≤ N.sc.L ∧

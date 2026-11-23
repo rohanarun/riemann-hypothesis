@@ -432,7 +432,7 @@ open GlobalTheory GlobalTheory.SiegelTor GlobalTheory.ZM
 namespace GlobalTheory.SiegelTor
 
 
-open CategoryTheory AlgebraicGeometry Limits NumberField in
+open CategoryTheory AlgebraicGeometry _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits NumberField in
 theorem _root_.GlobalTheory.SiegelTor.finiteType_cycAway (n : ℕ) : Algebra.FiniteType ℤ (_root_.GlobalTheory.SiegelTor.cycAway n) := by
   have hfg : (Algebra.adjoin ℤ ({_root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.zeta n, (n : ℂ)⁻¹} : Set ℂ)).FG := by
     rw [show ({_root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.zeta n, (n : ℂ)⁻¹} : Set ℂ) = ↑({_root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.zeta n, (n : ℂ)⁻¹} : Finset ℂ) by simp]
@@ -442,7 +442,7 @@ theorem _root_.GlobalTheory.SiegelTor.finiteType_cycAway (n : ℕ) : Algebra.Fin
   exact h
 
 
-open CategoryTheory AlgebraicGeometry Limits NumberField in
+open CategoryTheory AlgebraicGeometry _root_.CategoryTheory.Limits _root_.CategoryTheory.Limits NumberField in
 theorem _root_.GlobalTheory.SiegelTor.arBase_cycAway : ∀ n : ℕ, n ≠ 0 → _root_.GlobalTheory.ZM.ArBase (_root_.GlobalTheory.SiegelTor.cycAway n).subtype := by
   intro n _
   exact ⟨_root_.GlobalTheory.CycAwayReg.isDedekindDomain_cycAway n, _root_.GlobalTheory.SiegelTor.finiteType_cycAway n,

@@ -158,7 +158,7 @@ noncomputable section
 
 open NumberField IsDedekindDomain Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes GlobalTheory.WeilM GlobalTheory.IndefiniteRowSideFullHecke.WeilTensorModels GlobalTheory.AdelicSvN MeasureTheory
 open GroundTheory.Global GroundTheory.Automorphic.GJMatrix
-open scoped Matrix
+open scoped _root_.Matrix
 
 namespace GlobalTheory.AdelicSvN.Weyl
 

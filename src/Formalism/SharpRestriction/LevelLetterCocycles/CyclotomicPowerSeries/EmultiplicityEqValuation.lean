@@ -39,11 +39,7 @@ theorem toZModPow_eq_one_iff (k : ℕ) (x : ℤ_[l]) (hx : x - 1 ≠ 0) :
   rw [h1, ← RingHom.mem_ker, PadicInt.ker_toZModPow, Ideal.mem_span_singleton,
     pow_dvd_iff_le_valuation _ hx]
 
-private theorem prime_natCast_padicInt : Prime (l : ℤ_[l]) := by
-  first
-  | exact PadicInt.prime_p
-  | exact UniqueFactorizationMonoid.irreducible_iff_prime.mp PadicInt.irreducible_p
-  | exact PadicInt.irreducible_p.prime
+private theorem prime_natCast_padicInt : Prime (l : ℤ_[l]) := PadicInt.prime_p
 
 theorem factV (hl2 : l ≠ 2) (u : ℤ_[l]) (hu : (u - 1).valuation = 1) (m : ℕ) (hm : m ≠ 0) :
     (u ^ m - 1).valuation = 1 + padicValNat l m := by

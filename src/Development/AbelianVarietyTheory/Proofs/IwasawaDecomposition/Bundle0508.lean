@@ -473,7 +473,7 @@ open NumberField
 
 namespace GlobalTheory.OneMapRefObj
 
-open Formalism Formalism.IndefR Formalism.IndefR.FWT Formalism.IndefR.Links Formalism.L2.Pj Formalism.L2.DIV Formalism.BasicNotions
+open _root_.Formalism Formalism.IndefR Formalism.IndefR.FWT Formalism.IndefR.Links Formalism.L2.Pj Formalism.L2.DIV Formalism.BasicNotions
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

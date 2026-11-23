@@ -86,7 +86,7 @@ theorem dehom_mem_homFracDegZero (V : Ideal (MRing ι F)) [V.IsPrime] (i : ∀ k
 
 theorem div_eq_dehom_div (V : Ideal (MRing ι F)) [V.IsPrime] (i : ∀ k, ι k)
     (hi : ∀ k, (X ⟨k, i k⟩ : MRing ι F) ∉ V) {b : K → ℕ} {f g : MRing ι F}
-    (hf : IsMultiHomog f b) (hg : IsMultiHomog g b) :
+    (hf : _root_.GroundTheory.Heights₂.Heights.NumbersDVR.IsMultiHomog f b) (hg : _root_.GroundTheory.Heights₂.Heights.NumbersDVR.IsMultiHomog g b) :
     algebraMap (MRing ι F ⧸ V) (FractionRing (MRing ι F ⧸ V)) (Ideal.Quotient.mk V f) /
         algebraMap (MRing ι F ⧸ V) (FractionRing (MRing ι F ⧸ V)) (Ideal.Quotient.mk V g) =
       IntNumPoint.dehom V i f / IntNumPoint.dehom V i g := by

@@ -126,7 +126,7 @@ noncomputable section
 
 namespace GlobalTheory.GO
 
-open NumberField Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms
+open NumberField _root_.Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms
 
 section Exp
 

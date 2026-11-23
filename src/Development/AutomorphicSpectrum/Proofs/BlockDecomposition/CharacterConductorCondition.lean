@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.PsiCondLoc
 
-open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain Filter Topology Metric
+open HeckeCharacterZeroLocus.SiegelWeilU NumberField IsDedekindDomain Filter _root_.Topology _root_.Metric
 open Formalism.L2.SG.Pf.RescaleCore.NCov.AdCocptW
 
 theorem eq_one_of_pow_near {z : ℂ} (h : ∀ k : ℕ, ‖z ^ (2 ^ k) - 1‖ ≤ 1 / 2) : z = 1 :=

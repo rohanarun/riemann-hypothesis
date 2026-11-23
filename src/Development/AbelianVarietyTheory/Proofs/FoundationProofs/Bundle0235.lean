@@ -181,9 +181,9 @@ theorem defGram_selfDual_of_embedding : ∀ (E K : Type) [Field E] [NumberField 
     exact (hJ φ).inv.transpose
   · intro L hL
     have hfull := selfDualE_full cE J L hL
-    have hl : Submodule.IsFullLattice K (tauLat emb τ L) := GlobalTheory.T.lattice_extension_along_field_embedding_duals.1 E K ι n emb τ L hfull
+    have hl : Submodule.IsFullLattice K (tauLat emb τ L) := _root_.GlobalTheory.TauLat.tauLat_lattice_dual_round.1 E K ι n emb τ L hfull
     have hd : hdualFr (gramK emb J τ) (tauLat emb τ L) = tauLat emb τ L :=
-      GlobalTheory.T.lattice_extension_along_field_embedding_duals.2.1 E K ι n emb cE τ (hemb τ) J L L hdet hfull hL.2
+      _root_.GlobalTheory.TauLat.tauLat_lattice_dual_round.2.1 E K ι n emb cE τ (hemb τ) J L L hdet hfull hL.2
     refine ⟨⟨hl.toIsLattice, hd⟩, (GlobalTheory.T.dualLattice_isLattice_and_hermitianDual.1 K n _ _ hdK hl).1.toIsLattice, ?_⟩
     have h := GlobalTheory.T.dualLattice_isLattice_and_hermitianDual.2 K n _ _ h1.1 hdK hl
     rw [hd] at h

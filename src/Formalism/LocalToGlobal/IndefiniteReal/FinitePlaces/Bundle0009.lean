@@ -90,9 +90,6 @@ theorem cF_cF (z : Af D.host.F ⊗[D.host.F] D.host.E) : cF D (cF D z) = z := by
     rw [star_star]
   | add x y hx hy => rw [map_add (f := _), map_add (f := _), hx, hy]
 
-theorem intAf_mul {a a' : Af D.host.F} (ha : a ∈ intAf D.host.F) (ha' : a' ∈ intAf D.host.F) :
-    a * a' ∈ intAf D.host.F := fun w => by rw [map_mul]; exact mul_mem (ha w) (ha' w)
-
 theorem intAE_mul {z z' : Af D.host.F ⊗[D.host.F] D.host.E} (hz : z ∈ intAE D) (hz' : z' ∈ intAE D) :
     z * z' ∈ intAE D := by
   induction hz using AddSubgroup.closure_induction with

@@ -55,8 +55,8 @@ section Local
 
 variable (F : Type) [Field F] [NumberField F] (v : HeightOneSpectrum (𝓞 F))
 
-theorem countable_numberField : Countable F := by
-  exact Function.Injective.countable (Module.finBasis ℚ F).equivFun.injective
+theorem countable_numberField : Countable F :=
+  Finsupp.Countable.of_moduleFinite (R := ℚ)
 
 theorem separableSpace_Fv : TopologicalSpace.SeparableSpace (Fv F v) := by
   haveI := countable_numberField F

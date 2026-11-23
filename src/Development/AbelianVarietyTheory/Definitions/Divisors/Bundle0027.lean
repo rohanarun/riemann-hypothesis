@@ -440,7 +440,7 @@ section
 noncomputable section
 namespace GlobalTheory.KS
 namespace Model
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 open GlobalTheory.EtC GlobalTheory.UPel.HT
 open scoped TensorProduct
 

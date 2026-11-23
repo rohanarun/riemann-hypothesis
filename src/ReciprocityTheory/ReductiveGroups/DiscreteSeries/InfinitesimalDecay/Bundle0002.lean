@@ -57,14 +57,6 @@ theorem dSW_append (a b : List (Matrix (Fin n) (Fin n) ℂ)) (v : H) :
   | nil => rfl
   | cons X a ih => rw [List.cons_append, dSW_cons, dSW_cons, ih]
 
-theorem dSW_smooth (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n) ℂ)} (hw : ∀ X ∈ w, inG ε X)
-    {v : H} (hv : IsSmoothVecU ε σ v) : IsSmoothVecU ε σ (dSW σ w v) := by
-  induction w with
-  | nil => exact hv
-  | cons X w ih =>
-    rw [dSW_cons]
-    exact IsSmoothVecU.dS hσ (hw X (by simp)) (ih (fun Y hY => hw Y (by simp [hY])))
-
 theorem dSW_add (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n) ℂ)} (hw : ∀ X ∈ w, inG ε X)
     {v v' : H} (hv : IsSmoothVecU ε σ v) (hv' : IsSmoothVecU ε σ v') :
     dSW σ w (v + v') = dSW σ w v + dSW σ w v' := by
@@ -73,7 +65,7 @@ theorem dSW_add (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n)
   | cons X w ih =>
     have hw' : ∀ Y ∈ w, inG ε Y := fun Y hY => hw Y (by simp [hY])
     rw [dSW_cons, dSW_cons, dSW_cons, ih hw',
-      dS_add_vec hσ (hw X (by simp)) (dSW_smooth hσ hw' hv) (dSW_smooth hσ hw' hv')]
+      dS_add_vec hσ (hw X (by simp)) (dSW_smooth hσ _ hw' hv) (dSW_smooth hσ _ hw' hv')]
 
 theorem dSW_smul (c : ℂ) (w : List (Matrix (Fin n) (Fin n) ℂ)) (v : H) :
     dSW σ w (c • v) = c • dSW σ w v := by
@@ -134,7 +126,7 @@ theorem inner_dSW (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin 
     have hX : inG ε X := hw X (by simp)
     have hw' : ∀ Y ∈ w, inG ε Y := fun Y hY => hw Y (by simp [hY])
     have hXy : IsSmoothVecU ε σ (dS σ X y) := IsSmoothVecU.dS hσ hX hy
-    have h1 := inner_dS_add hσ hX hy (dSW_smooth hσ hw' hv)
+    have h1 := inner_dS_add hσ hX hy (dSW_smooth hσ _ hw' hv)
     have h2 : inner ℂ (dS σ X y) (dSW σ w v) =
         (-1 : ℂ) ^ w.length * inner ℂ (dSW σ w.reverse (dS σ X y)) v := ih (y := dS σ X y) hw' hXy
     have e : dSW σ [X] y = dS σ X y := rfl
@@ -202,7 +194,7 @@ theorem dSW_conj (hσ : IsURepOn (UJset ε) σ) {k : Matrix (Fin n) (Fin n) ℂ}
       intro Y hY
       obtain ⟨Z, hZ, rfl⟩ := List.mem_map.mp hY
       exact inG_conj_K hk (hw' Z hZ)
-    rw [List.map_cons, dSW_cons, dSW_cons, ih hw', dS_conj hσ hk hX (dSW_smooth hσ hm hv)]
+    rw [List.map_cons, dSW_cons, dSW_cons, ih hw', dS_conj hσ hk hX (dSW_smooth hσ _ hm hv)]
 
 end ReciprocityTheory.ChartRestriction.DS.DecInf
 end

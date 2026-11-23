@@ -1,0 +1,5 @@
+[
+  {"id":"ryzen-5900x","runner_id":299092,"runner_name":"rh-zulip-1241818-ryzen-5900x","label":"rh-quick-299092","cpus":8,"jobs":4,"memory_gib":64,"seconds":1200,"availability":"24/7","doctor_required":true},
+  {"id":"i9-12900ks","runner_id":299127,"runner_name":"rh-zulip-1241951-i9-12900ks","label":"rh-quick-299127","cpus":8,"jobs":4,"memory_gib":64,"seconds":1200,"availability":"24/7","doctor_required":true},
+  {"id":"gcp-small","runner_id":298713,"runner_name":"rh-zulip-1241826-gcp-small","label":"rh-quick-298713","cpus":8,"jobs":4,"memory_gib":64,"seconds":1200,"availability":"dedicated GCP instance; no expiry recorded","doctor_required":true}
+]

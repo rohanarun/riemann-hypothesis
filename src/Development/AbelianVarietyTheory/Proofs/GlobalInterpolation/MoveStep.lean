@@ -18,7 +18,7 @@ noncomputable section
 
 namespace GlobalTheory.LvT.Built.TrueLaws
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem GlobalTheory.Mem.Col2
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Ker GlobalTheory.Mem GlobalTheory.Mem.Col2
 open _root_.Formalism.L2.Col
 
 local instance starHost (B : Base) : StarRing B.host.E := B.fields.starE

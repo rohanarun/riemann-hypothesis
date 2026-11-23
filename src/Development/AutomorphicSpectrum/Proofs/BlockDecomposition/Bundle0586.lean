@@ -124,7 +124,7 @@ end Change
 
 section Piece
 
-open Filter Topology ReciprocityTheory.AnForm ReciprocityTheory.AnForm.M
+open Filter _root_.Topology ReciprocityTheory.AnForm ReciprocityTheory.AnForm.M
 
 variable {m : ℕ} {n : Fin (m + 1) → ℕ} {X : Scheme.{0}} (i : X ⟶ MP ℤ m n)
 

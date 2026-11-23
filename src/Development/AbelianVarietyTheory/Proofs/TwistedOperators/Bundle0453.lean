@@ -358,7 +358,7 @@ theorem coversAt_over_field (T : CoreJ D) [Algebra T.Q.c.F D.what₂.LL] (R : Re
   have key : ∀ t, ∃ d : DeltaDat (T.Q.Xo ((i : ℕ) + 1)) c' n, d.pd = tupPrime R t ∧ d.I = I t ∧ d.l₂ = l₂ t ∧ d.IsLev ∧
       d.l₂.A = 1 ∧ FnAlgClosed (Xo := d.Xo₂) (c := d.c₂) ∧ ∃ _ : StarRing (𝓞 D.host.E), IsNab d.Xo₂ d.c₂ d.nab₂ := fun t => by
     obtain ⟨l1, l2, l3, l4, l5, l6⟩ := hl t
-    obtain ⟨Xo₂⟩ := GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.1 _ _ (T.Q.Dw ((i : ℕ) + 1)) (l₂ t) hpos
+    obtain ⟨Xo₂⟩ := _root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.1 _ _ (T.Q.Dw ((i : ℕ) + 1)) (l₂ t) hpos
     obtain ⟨c₂, hc₂⟩ := exists_coeff_cover T R t (hL.Q_pl t) hr c' hc' (l₂ t) l2 l6 l3.symm
     obtain ⟨d, a1, a2, a3, -, -, -, a4, a5⟩ := GlobalTheory.LevelCover.exists_deltaDat_isLev _ _ _ _ (T.Q.Xo ((i : ℕ) + 1)) c' hpos n
       (tupPrime R t) (I t) (l₂ t) Xo₂ c₂ (hc₂.trans hc'.symm) l1 l2 l3 l4 l5

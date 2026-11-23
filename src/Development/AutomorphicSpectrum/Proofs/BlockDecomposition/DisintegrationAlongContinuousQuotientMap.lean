@@ -16,7 +16,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.WhitFree.AvgInf.Lim
 
-open Filter Topology
+open Filter _root_.Topology
 
 section Gen
 

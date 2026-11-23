@@ -216,41 +216,31 @@ section Words
 
 variable {R B : Type} [CommRing R] [Ring B] [Algebra R B]
 
-theorem first_embedding_mul (M N : Matrix (Fin 2) (Fin 2) B) : E1 (M * N) = E1 M * E1 N := by
-  unfold Formalism.YangianSpanCharacter.T.E1
-  ext ⟨i, k⟩ ⟨j, l⟩
-  fin_cases i <;> fin_cases k <;> fin_cases j <;> fin_cases l <;>
-    simp [Matrix.mul_apply, Matrix.one_apply, Fintype.sum_prod_type, Fin.sum_univ_two]
+theorem first_embedding_mul (M N : Matrix (Fin 2) (Fin 2) B) : E1 (M * N) = E1 M * E1 N :=
+  blockDiagonal_mul (fun _ : Fin 2 => M) (fun _ => N)
+
+private theorem E2_eq_reindex (M : Matrix (Fin 2) (Fin 2) B) :
+    E2 M = reindexRingEquiv B (Equiv.prodComm (Fin 2) (Fin 2)) (E1 M) := rfl
 
 theorem entries_mem_mul (M N : Matrix (Fin 2) (Fin 2) B) : E2 (M * N) = E2 M * E2 N := by
-  unfold Formalism.YangianSpanCharacter.T.E2
-  ext ⟨i, k⟩ ⟨j, l⟩
-  fin_cases i <;> fin_cases k <;> fin_cases j <;> fin_cases l <;>
-    simp [Matrix.mul_apply, Matrix.one_apply, Fintype.sum_prod_type, Fin.sum_univ_two]
+  simp only [E2_eq_reindex, first_embedding_mul, map_mul]
 
-theorem first_embedding_one : E1 (1 : Matrix (Fin 2) (Fin 2) B) = 1 := by
-  unfold Formalism.YangianSpanCharacter.T.E1
-  ext ⟨i, k⟩ ⟨j, l⟩
-  fin_cases i <;> fin_cases k <;> fin_cases j <;> fin_cases l <;>
-    simp [Matrix.mul_apply, Matrix.one_apply, Fintype.sum_prod_type, Fin.sum_univ_two]
+theorem first_embedding_one : E1 (1 : Matrix (Fin 2) (Fin 2) B) = 1 :=
+  blockDiagonal_one
 
 theorem entries_mem_one : E2 (1 : Matrix (Fin 2) (Fin 2) B) = 1 := by
-  unfold Formalism.YangianSpanCharacter.T.E2
-  ext ⟨i, k⟩ ⟨j, l⟩
-  fin_cases i <;> fin_cases k <;> fin_cases j <;> fin_cases l <;>
-    simp [Matrix.mul_apply, Matrix.one_apply, Fintype.sum_prod_type, Fin.sum_univ_two]
+  rw [E2_eq_reindex, first_embedding_one, map_one]
 
 theorem first_second_embedding_commute (A C : Matrix (Fin 2) (Fin 2) B)
     (h : ∀ i j k l, A i j * C k l = C k l * A i j) : E1 A * E2 C = E2 C * E1 A := by
-  unfold Formalism.YangianSpanCharacter.T.E1 Formalism.YangianSpanCharacter.T.E2
+  unfold E1 E2
   ext ⟨i, k⟩ ⟨j, l⟩
-  fin_cases i <;> fin_cases k <;> fin_cases j <;> fin_cases l <;>
-    simp [Matrix.mul_apply, Fintype.sum_prod_type, Fin.sum_univ_two, h]
+  simp [Matrix.mul_apply, Fintype.sum_prod_type, ite_mul, mul_ite, h]
 
 theorem transpose_mul_of_comm (A C : Matrix (Fin 2) (Fin 2) B)
     (h : ∀ i j k l, A i j * C k l = C k l * A i j) : (A * C)ᵀ = Cᵀ * Aᵀ := by
   ext i j
-  simp [Matrix.mul_apply, Fin.sum_univ_two, h]
+  simp only [Matrix.transpose_apply, Matrix.mul_apply, h]
 
 theorem isDet_iff (M : R → Matrix (Fin 2) (Fin 2) B) (q : R → R) :
     IsDet M q ↔ ∀ Y : R, (M (Y + 1))ᵀ * Formalism.YangianSpanCharacter.T.J B * M Y = q Y • Formalism.YangianSpanCharacter.T.J B ∧

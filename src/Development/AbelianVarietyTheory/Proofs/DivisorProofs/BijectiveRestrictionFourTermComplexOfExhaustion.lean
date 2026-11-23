@@ -280,7 +280,7 @@ theorem tower_two : ∀ (C : Type 1) [Category.{0} C] (D : Type) [Category.{0} D
   apply h2_bijective_of_surj_of_inj_on_cocycles (K.resMap ℓ)
   · intro y hy
     obtain ⟨x, hx, w, hw⟩ := surj2 (μ 0) (hμ 0).2.2 y hy
-    obtain ⟨b, hb0, hbZ, hbc⟩ := GlobalTheory.T.tower_complex_lift_and_extension_lemmas.2 (fun n ↦ (K.res (Q n).ι).T1)
+    obtain ⟨b, hb0, hbZ, hbc⟩ := _root_.GlobalTheory.TowerLift.tower_lemmas.2 (fun n ↦ (K.res (Q n).ι).T1)
       (fun n ↦ (K.res (Q n).ι).T2) (fun n ↦ (K.res (Q n).ι).Z2) (fun n ↦ (K.res (Q n).ι).D1)
       (fun n ↦ (ρ n).p1) (fun n ↦ (ρ n).p2) (fun n x ↦ first_diagonal_phase_mem_unitary _ x) (fun n x ↦ (ρ n).pullback_secondDifferential x)
       (fun n ↦ level_p1_surjective K _) (fun n x hx ↦ (ρ n).p2_mem_Z2_of_mem_Z2 hx) hS2 x hx
@@ -325,7 +325,7 @@ theorem tower_two : ∀ (C : Type 1) [Category.{0} C] (D : Type) [Category.{0} D
     let bx : ∀ n, (K.res (Q n).ι).T2 := fun n ↦ (K.resMap (Q n).ι).p2 x
     have hbx : ∀ n, ∃ a, (K.res (Q n).ι).D1 a = bx n := fun n ↦
       inj2 (μ n) (hμ n).2.1 (bx n) ((K.resMap (Q n).ι).p2_mem_Z2_of_mem_Z2 hx) w hw
-    obtain ⟨a, hac, had⟩ := GlobalTheory.T.tower_complex_lift_and_extension_lemmas.1 (fun n ↦ (K.res (Q n).ι).M0.c0) (fun n ↦ (K.res (Q n).ι).T1)
+    obtain ⟨a, hac, had⟩ := _root_.GlobalTheory.TowerLift.tower_lemmas.1 (fun n ↦ (K.res (Q n).ι).M0.c0) (fun n ↦ (K.res (Q n).ι).T1)
       (fun n ↦ (K.res (Q n).ι).T2) (fun n ↦ (K.res (Q n).ι).D0) (fun n ↦ (K.res (Q n).ι).D1)
       (fun n ↦ (ρ n).p0) (fun n ↦ (ρ n).p1) (fun n ↦ (ρ n).p2) (fun n x ↦ cx_D1_D0_eq_zero _ x)
       (fun n x ↦ (ρ n).pullback_firstDifferential x) (fun n x ↦ (ρ n).pullback_secondDifferential x) (fun n ↦ level_p0_surjective K _) hS1 bx

@@ -19,7 +19,7 @@ open Formalism.BasicNotions Formalism.MainNotions Formalism.DivisionValues Forma
   Formalism.IndefR.Links Formalism.L2.SG.PackageTie2 Formalism.L2.SG.KerJoinS Formalism.IndefR.CxPass
 
 namespace GlobalTheory.MiS
-open Formalism Formalism.IndefR Formalism.IndefR.Mi
+open _root_.Formalism Formalism.IndefR Formalism.IndefR.Mi
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

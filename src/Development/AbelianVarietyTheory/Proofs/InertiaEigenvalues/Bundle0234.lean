@@ -282,7 +282,7 @@ open scoped Formalism.Per
 
 namespace GlobalTheory.TiltRootApprox
 
-open Ideal
+open _root_.Ideal
 
 variable {l : ℕ} [Fact l.Prime]
 
@@ -333,7 +333,7 @@ end GlobalTheory.TiltRootApprox
 
 namespace GlobalTheory.TiltRootApprox
 
-open Ideal
+open _root_.Ideal
 
 theorem exists_root_approx : ∀ (l : ℕ) [Fact l.Prime] (y y' : Formalism.Per.Fl l), y' ≠ 0 →
     ‖(((y).untilt : Formalism.Per.OC l) : ℂ_[l])‖ = ‖(((y').untilt : Formalism.Per.OC l) : ℂ_[l])‖ →

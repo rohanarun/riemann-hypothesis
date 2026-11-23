@@ -62,7 +62,7 @@ namespace GlobalTheory.CompanionTheory.Ar.Rec
 
 namespace CompOver
 
-open AlgebraicGeometry CategoryTheory Limits GlobalTheory.LevelCoverCompare GlobalTheory.IndefiniteRowSideFullHecke.DeltaDatumCombinedCoefficient GlobalTheory.CompRat.FixedConst
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits GlobalTheory.LevelCoverCompare GlobalTheory.IndefiniteRowSideFullHecke.DeltaDatumCombinedCoefficient GlobalTheory.CompRat.FixedConst
 open scoped IntermediateField
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}

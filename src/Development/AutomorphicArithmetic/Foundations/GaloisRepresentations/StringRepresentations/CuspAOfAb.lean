@@ -8,7 +8,7 @@ public import Development.AutomorphicArithmetic.Foundations.GaloisRepresentation
 noncomputable section
 
 open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.ConjugateSelfDual ReciprocityTheory.Gal Polynomial Formalism.MainNotions.N
-open GlobalTheory GlobalTheory.WeilDeligne UpperTheory.Lit.Car
+open _root_.GlobalTheory GlobalTheory.WeilDeligne UpperTheory.Lit.Car
 
 namespace UpperTheory.GalN
 

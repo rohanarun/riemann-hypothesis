@@ -28,7 +28,7 @@ noncomputable section
 namespace GlobalTheory.SiegelFamilyNumberField
 
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj in
 open scoped CategoryTheory.Obj TensorProduct in
 attribute [local instance] Over.cartesianMonoidalCategory in
 open NumberField Polynomial in
@@ -55,7 +55,7 @@ theorem _root_.GlobalTheory.SiegelFamilyNumberField.nonempty_baseChange {h k : �
   · intro R _ _ x y s' c hxy hx hy
     exact _root_.GlobalTheory.SiegelFamilyBaseChange.inj_baseChange F j rfl U hU x y s' c hxy hx hy
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj in
 open scoped CategoryTheory.Obj TensorProduct in
 attribute [local instance] Over.cartesianMonoidalCategory in
 open NumberField Polynomial in
@@ -77,7 +77,7 @@ private theorem isPrimitiveRoot_map_localization_away (k : ℕ) (hk : 0 < k) (K 
   exact (isRoot_cyclotomic_iff).mp this
 
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj in
 open scoped CategoryTheory.Obj TensorProduct in
 attribute [local instance] Over.cartesianMonoidalCategory in
 open NumberField Polynomial in

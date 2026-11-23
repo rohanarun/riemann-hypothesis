@@ -30,7 +30,7 @@ open Formalism.BasicNotions.Loc
 namespace Div
 
 open scoped NNReal
-open Ideal
+open _root_.Ideal
 
 section General
 
@@ -109,7 +109,7 @@ end Div
 section Complete
 
 open scoped NNReal
-open Ideal
+open _root_.Ideal
 
 variable {p : ℕ} [Fact p.Prime]
 

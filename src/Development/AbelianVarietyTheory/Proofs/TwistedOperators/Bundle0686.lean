@@ -100,7 +100,7 @@ variable {D : D7} {Γ : Type} [Group Γ] [Fintype Γ] {Pl0 T : Type} {A : FamIn 
   {Ks : Type} [Field Ks] [NumberField Ks] [Algebra Ks D.what₂.LL] {R : RealDat D A Ks}
 
 theorem wtAt_big : Big fun ch => ∀ s, WtAt ch s := by
-  refine GlobalTheory.RowReal.big_mono ?_ (GlobalTheory.T.rowTest_tupleTerm_measures_differ_by_scalars.and _root_.GlobalTheory.CellMass.cell_mass)
+  refine GlobalTheory.RowReal.big_mono ?_ (_root_.GlobalTheory.TermScales.exists_scales.and _root_.GlobalTheory.CellMass.cell_mass)
   intro D Γ _ _ Pl0 T A Ks _ _ _ R ch h s ρ μ hH
   obtain ⟨hA, hC⟩ := h
   have hc := hC s ρ μ hH

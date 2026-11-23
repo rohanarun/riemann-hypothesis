@@ -113,7 +113,7 @@ theorem genRel_ne_zero {F : Type} [Field F] {B B₀ : Scheme.{0}} {M : LB B} {M�
 
 section ThetaShiftProofs
 
-open ArcTransport TorusExt
+open ArcTransport _root_.GlobalTheory.TorusExt
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {D : Datum H} {l : Level H} {c : Coeff l}
   {O : Type} [CommRing O] {β : O →+* c.F} {O' : Type} [CommRing O'] [IsDomain O'] {b : O →+* O'}
@@ -233,7 +233,7 @@ end ThetaShiftProofs
 section Rigid
 
 open ArcTransport hiding IsTransport exists_transport
-open TorusExt
+open _root_.GlobalTheory.TorusExt
 
 attribute [local instance] gtGroup
 

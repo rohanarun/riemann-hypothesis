@@ -255,7 +255,7 @@ noncomputable section
 
 namespace GlobalTheory.QNormal
 
-open Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.DIV Formalism.L2.Col
+open Formalism.BasicNotions Formalism.HermitianLatticesTheory Formalism.L2.DIV _root_.Formalism.L2.Col
 
 section General
 

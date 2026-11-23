@@ -123,11 +123,6 @@ theorem intA_mul (hg : ∀ k l m, algebraMap F (Fv F v) (b.repr (b k * b l) m) �
   rw [smul_mul_smul_comm, hB, hB, ← map_mul]
   exact intA_smul (mul_mem (hz k) (hw l)) (intA_incl _ (hg k l))
 
-theorem sigR_incl (σ : E →ₐ[F] E) (e : E) :
-    Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR (Fv F v) σ (inclR (Fv F v) e) = inclR (Fv F v) (σ e) := by
-
-  simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR, inclR, Algebra.TensorProduct.map_tmul]
-
 theorem sigR_smul (σ : E →ₐ[F] E) (c : Fv F v) (z : Fv F v ⊗[F] E) :
     Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR (Fv F v) σ (c • z) = c • Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR (Fv F v) σ z := by
 

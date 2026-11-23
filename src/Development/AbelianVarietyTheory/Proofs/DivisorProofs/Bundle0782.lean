@@ -399,7 +399,7 @@ noncomputable section
 
 namespace GlobalTheory.InertTypeIso
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {E : Type} [Field E] [NumberField E] [StarRing E] (P : Ideal (𝓞 E))
 

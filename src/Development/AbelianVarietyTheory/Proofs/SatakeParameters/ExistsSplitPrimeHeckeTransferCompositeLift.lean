@@ -28,7 +28,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory.Hk3.SplitChain
 
-open Formalism.L2.Col (heckePolyOf blockPoly gaussBin)
+open _root_.Formalism.L2.Col (heckePolyOf blockPoly gaussBin)
 
 def stepMat (q n t : ℕ) (ν s : ℂ) (k j : ℕ) : ℂ :=
   if j ≤ k then (q : ℂ) ^ ((n - j) * (k - j)) * (gaussBin q t (k - j) : ℂ) * ν ^ (k - j) * s ^ j else 0

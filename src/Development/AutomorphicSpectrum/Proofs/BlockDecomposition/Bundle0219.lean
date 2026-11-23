@@ -218,7 +218,7 @@ open PositivityTheory.JacquetShalikaLocal
 
 namespace GlobalTheory.CompanionTheory.SatakeBound
 
-open PowerSeries Filter Topology
+open PowerSeries Filter _root_.Topology
 
 theorem tendsto_coeff_mul_one_sub (G : ℂ⟦X⟧) (b : ℂ)
     (h : Tendsto (fun j => coeff j G) atTop (𝓝 0)) :

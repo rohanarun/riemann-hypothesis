@@ -13,14 +13,6 @@ def LeviNonnegOn (n : ℕ) (φ : V n → ℝ) (U : Set (V n)) : Prop :=
 
 variable {n : ℕ}
 
-theorem wd_congr {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
-    wd n j f x = wd n j g x := by
-  simp only [wd, h.fderiv_eq]
-
-theorem wdb_congr {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
-    wdb n j f x = wdb n j g x := by
-  simp only [wdb, h.fderiv_eq]
-
 theorem wdb_eventuallyEq {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
     wdb n j f =ᶠ[𝓝 x] wdb n j g := h.eventuallyEq_nhds.mono fun _ hy => wdb_congr hy
 

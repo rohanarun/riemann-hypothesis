@@ -54,7 +54,7 @@ theorem levelMap_coeff_le : ∀ (E : Type) [Field E] [NumberField E] [IsCMField 
       r ≫ pullback.fst _ _ = pullback.fst _ _ ≫ r₀ ∧ IsFinite (pullback.lift r _ h) ∧ Etale (pullback.lift r _ h) ∧
         Surjective (pullback.lift r _ h) := by
   intro E _ _ _ H Dw l l' Xo Xo' c c' hle hpq hd
-  obtain ⟨r₀, jK, m, hk, -, -, -, -, hc⟩ := (GlobalTheory.T.moduliScheme_levelMaps_heckePoints'.2 E H Dw hpq).1 l l' Xo Xo' hd
+  obtain ⟨r₀, jK, m, hk, -, -, -, -, hc⟩ := (_root_.GlobalTheory.moduliScheme_levelMaps_heckePoints.2 E H Dw hpq).1 l l' Xo Xo' hd
   have hle₁ : KA l ≤ c'.F := fun x hx => by
     have := c'.le (jK ⟨x, hx⟩).2
     rwa [hk] at this

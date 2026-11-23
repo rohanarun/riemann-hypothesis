@@ -240,7 +240,7 @@ noncomputable section
 
 namespace GlobalTheory.Obs.GluePair
 
-open Opposite Limits GlobalTheory.LiftSys.Glue
+open Opposite _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits GlobalTheory.LiftSys.Glue
 
 variable {R R₀ : Type} [CommRing R] [CommRing R₀] {I : Ideal R} {π : R →+* R₀}
   {X₀ Z₀ : Scheme.{0}} {t₀ : Z₀ ⟶ Sp R₀}
@@ -296,7 +296,7 @@ end GlobalTheory.Obs.GluePair
 
 namespace GlobalTheory.Obs
 
-open Opposite Limits GlobalTheory.LiftSys.Glue GlobalTheory.Obs.GluePair
+open Opposite _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits GlobalTheory.LiftSys.Glue GlobalTheory.Obs.GluePair
 
 theorem pairs_glue : ∀ (R R₀ : Type) [CommRing R] [CommRing R₀] (I : Ideal R) (hI : I ^ 2 = 0) (π : R →+* R₀) (hπ : Function.Surjective π) (hk : RingHom.ker π = I) (X₀ Z₀ X Z : Scheme.{0}) (s₀ : X₀ ⟶ Sp R₀) (t₀ : Z₀ ⟶ Sp R₀) (s : X ⟶ Sp R) (t : Z ⟶ Sp R) (i : X₀ ⟶ X) (k : Z₀ ⟶ Z) (hi : IsPullback i s₀ s (spMap π)) (hkk : IsPullback k t₀ t (spMap π)) (S : Sys I π s₀) (S' : Sys I π t₀) (P : S.Presents s i) (P' : S'.Presents t k) (f₀ : Z₀ ⟶ X₀) (h : f₀ ≫ s₀ = t₀ ≫ spMap (RingHom.id R₀)) (l : ∀ T : (Pair f₀)ᵒᵖ, (ofSys S).B ((pairPull h).G.obj T) →ₐ[R] (pairPre S' f₀).B T), (ofSys S).IsLift (pairPre S' f₀) (pairPull h) l → (ofSys S).IsNat (pairPre S' f₀) (pairPull h) l → ∃ f : Z ⟶ X, f ≫ s = t ∧ k ≫ f = f₀ ≫ i := by
   intro R R₀ _ _ I hI π hπ hk X₀ Z₀ X Z s₀ t₀ s t i k hi hkk S S' P P' f₀ h l hL hN

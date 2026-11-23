@@ -359,7 +359,7 @@ namespace GlobalTheory.SiegJoin
 theorem minor_model : ∀ (o Ω : Type) [CommRing o] [Field Ω] [Algebra o Ω] [ArithBase o Ω] (S : ThetaSys o Ω) (ρ : S.Real), S.Big → Module.Finite (Subfield.closure (Set.range (algebraMap o Ω) ∪ {x | ∃ i j, x = S.th j / S.th i})) Ω → ∃ (X M : RatModel o Ω) (U₀ : M.Z.Opens) (EE : M.Lat S.J) (f : M.Z ⟶ X.Z) (Xab : X.Z.Opens) (Zh : ZHOut ρ M U₀ EE), MinorAt S X M U₀ EE f Xab ∧ IsOpen (abLocus Zh.G) ∧ (abLocus Zh.G : Set M.Z) = f ⁻¹' (Xab : Set X.Z) := by
   intro o Ω _ _ _ _ S ρ hB hfin
   have hL := GlobalTheory.abelianSchemeLaws_all
-  have hT : S.HasTests := (_root_.GlobalTheory.ZH.hasTests_of_real _root_.GlobalTheory.SS.semistableReductionSt GlobalTheory.T.uniformisationExistence_and_torsion_statements.1 hL.1 hL.2 GlobalTheory.T.uniformisationExistence_and_torsion_statements.2 o Ω S ρ).1
+  have hT : S.HasTests := (_root_.GlobalTheory.ZH.hasTests_of_real _root_.GlobalTheory.SS.semistableReductionSt _root_.GlobalTheory.ZH.thmU_and_uTors.1 hL.1 hL.2 _root_.GlobalTheory.ZH.thmU_and_uTors.2 o Ω S ρ).1
   obtain ⟨n, a, GG, X, M, U₀, EE, f, Xab, hNm, hP, -, hO, hE, hH, hXab, hI, hgen, -⟩ := _root_.GlobalTheory.ZH.exists_minor_model o Ω S hT hfin
   obtain ⟨Zh⟩ := _root_.GlobalTheory.zhGeo_of_semistableReduction _root_.GlobalTheory.SS.semistableReductionSt o Ω S ρ hB M U₀ EE hO hE ⟨n, a, GG, hgen⟩
   have hsupI : ∀ z : M.Z, S.supI M z = S.supI X (f z) := fun z =>

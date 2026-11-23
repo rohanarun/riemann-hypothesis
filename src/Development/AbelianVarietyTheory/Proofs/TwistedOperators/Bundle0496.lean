@@ -294,6 +294,9 @@ public noncomputable abbrev source
 
 end I195MixedCoordinates_857711241bb3adcbae71fb38
 
+public noncomputable abbrev _root_.I195MixedCoordinates_e9b37737007d4cfbb59b997f.source :=
+  @_root_.I195MixedCoordinates_857711241bb3adcbae71fb38.source
+
 @[expose] public section
 
 noncomputable section

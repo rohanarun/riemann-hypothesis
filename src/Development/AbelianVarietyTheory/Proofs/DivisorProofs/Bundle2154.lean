@@ -168,7 +168,7 @@ theorem exists_dvr {O Ω : Type} [CommRing O] [IsNoetherianRing O] [IsLocalRing 
 
 end Algebra
 
-open CategoryTheory AlgebraicGeometry Limits NumberField IsLocalRing
+open CategoryTheory AlgebraicGeometry _root_.CategoryTheory.Limits NumberField IsLocalRing
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {D : Datum H} {l : Level H}

@@ -185,7 +185,7 @@ theorem ptsIntegral_const_ge (P : Ideal (MRing ι)) (φ : Fin 0 → ((Σ k, ι k
         have hμ : (∏ k, c k) ≠ 0 := Finset.prod_ne_zero_iff.mpr fun k _ ↦ hc k
         congr 1
         field_simp)
-    let F : fibre P Ψ y₀ → Quot r := fun w ↦ Quot.mk r ⟨w.2.choose, w.2.choose_spec.1⟩
+    let F : _root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre P Ψ y₀ → Quot r := fun w ↦ Quot.mk r ⟨w.2.choose, w.2.choose_spec.1⟩
     have hGF : ∀ w, G (F w) = w := by
       intro w
       obtain ⟨h1, h2, h3⟩ := w.2.choose_spec
@@ -194,9 +194,9 @@ theorem ptsIntegral_const_ge (P : Ideal (MRing ι)) (φ : Fin 0 → ((Σ k, ι k
       simp
     have hinj : Function.Injective F := fun a b hab ↦ Subtype.ext (by
       rw [← hGF a, ← hGF b, hab])
-    have : Finite (fibre P Ψ y₀) := Finite.of_injective F hinj
+    have : Finite (_root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre P Ψ y₀) := Finite.of_injective F hinj
     have hcard := Nat.card_le_card_of_injective F hinj
-    have hfin : (fibre P Ψ y₀).Finite := Set.toFinite _
+    have hfin : (_root_.ReciprocityTheory.ChartRestriction.G.Geo.fibre P Ψ y₀).Finite := Set.toFinite _
     rw [finsum_mem_eq_finite_toFinset_sum _ hfin]
     have hterm : ∀ w ∈ hfin.toFinset, t ≤ sheetDensity P Ψ φ (fun _ ↦ t) y₀ w := by
       intro w _

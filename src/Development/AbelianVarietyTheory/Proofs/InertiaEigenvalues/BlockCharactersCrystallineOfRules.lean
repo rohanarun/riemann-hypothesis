@@ -20,7 +20,7 @@ noncomputable section
 
 namespace GlobalTheory.BlockCrys
 
-open NumberField IsDedekindDomain Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions Formalism.MainNotions.N
+open NumberField IsDedekindDomain _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions Formalism.MainNotions.N
 open GlobalTheory.IndefiniteRowSideFullHecke
 open Module TensorProduct
 

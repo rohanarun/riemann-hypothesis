@@ -205,12 +205,12 @@ def jacEquiv : Jacquet (piTensor ρ) (relUnipD k e') ≃ₗ[ℂ] ⨂[ℂ] a, Jac
         Submodule.mkQ_apply])
 
 theorem relJacD_piTensor :
-    Nonempty ((relJacD e' (piTensor ρ)).Equiv (piTensor fun a => jac (e' a) (ρ a))) := by
+    Nonempty ((relJacD e' (piTensor ρ)).Equiv (piTensor fun a => _root_.GlobalTheory.SmGL.jac (e' a) (ρ a))) := by
   refine ⟨Representation.Equiv.mk (jacEquiv e' ρ) fun g => ?_⟩
   refine Submodule.linearMap_qext _ (PiTensorProduct.ext (MultilinearMap.ext fun x => ?_))
   simp only [LinearMap.compMultilinearMap_apply, LinearMap.comp_apply, Submodule.mkQ_apply]
   rw [relJacD_mk]
-  show fwd e' ρ _ = piTensor (fun a => jac (e' a) (ρ a)) g (fwd e' ρ _)
+  show fwd e' ρ _ = piTensor (fun a => _root_.GlobalTheory.SmGL.jac (e' a) (ρ a)) g (fwd e' ρ _)
   rw [map_smul, piTensor_tprod, fwd_mk_tprod', fwd_mk_tprod', piTensor_tprod]
   simp only [jac_mk, relEmbD_apply]
   rw [MultilinearMap.map_smul_univ, relDeltaHalfD_apply]
@@ -227,7 +227,7 @@ theorem relJacD_piTensor_equiv : ∀ (k : Type) [Field k] [ValuativeRel k] [Topo
     (s : ℕ) (d : Fin s → ℕ) (t : Fin s → ℕ) (d' : ∀ a, Fin (t a) → ℕ)
     (e' : ∀ a, (Σ b, Fin (d' a b)) ≃ Fin (d a)) (X : Fin s → Type) [∀ a, AddCommGroup (X a)]
     [∀ a, Module ℂ (X a)] (ρ : ∀ a, Representation ℂ (GL (Fin (d a)) k) (X a)),
-    Nonempty ((relJacD e' (piTensor ρ)).Equiv (piTensor fun a => jac (e' a) (ρ a))) :=
+    Nonempty ((relJacD e' (piTensor ρ)).Equiv (piTensor fun a => _root_.GlobalTheory.SmGL.jac (e' a) (ρ a))) :=
   fun _ _ _ _ _ _ _ _ _ e' _ _ _ ρ => GlobalTheory.JacPiTensor.relJacD_piTensor e' ρ
 
 end GlobalTheory.JacStages

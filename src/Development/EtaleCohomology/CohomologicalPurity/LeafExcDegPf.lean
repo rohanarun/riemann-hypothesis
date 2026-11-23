@@ -110,9 +110,6 @@ end Gen2
 section Main
 variable (R : Type) [CommRing R]
 
--- [dedup] theorem dbl.inl_map' {P' P : Arrow Spc} (φ : P' ⟶ P) : dbl.inl P' ≫ dbl.map φ = φ.right ≫ dbl.inl P :=
--- [dedup]   pushout.inl_desc (f := P'.hom) (g := P'.hom) _ _ _
-
 theorem hPO (P : Arrow Spc) (p : SimplexCategoryᵒᵖ) :
     IsPushout ((free R).map (P.hom.app p)) ((free R).map (P.hom.app p)) ((free R).map ((dbl.inl P).app p))
       ((free R).map ((dbl.inr P).app p)) :=

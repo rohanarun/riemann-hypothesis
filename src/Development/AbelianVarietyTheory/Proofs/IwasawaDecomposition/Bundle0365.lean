@@ -186,7 +186,7 @@ open Formalism.IndefR.RecTie Formalism.IndefR.Lev Formalism.L2.Rows GlobalTheory
 
 noncomputable section
 namespace GlobalTheory.Mem.HFld.Transp
-open Formalism.L2.Col Polynomial
+open _root_.Formalism.L2.Col Polynomial
 
 theorem chiC_apply {B : Base} {px : PreX B.toPre} (I : Col2.ColIn B px) (j : Fin B.R.m)
     (w : {w // w ∈ (B.primes px).vGs}) (y : 𝓞 B.host.E) (hu : IsUnit (Ideal.Quotient.mk w.1.asIdeal y)) :

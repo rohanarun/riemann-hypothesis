@@ -19,7 +19,7 @@ namespace GlobalTheory.ArcOfModel
 
 open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Out ReciprocityTheory.ChartRestriction.G.Geo.Tor
-open TorusExt ArcExt
+open _root_.GlobalTheory.TorusExt ArcExt
 open scoped CategoryTheory.Obj
 
 theorem weilQkIs_qkExt (hL : Laws) (hL₂ : Laws2) {R : Type} [CommRing R] [IsDomain R] [IsLocalRing R]

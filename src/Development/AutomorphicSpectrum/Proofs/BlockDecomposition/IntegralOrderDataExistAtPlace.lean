@@ -13,7 +13,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.AvgFree.Ord
 
-open MeasureTheory Filter Topology
+open MeasureTheory Filter _root_.Topology
 open scoped ENNReal NNReal
 
 section Abs

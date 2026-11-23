@@ -13,10 +13,8 @@ namespace PI.WHw
 
 open Formalism.BasicNotions Formalism.GradedWeylDivisibility MvPolynomial
 
-theorem natW_antitone {N : ℕ} (lam : DomWeight N) : Antitone lam.natW := by
-  intro i j hij
-  unfold Formalism.BasicNotions.DomWeight.natW
-  exact Int.toNat_le_toNat (by linarith [lam.anti hij])
+theorem natW_antitone {N : ℕ} (lam : DomWeight N) : Antitone lam.natW :=
+  fun _ _ hij => Int.toNat_le_toNat (sub_le_sub_right (lam.anti hij) _)
 
 theorem hwIrred_of (hA1 : StableClosedC) (hA2 : FixedKilledC) (hB1 : HWInClosedC)
     (hB2 : ClosedEqNablaC) : PI.HwIrred := by

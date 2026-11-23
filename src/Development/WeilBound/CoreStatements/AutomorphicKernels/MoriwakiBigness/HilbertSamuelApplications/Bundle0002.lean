@@ -130,7 +130,7 @@ theorem inputs_of_use :
     ⟨_root_.GlobalTheory.CompanionTheory.Ar.Giv.resExists_of_resK hRes, degree_of_system hII, (hsLinks_of_use hU hBig).1⟩,
     ⟨_root_.GlobalTheory.CompanionTheory.Ar.Giv.ratR_of_resK hRes, metricLocal⟩,
     ⟨_root_.GlobalTheory.CompanionTheory.Ar.Giv.ProjF.projFormula hII, lineFibre_holds, fibreDim⟩,
-    ⟨GlobalTheory.T.kleiman_nef_criteria_hold.1, GlobalTheory.T.kleiman_nef_criteria_hold.2, _root_.GlobalTheory.CompanionTheory.Ar.Giv.siuZ⟩⟩
+    ⟨_root_.GlobalTheory.CompanionTheory.Ar.Giv.kleimanNef_field_and_fibre.1, _root_.GlobalTheory.CompanionTheory.Ar.Giv.kleimanNef_field_and_fibre.2, _root_.GlobalTheory.CompanionTheory.Ar.Giv.siuZ⟩⟩
 
 end GlobalTheory.CompanionTheory.Ar.Giv
 end

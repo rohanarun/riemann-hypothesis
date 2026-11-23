@@ -405,13 +405,13 @@ set_option synthInstance.maxHeartbeats 200000
 section
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 variable {D : D7}
 end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 variable {D : D7}
 section HC
 variable {R : Ranks} (P : HCParam R)
@@ -420,13 +420,13 @@ end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 variable {D : D7}
 end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 variable {D : D7}
 section JB
 variable {L : SizeData₂ D} {j : ℕ} {ρ : D.what₂.Tau}
@@ -435,7 +435,7 @@ end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 variable {D : D7}
 section Core
 variable {L : SizeData₂ D} {j : ℕ} {ρ : D.what₂.Tau}
@@ -444,13 +444,13 @@ end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ Formalism.MainNotions.N Formalism.WeaklyAdmissibleFiltrations Classical
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ Formalism.MainNotions.N Formalism.WeaklyAdmissibleFiltrations Classical
 variable {D : D7}
 end GlobalTheory.JumpSets
 end
 noncomputable section
 namespace GlobalTheory.JumpSets
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
+open _root_.Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.MainNotions.AdmissibleParameterJ
 theorem stmtJ_holds_alt (D : D7) : _root_.Formalism.MainNotions.AdmissibleParameterJ.JumpClosed D := by
   intro L hA
   obtain ⟨hG2, hCr, hG2g, hDi, hRd, hP⟩ := hA

@@ -302,7 +302,7 @@ attribute [local instance] Over.cartesianMonoidalCategory
 
 namespace GlobalTheory
 
-open Limits
+open _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits
 
 theorem specQuotIdemCoprod_bij (R : Type) [CommRing R] (e e' : R) (he : IsIdempotentElem e)
     (hs : e + e' = 1) :

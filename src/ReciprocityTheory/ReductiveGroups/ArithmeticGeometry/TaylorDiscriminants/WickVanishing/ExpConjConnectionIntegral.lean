@@ -48,7 +48,7 @@ theorem exp_conj_connection_integral {B : FB R d O} {h : PS k 2 d} (hc : B.IsCan
         (fun i => algebraMap R k (φ' i) - (sg1 k h).mulVec (fun j => algebraMap R k (u' j)) i)
         (liftX k (FB.expS k ((m : k) • B.hL k h w0)) * G) ∈ Ig R k (Fin d ⊕ Fin d) := by
   have cPA : CZ (![pt k (n := 1) d 0, B.actK k w0] : Fin 2 → Pt k 1 d) :=
-    CZ.cons (cc_pt 0) (CZ.cons (const_actK' B w0) CZ.nil)
+    CZ.cons (_root_.ReciprocityTheory.ChartRestriction.G.TB.LogPf.cc_pt 0) (CZ.cons (const_actK' B w0) CZ.nil)
   have ccf : constantCoeff ((m : k) • B.hL k h w0) = 0 := by
     rw [nt_const_smul, hL_eq, cc_ev' cPA, cc_h hc, mul_zero]
   have ccf' : constantCoeff (-((m : k) • B.hL k h w0)) = 0 := by rw [map_neg, ccf, neg_zero]

@@ -62,7 +62,7 @@ noncomputable section
 
 def GridSeparation.Statement : Prop :=
   ∀ (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)] (Ω : Type) [Field Ω]
-    (y : (Σ k, ι k) → Ω) (D : ℕ) (A : HermLine ι),
+    (y : (Σ k, ι k) → Ω) (D : ℕ) (A : _root_.ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι),
     IsArithVar (mCoordIdeal y) (D + 1) → Birational y → IsSmoothHerm A →
     ∃ C : ℝ, 0 ≤ C ∧ ∀ τ : ℕ, ∃ Z : Finset ((Σ k, ι k) → ℂ),
       (∀ z ∈ Z, z ∈ mcPts (mCoordIdeal y)) ∧
@@ -181,7 +181,7 @@ open ReciprocityTheory.ChartRestriction.G.Geo
 
 def IntegralAgainstPositive.Statement : Prop :=
   ∀ (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)] (P P0 : Ideal (MRing ι)) (e : ℕ)
-    (L : Fin e → HermLine ι) (g : ((Σ k, ι k) → ℂ) → ℝ),
+    (L : Fin e → _root_.ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (g : ((Σ k, ι k) → ℂ) → ℝ),
     P0 ≤ P → (∀ j, IsSemipositiveRel P0 P (L j)) → (∀ z ∈ mcPts P, g z ≤ 0) →
     ptsIntegral P (pot L) g ≤ 0
 
@@ -251,7 +251,7 @@ noncomputable section
 
 def KodairaSection.Statement : Prop :=
   ∀ (K : Type) [Fintype K] (ι : K → Type) [∀ k, Fintype (ι k)] (Ω : Type) [Field Ω] [CharZero Ω]
-    (y : (Σ k, ι k) → Ω) (D : ℕ) (M : HermLine ι) (P0 : Ideal (MRing ι)),
+    (y : (Σ k, ι k) → Ω) (D : ℕ) (M : _root_.ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (P0 : Ideal (MRing ι)),
     1 ≤ D → IsArithVar (mCoordIdeal y) (D + 1) → Birational y → IsNefBigDatum P0 y D M →
     ∃ (k : ℕ) (e : Ω) (C : ℝ), 1 ≤ k ∧ 0 ≤ C ∧ e ≠ 0 ∧ e ∈ chartLat y ((k : ℤ) • M.a - 1) 1 ∧
       IsBoundedH (mCoordIdeal y) y (HermLine.zcomb M (fsH ι) k (-1)) 1 (Real.exp C) e

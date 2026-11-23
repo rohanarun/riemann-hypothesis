@@ -42,7 +42,7 @@ open GlobalTheory.KeyPow GlobalTheory.KeyKa
 namespace GlobalTheory.KeyFam
 
 
-open AlgebraicGeometry CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj MeasureTheory in
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj MeasureTheory in
 attribute [local instance] Over.cartesianMonoidalCategory in
 theorem _root_.GlobalTheory.KeyFam.keyFormula_holds : _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.KeyFormula :=
   _root_.GlobalTheory.keyFormula_of_connFam

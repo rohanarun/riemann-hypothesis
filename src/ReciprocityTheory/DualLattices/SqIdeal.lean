@@ -64,13 +64,13 @@ private theorem pow_two_mul_p_sub_three_mul_self_eq_one {p : ℕ} [Fact p.Prime]
 private theorem sum_wt_mul_comp_mul_eq {p : ℕ} [Fact p.Prime] {C : Type} [Field C] {ω : ZMod p → C}
     (hpow : ∀ a, ω a ^ p = ω a) (hone : ω 1 = 1) (hmul : ∀ a b, ω (a * b) = ω a * ω b)
     (a : ZMod p) (ha : a ≠ 0) (f : ZMod p → C) :
-    ∑ k, U3.wt ω k * f (k * a) = ω a * ∑ b, U3.wt ω b * f b := by
+    ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * f (k * a) = ω a * ∑ b, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω b * f b := by
   rw [Finset.mul_sum]
   refine Fintype.sum_equiv (Equiv.mulRight₀ a ha) _ _ ?_
   intro k
   have h := pow_two_mul_p_sub_three_mul_self_eq_one hpow hone hmul a ha
-  show U3.wt ω k * f (k * a) = ω a * (U3.wt ω (k * a) * f (k * a))
-  simp only [U3.wt, hmul, mul_pow]
+  show _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * f (k * a) = ω a * (_root_.ReciprocityTheory.PGsh.Up.U3.wt ω (k * a) * f (k * a))
+  simp only [_root_.ReciprocityTheory.PGsh.Up.U3.wt, hmul, mul_pow]
   linear_combination (-(ω k ^ (2 * p - 3) * f (k * a))) * h
 
 private theorem valuation_sub_one_eq_one_of_lt_one {C : Type} [Field C] (v : Valuation C NNReal) (q : C) (hq : v q < 1) :
@@ -305,7 +305,7 @@ theorem u3 : PrimeHopfOrderStatement := by
     rw [hBA]
     exact Submodule.subset_span ⟨j0, rfl⟩
   obtain ⟨s0, hs0⟩ := (AA.le_int hf0 : ∀ y, ∃ r : R, algebraMap R C r = BA y j0) 0
-  have hcoef : ∀ k : ZMod p, ∃ r : R, algebraMap R C r = U3.wt ω k * ((p : C) - 1)⁻¹ := by
+  have hcoef : ∀ k : ZMod p, ∃ r : R, algebraMap R C r = _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * ((p : C) - 1)⁻¹ := by
     intro k
     apply hv.exists_of_le_one
     rw [map_mul, map_inv₀, hvp1, inv_one, mul_one]
@@ -313,7 +313,7 @@ theorem u3 : PrimeHopfOrderStatement := by
     rw [map_pow]
     exact pow_le_one' (valuation_le_one_of_sub_natCast_lt_one hv (ω k) k (hωcong k)) _
   choose r hr using hcoef
-  have hmexp : m = ∑ b, U3.wt ω b * BA b j0 - sS ω * BA 0 j0 := by
+  have hmexp : m = ∑ b, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω b * BA b j0 - sS ω * BA 0 j0 := by
     rw [hmdef]
     simp [u0, sub_mul, ite_mul, Finset.sum_sub_distrib]
   have hE : (fun a => c * ω a) ∈ AA.carrier := by
@@ -329,13 +329,13 @@ theorem u3 : PrimeHopfOrderStatement := by
     simp only [Algebra.smul_def, hr, hs0, mul_one]
     by_cases ha : a = 0
     · simp [ha, hω0]
-    · have h1' : ∑ k, U3.wt ω k * BA (k * a) j0 = ω a * ∑ b, U3.wt ω b * BA b j0 :=
+    · have h1' : ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * BA (k * a) j0 = ω a * ∑ b, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω b * BA b j0 :=
         sum_wt_mul_comp_mul_eq hωpow hω1 hωmul a ha (fun b => BA b j0)
-      have h2' : ∑ k, U3.wt ω k = ω a * ∑ b, U3.wt ω b := by
+      have h2' : ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k = ω a * ∑ b, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω b := by
         simpa using sum_wt_mul_comp_mul_eq hωpow hω1 hωmul a ha (fun _ => (1 : C))
-      have h3' : ∑ k, U3.wt ω k * ((p : C) - 1)⁻¹ * (BA (k * a) j0 - BA 0 j0) =
-          ((p : C) - 1)⁻¹ * ∑ k, U3.wt ω k * BA (k * a) j0 -
-            ((p : C) - 1)⁻¹ * BA 0 j0 * ∑ k, U3.wt ω k := by
+      have h3' : ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * ((p : C) - 1)⁻¹ * (BA (k * a) j0 - BA 0 j0) =
+          ((p : C) - 1)⁻¹ * ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k * BA (k * a) j0 -
+            ((p : C) - 1)⁻¹ * BA 0 j0 * ∑ k, _root_.ReciprocityTheory.PGsh.Up.U3.wt ω k := by
         rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_sub_distrib]
         exact Finset.sum_congr rfl (fun k _ => by ring)
       rw [h3', h1', h2', hcdef, hmexp]

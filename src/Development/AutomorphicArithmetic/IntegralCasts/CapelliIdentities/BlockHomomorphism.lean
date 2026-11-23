@@ -323,29 +323,7 @@ theorem UpperTheory.Reformulated.B.BlockHomomorphism.aux4 :
   intro k _ n r A B
   simp [Matrix.fromBlocks_multiply]
 
-noncomputable def UpperTheory.Reformulated.B.BlockHomomorphism.blkHom :
-    (k : Type) →
-      [inst : Field k] →
-        (n r : Nat) →
-          @MonoidHom (Matrix (Fin n) (Fin n) k) (Matrix (Sum (Fin n) (Fin r)) (Sum (Fin n) (Fin r)) k)
-            (@Matrix.instMulOneOfFintypeOfDecidableEqOfAddCommMonoid (Fin n) k (Fin.fintype n) (instDecidableEqFin n)
-              (@MulOneClass.toMulOne k
-                (@MulZeroOneClass.toMulOneClass k
-                  (@instMulZeroOneClassOfSemiring k
-                    (@DivisionSemiring.toSemiring k (@Semifield.toDivisionSemiring k (@Field.toSemifield k inst))))))
-              (@Semiring.toAddCommMonoid k
-                (@DivisionSemiring.toSemiring k (@Semifield.toDivisionSemiring k (@Field.toSemifield k inst)))))
-            (@Matrix.instMulOneOfFintypeOfDecidableEqOfAddCommMonoid (Sum (Fin n) (Fin r)) k
-              (@instFintypeSum (Fin n) (Fin r) (Fin.fintype n) (Fin.fintype r))
-              (fun (a b : Sum (Fin n) (Fin r)) ↦
-                @instDecidableEqSum (Fin n) (Fin r) (instDecidableEqFin n) (instDecidableEqFin r) a b)
-              (@MulOneClass.toMulOne k
-                (@MulZeroOneClass.toMulOneClass k
-                  (@instMulZeroOneClassOfSemiring k
-                    (@DivisionSemiring.toSemiring k (@Semifield.toDivisionSemiring k (@Field.toSemifield k inst))))))
-              (@Semiring.toAddCommMonoid k
-                (@DivisionSemiring.toSemiring k (@Semifield.toDivisionSemiring k (@Field.toSemifield k inst))))) :=
-    fun (k : Type) [inst : Field k] (n r : Nat) ↦
+noncomputable def UpperTheory.Reformulated.B.BlockHomomorphism.blkHom : (k : Type) → [inst : Field k] → (n r : ℕ) → Matrix (Fin n) (Fin n) k →* Matrix (Fin n ⊕ Fin r) (Fin n ⊕ Fin r) k := fun (k : Type) [inst : Field k] (n r : Nat) ↦
       @MonoidHom.mk (Matrix (Fin n) (Fin n) k) (Matrix (Sum (Fin n) (Fin r)) (Sum (Fin n) (Fin r)) k)
         (@Matrix.instMulOneOfFintypeOfDecidableEqOfAddCommMonoid (Fin n) k (Fin.fintype n) (instDecidableEqFin n)
           (@MulOneClass.toMulOne k

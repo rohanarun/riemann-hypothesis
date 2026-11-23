@@ -74,8 +74,8 @@ lemma pm_sum_cover (f : ℕ → ℝ) (hf : ∀ l, 0 ≤ f l) (M N : ℕ) (hM : 2
     sum_le_sum_of_subset_of_nonneg hsub (fun i _ _ => hf i)
   linarith
 
-private theorem log_le_log_of_pos_of_le {a b : ℝ} (ha : 0 < a) (h : a ≤ b) : Real.log a ≤ Real.log b := by
-  exact Real.log_le_log ha h
+private theorem log_le_log_of_pos_of_le {a b : ℝ} (ha : 0 < a) (h : a ≤ b) : Real.log a ≤ Real.log b :=
+  Real.log_le_log ha h
 
 private theorem div_le_div_of_mul_le_mul_of_pos' {a b c d : ℝ} (hb : 0 < b) (hd : 0 < d)
     (h : a * d ≤ c * b) : a / b ≤ c / d := by
@@ -135,10 +135,7 @@ lemma pm_resid (hI : OrdersIff) (e J l : ℕ) (hl : Nat.Coprime l (4 * 2 ^ e)) (
   rw [hoi]
   exact pow_dvd_pow 2 hij
 
-private theorem log_natCast_nonneg_real (n : ℕ) : 0 ≤ Real.log n := by
-  rcases Nat.eq_zero_or_pos n with h | h
-  · simp [h]
-  · exact Real.log_nonneg (Nat.one_le_cast.mpr h)
+private theorem log_natCast_nonneg_real (n : ℕ) : 0 ≤ Real.log n := Real.log_natCast_nonneg n
 
 private theorem sum_range_inv_succ_le_one_add_log (N : ℕ) :
     ∑ k ∈ range N, 1 / ((k : ℝ) + 1) ≤ 1 + Real.log N := by

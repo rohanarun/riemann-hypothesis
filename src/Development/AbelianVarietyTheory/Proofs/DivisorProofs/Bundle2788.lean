@@ -359,8 +359,8 @@ theorem crystallineSmoothLift_of_relations : GlobalTheory.Published.CrystallineS
   · intro D m c
     exact (he₁ D _ _).2 (_root_.GlobalTheory.PDForm.CrysCmp.lift_rel1_pull1_cmp1 D (Λ D) m c)
   · intro D D' σ φ φ₀ h m hc
-    exact ⟨fun c ↦ GlobalTheory.T.crystallineDeRhamRelation_natural_smoothLift_morphism.1 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _ (r1 D c) (r1 D' _),
-      fun c ↦ GlobalTheory.T.crystallineDeRhamRelation_natural_smoothLift_morphism.2 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _ (r2 D c) (r2 D' _)⟩
+    exact ⟨fun c ↦ _root_.GlobalTheory.PDForm.LiftNat.main.1 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _ (r1 D c) (r1 D' _),
+      fun c ↦ _root_.GlobalTheory.PDForm.LiftNat.main.2 D D' (Λ D) (Λ D') σ φ φ₀ h m hc c _ _ (r2 D c) (r2 D' _)⟩
 
 end GlobalTheory.SmoothLift
 end

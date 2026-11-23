@@ -37,7 +37,7 @@ private theorem emb_mem {O G R : Type} [CommRing O] [Group G] [CommRing R] [Alge
     (r : G →* GG (m := 3) (R := R)) (c : G)
     (h1 : (r c).right = -1) (h2 : (r c).mat = 1) (g : G) (a b : Fin 3 ⊕ Fin 3) :
     emb (r g) a b ∈ Submodule.span O (entMon r (wt6 a - wt6 b)) := by
-  rw [emb_apply, theta_left r c h1 h2]
+  rw [_root_.UpperTheory.V.U3.Mop.emb_apply, theta_left r c h1 h2]
   split_ifs <;> rcases a with a | a <;> rcases b with b | b <;>
     first
     | exact Submodule.zero_mem _

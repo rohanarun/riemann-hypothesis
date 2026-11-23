@@ -229,7 +229,7 @@ theorem factor_locus : ∀ (X T : Scheme.{0}) (W : X.Opens) (c : Pic W.toScheme)
     exact ⟨z', h⟩)
   have hk : k ≫ (j ∣_ W) = X.homOfLE (inf_le_right : N ⊓ W ≤ W) := IsOpenImmersion.lift_fac _ _ _
   rw [← hk, pull_comp]
-  refine GlobalTheory.T.nonvanishingLocus_pullback_and_vanish_into_locus.2 _ _ k _ V hV fun z => ?_
+  refine _root_.GlobalTheory.LocusPull.locus_pull.2 _ _ k _ V hV fun z => ?_
   obtain ⟨z', hz'V, h⟩ := hz z
   have hkz : k z = z' := (j ∣_ W).isOpenEmbedding.injective (by
     have e : (j ∣_ W) (k z) = X.homOfLE (inf_le_right : N ⊓ W ≤ W) z := congrArg (fun f => f.base z) hk

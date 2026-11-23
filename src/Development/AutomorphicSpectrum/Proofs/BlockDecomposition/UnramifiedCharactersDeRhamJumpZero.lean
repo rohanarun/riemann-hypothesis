@@ -17,7 +17,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.PotUnr
 
-open Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions.N TensorProduct Module GlobalTheory.UnramifiedCrys GlobalTheory.Cyc
+open _root_.Formalism Formalism.BasicNotions Formalism.BasicNotions.Loc Formalism.WeaklyAdmissibleFiltrations Formalism.MainNotions.N TensorProduct Module GlobalTheory.UnramifiedCrys GlobalTheory.Cyc
 open scoped Topology
 
 variable {l : ℕ} [Fact l.Prime]

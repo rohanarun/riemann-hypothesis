@@ -23,8 +23,6 @@ theorem cont_KR_mul (n : ℕ) (y k1 : GR n) : Continuous (fun k : KR n => y * (k
 theorem cont_KR_mul' (n : ℕ) (k1 : GR n) : Continuous (fun k : KR n => (k : GR n) * k1) :=
   continuous_subtype_val.mul continuous_const
 
-theorem mR_mul {n : ℕ} (a b : GR n) : mR (a * b) = mR a * mR b := rfl
-
 theorem spherical_section_eq_extension {n : ℕ} (p q : ℕ) (e : ℤ) (g : GR n) : F0 p q e g = twistedScalarSection p q e (mR g) := by
   simp only [F0, twistedScalarSection]
 

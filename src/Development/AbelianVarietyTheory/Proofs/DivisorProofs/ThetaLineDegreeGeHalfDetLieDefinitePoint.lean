@@ -18,7 +18,7 @@ namespace GlobalTheory.DefPt.ThetaDeg
 
 section Key
 
-open AlgebraicGeometry CategoryTheory Limits NumberField MeasureTheory
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField MeasureTheory
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.LamT GlobalTheory.KeyFourth GlobalTheory.Frames GlobalTheory.CM
 open GlobalTheory.IndefiniteRowSideFullHecke.FibreFramesOnModels
 open scoped Matrix

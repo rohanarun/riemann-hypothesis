@@ -423,6 +423,9 @@ public noncomputable abbrev source
 
 end I195MixedCoordinates_069c5864e5661f762e792771
 
+public noncomputable abbrev _root_.I195MixedCoordinates_46859e632a5b1b7714de2075.source :=
+  @_root_.I195MixedCoordinates_069c5864e5661f762e792771.source
+
 @[expose] public section
 
 open Formalism.BasicNotions Formalism.BasicNotions.TH Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes Formalism.MainNotions.StandardLattice Formalism.L2.Theta Formalism.IndefR.Datum MeasureTheory IsDedekindDomain NumberField Matrix

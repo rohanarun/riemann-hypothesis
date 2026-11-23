@@ -265,7 +265,7 @@ noncomputable section
 namespace GlobalTheory.ColNorms.SumBound
 
 open NumberField IsDedekindDomain
-open Formalism.L2.DIV Formalism.L2.Col GlobalTheory.ColNorms
+open Formalism.L2.DIV _root_.Formalism.L2.Col GlobalTheory.ColNorms
 open scoped ComplexOrder Matrix
 
 variable {K : Type} [Field K] [NumberField K] [StarRing K] (S : GSD K) (v : InfinitePlace K)

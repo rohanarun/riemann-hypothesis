@@ -358,7 +358,7 @@ theorem quo_unique {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Recip
 
 section Pt
 
-open IsDedekindDomain Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef Formalism.IndefR.Links Formalism.IndefR.FWT ReciprocityTheory.ChartRestriction.G.FD
+open IsDedekindDomain _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef Formalism.IndefR.Links Formalism.IndefR.FWT ReciprocityTheory.ChartRestriction.G.FD
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

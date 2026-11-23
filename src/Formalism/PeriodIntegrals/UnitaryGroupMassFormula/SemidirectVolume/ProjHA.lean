@@ -26,11 +26,8 @@ def datR : PG.Dat (R ⊗[F] E) (Fin M) r where
   z := ratV (F := F) R P.z
   tz := inclR (F := F) R ((algebraMap F E (-T))⁻¹)
 
-theorem sigR_inclR (x : E) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR (F := F) R x) = inclR (F := F) R (σ x) := by
-  show Algebra.TensorProduct.map (AlgHom.id F R) σ (Algebra.TensorProduct.includeRight x) =
-    Algebra.TensorProduct.includeRight (σ x)
-  rw [Algebra.TensorProduct.includeRight_apply, Algebra.TensorProduct.includeRight_apply,
-    Algebra.TensorProduct.map_tmul, AlgHom.id_apply]
+theorem sigR_inclR (x : E) : _root_.Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR (F := F) R x) = inclR (F := F) R (σ x) :=
+  DFunLike.congr_fun (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id F R) σ) x
 
 theorem hR_ratV (x y : Fin M → E) :
     hR R σ J (ratV (F := F) R x) (ratV (F := F) R y) = inclR (F := F) R (hE σ J x y) := by

@@ -41,7 +41,7 @@ open scoped Matrix
 namespace GlobalTheory.Mem.R3.DefLatBC.LiftExt
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 set_option maxHeartbeats 1000000 in
 private theorem liftHom_reidx (X : Fields) {L : Type} [Field L] [NumberField L] [StarRing L] (ι : X.K →+* L)
     (e : X.Tau → X.E →+* L) (he : ∀ τ, ι.comp (X.emb τ) = e τ) {n : ℕ} (lam₁ lam₂ : X.Tau → DomWeight n)
@@ -93,7 +93,7 @@ private theorem liftHom_reidx (X : Fields) {L : Type} [Field L] [NumberField L] 
     rw [hc']
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 private theorem formsLift_of_eqFunLift {K₁ K₂ : Type} [Field K₁] [NumberField K₁] [StarRing K₁] [Field K₂] [NumberField K₂] [StarRing K₂]
     (ι : K₁ →+* K₂) (S₁ : GSD K₁) (S₂ : GSD K₂) (h₁ : S₁.Ok) (h₂ : S₂.Ok) (Lf : S₁.EqFun →+ S₂.EqFun)
     (hLf : ∀ (a : K₁) ψ, Lf (a • ψ) = ι a • Lf ψ) :

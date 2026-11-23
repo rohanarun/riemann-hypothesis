@@ -235,7 +235,7 @@ end Algebra
 
 section Geometry
 
-open CategoryTheory Limits AlgebraicGeometry TopologicalSpace IsLocalRing
+open CategoryTheory _root_.CategoryTheory.Limits AlgebraicGeometry TopologicalSpace IsLocalRing
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.AnForm.R
 open GlobalTheory GlobalTheory.LogBasis GlobalTheory.LogDerProj GlobalTheory.ZH.CrdCalc
 open ReciprocityTheory.ChartRestriction.G.DVR.FlatBC (algX)

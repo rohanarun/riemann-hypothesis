@@ -226,7 +226,7 @@ namespace GlobalTheory.CompanionTheory.SW.MdBase
 
 section
 
-open NumberField IsDedekindDomain MeasureTheory Topology Filter GroundTheory.Global
+open NumberField IsDedekindDomain MeasureTheory _root_.Topology Filter GroundTheory.Global
   GroundTheory.Global.AdeleBaseChange MeasureTheory.Measure
 open scoped ENNReal NNReal NumberField.AdeleRing
 
@@ -332,7 +332,7 @@ end
 
 section
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology Filter
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology Filter
   PositivityTheory.Rg.Base1 GroundTheory.Global GlobalTheory.CompanionTheory.SW.RankOneSiegelWeil
 open scoped TensorProduct ENNReal NNReal Matrix Classical
 

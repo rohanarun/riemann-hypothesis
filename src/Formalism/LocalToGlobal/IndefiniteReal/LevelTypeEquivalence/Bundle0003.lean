@@ -68,13 +68,6 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 variable {D : D7}
 
-theorem mt_mul (V : HSp D) (g h : GA D V) :
-    Formalism.L2.Theta.mt V (g * h) = Formalism.L2.Theta.mt V g * Formalism.L2.Theta.mt V h := by
-  unfold Formalism.L2.Theta.mt; rw [map_mul]; rfl
-
-theorem mt_one (V : HSp D) : Formalism.L2.Theta.mt V 1 = 1 := by
-  unfold Formalism.L2.Theta.mt; rw [map_one]; rfl
-
 theorem actO_actO (S T : HSp D) (g g' : GA D S) (h h' : GA D T) (x : WO S T) :
     actO S T g h (actO S T g' h' x) = actO S T (g * g') (h * h') x := by
   unfold actO

@@ -13,7 +13,7 @@ noncomputable section
 
 namespace GlobalTheory.Mem.Col2.MetricTie
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.DivisionValues Matrix
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms Formalism.DivisionValues Matrix
 open scoped ComplexOrder
 
 theorem majAt_classSum {K : Type} [Field K] [NumberField K] [StarRing K] (C : CSD K) (hb : C.HasRatBasis) (v : InfinitePlace K)

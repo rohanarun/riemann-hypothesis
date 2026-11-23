@@ -273,7 +273,7 @@ theorem lowTop_ofCore : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : T
     exact hinj (a1.trans (a3.symm.trans a2.symm))
   have hid := GlobalTheory.LiftScalarCompare.eC_idem (R := R) h.grp.record
   have hu := GlobalTheory.gW_norm_eq R h.models.HW h.models.gW h.models.νW i (sg0 D A)
-  have htop := GlobalTheory.T.principalLevel_eigenparts_and_conjugate_characters.1 R F (GlobalTheory.Core5.of_core h) i (sg0 D A)
+  have htop := _root_.GlobalTheory.FiveClauseParts.parts_conj_five.1 R F (GlobalTheory.Core5.of_core h) i (sg0 D A)
     (GlobalTheory.LiftLower.schurMult_of_models R h.models.HW i (sg0 D A))
   have htop' : (⨆ c : GlobalTheory.IndefiniteRowSideFullHecke.PolarisedDualSystem.Sys D, GlobalTheory.LiftLower.partH R i (sg0 D A) c) = ⊤ :=
     top_le_iff.1 (htop.ge.trans (iSup_mono fun c => iSup_le fun _ => le_rfl))

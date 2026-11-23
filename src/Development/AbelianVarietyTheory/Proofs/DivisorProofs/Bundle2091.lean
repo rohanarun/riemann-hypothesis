@@ -99,7 +99,7 @@ end GlobalTheory.ConjSeq
 
 namespace GlobalTheory.DeRhamSheaf
 
-open Limits
+open _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits
 
 variable {T : Scheme.{0}} (A : Over T) [GrpObj A]
 

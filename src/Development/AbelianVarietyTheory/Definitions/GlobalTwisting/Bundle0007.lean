@@ -63,7 +63,7 @@ end Cls
 
 section IndefiniteRowSideFullHecke
 
-open Formalism Formalism.L2 Formalism.L2.DIV Formalism.L2.Rows Formalism.L2.Indef NumberField IsDedekindDomain
+open _root_.Formalism _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Rows Formalism.L2.Indef NumberField IsDedekindDomain
 
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : MainNotions.G.Inst D L} {Gl : MainNotions.G.LatInst D} {Kc : MainNotions.G.Consts} {Y : DivX D}
   {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Y cX}
@@ -112,7 +112,7 @@ end IndefiniteRowSideFullHecke
 
 section At
 
-open Formalism
+open _root_.Formalism
 
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : MainNotions.G.Inst D L} {Gl : MainNotions.G.LatInst D} {K : MainNotions.G.Consts} {Y : DivX D}
   {cX : ExtraC} {ex : Extra D L hT Gi Gl K Y cX} {Rc : Formalism.L2.RecT ex} {P : Formalism.L2.Rows.RowSideFamily ex}
@@ -135,7 +135,7 @@ end At
 
 section Serv
 
-open Formalism.MainNotions.Pk Formalism.L2
+open Formalism.MainNotions.Pk _root_.Formalism.L2
 
 end Serv
 

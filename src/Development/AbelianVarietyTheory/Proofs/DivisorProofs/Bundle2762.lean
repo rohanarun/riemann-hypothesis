@@ -369,7 +369,7 @@ theorem crystallineCechDeRham_degreeOne_relation_total : (∀ c, ∃ h, Λ.Rel1 
     ∀ c h, Λ.Rel1 c h → (c = 0 ↔ h = 0) := by
   have hfn := (GlobalTheory.T.fnMap_pullbackBijective12_kk_and_res D.R D.I D.κ D.X₀ D.t D.X D.i).1.1
   have hres := (_root_.GlobalTheory.PDForm.Lift.resMap_lift_pullbackBijectiveDegreesOneTwo D Λ).1
-  obtain ⟨hW, hK, hZ⟩ := GlobalTheory.T.compatibleFormsCochains_eq_deRhamCochains_smoothLift.1 D Λ
+  obtain ⟨hW, hK, hZ⟩ := _root_.GlobalTheory.PDForm.lift_res_bij.1 D Λ
   have key : ∀ k : (KK D.κ D.t).Z1, (∃ g, GlobalTheory.CatCoh.d0 (O D.κ D.t) g = k.1.1) ↔
       ∃ g, ((KK D.κ D.t).res Λ.L).D0 g = ((KK D.κ D.t).resMap Λ.L).p1 k.1 := fun k ↦ by
     have e := (map_eq_zero_iff _ hfn.1 (x := (QuotientAddGroup.mk k : (KK D.κ D.t).H1))).trans
@@ -411,7 +411,7 @@ theorem crystallineCechDeRham_degreeTwo_relation_total : (∀ c, ∃ h, Λ.Rel2 
     ∀ c h, Λ.Rel2 c h → (c = 0 ↔ h = 0) := by
   have hfn := (GlobalTheory.T.fnMap_pullbackBijective12_kk_and_res D.R D.I D.κ D.X₀ D.t D.X D.i).1.2
   have hres := (_root_.GlobalTheory.PDForm.Lift.resMap_lift_pullbackBijectiveDegreesOneTwo D Λ).2
-  obtain ⟨hW, hK, hZ⟩ := GlobalTheory.T.compatibleFormsCochains_eq_deRhamCochains_smoothLift.2 D Λ
+  obtain ⟨hW, hK, hZ⟩ := _root_.GlobalTheory.PDForm.lift_res_bij.2 D Λ
   have key : ∀ k : (KK D.κ D.t).Z2, (∃ g, GlobalTheory.CatCoh.d1 (O D.κ D.t) g = k.1.1) ↔
       ∃ g, ((KK D.κ D.t).res Λ.L).D1 g = ((KK D.κ D.t).resMap Λ.L).p2 k.1 := fun k ↦ by
     have e := (map_eq_zero_iff _ hfn.1 (x := (QuotientAddGroup.mk k : (KK D.κ D.t).H2))).trans

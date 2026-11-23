@@ -61,10 +61,8 @@ theorem denom_fin (n : ℕ) :
   exact (Fin.prod_univ_eq_prod_range (fun i : ℕ => ∏ j ∈ Ico (i + 1) n, ((j : ℝ) - (i : ℝ))) n).trans
     (denom_range n)
 
-theorem natW_anti {N : ℕ} (lam : DomWeight N) : Antitone lam.natW := by
-  intro i j hij
-  unfold Formalism.BasicNotions.DomWeight.natW
-  exact Int.toNat_le_toNat (sub_le_sub_right (lam.2 hij) _)
+theorem natW_anti {N : ℕ} (lam : DomWeight N) : Antitone lam.natW :=
+  fun _ _ hij => Int.toNat_le_toNat (sub_le_sub_right (lam.anti hij) _)
 
 theorem natW_cast {N : ℕ} (lam : DomWeight N) (i : Fin N) :
     ((lam.natW i : ℕ) : ℤ) = lam.w i - lam.detShift := by

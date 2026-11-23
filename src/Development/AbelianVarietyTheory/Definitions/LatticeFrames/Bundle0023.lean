@@ -325,7 +325,7 @@ noncomputable section
 
 namespace GlobalTheory.Core.Cls
 
-open Formalism.BasicNotions Formalism.MainNotions Formalism.L2 NumberField IsDedekindDomain Matrix Formalism.UG
+open Formalism.BasicNotions Formalism.MainNotions _root_.Formalism.L2 NumberField IsDedekindDomain Matrix Formalism.UG
 
 def LowerTie {D : D7} {u : D.what₂.Word} {Ch : ℕ → Type} {chOf : ∀ i, (D.mem u).C.cls i → Ch i}
     (Tf : Forms.FormsTiedSym D u Ch chOf) : Prop :=

@@ -40,14 +40,14 @@ theorem gsv_hcId : IsGrpPullback Xo.univ.t.G Xo.univ.t.G (𝟙 Xo.X) (𝟙 Xo.un
   simp [e]
 
 def gsvVec {L : Type} [CommRing L] (x : Sp L ⟶ Xo.X) {n : ℕ}
-    (xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G)
+    (xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (_root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G)
     (cc : Fin n → L) : Sp (DualNumber L) ⟶ Xo.univ.t.G.left :=
   (tvec (x := xc) cc).left ≫ pullback.fst Xo.univ.t.G.hom x
 
 section V
 
 variable {L : Type} [CommRing L] {x : Sp L ⟶ Xo.X} {n : ℕ}
-  {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
+  {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (_root_.ReciprocityTheory.ChartRestriction.G.Chart.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
 
 theorem gsvVec_w (cc : Fin n → L) :
     gsvVec x xc cc ≫ Xo.univ.t.G.hom = spMap (algebraMap L (DualNumber L)) ≫ x := by

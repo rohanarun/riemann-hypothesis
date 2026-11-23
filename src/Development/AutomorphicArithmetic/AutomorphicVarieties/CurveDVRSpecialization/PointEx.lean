@@ -240,8 +240,7 @@ private theorem pe_flag (ρ : NRep F n A) (v : G.Vl)
   refine ⟨fun i j hij => ?_, fun i => ?_⟩
   · rw [key, Matrix.smul_apply, h1 i j hij, smul_zero]
   · rw [key, Matrix.smul_apply, h2 i]
-    simp [Pr.TwLink.twψ, mul_comm]
-    try rfl
+    exact mul_comm _ _
 
 private theorem pe_tw_cont [IsLocalRing A] [IsLocalHom (algebraMap O A)] (ρ : NRep F n A)
     (h : ∀ i j, AdicCont (maximalIdeal A) fun g => ρ.r g i j) (i j : Fin n) :

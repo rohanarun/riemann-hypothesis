@@ -29,7 +29,7 @@ public import Development.AbelianVarietyTheory.Definitions.AutomorphicMembership
 noncomputable section
 
 open NumberField IsDedekindDomain Formalism.ConjugateSelfDual ReciprocityTheory.Gal Formalism.BasicNotions Formalism.MainNotions.N Polynomial Module
-open GlobalTheory GlobalTheory.WeilDeligne GlobalTheory.LocLanglands
+open _root_.GlobalTheory GlobalTheory.WeilDeligne GlobalTheory.LocLanglands
 
 namespace UpperTheory.GalN
 

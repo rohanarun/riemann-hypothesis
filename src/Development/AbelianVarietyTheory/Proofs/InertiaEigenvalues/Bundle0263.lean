@@ -423,7 +423,7 @@ open Ideal Finset GlobalTheory.Per.AinfComplete
 namespace GlobalTheory.WittTeichComplete
 
 open scoped NNReal in
-open Ideal Finset in
+open _root_.Ideal Finset in
 private lemma tails_of_isAdicComplete_span {A : Type*} [CommRing A] (y : A)
     [IsAdicComplete (Ideal.span {y}) A] : _root_.GlobalTheory.Per.AinfComplete.Tails y := by
   have hsum := _root_.GlobalTheory.Per.AinfComplete.summ_of_precomplete y
@@ -455,7 +455,7 @@ private lemma tails_of_isAdicComplete_span {A : Type*} [CommRing A] (y : A)
 
 
 open scoped NNReal in
-open Ideal Finset in
+open _root_.Ideal Finset in
 theorem _root_.GlobalTheory.WittTeichComplete.main : ∀ (l : ℕ) [Fact l.Prime] (O : Type) [CommRing O] [IsDomain O] [CharP O l]
     [PerfectRing O l] (x : O), x ≠ 0 → IsAdicComplete (Ideal.span {x}) O →
     IsAdicComplete (Ideal.span {WittVector.teichmuller l x}) (WittVector l O) ∧

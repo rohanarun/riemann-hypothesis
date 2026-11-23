@@ -251,6 +251,7 @@ theorem _root_.GlobalTheory.T.genericLevelOfFrame_block_and_character :
     have hB : ∀ r s, s ≤ r → IsLocalRing.residue 𝒪[k] (A r s) = (1 : Matrix (Fin κ) (Fin κ) 𝓀[k]) r s :=
       hres
     have hdet : IsUnit A.det := by
+      have : IsLocalRing ↥𝒪[k] := ValuationRing.isLocalRing _
       apply IsLocalRing.notMem_maximalIdeal.1
       intro hm
       rw [← IsLocalRing.residue_eq_zero_iff, RingHom.map_det, Matrix.det_of_isUpperTriangular] at hm

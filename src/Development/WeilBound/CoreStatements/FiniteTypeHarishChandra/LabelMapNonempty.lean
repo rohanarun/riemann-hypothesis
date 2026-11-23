@@ -121,7 +121,7 @@ theorem iso_of_label (C : LabelConv K) {d : ℕ} (hd : 1 ≤ d) (τ τ' : FDRep 
     rw [hd1]
     exact congrArg _ (congrArg _ (congrFun heq γ⁻¹))
   rw [← hz, (zIdemIdemCentral_holds _ τ hs).1] at h1
-  have h2 := GlobalTheory.T.central_idempotent_properties.2.2.1 _ τ τ hs hs ⟨Iso.refl _⟩
+  have h2 := _root_.GlobalTheory.CompanionTheory.TyFin.zIdemFacts.2.2.1 _ τ τ hs hs ⟨Iso.refl _⟩
   rw [h1, map_zero] at h2
   haveI : Nontrivial τ := (isIrr_of_simple τ).1
   exact zero_ne_one h2

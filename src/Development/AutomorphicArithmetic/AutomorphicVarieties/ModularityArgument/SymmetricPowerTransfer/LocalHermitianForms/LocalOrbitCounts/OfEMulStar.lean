@@ -649,7 +649,7 @@ theorem UpperTheory.V.Z.Sym.Loc.caseG :
     ?_ (((hzI.star ⟨a, ha⟩).smul (int_star hlam)).smulO _) ?_
   · refine IB.smul hlam (IB.unit u₂ ?_)
     convert hzI using 1
-    rw [← hzn, ← one_mul (ofE Δ (star _)), ← smul_mul_assoc, ← ofE_mul_star, ofE_star]
+    rw [← hzn, ← one_mul (ofE Δ (star _)), ← smul_mul_assoc, ← ofE_mul_star, ← UpperTheory.V.Z.Sym.Loc.CG.ofE_star]
     linear_combination ofE Δ (z : Etau K τ) * hzz
-  · rw [dLam, ← ofE_star, smul_mul_assoc, smul_mul_smul_comm, mul_comm (star (ofE Δ _)), hzz, mul_comm,
+  · rw [dLam, ← UpperTheory.V.Z.Sym.Loc.CG.ofE_star, smul_mul_assoc, smul_mul_smul_comm, mul_comm (star (ofE Δ _)), hzz, mul_comm,
       ← algebraMap_norm_eq_mul_star, hn, ← h₂, algebraMap_smul (Lsq K Δ), smul_smul, ← map_mul, Units.inv_mul, map_one, one_smul]

@@ -393,7 +393,7 @@ namespace GlobalTheory.CompanionTheory.WeilSiegel.Frame
 
 section Gen
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 
 variable {F E : Type} [Field F] [Field E] [Algebra F E]
@@ -418,7 +418,7 @@ end Gen
 
 section Glob
 
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 
 variable {F E : Type} [Field F] [NumberField F] [Field E] [Algebra F E]

@@ -32,7 +32,7 @@ open scoped Classical
 
 namespace GlobalTheory.ClsVal.Reach
 
-open Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj
 open GlobalTheory.IndefiniteRowSideFullHecke.DeltaDatumCombinedCoefficient (fnAt basePt)
 open GlobalTheory.LevelCoverCompare (fnRule evR_fnRule fnRule_mem fnAt_comp)
 attribute [local instance] Over.cartesianMonoidalCategory

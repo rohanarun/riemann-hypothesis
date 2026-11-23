@@ -48,7 +48,7 @@ variable (q) in
 def IsGenSmooth (π : Y ⟶ X) : Prop :=
   ∃ U : Y.Opens, (∀ σ (y : CxPts q σ), y ∈ ptsIn q σ U) ∧ Smooth (U.ι ≫ π)
 
-open Limits
+open _root_.CategoryTheory.Limits
 
 def relCot (π : Y ⟶ X) : Y.Modules := Conormal.conormal (pullback.diagonal π)
 

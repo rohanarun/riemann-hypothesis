@@ -59,7 +59,7 @@ noncomputable section
 
 namespace GlobalTheory.QTw.StepChar
 
-open Formalism.L2.Col Formalism.L2.DIV
+open _root_.Formalism.L2.Col Formalism.L2.DIV
 open Formalism.L2.Host (HChar)
 
 theorem locK_unif {L : Type} [Field L] [NumberField L] (χ : HChar L) (Q : HeightOneSpectrum (𝓞 L)) (hu : χ.UnrAt Q) (k : Lˣ)

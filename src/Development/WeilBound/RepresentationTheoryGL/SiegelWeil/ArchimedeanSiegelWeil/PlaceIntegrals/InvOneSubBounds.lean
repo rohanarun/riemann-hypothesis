@@ -22,7 +22,7 @@ public import CompanionTheory.SpectralGeometry.CountingDefinitions.AdelicEulerPr
 @[expose] public section
 
 namespace GlobalTheory.CompanionTheory.WeilSiegel.HypMass.HH
-open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory Topology
+open HeckeCharacterZeroLocus.SiegelWeilU GlobalTheory.CompanionTheory.SW NumberField IsDedekindDomain MeasureTheory _root_.Topology
 open scoped TensorProduct ENNReal NNReal Matrix
 open GlobalTheory.CompanionTheory.WeilSiegel.Frame GlobalTheory.CompanionTheory.WeilSiegel.Free GlobalTheory.CompanionTheory.WeilSiegel.HypStep GlobalTheory.CompanionTheory.WeilSiegel.HypMass
 theorem finite_lt : ∀ (F E : Type) [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] (σ : E →ₐ[F] E), IsCMExt F E σ → ∀ (M : ℕ) (J : Matrix (Fin M) (Fin M) E), IsHermND σ J → ∀ p : ℕ, 1 ≤ p → 2 * p < M → ∀ (h₀ : ∀ a b : Fin p, σ ((0 : Matrix (Fin p) (Fin p) E) b a) = (0 : Matrix (Fin p) (Fin p) E) a b) (d : ℕ) (b : Module.Basis (Fin d) F E) (v : HeightOneSpectrum (𝓞 F)) (lam : Measure (Fv F v)), IsStdV v lam → ∀ (m : HermR (Fv F v) σ p → Measure (Fin p → Fin M → Fv F v ⊗[F] E)), IsGramFibFree (Fv F v) σ J p (coordW (Fv F v) b lam p M) (coordHerm (Fv F v) σ b lam p) m → m (hermOf (Fv F v) σ (0 : Matrix (Fin p) (Fin p) E) h₀) (latV b v) < ⊤ := by

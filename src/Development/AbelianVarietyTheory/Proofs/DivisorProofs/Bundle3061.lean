@@ -54,7 +54,7 @@ noncomputable section
 
 namespace GlobalTheory.KSCocycle
 
-open AlgebraicGeometry CategoryTheory Limits NumberField
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField
 open ReciprocityTheory.ChartRestriction.G ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor GlobalTheory.LogKS Formalism.L2.Pj
 open GlobalTheory.LogKSLin
 open GlobalTheory.Points (valR_eq valR_add valR_mul valR_res valR_appLE le_preimage_mono)

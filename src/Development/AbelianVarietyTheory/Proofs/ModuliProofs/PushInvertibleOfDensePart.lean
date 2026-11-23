@@ -237,7 +237,7 @@ theorem gs_eq_of_mul_eq (π : Y ⟶ X) [Flat π] {O O' : X.Opens} (a : Γ(X, O))
   rw [← gs_stalkMap π g O h, ← gs_stalkMap π g O' h']
   exact hu.mul_right_cancel e
 
-theorem pushInvertible_of_densePart : ∀ (X U : Scheme.{0}) [IsLocallyNoetherian X] (j : U ⟶ X), IsNormalScheme X → IsPreimmersion j → Flat j → IsDominant j → QuasiCompact j → ∀ (G : Over X) (G₀ : Over U) (φ : G₀.left ⟶ G.left) (L : LB G.left) (L₀ : LB G₀.left), Smooth G.hom → GeometricallyIntegral G.hom → IsPullback φ G₀.hom G.hom j → L.IsLB → L₀.IsLB → LBIso L₀ (L.pull φ) → PushInvertible G₀ L₀ → (∀ x : X, ∃ V : X.Opens, x ∈ V ∧ ∃ θ ∈ secOn L (G.hom ⁻¹ᵁ V), ∀ y ∈ V, ∃ (g : G.left) (i : L.ι), G.hom g = y ∧ g ∈ G.left.basicOpen (θ i)) → PushInvertible G L := by
+theorem pushInvertible_of_densePart : ∀ (X U : Scheme.{0}) [IsLocallyNoetherian X] (j : U ⟶ X), _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.IsNormalScheme X → IsPreimmersion j → Flat j → IsDominant j → QuasiCompact j → ∀ (G : Over X) (G₀ : Over U) (φ : G₀.left ⟶ G.left) (L : LB G.left) (L₀ : LB G₀.left), Smooth G.hom → GeometricallyIntegral G.hom → IsPullback φ G₀.hom G.hom j → L.IsLB → L₀.IsLB → LBIso L₀ (L.pull φ) → PushInvertible G₀ L₀ → (∀ x : X, ∃ V : X.Opens, x ∈ V ∧ ∃ θ ∈ secOn L (G.hom ⁻¹ᵁ V), ∀ y ∈ V, ∃ (g : G.left) (i : L.ι), G.hom g = y ∧ g ∈ G.left.basicOpen (θ i)) → PushInvertible G L := by
   intro X U _ j hX _ _ _ _ G G₀ φ L L₀ _ _ sq hL hL₀ hw h₀ H x
   obtain ⟨V, hx, θ, hθ, hne⟩ := H x
   refine ⟨V, hx, θ, hθ, fun W hW s hs => ?_, hne⟩

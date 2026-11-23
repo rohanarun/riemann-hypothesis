@@ -186,7 +186,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.BZPsiPG.FibOnto
 
-open Topology GlobalTheory.SplitWeil
+open _root_.Topology GlobalTheory.SplitWeil
 
 theorem fibInt_translate : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (i t : ℕ) {V W : Type} [AddCommGroup V] [Module ℂ V] [AddCommGroup W] [Module ℂ W] (τ : Representation ℂ (Mir k i) V) (σ : Representation ℂ (GL (Fin t) k) W) [MeasurableSpace (Fin t → k)] (μ : MeasureTheory.Measure (Fin t → k)) (f : cIndSpace (HPG k i t) (hRep τ σ)) (x g : GL (Fin (i + t)) k), fibInt μ (prodPG τ σ (levi k (i + t) x) f) g = fibInt μ f (g * x) := by
   intro k _ _ _ _ i t V W _ _ _ _ τ σ _ μ f x g
@@ -289,7 +289,7 @@ end GlobalTheory.CompanionTheory.BZPsiPG.FibOnto
 
 namespace GlobalTheory.CompanionTheory.BZPsiPG.FibOnto
 
-open Topology GlobalTheory.SplitWeil
+open _root_.Topology GlobalTheory.SplitWeil
 
 section
 variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
@@ -356,7 +356,7 @@ end GlobalTheory.CompanionTheory.BZPsiPG.FibOnto
 
 namespace GlobalTheory.CompanionTheory.BZPsiPG
 
-open Topology GlobalTheory.SplitWeil FibOnto
+open _root_.Topology GlobalTheory.SplitWeil FibOnto
 
 theorem exists_fibInt_eq : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (i t : ℕ) {V W : Type} [AddCommGroup V] [Module ℂ V] [AddCommGroup W] [Module ℂ W] (τ : Representation ℂ (Mir k i) V) (σ : Representation ℂ (GL (Fin t) k) W), IsSmooth τ → IsSmooth σ → ∀ [MeasurableSpace (Fin t → k)] [BorelSpace (Fin t → k)] (μ : MeasureTheory.Measure (Fin t → k)) [μ.IsAddHaarMeasure], ∀ G : smoothPart (ind (Qp k i t) (qRep τ σ)), ∃ f : cIndSpace (HPG k i t) (hRep τ σ), ∀ g, fibInt μ f g = G.1.1 g := by
   intro k _ _ _ _ i t V W _ _ _ _ τ σ hτ hσ _ _ μ _ G

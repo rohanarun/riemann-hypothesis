@@ -59,7 +59,7 @@ open GlobalTheory.ZH GlobalTheory.Poinc GlobalTheory.UPoinc.USum
 
 noncomputable section
 namespace GlobalTheory.Poinc.FieldConj
-open GlobalTheory.Points RatModel
+open GlobalTheory.Points _root_.GlobalTheory.ZH.RatModel
 open scoped Pointwise
 
 theorem eq_of_val_eq_fibre {o Ω : Type} [CommRing o] [Field Ω] [Algebra o Ω] (M : RatModel o Ω) {X : Scheme.{0}}

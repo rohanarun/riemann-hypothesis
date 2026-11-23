@@ -173,7 +173,7 @@ namespace GlobalTheory.CMSub
 
 section Crit
 
-open ComplexEmbedding InfinitePlace IntermediateField
+open _root_.NumberField.ComplexEmbedding InfinitePlace IntermediateField
 
 theorem isCMField_of_forall_isConj (K : Type) [Field K] [NumberField K] [_root_.NumberField.IsTotallyComplex K]
     {σ : K ≃ₐ[ℚ] K} (hσ : ∀ φ : K →+* ℂ, IsConj φ σ) : IsCMField K := by

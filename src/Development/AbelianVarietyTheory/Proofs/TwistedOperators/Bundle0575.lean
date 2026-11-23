@@ -316,7 +316,7 @@ noncomputable section
 namespace GlobalTheory.HeckeTermIdent
 
 open NumberField IsDedekindDomain ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj GlobalTheory.GeoTie
-open AlgebraicGeometry CategoryTheory Limits
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits
 open ReciprocityTheory.ChartRestriction.G GlobalTheory.IndefiniteRowSideFullHecke.HeckeIsogenyKernels GlobalTheory.HeckeCompare GlobalTheory.HeckeCount
 
 theorem nonempty_hkKer_equiv {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E}

@@ -420,8 +420,8 @@ universe u v w
 def ChartFiniteIrrel.Statement : Prop :=
   ∀ (K : Type u) [Fintype K] (ι : K → Type v) [∀ k, Fintype (ι k)] (F : Type w) [Field F]
     (V : Ideal (MRingOver F ι)) (f : MRingOver F ι) (i : ∀ k, ι k),
-    IsMultiHomogIdeal V → IsMultiHomog f (fun _ => 1) →
-    (∀ W ∈ (V ⊔ Ideal.span {f}).minimalPrimes, ¬ IsRelevant W) →
+    IsMultiHomogIdeal V → _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog f (fun _ => 1) →
+    (∀ W ∈ (V ⊔ Ideal.span {f}).minimalPrimes, ¬ _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsRelevant W) →
     Module.Finite F (MRingOver F ι ⧸ chartIdeal V i)
 
 end GroundTheory.Heights₂.Heights.Targets
@@ -440,7 +440,7 @@ universe u v w
 def SegreComponent.Statement : Prop :=
   ∀ (K : Type u) [Fintype K] (ι : K → Type v) [∀ k, Fintype (ι k)] (F : Type w) [Field F]
     (V : Ideal (MRingOver F ι)) (n : ℕ) (f : MRingOver F ι), IsProjVarF V (n + 1) →
-    IsMultiHomog f (fun _ => 1) → (divSupp V f).Nonempty
+    _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog f (fun _ => 1) → (divSupp V f).Nonempty
 
 end GroundTheory.Heights₂.Heights.Targets
 end
@@ -458,7 +458,7 @@ universe u v w
 def SegreDivisor.Statement : Prop :=
   ∀ (K : Type u) [Fintype K] (ι : K → Type v) [∀ k, Fintype (ι k)] (F : Type w) [Field F]
     (V : Ideal (MRingOver F ι)) (n : ℕ), IsProjVarF V (n + 1) →
-    ∃ f : MRingOver F ι, IsMultiHomog f (fun _ => 1) ∧ f ∉ V ∧ divCycle V f ≠ 0
+    ∃ f : MRingOver F ι, _root_.ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog f (fun _ => 1) ∧ f ∉ V ∧ _root_.ReciprocityTheory.ChartRestriction.G.Geo.divCycle V f ≠ 0
 
 end GroundTheory.Heights₂.Heights.Targets
 end

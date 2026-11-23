@@ -21,7 +21,7 @@ namespace GlobalTheory.CompanionTheory.RgStart
 
 open Formalism.REAL (GlRel KHighest IsWeight qdet)
 open CompanionTheory.D.LK (IsKMod)
-open CompanionTheory.RgExh
+open _root_.CompanionTheory.RgExh
 
 theorem monic_eval_capP : ∀ (n : ℕ) (p : ℂ[X]), p.Monic → p.natDegree = n →
     ∃ χ : Fin n → ℂ, ∀ Y : ℂ, p.eval Y = Formalism.QuantumDeterminants.capP χ Y := by

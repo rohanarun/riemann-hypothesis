@@ -31,7 +31,7 @@ public import Development.AbelianVarietyTheory.Proofs.UniformizationProofs.Bundl
 section
 namespace GlobalTheory.Mem.Col2.DiaLat
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2
+open NumberField IsDedekindDomain Formalism.BasicNotions _root_.Formalism.L2.Col Formalism.L2.DIV Formalism.L2.Forms GlobalTheory.Mem.Col2
 
 section General
 

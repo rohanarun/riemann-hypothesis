@@ -179,8 +179,8 @@ variable {F E : Type} [Field F] [Field E] [Algebra F E] (R : Type) [CommRing R] 
 
 def covR (x : Fin n → E) : Fin n → R ⊗[F] E := fun j => inclR R (∑ i, σ (x i) * J i j)
 
-theorem sigR_inclR (a : E) : Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR R a) = inclR R (σ a) := by
-  simp [Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR, inclR]
+theorem sigR_inclR (a : E) : _root_.Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.sigR R σ (inclR R a) = inclR R (σ a) :=
+  DFunLike.congr_fun (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id F R) σ) a
 
 theorem hR_ratV_left (x : Fin n → E) (y : Fin n → R ⊗[F] E) :
     hR R σ J (ratV (F := F) R x) y = covR R σ J x ⬝ᵥ y := by

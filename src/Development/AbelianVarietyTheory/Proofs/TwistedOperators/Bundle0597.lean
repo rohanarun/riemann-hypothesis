@@ -246,7 +246,7 @@ open scoped TensorProduct nonZeroDivisors Pointwise
 
 namespace GlobalTheory.RowEx.GridExPf
 
-open Formalism.L2.Col GlobalTheory.GridPlaces
+open _root_.Formalism.L2.Col GlobalTheory.GridPlaces
 
 variable {D : D7}
 

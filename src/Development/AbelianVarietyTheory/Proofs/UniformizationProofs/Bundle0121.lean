@@ -304,7 +304,7 @@ theorem exists_lineBundle_of_thickenings : ∀ (V : Type) [CommRing V] [IsDomain
       · rw [pullback.lift_snd, IsPullback.isoPullback_hom_snd]
     rw [e]
     infer_instance
-  obtain ⟨t₁, ht₁⟩ := GlobalTheory.T.serre_vanishing_very_ample.1 _ _ _ _ _ _ (hL 0) hva (N 0) (hN 0).1
+  obtain ⟨t₁, ht₁⟩ := _root_.GlobalTheory.AbLaw.serre_h1Zero_and_sections_polynomial.1 _ _ _ _ _ _ (hL 0) hva (N 0) (hN 0).1
   obtain ⟨t₂, ht₂⟩ := GlobalTheory.TwistGen.twist_generated _ _ _ _ _ _ (hL 0) hva (N 0) (hN 0).1
   obtain ⟨t, h₁, h₂⟩ : ∃ t, t₁ ≤ t ∧ t₂ ≤ t := ⟨max t₁ t₂, le_max_left _ _, le_max_right _ _⟩
   obtain ⟨n, u, hu⟩ := ht₂ t h₂

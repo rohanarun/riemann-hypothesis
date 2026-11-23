@@ -60,7 +60,7 @@ theorem isAlgebraic_of_norm_const {K Ω : Type} [Field K] [CharZero K] [Field Ω
   have h3 : P₀ b = 0 := norm_eq_zero.1 (by linarith)
   exact hb ((map_eq_zero P₀).1 h3 ▸ isAlgebraic_zero)
 
-open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD
+open NumberField IsDedekindDomain AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits ReciprocityTheory.ChartRestriction.G.Geo.Tor ReciprocityTheory.ChartRestriction.G.FD
   Formalism.L2.Pj GlobalTheory.AllWt
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host E} {Dw : Datum H}

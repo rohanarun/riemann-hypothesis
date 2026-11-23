@@ -154,7 +154,7 @@ noncomputable section
 namespace GlobalTheory.LocMod.SplitHecke
 open GlobalTheory.FinPl (SplitPt)
 open Formalism.L2.NTheta (IsIdemAt)
-open Formalism.L2.Col (IntAt)
+open _root_.Formalism.L2.Col (IntAt)
 
 section Place
 variable {D : D7} {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (q : SplitPt D k)
@@ -206,7 +206,7 @@ end GlobalTheory.LocMod.SplitHecke
 namespace GlobalTheory.LocMod.SplitHecke
 open GlobalTheory.FinPl (SplitPt)
 open Formalism.L2.NTheta (IsIdemAt)
-open Formalism.L2.Col (IntAt)
+open _root_.Formalism.L2.Col (IntAt)
 variable {D : D7} {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (q : SplitPt D k)
 
 theorem chi_idlU_rat {PP : Formalism.L2.DIV.Pl D.host.E} (h : IsIdemAt q.e PP) {χ : (AE D)ˣ →* Circle}
@@ -226,7 +226,7 @@ end GlobalTheory.LocMod.SplitHecke
 namespace GlobalTheory.LocMod.SplitHecke
 open GlobalTheory.FinPl (SplitPt)
 open Formalism.L2.NTheta (IsIdemAt)
-open Formalism.L2.Col (IntAt)
+open _root_.Formalism.L2.Col (IntAt)
 section Place
 variable {D : D7} {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (q : SplitPt D k)
 

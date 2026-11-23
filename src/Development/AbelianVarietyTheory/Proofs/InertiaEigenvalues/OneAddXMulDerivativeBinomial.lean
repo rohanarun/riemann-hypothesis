@@ -350,7 +350,8 @@ theorem evLaw_integers {l : ℕ} [Fact l.Prime] (P : LocPrime l) (LL : FinExt l)
 
 theorem nonempty_wSer : ∀ (l : ℕ) [Fact l.Prime] (P : LocPrime l) (K : FinExt l) (s : ℕ) (LL : FinExt l), Good K s LL → ∀ Γ : GamS P K s LL, Nonempty (WSer Γ) := by
   intro l _ P K s LL _ Γ
-  obtain ⟨_, hcomp, -, hu, -⟩ := GlobalTheory.Per.integers_completeDVR l LL
+  obtain ⟨dvr, hcomp, -, hu, -⟩ := GlobalTheory.Per.integers_completeDVR l LL
+  have : IsLocalRing ↥(OL LL) := dvr.toIsLocalRing
   have : IsHausdorff (Ideal.span {(l : ↥(OL LL))}) ↥(OL LL) :=
     ⟨fun x hx => IsHausdorff.haus (I := IsLocalRing.maximalIdeal ↥(OL LL)) inferInstance x fun k =>
       (hx k).mono (Submodule.smul_mono_left (Ideal.pow_right_mono

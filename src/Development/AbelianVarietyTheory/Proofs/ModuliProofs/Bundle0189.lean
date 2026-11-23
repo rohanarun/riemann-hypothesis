@@ -418,7 +418,7 @@ theorem relAmple_of_genericFibre : Out.Laws → Out.Laws2 → ∀ (S : Scheme.{0
   obtain ⟨t', ht'⟩ := exists_sec_ne_zero_of_lbIso (hN' _) (pull_isLB hN _)
     (lbIso_pull_div_lbPow P.isLB hM (pullback.fst P.A.hom y) a).symm
     (_root_.GlobalTheory.GenericSection.exists_sec_ne_zero_of_generic hL S P _ K K' x y t hN hx ht)
-  obtain ⟨r, u, hu⟩ := _root_.GlobalTheory.EffectiveCube.exists_sections_cube_cover GlobalTheory.T.cube_theorem_and_sections_finite_growth_abelianVariety.1 K' (baseChange P y) _ t' (hN' _) ht'
+  obtain ⟨r, u, hu⟩ := _root_.GlobalTheory.EffectiveCube.exists_sections_cube_cover _root_.GlobalTheory.AbLaw.CubeAssembly.cube_and_sections.1 K' (baseChange P y) _ t' (hN' _) ht'
   exact _root_.GlobalTheory.relAmple_of_cube_div_generated K' (baseChange P y).A (baseChange P y).L (M.pull (pullback.fst P.A.hom y)) a r u
     (baseChange P y).isAb.proper (baseChange P y).isLB (pull_isLB hM _) ha (baseChange P y).ample hu
 

@@ -23,6 +23,10 @@ open PI.RhsWLim
 
 variable {k r : ℕ}
 
+theorem hb_sq (k : ℕ) : Hb k * Hb k = 1 := by
+  rw [Hb, Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
+  congr 1; funext j; split_ifs <;> norm_num
+
 theorem herm_mulVec_right {p : Mat k r} (hp : p ∈ UH (Hpk k r)) (v u : Fin (2 * r + k + 1) → ℂ) :
     herm (Hpk k r) v (p *ᵥ u) = herm (Hpk k r) (p⁻¹ *ᵥ v) u := by
   have hu := HU.isUnit_of_uh hp

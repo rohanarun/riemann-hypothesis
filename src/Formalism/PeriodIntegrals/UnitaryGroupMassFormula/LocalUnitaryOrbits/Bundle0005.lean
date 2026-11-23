@@ -4,6 +4,7 @@ public import Mathlib
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalUnitaryOrbits.Bundle0004
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalUnitaryOrbits.Bundle0003
 public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalUnitaryOrbits.CrossMSmulRight
+public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.LocalUnitaryOrbits.Bundle0002
 
 @[expose] public section
 
@@ -338,35 +339,8 @@ variable {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algeb
   (σ : E →ₐ[F] E) {n : ℕ} (J : Matrix (Fin n) (Fin n) E) (v : HeightOneSpectrum (𝓞 F))
 
 theorem oEv_mul {x y : Fv F v ⊗[F] E} (hx : x ∈ OEv (E := E) v) (hy : y ∈ OEv (E := E) v) :
-    x * y ∈ OEv (E := E) v := by
-  unfold OEv at *
-  rw [SetLike.mem_coe] at *
-  induction hx using Submodule.span_induction with
-  | mem a ha =>
-    obtain ⟨e, -, rfl⟩ := ha
-    induction hy using Submodule.span_induction with
-    | mem b hb =>
-      obtain ⟨f, -, rfl⟩ := hb
-      rw [← map_mul]
-      exact Submodule.subset_span ⟨e * f, Set.mem_univ _, by simp⟩
-    | zero =>
-      rw [mul_zero]
-      exact Submodule.zero_mem _
-    | add b c _ _ hb hc =>
-      rw [mul_add]
-      exact Submodule.add_mem _ hb hc
-    | smul r b _ hb =>
-      rw [mul_smul_comm]
-      exact Submodule.smul_mem _ r hb
-  | zero =>
-    rw [zero_mul]
-    exact Submodule.zero_mem _
-  | add a c _ _ ha hc =>
-    rw [add_mul]
-    exact Submodule.add_mem _ ha hc
-  | smul r a _ ha =>
-    rw [smul_mul_assoc]
-    exact Submodule.smul_mem _ r ha
+    x * y ∈ OEv (E := E) v :=
+  (PI.OmLocU.Orb.oSub (E := E) v).2 x hx y hy
 
 theorem oEv_sum {ι : Type} (s : Finset ι) (f : ι → Fv F v ⊗[F] E) (h : ∀ i ∈ s, f i ∈ OEv (E := E) v) :
     ∑ i ∈ s, f i ∈ OEv (E := E) v := by

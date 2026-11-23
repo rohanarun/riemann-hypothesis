@@ -68,8 +68,8 @@ namespace GlobalTheory.UU
 
 theorem exists_pelUnif_of_cdvr_unconditional :
     ∀ (E : Type) [Field E] [NumberField E] [NumberField.IsCMField E] (H : Host E) (V : Type) [CommRing V] [IsDomain V] [IsLocalRing V], CDVR V → ∀ (t : SAB H (Sp V)) (A : PolAV (Sp (FractionRing V))) (gen : (Over.pullback (jK V)).obj t.G ≅ A.A), IsMonHom gen.hom → (∃ w : LB.Iso (A.L.pull gen.hom.left) (t.PP.L.pull (pullback.fst t.G.hom (jK V))), w.IsGen) → (∃ S : SplitExt (Sp (IsLocalRing.ResidueField V)), S.IsGt ((Over.pullback (spMap (IsLocalRing.residue V))).obj t.G)) → ∃ P : PELUnif (maximalIdeal V) t, P.A = A ∧ HEq P.U.gen gen ∧ P.TorsionIso :=
-  _root_.GlobalTheory.UU.exists_pelUnif_of_cdvr _root_.GlobalTheory.UU.exists_degData_unif_unconditional GlobalTheory.T.all_six_abelian_scheme_laws_hold.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.1
-    GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.2.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.2.2.1
+  _root_.GlobalTheory.UU.exists_pelUnif_of_cdvr _root_.GlobalTheory.UU.exists_degData_unif_unconditional _root_.GlobalTheory.allSixLaws.1 _root_.GlobalTheory.allSixLaws.2.1 _root_.GlobalTheory.allSixLaws.2.2.1
+    _root_.GlobalTheory.allSixLaws.2.2.2.1 _root_.GlobalTheory.allSixLaws.2.2.2.2.1
     GlobalTheory.twistBaseChange_and_valuation_statements.2.1
     GlobalTheory.twistBaseChange_and_valuation_statements.2.2.1
     GlobalTheory.twistBaseChange_and_valuation_statements.2.2.2.1
@@ -113,8 +113,8 @@ open GlobalTheory.LN
 namespace GlobalTheory
 
 theorem uniformisation_total_closed : USt :=
-  _root_.GlobalTheory.LN.uniformisation_dvr GlobalTheory.T.all_six_abelian_scheme_laws_hold.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.2.1
-    GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.2.2.2.1
+  _root_.GlobalTheory.LN.uniformisation_dvr _root_.GlobalTheory.allSixLaws.1 _root_.GlobalTheory.allSixLaws.2.1 _root_.GlobalTheory.allSixLaws.2.2.1 _root_.GlobalTheory.allSixLaws.2.2.2.1
+    _root_.GlobalTheory.allSixLaws.2.2.2.2.1
 
 end GlobalTheory
 end

@@ -231,7 +231,7 @@ theorem twistBaseChange_of_finrank_sections_one :
   obtain ⟨-, -, -, -, -, -, -, -, hmulq, hrel⟩ := _root_.GlobalTheory.AbLaw.FromCube.all_of_cubeGen hcube
   have hproj := GlobalTheory.AbLaw.polAV_veryAmpleBy hBC
   have hmul := (GlobalTheory.MulPull.mulPull_of_cube_of_symm hcube (GlobalTheory.exists_gen_negLB hGF)).1
-  have hvan := GlobalTheory.AbLaw.PowVanish.first_cohomology_vanishes_powers hproj GlobalTheory.T.serre_vanishing_very_ample.1 GlobalTheory.AbLaw.h1Zero_of_isIso hmul hmulq
+  have hvan := GlobalTheory.AbLaw.PowVanish.first_cohomology_vanishes_powers hproj _root_.GlobalTheory.AbLaw.serre_h1Zero_and_sections_polynomial.1 GlobalTheory.AbLaw.h1Zero_of_isIso hmul hmulq
     (GlobalTheory.torsion_invariant_descends hmulq)
   have h0 := GlobalTheory.FinrankGrowthBounds.finrank_sections_lineBundlePow_eq_pow
     GlobalTheory.forall_geometricallyIntegral_of_smooth_of_geometricallyConnected h1 hrel hgrow hmulq

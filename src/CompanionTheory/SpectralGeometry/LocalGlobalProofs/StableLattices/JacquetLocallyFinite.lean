@@ -13,7 +13,7 @@ open Polynomial
 
 namespace GlobalTheory.CompanionTheory.LocFinFilt
 
-open CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J ReciprocityTheory.ChartRestriction.DS
+open _root_.CompanionTheory.RgExh CompanionTheory.RgExh.Dec CompanionTheory.RgExh.Dec.J ReciprocityTheory.ChartRestriction.DS
 
 variable {n : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V]
 

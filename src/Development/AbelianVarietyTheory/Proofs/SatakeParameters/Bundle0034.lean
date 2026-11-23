@@ -301,7 +301,7 @@ end
 section
 namespace GlobalTheory
 
-open WittVector
+open _root_.WittVector
 
 theorem isPrecomplete_pi {R : Type*} [CommRing R] (I : Ideal R) [IsPrecomplete I R]
     (ι : Type*) [Finite ι] : IsPrecomplete I (ι → R) := by

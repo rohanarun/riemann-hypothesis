@@ -267,7 +267,7 @@ attribute [local instance] Over.cartesianMonoidalCategory
 
 namespace GlobalTheory
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj Pointwise in
 open IsLocalRing in
 attribute [local instance] Over.cartesianMonoidalCategory in
@@ -277,7 +277,7 @@ private lemma unit_pullback_left_comp_fst_eq_spMap_comp_unit {W R : Type} [CommR
       _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.spMap φ ≫ η[G].left := by
   simp [Functor.grpObjObj, Functor.monObjObj]
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj Pointwise in
 open IsLocalRing in
 attribute [local instance] Over.cartesianMonoidalCategory in
@@ -288,7 +288,7 @@ private lemma unit_pullback_left_comp_snd_eq_id {W R : Type} [CommRing W] [CommR
   simpa using h
 
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
+open CategoryTheory _root_.CategoryTheory.Limits _root_.CategoryTheory.MonoidalCategory.Limits _root_.CategoryTheory.Limits MonoidalCategory CartesianMonoidalCategory MonObj AlgebraicGeometry in
 open scoped CategoryTheory.Obj CategoryTheory.MonObj Pointwise in
 open IsLocalRing in
 attribute [local instance] Over.cartesianMonoidalCategory in

@@ -54,13 +54,7 @@ noncomputable def UpperTheory.Reformulated.B.CovariantDegrees.jE :
         (@Algebra.algebraMap E Ω (@Semifield.toCommSemiring E (@Field.toSemifield E inst))
           (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst_1))) inst_2)
 
-theorem UpperTheory.Reformulated.B.CovariantDegrees.aux2 :
-    ∀ {E : Type} [inst : Field E] [inst_1 : @NumberField E inst],
-      @Module.Free Rat E (@CommSemiring.toSemiring Rat (@CommRing.toCommSemiring Rat Rat.commRing))
-        (@AddCommGroup.toAddCommMonoid E (@Ring.toAddCommGroup E (@DivisionRing.toRing E (@Field.toDivisionRing E inst))))
-        (@Algebra.toModule Rat E Rat.commSemiring
-          (@DivisionSemiring.toSemiring E (@Semifield.toDivisionSemiring E (@Field.toSemifield E inst)))
-          (@DivisionRing.toRatAlgebra E (@Field.toDivisionRing E inst) (@NumberField.to_charZero E inst inst_1))) := by
+theorem UpperTheory.Reformulated.B.CovariantDegrees.aux2 : ∀ {E : Type} [inst : Field E] [inst_1 : NumberField E], Module.Free ℚ E := by
   intros; infer_instance
 
 noncomputable def UpperTheory.Reformulated.B.CovariantDegrees.KwF :
@@ -457,79 +451,12 @@ theorem UpperTheory.Reformulated.B.CovariantDegrees.aux12 :
       @Normal Rat Ω Rat.instField inst (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1) := by
   intros; infer_instance
 
-noncomputable def UpperTheory.Reformulated.B.CovariantDegrees.resQ :
-    {l : Nat} →
-      [hl : Fact (Nat.Prime l)] →
-        {Ω : Type} →
-          [inst : Field Ω] →
-            [inst_1 :
-                @CharZero Ω
-                  (@AddGroupWithOne.toAddMonoidWithOne Ω
-                    (@Ring.toAddGroupWithOne Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst))))] →
-              [@IsAlgClosure Rat Ω Rat.commRing inst (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1)
-                    (@Module.Flat.isTorsionFree Rat Ω Rat.commSemiring
-                      (@Semiring.toAddCommMonoid Ω
-                        (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst))))
-                      (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                        (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                        (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))
-                      (@Module.Flat.instOfIsDedekindDomainOfIsTorsionFree Rat Ω Rat.commRing
-                        (@Ring.toAddCommGroup Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst)))
-                        (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                          (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                          (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))
-                        (@IsPrincipalIdealRing.isDedekindDomain Rat Rat.commRing Rat.isDomain
-                          (@IsPrincipalIdealRing.of_isSimpleRing Rat Rat.commRing
-                            (@DivisionRing.isSimpleRing Rat Rat.instDivisionRing)))
-                        (@Module.Flat.isTorsionFree Rat Ω Rat.commSemiring
-                          (@AddCommGroup.toAddCommMonoid Ω
-                            (@Ring.toAddCommGroup Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst))))
-                          (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                            (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                            (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))
-                          (@Module.FaithfullyFlat.toFlat Rat Ω Rat.commRing
-                            (@Ring.toAddCommGroup Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst)))
-                            (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                              (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                              (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))
-                            (@Module.FaithfullyFlat.instOfNontrivialOfFree Rat Ω Rat.commRing
-                              (@Ring.toAddCommGroup Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst)))
-                              (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                                (@DivisionSemiring.toSemiring Ω
-                                  (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                                (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))
-                              (@IsLocalRing.toNontrivial Ω
-                                (@CommSemiring.toSemiring Ω (@CommRing.toCommSemiring Ω (@Field.toCommRing Ω inst)))
-                                (@IsRegularLocalRing.toIsLocalRing Ω (@Field.toCommRing Ω inst)
-                                  (@IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing Ω
-                                    (@Field.toCommRing Ω inst)
-                                    (@HenselianLocalRing.toIsLocalRing Ω (@Field.toCommRing Ω inst)
-                                      (@Field.henselian Ω inst))
-                                    (@IsDomain.of_isSimpleRing Ω (@Field.toCommRing Ω inst)
-                                      (@DivisionRing.isSimpleRing Ω (@Field.toDivisionRing Ω inst)))
-                                    (@IsPrincipalIdealRing.of_isSimpleRing Ω (@Field.toCommRing Ω inst)
-                                      (@DivisionRing.isSimpleRing Ω (@Field.toDivisionRing Ω inst))))))
-                              (@Module.Free.of_divisionRing Rat Ω Rat.instDivisionRing
-                                (@Ring.toAddCommGroup Ω (@DivisionRing.toRing Ω (@Field.toDivisionRing Ω inst)))
-                                (@Algebra.toModule Rat Ω (@CommRing.toCommSemiring Rat Rat.commRing)
-                                  (@DivisionSemiring.toSemiring Ω
-                                    (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                                  (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1))))))))] →
-                @RingHom Ω (@PadicAlgCl l hl)
-                    (@Semiring.toNonAssocSemiring Ω
-                      (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst))))
-                    (@Semiring.toNonAssocSemiring (@PadicAlgCl l hl)
-                      (@DivisionSemiring.toSemiring (@PadicAlgCl l hl)
-                        (@Semifield.toDivisionSemiring (@PadicAlgCl l hl)
-                          (@Field.toSemifield (@PadicAlgCl l hl)
-                            (@AlgebraicClosure.instField (@Padic l hl) (@instFieldPadic l hl)))))) →
-                  @UpperTheory.Reformulated.B.CovariantDegrees.GQ l hl →
-                    @AlgEquiv Rat Ω Ω Rat.commSemiring
-                      (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                      (@DivisionSemiring.toSemiring Ω (@Semifield.toDivisionSemiring Ω (@Field.toSemifield Ω inst)))
-                      (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1)
-                      (@DivisionRing.toRatAlgebra Ω (@Field.toDivisionRing Ω inst) inst_1) :=
-    fun {l : Nat} [hl : Fact (Nat.Prime l)] {Ω : Type} [inst : Field Ω]
+noncomputable def UpperTheory.Reformulated.B.CovariantDegrees.resQ : {l : ℕ} →
+  [hl : Fact (Nat.Prime l)] →
+    {Ω : Type} →
+      [inst : Field Ω] →
+        [inst_1 : CharZero Ω] →
+          [IsAlgClosure ℚ Ω] → (Ω →+* PadicAlgCl l) → UpperTheory.Reformulated.B.CovariantDegrees.GQ l → Gal(Ω/ℚ) := fun {l : Nat} [hl : Fact (Nat.Prime l)] {Ω : Type} [inst : Field Ω]
         [inst_1 :
           @CharZero Ω
             (@AddGroupWithOne.toAddMonoidWithOne Ω

@@ -87,7 +87,7 @@ theorem splitLab_pairwise (n k : â„•) : (splitLab n k).Pairwise (fun a b => b â‰
 
 section Poly
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {L : Type} [Field L]
 

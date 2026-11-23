@@ -89,7 +89,7 @@ theorem flatIso_isGen (w : LB.Iso (L₁.pull f₁) (L₂.pull f₂)) (hw : w.IsG
   rw [gm_pull_g' L₁ f₁ (𝟙 Y) y (p.1 k) (q.1 k) (by simpa using h1) (by simpa using h1')] at e
   rw [map_zpow, map_zpow]
   erw [gm_res _ y _ hp, gm_res _ y _ hq]
-  change ReciprocityTheory.ChartRestriction.G.Geo.Tor.gw w (𝟙 Y) y (p.2 k) (fun _ => p.1 k) ^ (-ε k) = _ * _ * ReciprocityTheory.ChartRestriction.G.Geo.Tor.gw w (𝟙 Y) y (q.2 k) (fun _ => q.1 k) ^ (-ε k)
+  change _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.gw w (𝟙 Y) y (p.2 k) (fun _ => p.1 k) ^ (-ε k) = _ * _ * _root_.ReciprocityTheory.ChartRestriction.G.Geo.Tor.gw w (𝟙 Y) y (q.2 k) (fun _ => q.1 k) ^ (-ε k)
   rw [e]
   simp only [Category.id_comp]
   exact comm_alg _ _ _ _

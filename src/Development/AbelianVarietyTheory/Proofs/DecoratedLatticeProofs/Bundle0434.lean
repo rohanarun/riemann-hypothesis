@@ -150,7 +150,7 @@ theorem moves_rep_tw : ∀ {B : Base} {X : PreX B.toPre} {I : TC B X} {l : I.Law
   rw [hinv]
   let p := ((I.stp u a j).rep c).1.1
   have hspan : Submodule.span B.fields.E (p.deco.1.N : Set (Formalism.L2.Col.Sp B.fields.E (B.R.N j))) = ⊤ := by
-    open Formalism.HermitianLatticesTheory Formalism.L2.Col in
+    open Formalism.HermitianLatticesTheory _root_.Formalism.L2.Col in
     apply Submodule.dualAnnihilator_eq_bot_iff.mp
     apply le_antisymm ?_ bot_le
     intro f hf
@@ -329,7 +329,7 @@ namespace GlobalTheory.Fam.PkOf
 
 section Heq
 
-open Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
+open _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
 
 variable {D : D7}
 

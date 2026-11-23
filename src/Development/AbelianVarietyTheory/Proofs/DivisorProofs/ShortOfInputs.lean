@@ -148,7 +148,7 @@ theorem log_level {D : D7} {L : SizeData₂ D} {PP A M : ℝ} (h : HostNum D L P
 
 section Point
 
-open Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
+open _root_.Formalism.L2 Formalism.L2.DIV Formalism.L2.Indef
 
 variable {D : D7} {L : SizeData₂ D} {hT : GatTies D} {Gi : Formalism.MainNotions.G.Inst D L} {Gl : Formalism.MainNotions.G.LatInst D} {Kc : Formalism.MainNotions.G.Consts}
   {Y0 : DivX D} {cX : ExtraC} {ex : Extra D L hT Gi Gl Kc Y0 cX} {Csz : ℝ} (p : PtAt ex Csz) (i : Fin D.R.m)

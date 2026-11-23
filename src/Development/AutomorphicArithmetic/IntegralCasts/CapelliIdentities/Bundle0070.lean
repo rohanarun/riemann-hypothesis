@@ -312,116 +312,20 @@ private lemma exists_ne_zero_smul_mem_of_span_eq_top_alt {O LL V : Type} [CommRi
     rw [key]
     exact T.smul_mem _ hax
 
-theorem UpperTheory.Reformulated.B.ExistsSmulMemBis.exists_smul_mem :
-    ∀ {G : Type} [inst : Group.{0} G] [inst_1 : TopologicalSpace.{0} G] {Qp LL O : Type} [inst_2 : Field.{0} Qp]
-      [inst_3 : Field.{0} LL]
-      [inst_4 :
-        @Algebra.{0, 0} Qp LL (@Semifield.toCommSemiring.{0} Qp (@Field.toSemifield.{0} Qp inst_2))
-          (@DivisionSemiring.toSemiring.{0} LL (@Semifield.toDivisionSemiring.{0} LL (@Field.toSemifield.{0} LL inst_3)))]
-      [inst_5 : CommRing.{0} O]
-      [inst_6 :
-        @Algebra.{0, 0} O LL (@CommRing.toCommSemiring.{0} O inst_5)
-          (@DivisionSemiring.toSemiring.{0} LL (@Semifield.toDivisionSemiring.{0} LL (@Field.toSemifield.{0} LL inst_3)))]
-      [inst_7 : TopologicalSpace.{0} LL]
-      (A : @Formalism.MainNotions.N.GRep G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7)
-      (LA :
-        @Formalism.WeaklyAdmissibleFiltrations.Lattice G inst LL inst_3 O inst_5
-          (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-          (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-          (@Formalism.MainNotions.N.GRep.modLL G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-          (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-          (@Formalism.MainNotions.N.GRep.ρ G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-      [@IsDomain.{0} O (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5))]
-      [@IsFractionRing.{0, 0} O (@CommRing.toCommSemiring.{0} O inst_5) LL
-          (@Semifield.toCommSemiring.{0} LL (@Field.toSemifield.{0} LL inst_3)) inst_6]
-      (v : @Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A),
-      ∃ (a : O),
-        And
-          (@Ne.{1} O a
-            (@OfNat.ofNat.{0} O (nat_lit 0)
-              (@Zero.toOfNat0.{0} O
-                (@MulZeroClass.toZero.{0} O
-                  (@instMulZeroClassOfSemiring.{0} O
-                    (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5)))))))
-          (@Membership.mem.{0, 0} (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-            (@Submodule.{0, 0} O (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5))
-              (@AddCommGroup.toAddCommMonoid.{0}
-                (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-              (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-            (@SetLike.instMembership.{0, 0}
-              (@Submodule.{0, 0} O (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5))
-                (@AddCommGroup.toAddCommMonoid.{0}
-                  (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                  (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-                (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-              (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Submodule.setLike.{0, 0} O
-                (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5))
-                (@AddCommGroup.toAddCommMonoid.{0}
-                  (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                  (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-                (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)))
-            (@Formalism.WeaklyAdmissibleFiltrations.Lattice.T G inst LL inst_3 O inst_5
-              (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Formalism.MainNotions.N.GRep.modLL G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Formalism.MainNotions.N.GRep.ρ G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A) LA)
-            (@HSMul.hSMul.{0, 0, 0} O (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-              (@instHSMul.{0, 0} O (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                (@SMulZeroClass.toSMul.{0, 0} O
-                  (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                  (@AddZero.toZero.{0} (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                    (@AddZeroClass.toAddZero.{0}
-                      (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                      (@AddMonoid.toAddZeroClass.{0}
-                        (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                        (@SubNegMonoid.toAddMonoid.{0}
-                          (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                          (@AddGroup.toSubNegMonoid.{0}
-                            (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                            (@AddCommGroup.toAddGroup.{0}
-                              (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                              (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)))))))
-                  (@DistribSMul.toSMulZeroClass.{0, 0} O
-                    (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                    (@AddMonoid.toAddZeroClass.{0}
-                      (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                      (@SubNegMonoid.toAddMonoid.{0}
-                        (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                        (@AddGroup.toSubNegMonoid.{0}
-                          (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                          (@AddCommGroup.toAddGroup.{0}
-                            (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                            (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)))))
-                    (@DistribMulAction.toDistribSMul.{0, 0} O
-                      (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                      (@Semiring.toMonoid.{0} O (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5)))
-                      (@SubNegMonoid.toAddMonoid.{0}
-                        (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                        (@AddGroup.toSubNegMonoid.{0}
-                          (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                          (@AddCommGroup.toAddGroup.{0}
-                            (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                            (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))))
-                      (@Module.toDistribMulAction.{0, 0} O
-                        (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                        (@CommSemiring.toSemiring.{0} O (@CommRing.toCommSemiring.{0} O inst_5))
-                        (@AddCommGroup.toAddCommMonoid.{0}
-                          (@Formalism.MainNotions.N.GRep.V G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A)
-                          (@Formalism.MainNotions.N.GRep.acg G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))
-                        (@Formalism.MainNotions.N.GRep.modO G inst inst_1 Qp LL O inst_2 inst_3 inst_4 inst_5 inst_6 inst_7 A))))))
-              a v)) := by
-  intro G _ _ Qp LL O _ _ _ _ _ _ A LA _ _ v
-  letI := A.acg
-  letI := A.modLL
-  letI := A.modO
-  haveI := A.towO
+open Formalism.MainNotions.N Formalism.WeaklyAdmissibleFiltrations in
+theorem UpperTheory.Reformulated.B.ExistsSmulMemBis.exists_smul_mem
+    {G : Type} [inst : Group G] [inst_1 : TopologicalSpace G]
+    {Qp LL O : Type} [inst_2 : Field Qp] [inst_3 : Field LL] [inst_4 : Algebra Qp LL]
+    [inst_5 : CommRing O] [inst_6 : Algebra O LL] [inst_7 : TopologicalSpace LL]
+    (A : GRep G Qp LL O) (LA : @Lattice G inst LL inst_3 O inst_5 A.V A.acg A.modLL A.modO A.ρ)
+    [IsDomain O] [IsFractionRing O LL] (v : A.V) :
+    letI := A.acg
+    letI := A.modO
+    ∃ a : O, a ≠ 0 ∧ a • v ∈ LA.T := by
+  let _ := A.acg
+  let _ := A.modLL
+  let _ := A.modO
+  have _ := A.towO
   obtain ⟨T, _, _, _, hs⟩ := LA
   exact exists_ne_zero_smul_mem_of_span_eq_top_alt T hs v
 end

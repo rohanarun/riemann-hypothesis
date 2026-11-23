@@ -276,7 +276,7 @@ noncomputable section
 
 namespace GlobalTheory.PadicUnfold
 
-open Formalism.L2.Col
+open _root_.Formalism.L2.Col
 
 variable {g : ℕ} [Fact g.Prime]
 

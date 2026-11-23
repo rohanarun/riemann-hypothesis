@@ -292,7 +292,7 @@ noncomputable section
 namespace GlobalTheory.LocMod.SymChainAt
 open GlobalTheory.FinPl (SplitPt idAt intAt)
 open Formalism.L2.NTheta (IsIdemAt)
-open Formalism.L2.Col (IntAt)
+open _root_.Formalism.L2.Col (IntAt)
 
 section Place
 variable {D : D7} {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (q : SplitPt D k)

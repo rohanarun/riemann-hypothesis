@@ -448,7 +448,7 @@ noncomputable section
 
 namespace GlobalTheory.ColPeriod
 
-open NumberField IsDedekindDomain Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker
+open NumberField IsDedekindDomain _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker
 open GlobalTheory.IndefiniteRowSideFullHecke.BadPrimesPeriodBound (recSeam HostTie AnTie)
 open GlobalTheory.IndefiniteRowSideFullHecke.SubstitutionAdjoint (WtCompat InDeg LatWithBasis)
 

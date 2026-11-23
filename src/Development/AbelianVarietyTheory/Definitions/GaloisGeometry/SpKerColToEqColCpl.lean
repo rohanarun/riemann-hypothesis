@@ -11,7 +11,7 @@ noncomputable section
 
 namespace GlobalTheory.GO
 
-open NumberField Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.Ker
+open NumberField _root_.Formalism.L2.Col Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Forms Formalism.L2.Ker
 
 variable {K : Type} [Field K] [NumberField K] [StarRing K]
 

@@ -146,7 +146,7 @@ end
 noncomputable section
 namespace GlobalTheory.Mem.R3.ScalarComponentUnique
 
-open Formalism.L2.Col GlobalTheory.HeckeLifts₂
+open _root_.Formalism.L2.Col GlobalTheory.HeckeLifts₂
 
 
 set_option maxHeartbeats 4000000 in

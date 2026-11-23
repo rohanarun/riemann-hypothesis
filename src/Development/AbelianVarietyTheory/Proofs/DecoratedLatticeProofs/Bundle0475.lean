@@ -385,7 +385,7 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
 
 namespace GlobalTheory.Fam.RepZero
 
-open Formalism.L2.Col GlobalTheory.Mem.Col2.StepZero
+open _root_.Formalism.L2.Col GlobalTheory.Mem.Col2.StepZero
 
 theorem chr_of_down_eq_one {X : Fields} {n : ℕ} {ST SG Q : Finset (IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers X.E))}
     {y : Ys X n} {β : Type} [Fintype β] [DecidableEq β] {Λ : β → LevFam X.E X.K n SG} {Θ : β → LevQFam X.E X.K n Q}

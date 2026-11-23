@@ -165,8 +165,8 @@ section Main
 
 variable {E : Type} [Field E] [NumberField E] [StarRing E] {S : HSpace E} {r : ℕ}
 
-theorem herm'' (x y : S.V) : S.hT y x = star (S.hT x y) := by
-  rw [← S.herm.eq x y, starRingEnd_apply]
+theorem herm'' (x y : S.V) : S.hT y x = star (S.hT x y) :=
+  (S.herm.eq x y).symm
 
 theorem mem_orth'' {U : Submodule E S.V} {v : S.V} : v ∈ orth S U ↔ ∀ x ∈ U, S.hT x v = 0 := by
   simp [orth, Submodule.mem_iInf]

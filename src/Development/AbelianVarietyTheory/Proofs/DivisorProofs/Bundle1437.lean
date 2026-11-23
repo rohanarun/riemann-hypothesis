@@ -357,7 +357,7 @@ namespace GlobalTheory.LevelSpanCompare
 
 section Move
 
-open AlgebraicGeometry CategoryTheory Limits NumberField MonoidalCategory CartesianMonoidalCategory
+open AlgebraicGeometry CategoryTheory _root_.CategoryTheory.Limits NumberField MonoidalCategory CartesianMonoidalCategory
 open ReciprocityTheory.ChartRestriction.G.Semi ReciprocityTheory.ChartRestriction.G.Geo.Tor Formalism.L2.Pj
 
 variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {Dw : Datum H} {l : Level H}

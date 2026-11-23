@@ -32,7 +32,7 @@ open scoped InnerProductSpace
 open Formalism.BasicNotions Formalism.DivisionValues Formalism.L2.Indef Formalism.L2.Theta Formalism.L2.DIV Formalism.IndefR.Cx Formalism.IndefR.Links
 
 namespace GlobalTheory.MiS
-open Formalism Formalism.IndefR
+open _root_.Formalism Formalism.IndefR
 
 attribute [local instance] Formalism.BasicNotions.Host.cmStar
 

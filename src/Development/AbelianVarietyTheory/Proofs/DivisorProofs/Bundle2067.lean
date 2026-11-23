@@ -170,7 +170,7 @@ noncomputable section
 
 namespace GlobalTheory.LiftSys.Glue
 
-open Opposite Limits
+open Opposite _root_.CategoryTheory.Limits
 
 theorem spMap_comp₂ {A B C : Type} [CommRing A] [CommRing B] [CommRing C] (f : A →+* B) (g : B →+* C) :
     spMap (g.comp f) = spMap g ≫ spMap f := by

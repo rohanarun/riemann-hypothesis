@@ -31,7 +31,7 @@ noncomputable section
 
 namespace GlobalTheory.CompanionTheory.Ar.AbB
 
-open GlobalTheory GlobalTheory.UU GlobalTheory.UU.PackageDescent GlobalTheory.BiextTriv GlobalTheory.GeneratorLaw GlobalTheory.TorusUnit GlobalTheory.CompanionTheory.TorusPic
+open _root_.GlobalTheory GlobalTheory.UU GlobalTheory.UU.PackageDescent GlobalTheory.BiextTriv GlobalTheory.GeneratorLaw GlobalTheory.TorusUnit GlobalTheory.CompanionTheory.TorusPic
 
 attribute [local instance] Over.cartesianMonoidalCategory
 

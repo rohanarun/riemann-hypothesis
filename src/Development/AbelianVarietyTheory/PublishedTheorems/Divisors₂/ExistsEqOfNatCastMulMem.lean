@@ -134,7 +134,7 @@ end GlobalTheory.Published
 
 namespace GlobalTheory.EllipticCM
 
-open WeierstrassCurve
+open _root_.WeierstrassCurve
 
 section Analytic
 

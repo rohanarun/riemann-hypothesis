@@ -160,7 +160,7 @@ noncomputable section
 open NumberField IsDedekindDomain Neutral.B1 Formalism.L2.Host Formalism.ConjugateSelfDual ReciprocityTheory.Gal Formalism.BasicNotions Formalism.MainNotions.N
 open GlobalTheory.CuspRep GlobalTheory.HeckeGal GlobalTheory.GalOfCusp UpperTheory.V.Af UpperTheory.V.Base
 open NumberField.mixedEmbedding MeasureTheory GroundTheory.Global GroundTheory.Automorphic.Adele2 UpperTheory.V.Sd UpperTheory.V.Published
-open scoped Matrix Classical NumberField.AdeleRing nonZeroDivisors
+open scoped _root_.Matrix Classical NumberField.AdeleRing nonZeroDivisors
 
 namespace UpperTheory.HilbertEisensteinWeightOne.PoissonSummationAdelic
 

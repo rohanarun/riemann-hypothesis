@@ -75,12 +75,8 @@ theorem ap_Jm_herm {n : ℕ} (ε : Fin n → Bool) : (Formalism.REAL.Jm ε)ᴴ =
   funext a
   by_cases h : ε a <;> simp [h]
 
-theorem ap_Jm_sq {n : ℕ} (ε : Fin n → Bool) : Formalism.REAL.Jm ε * Formalism.REAL.Jm ε = 1 := by
-  unfold Formalism.REAL.Jm
-  rw [Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
-  congr 1
-  funext a
-  by_cases h : ε a <;> simp [h]
+theorem ap_Jm_sq {n : ℕ} (ε : Fin n → Bool) : Formalism.REAL.Jm ε * Formalism.REAL.Jm ε = 1 :=
+  Formalism.REAL.Jm_mul_self ε
 
 variable (I : Formalism.MainNotions.S.AutInst)
 

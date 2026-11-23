@@ -62,6 +62,10 @@ theorem GlobalTheory.JR.fourB_descFn : ∀ (F E : Type) [NontriviallyNormedField
   obtain ⟨ν, hν⟩ : ∃ ν : Measure (Matrix.unitaryGroup (Fin r) E), ν = M.μU.restrict (tsupport α) := ⟨_, rfl⟩
   haveI : IsFiniteMeasure ν := by
     rw [hν]; exact isFiniteMeasure_restrict.2 hαc.isCompact.measure_lt_top.ne
+  have : IsFiniteMeasureOnCompacts ν := ⟨fun _ _ => measure_lt_top ν _⟩
+  have : SigmaFinite ν := IsFiniteMeasure.toSigmaFinite ν
+  have : SecondCountableTopologyEither (Fin r → E) (Matrix.unitaryGroup (Fin r) E) :=
+    secondCountableTopologyEither_of_left _ _
   haveI : IsFiniteMeasureOnCompacts (P.prod ν) := inferInstance
   have hψc := continuous_of_isStdChar hψ
   have htr : Continuous (fun e : E => Algebra.trace F E e) :=

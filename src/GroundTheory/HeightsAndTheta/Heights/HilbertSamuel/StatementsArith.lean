@@ -156,7 +156,7 @@ structure HSMBlockDatum (D : ℕ) (K : Type) [Fintype K] [DecidableEq K] (ι : K
   one_le : 1 ≤ D
   arith : IsArithVar (mCoordIdeal y) (D + 1)
   birat : BlockBirational y k₀
-  deg : A.a = unitDeg k₀
+  deg : A.a = _root_.ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k₀
   conjInv : IsConjInvariantH A
   normalForm_baseLattice_le_dualSpan_sup_line : P0 ≤ mCoordIdeal y
 

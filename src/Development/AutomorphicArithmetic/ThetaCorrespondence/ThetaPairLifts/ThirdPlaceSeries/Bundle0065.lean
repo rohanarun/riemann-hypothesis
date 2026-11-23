@@ -115,7 +115,7 @@ set_option synthInstance.maxHeartbeats 200000
 section
 noncomputable section
 namespace UpperTheory.GalS
-open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal Polynomial NumberField IsDedekindDomain GlobalTheory GlobalTheory.StringRepresentationDecomposition UpperTheory.GalC
+open Formalism Formalism.BasicNotions Formalism.MainNotions Formalism.MainNotions.N Formalism.ConjugateSelfDual ReciprocityTheory.Gal Polynomial NumberField IsDedekindDomain _root_.GlobalTheory GlobalTheory.StringRepresentationDecomposition UpperTheory.GalC
 theorem g3a_of_restricted_general_alt {D : D7} (_ : _root_.Formalism.MainNotions.SumRepresentations.provisionFortyOne D) (h : DeRhamJumpsDistinctCondition D) : ∀ i r, GoodR D.nd i r → DistinctAbsIrredConstituents D.nd i r := h.2
 theorem admJ_of_admPar (D : D7) (L : SizeData₂ D) (h0 : SumRepresentations.tie0 D) (h1 : SumRepresentations.adm1 D) (h2 : _root_.Formalism.MainNotions.SumRepresentations.adm2_alt D) (h5 : SumRepresentations.adm5 D)
     (hC : CutRec D) (hW : GlobalTheory.IndefiniteRowSideFullHecke.JumpDictionary.WeightParam D) (hB : GlobalTheory.IndefiniteRowSideFullHecke.JumpDictionary.BlockCharParam D) (hP : AdmissibleParameterJ.AdmPar L) :

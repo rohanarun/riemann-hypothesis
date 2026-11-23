@@ -287,6 +287,7 @@ theorem BK.prime_unif (l : ℕ) [Fact l.Prime] (K : FinExt l) (bk : BK K) :
       intToOC K (bk.str.symm (Ideal.Quotient.mk _ (X : bk.S))) = bk.flat.untilt := by
   constructor
   · obtain ⟨w, hw⟩ := bk.coeff_zero
+    have : DecompositionMonoid (Wq l bk.a) := UniqueFactorizationMonoid.instDecompositionMonoid
     have hp : Prime (l : Wq l bk.a) := (WittVector.irreducible l).prime
     have hE : constantCoeff bk.E = (l : Wq l bk.a) * w := by
       rw [← hw]; exact Polynomial.constantCoeff_coe _

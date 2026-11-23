@@ -173,7 +173,7 @@ noncomputable section
 namespace GlobalTheory.Mem.R3.LiftBrg.EtaDet
 
 
-open Formalism.L2.Col in
+open _root_.Formalism.L2.Col in
 theorem prod_diag_inv {E : Type} [Field E] [NumberField E] [StarRing E] (n : ℕ) (π : 𝓞 E) (d : ℕ) (hd : d ≤ n) :
     ∏ i : Fin n, (mhlDiag n π d i)⁻¹ = (mhlA π)⁻¹ ^ d := by
   have h1 : ∀ i : Fin n, (mhlDiag n π d i)⁻¹ = (fun j : ℕ => if j < d then (mhlA π)⁻¹ else 1) i.1 := by

@@ -131,15 +131,15 @@ theorem nonempty_hyps_of_allRows_alt : StandardLattice.SiegelMassRatioCM → Lit
   obtain ⟨𝒜, σ, hE, hD, -, hn4, jOn, hInstR, aC2, aP10, aAtG, aPt0, aPtTw, aPer0, aPerTw, tie, hRB, hTw, hPA, hLamP, hDivG,
     hDcPtG, selJ, sLp, sO, hServ, zL, hTF, rRows, nRest, ⟨h30, irrC⟩, hTu⟩ :=
     UpperTheory.Top.classSel hP (fun D => hU D) KP Q Q' _root_.GlobalTheory.Fc.BundleCondition Lk _ (fun _ y => Formalism.MainNotions.StandardLattice.HarishChandraReduction.cTmin y) hc hx hall
-  have s3 : ∀ {eps : ℝ} (Fm : FamP eps), GlobalTheory.Cp.D3 3 𝒜 Fm → W3 𝒜 Fm := fun Fm h => ((GlobalTheory.T.workingFamClass_copies_eq_frozen.1 𝒜 _ Fm).1).1 h
+  have s3 : ∀ {eps : ℝ} (Fm : FamP eps), GlobalTheory.Cp.D3 3 𝒜 Fm → W3 𝒜 Fm := fun Fm h => ((_root_.GlobalTheory.Fc.copies_frozen.1 𝒜 _ Fm).1).1 h
   have s1 : ∀ {eps : ℝ} (Fm : FamP eps), Formalism.MainNotions.WithTw (Formalism.MainNotions.WithSm (GlobalTheory.Cp.WithChN 𝒜)) Fm → W1 𝒜 Fm :=
-    fun Fm h => ((GlobalTheory.T.workingFamClass_copies_eq_frozen.1 𝒜 _ Fm).2).1 h
+    fun Fm h => ((_root_.GlobalTheory.Fc.copies_frozen.1 𝒜 _ Fm).2).1 h
   exact ⟨{
     𝒜 := 𝒜
     σ := σ
     cT := fun _ y => Formalism.MainNotions.StandardLattice.HarishChandraReduction.cTmin y
     hEx := fun hM la G hla hH => working_classes_frozen.2 _ _ (fun hM' => hE hM' la G hla hH) hM
-    hduty := fun Fm h => GlobalTheory.T.workingFamClass_copies_eq_frozen.2 _ Fm (hD _ Fm h).1
+    hduty := fun Fm h => _root_.GlobalTheory.Fc.copies_frozen.2 _ Fm (hD _ Fm h).1
     hRB := fun Fm hc x hx _ i => hRB Fm hc x hx i
     hTw := fun Fm hc x hx _ i => hTw Fm hc x hx i
     hPA := fun Fm hc x hx _ i => hPA Fm hc x hx i
@@ -233,7 +233,7 @@ variable {B : GlobalTheory.Mem.Base} {X : PreX B.toPre} {I : TC B X} {l : I.Laws
   {hT : GatTies (I.rec7 l Z)} {Gi : Formalism.MainNotions.G.Inst (I.rec7 l Z) L} {Gl : Formalism.MainNotions.G.LatInst (I.rec7 l Z)} {Kc : Formalism.MainNotions.G.Consts}
   {Yd : DivX (I.rec7 l Z)} {cX : ExtraC} {ex : Extra (I.rec7 l Z) L hT Gi Gl Kc Yd cX} {W : _root_.GlobalTheory.MiS.RealPackAlt ex} {u : B.Word}
   {a : _root_.GlobalTheory.Fam.GeometricFamily W u} {t : W.P.T}
-open Formalism.L2.Col GlobalTheory.StepData GlobalTheory.SymBridge
+open _root_.Formalism.L2.Col GlobalTheory.StepData GlobalTheory.SymBridge
 def QuadraticExtensionCarry (J : _root_.GlobalTheory.Fam.QuadraticExtensionData a t) (i : Fin J.r) (β : J.Ch₀ ((J.G i).s + 1))
     (r : Sp B.fields.E (B.R.N ((J.G i).s + 1)) ≃ₗ[B.fields.E] Sp B.fields.E (B.R.N ((J.G i).s + 1))) : Prop :=
   ∀ e : XIx (Fin B.R.k) (Fin B.R.t) ((J.G i).s + 1) ≃ Fin (B.R.N ((J.G i).s + 1)), IsOrd xPos e →

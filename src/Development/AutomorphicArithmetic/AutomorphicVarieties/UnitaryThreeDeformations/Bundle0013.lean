@@ -17,6 +17,7 @@ open Matrix IsLocalRing ReciprocityTheory.Gal UpperTheory.V.HV UpperTheory.V.U3 
 
 private theorem norm_two_eq_one {l : ℕ} [Fact l.Prime] {O : Type} [CommRing O] [IsDomain O] [CharZero O]
     [Algebra ℤ_[l] O] [Module.Finite ℤ_[l] O] (h : IsUnit (2 : O)) : ‖(2 : PadicAlgCl l)‖ = 1 := by
+  have : Nontrivial O := IsDomain.toNontrivial
   have h2 : IsUnit (2 : ℤ_[l]) := by
     by_contra hn
     have hl : (l : ℤ) ∣ 2 := by

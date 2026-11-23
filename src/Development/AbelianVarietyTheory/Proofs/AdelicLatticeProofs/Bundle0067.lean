@@ -69,13 +69,13 @@ theorem classFinite_integralLevel : ∀ (F : Type) [Field F] [NumberField F] (n 
       refine (hint 1).1 ?_
       intro v
       exact (HeightOneSpectrum.adicCompletionIntegers F v).one_mem
-    have hunits := GlobalTheory.T.glFreeAlgebraEmb_integral_and_rational.1 R _ _ (Fin n) b R₀ u h1 hu₀int
+    have hunits := _root_.GlobalTheory.ClassFin.EmbInt.emb_integral_and_rational.1 R _ _ (Fin n) b R₀ u h1 hu₀int
     refine ⟨γ, hγS, lift s, Finset.mem_image_of_mem lift hs, u, huS, ?_, ?_⟩
     · intro i j
       exact ⟨(hint _).2 (fun k => (hunits i j k).1), (hint _).2 (fun k => (hunits i j k).2)⟩
     · apply hembinj
       simp only [hembmul]
-      rw [hx₀, ← hsemb, GlobalTheory.T.glFreeAlgebraEmb_integral_and_rational.2 F _ (NumberField.integralBasis F) (Fin n) R _ b hbF γ]
+      rw [hx₀, ← hsemb, _root_.GlobalTheory.ClassFin.EmbInt.emb_integral_and_rational.2 F _ (NumberField.integralBasis F) (Fin n) R _ b hbF γ]
 
 end GlobalTheory.ClassFin
 end

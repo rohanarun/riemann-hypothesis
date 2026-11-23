@@ -166,14 +166,6 @@ lemma continuous_blkAct (μ : Matrix (Fin (k + 1)) (Fin (k + 1)) ℂ) : Continuo
   exact (continuous_pi fun i => (continuous_apply (Fin.castSucc i)).comp hc).prodMk
     ((continuous_apply (Fin.last k)).comp hc)
 
-lemma hb_sq : Hb k * Hb k = 1 := by
-  unfold Hb
-  rw [Matrix.diagonal_mul_diagonal]
-  rw [← Matrix.diagonal_one]
-  congr 1
-  funext j
-  split_ifs <;> norm_num
-
 lemma hb_inv_mul {μ : Matrix (Fin (k + 1)) (Fin (k + 1)) ℂ} (hμ : μᴴ * Hb k * μ = Hb k) :
     (Hb k * μᴴ * Hb k) * μ = 1 := by
   calc (Hb k * μᴴ * Hb k) * μ = Hb k * (μᴴ * Hb k * μ) := by simp only [Matrix.mul_assoc]

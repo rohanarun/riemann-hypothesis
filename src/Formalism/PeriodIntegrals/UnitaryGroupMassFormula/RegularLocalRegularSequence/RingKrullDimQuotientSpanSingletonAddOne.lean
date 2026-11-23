@@ -134,8 +134,8 @@ theorem eq_natCast_and_add_one_eq_of_le {a : WithBot ℕ∞} {d n : ℕ}
       exact ⟨rfl, (Nat.cast_succ k).symm⟩
 
 private theorem spanFinrank_maximalIdeal_eq_ringKrullDim (R : Type*) [CommRing R] [IsRegularLocalRing R] :
-    ((Submodule.spanFinrank (maximalIdeal R) : ℕ) : WithBot ℕ∞) = ringKrullDim R := by
-  exact IsRegularLocalRing.spanFinrank_maximalIdeal
+    ((Submodule.spanFinrank (maximalIdeal R) : ℕ) : WithBot ℕ∞) = ringKrullDim R :=
+  IsRegularLocalRing.spanFinrank_maximalIdeal
 
 private theorem finrank_cotangentSpace_le_spanFinrank (R : Type*) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] :
     Module.finrank (ResidueField R) (CotangentSpace R) ≤ Submodule.spanFinrank (maximalIdeal R) := by

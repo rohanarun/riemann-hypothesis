@@ -315,7 +315,7 @@ open scoped CategoryTheory.Obj
 namespace GlobalTheory.Moduli
 
 theorem siegelFamilies_closed : N0 :=
-  _root_.GlobalTheory.SiegelFromSharp.exists_siegelFamily GlobalTheory.T.all_six_abelian_scheme_laws_hold.1 GlobalTheory.T.all_six_abelian_scheme_laws_hold.2.1 _root_.GlobalTheory.Moduli.cube_of_isLB _root_.GlobalTheory.thetaUnifAV_closed
+  _root_.GlobalTheory.SiegelFromSharp.exists_siegelFamily _root_.GlobalTheory.allSixLaws.1 _root_.GlobalTheory.allSixLaws.2.1 _root_.GlobalTheory.Moduli.cube_of_isLB _root_.GlobalTheory.thetaUnifAV_closed
 
 end GlobalTheory.Moduli
 end

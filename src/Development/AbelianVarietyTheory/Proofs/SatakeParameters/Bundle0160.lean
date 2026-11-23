@@ -16,7 +16,7 @@ public import Development.AbelianVarietyTheory.Proofs.SatakeParameters.MemZmuOfP
 section
 namespace GlobalTheory.ColPeriod
 
-open Formalism.L2.Col Formalism.BasicNotions Formalism.L2.Ker
+open _root_.Formalism.L2.Col Formalism.BasicNotions Formalism.L2.Ker
 open GlobalTheory.IndefiniteRowSideFullHecke.SubstitutionAdjoint (WtCompat)
 
 theorem sub_half_rank_int (R : Ranks) (z : ℤ) (j : ℕ) : ∃ a : ℤ, (z : ℚ) - (R.N j : ℚ) / 2 = a := by
@@ -323,7 +323,7 @@ noncomputable section
 
 namespace GlobalTheory.ColPeriod.Scal
 
-open NumberField IsDedekindDomain Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker
+open NumberField IsDedekindDomain _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker
 open GlobalTheory.IndefiniteRowSideFullHecke.CharacterValuation (StdOver IsFrames)
 
 variable {X : Fields} {Pr : Primes X}
@@ -398,7 +398,7 @@ end GlobalTheory.ColPeriod.Scal
 
 namespace GlobalTheory.ColPeriod
 
-open NumberField IsDedekindDomain Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker Scal
+open NumberField IsDedekindDomain _root_.Formalism.L2.Col Formalism.HermitianLatticesTheory Formalism.BasicNotions Formalism.MainNotions Formalism.L2.DIV Formalism.L2.Ker Scal
 
 theorem scalarUnit_of (hL : LevelPrimes) (hH : HeckeUnit) (hT : TwistUnit) : ScalarUnit := by
   intro X Pr R Ch sel S mu cst L G m2 e eta hX hPr hsel hS ht hOk i w hw j hj

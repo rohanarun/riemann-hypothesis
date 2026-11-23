@@ -51,7 +51,7 @@ theorem rpow_le (v x : ℝ) (hv : 3 / 4 ≤ v) (hx : 0 ≤ x) : v ^ (-x) ≤ Rea
 
 theorem inv_sph_le (J : ℕ) (s : ℝ) (hJ : (J : ℝ) ≤ s) (hJ1 : 1 ≤ J) :
     (sphV J)⁻¹ ≤ Real.exp (J * (s / 2 * Real.log s)) := by
-  refine (GlobalTheory.T.unitarySphereVolumeProduct_ratio_and_inv_bounds.2 J).2.trans ?_
+  refine (_root_.GlobalTheory.sphV_ratio_and_inv_bounds.2 J).2.trans ?_
   have h1 : (1 : ℝ) ≤ J := by exact_mod_cast hJ1
   have h0 : (0 : ℝ) < J := by linarith
   rw [← Real.exp_log (pow_pos h0 _), Real.log_pow]
@@ -135,7 +135,7 @@ theorem constantBound : ConstantBound := by
     have : (J : ℝ) ≤ p := by linarith
     exact_mod_cast this
   have hlogs : Real.log s = Real.log n / 2 := Real.log_sqrt hn0.le
-  have hpos : ∀ i, 0 < sphV i := fun i => (GlobalTheory.T.unitarySphereVolumeProduct_ratio_and_inv_bounds.2 i).1
+  have hpos : ∀ i, 0 < sphV i := fun i => (_root_.GlobalTheory.sphV_ratio_and_inv_bounds.2 i).1
   have hpi := Real.pi_pos
   have hc0 : 0 ≤ Real.log (2 * Real.pi) := Real.log_nonneg (by have := Real.pi_gt_three; linarith)
   have hc2 : Real.log (2 * Real.pi) ≤ 2 := by
@@ -161,7 +161,7 @@ theorem constantBound : ConstantBound := by
   rw [Real.log_div hn0.ne' (by positivity), Real.log_mul (x := 2 * Real.pi) (by positivity) (by positivity),
     Real.log_exp,
     Real.log_le_iff_le_exp (div_pos (hpos _) (hpos _))] at hA
-  have hB := GlobalTheory.T.unitarySphereVolumeProduct_ratio_and_inv_bounds.1 q J hjq
+  have hB := _root_.GlobalTheory.sphV_ratio_and_inv_bounds.1 q J hjq
   rw [Real.log_le_iff_le_exp (div_pos (hpos _) (hpos _))] at hB
   have hC : (∏ i, sphV (j i))⁻¹ ≤ Real.exp (J * (s / 2 * (Real.log n / 2))) := by
     rw [← Finset.prod_inv_distrib, hcast, Finset.sum_mul, Real.exp_sum, ← hlogs]

@@ -358,7 +358,7 @@ end
 section
 open NumberField GlobalTheory.CuspRep GlobalTheory.CuspQuot GlobalTheory.AutGrowth MeasureTheory GroundTheory.Global GroundTheory.Automorphic GroundTheory.Automorphic.Reduction
 
-open Pointwise Matrix
+open Pointwise _root_.Matrix
 
 namespace GlobalTheory.SiegelSetGL
 

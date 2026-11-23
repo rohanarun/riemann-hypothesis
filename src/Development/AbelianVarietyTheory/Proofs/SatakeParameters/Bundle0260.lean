@@ -322,7 +322,7 @@ noncomputable section
 
 namespace GlobalTheory.TwTop
 
-open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.DIV Formalism.L2.Col
+open NumberField IsDedekindDomain Formalism.BasicNotions Formalism.L2.DIV _root_.Formalism.L2.Col
 
 variable {X : Fields} {Pr : Primes X} {R : Ranks} (Ch : Chars X Pr R.m)
   (sel : HeightOneSpectrum (𝓞 X.F) → HeightOneSpectrum (𝓞 X.E)) {S : Set ℕ}

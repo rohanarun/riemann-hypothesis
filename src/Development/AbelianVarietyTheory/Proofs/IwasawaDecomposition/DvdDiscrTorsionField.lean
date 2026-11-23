@@ -17,7 +17,7 @@ open scoped nonZeroDivisors IntermediateField
 
 namespace GlobalTheory.Mem.TorsionRam
 
-open WeierstrassCurve WeierstrassCurve.Affine
+open _root_.WeierstrassCurve WeierstrassCurve.Affine
 
 section Local
 

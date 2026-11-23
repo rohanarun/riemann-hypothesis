@@ -10,9 +10,8 @@ namespace GroundTheory.Global
 
 open Complex
 
-theorem isCoveringMap_circleExp : IsCoveringMap (Circle.exp : ℝ → Circle) := by
-  have h : IsCoveringMap ((↑) : ℝ → AddCircle (2 * Real.pi)) := AddCircle.isCoveringMap_coe _
-  exact h.homeomorph_comp AddCircle.homeomorphCircle'
+theorem isCoveringMap_circleExp : IsCoveringMap (Circle.exp : ℝ → Circle) :=
+  Circle.isCoveringMap_exp
 
 theorem existsUnique_circleExp_of_continuous (χ : ℝ → Circle) (hχ : Continuous χ)
     (hmul : ∀ s t, χ (s + t) = χ s * χ t) : ∃! τ : ℝ, ∀ t, χ t = Circle.exp (τ * t) := by

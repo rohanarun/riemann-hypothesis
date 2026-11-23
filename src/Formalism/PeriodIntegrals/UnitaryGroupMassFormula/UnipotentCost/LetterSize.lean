@@ -11,6 +11,33 @@ noncomputable section
 
 namespace PI.UnitaryGroupMassFormula.UsCost
 
+theorem det_zjH_ne {p s : ℕ} {σ : Equiv.Perm (Fin p)} {d : Fin p → ℂ} (hd : ∀ i, d i ≠ 0) (η : XiH p s σ)
+    {Z : G.Mat s} (hZ : G.detM Z ≠ 0) : (ZjH σ d η Z).det ≠ 0 := by
+  unfold ZjH Zj headH
+  simp only [Matrix.det_mul, blk2, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
+    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, one_mul, mul_one]
+  unfold wP lowW G.upper
+  repeat' apply mul_ne_zero
+  all_goals first
+    | exact hZ
+    | (rw [Matrix.det_diagonal]; exact Finset.prod_ne_zero_iff.2 fun i _ => hd i)
+    | (have hP : (of fun a b => if σ a = b then (1 : ℂ) else 0) =
+          (1 : Matrix (Fin p) (Fin p) ℂ).submatrix σ id := by
+         ext a b
+         simp [Matrix.one_apply]
+       rw [hP, Matrix.det_permute]
+       simp)
+    | (first | rw [Matrix.det_of_lowerTriangular _ ?_] | rw [Matrix.det_of_lowerTriangular ?_]
+       · simp
+       · intro i j hij
+         have hij' : i < j := hij
+         simp [Matrix.one_apply, hij'.ne, not_lt.2 hij'.le])
+    | (first | rw [Matrix.det_of_upperTriangular ?_] | rw [Matrix.det_of_upperTriangular _ ?_]
+       · simp [G.strictUpper]
+       · intro i j hij
+         have hij' : j < i := hij
+         simp [G.strictUpper, Matrix.one_apply, hij'.ne', not_lt.2 hij'.le])
+
 def lsz {k r : ℕ} (X : B.Mat k r) : ℝ := max 1 (mx X)
 
 def cj (k j ρ : ℕ) (x : RC k j ρ) (Y : B.Mat k ρ) : B.Mat k (j + ρ) :=

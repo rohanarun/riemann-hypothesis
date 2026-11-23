@@ -424,7 +424,7 @@ theorem isRatPath_of_integral_at_places : ∀ (k K E : Type) [Field k] [IsAlgClo
   have key : ∀ p, ⊤ ≤ (b p) ⁻¹ᵁ V → ⊤ ≤ (ζ p) ⁻¹ᵁ U := by
     intro p hp
     haveI := isLocalHom_constantCoeff_ps p.O
-    rw [GlobalTheory.T.evalSectionAtRingPoint_spMap_comp_restrict_stalk.2.2.2.1 (PowerSeries p.O) G.left (ζ p) U]
+    rw [_root_.GlobalTheory.Nef.evAt_calculus.2.2.2.1 (PowerSeries p.O) G.left (ζ p) U]
     rw [← (IsLocalRing.comap_closedPoint (PowerSeries.constantCoeff (R := p.O)) :
       spMap (PowerSeries.constantCoeff (R := p.O)) (IsLocalRing.closedPoint p.O) = _)]
     show (spMap (PowerSeries.constantCoeff (R := p.O)) ≫ ζ p) (IsLocalRing.closedPoint p.O) ∈ U

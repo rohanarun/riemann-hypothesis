@@ -438,7 +438,7 @@ noncomputable section
 
 namespace GlobalTheory.FlagFamily
 
-open Limits
+open _root_.CategoryTheory.Limits
 
 theorem isProjOver_pullback_over {k : Type} [CommRing k] {B X Y : Scheme.{0}} {q : B ⟶ Sp k} (hq : IsProjOver q)
     {f : X ⟶ B} {g : Y ⟶ B} (hf : IsProjOver (f ≫ q)) (hg : IsProjOver (g ≫ q)) :

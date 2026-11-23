@@ -205,7 +205,7 @@ theorem mem_adjoin_iff {o : Type} [CommRing o] [Algebra o Ω] {ξ : Spec (CommRi
     exact H _ hi
   · rintro ⟨s, rfl⟩ p hp
     have hq : p.1 ∈ U := (hU p.1).2 ⟨p.2, hp⟩
-    exact ⟨_, genMap_germ ξ h hq p.2 s⟩
+    exact ⟨_, _root_.GlobalTheory.CompanionTheory.Ar.ChartFin.genMap_germ ξ h hq p.2 s⟩
 
 theorem exists_secEquiv {o : Type} [CommRing o] [Algebra o Ω] {ξ : Spec (CommRingCat.of Ω) ⟶ X} {κ : Type}
     {x : κ → Ω} (hall : ∀ q : X, genPt ξ ⤳ q) (T : CoordTie o ξ x) {c : κ} (hc : x c ≠ 0) {U : X.Opens}

@@ -249,7 +249,7 @@ noncomputable section
 
 namespace GlobalTheory.WeightParamTie
 
-open Formalism.L2
+open _root_.Formalism.L2
 
 theorem paramV_half (R : Ranks) (h : HCParam R) (j : Fin R.m) :
     NG.paramV R h j (1 / 2) = (param h j).map (fun p => ((p - 1 / 2 : ℚ) : ℂ)) := by

@@ -281,7 +281,7 @@ noncomputable section
 
 namespace GlobalTheory.MtContraHw
 
-open GlobalTheory.CoefModel Formalism.L2.Col
+open GlobalTheory.CoefModel _root_.Formalism.L2.Col
 
 section Irr
 
@@ -328,7 +328,7 @@ end GlobalTheory.MtContraHw
 
 namespace GlobalTheory.MtContraHw
 
-open GlobalTheory.CoefModel Formalism.L2.Col
+open GlobalTheory.CoefModel _root_.Formalism.L2.Col
 
 section Omega
 
@@ -371,7 +371,7 @@ end GlobalTheory.MtContraHw
 
 namespace GlobalTheory.MtContraHw
 
-open GlobalTheory.CoefModel Formalism.L2.Col
+open GlobalTheory.CoefModel _root_.Formalism.L2.Col
 
 section Props
 
@@ -430,7 +430,7 @@ end GlobalTheory.MtContraHw
 
 namespace GlobalTheory.MtContraHw
 
-open GlobalTheory.CoefModel Formalism.L2.Col
+open GlobalTheory.CoefModel _root_.Formalism.L2.Col
 
 theorem omegaV_comm {L : Type} [Field L] [NumberField L] [IsCMField L] {n : ℕ} {ι : Type} [Fintype ι] {K : Type}
     [Field K] (e : K →+* ℂ) (emb : ι → L →+* K) (lam : ι → DomWeight n) {W : Type} [AddCommGroup W] [Module K W]

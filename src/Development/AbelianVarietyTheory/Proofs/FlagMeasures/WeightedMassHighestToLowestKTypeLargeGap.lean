@@ -99,7 +99,7 @@ theorem weightedMass_bound_lowestType_largeGap (hH : GlobalTheory.GapIn.Hyp) (k 
   choose E hE using hE
   have hbd' := hbd Q E hQ hE
   have hDG : (R ν).IsDG (PI.BesselPeriodGGP.eps48 k r) (fun a => lam a + (ν a : ℝ)) :=
-    GlobalTheory.T.families_have_largeGap_of_numericalHypotheses.1 k r lam u b bv ga h q0 R hNum hFam ν hν0
+    _root_.GlobalTheory.GapSetup.families_gap.1 k r lam u b bv ga h q0 R hNum hFam ν hν0
   have hDS := GlobalTheory.isDS_of_isDG hDG
   have hD := (GlobalTheory.CayleyChoice.cayley_exists_and_any k r).2 _ _ _ hDS Q hQ
   obtain ⟨hG, -, hlen, hmeas⟩ := GlobalTheory.quotMeas_ae_mem_and_measurable hK k r _ _ (R ν) Wp z π u μW μN μG νq hDS hSide
