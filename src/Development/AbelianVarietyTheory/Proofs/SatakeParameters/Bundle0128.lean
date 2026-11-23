@@ -347,7 +347,7 @@ theorem dcOp_eq_label : ∀ {D : D7} (V : HSp D) (β : GL (Fin V.rank) (Lev.EAf 
     ⟨e, f, ϖ, α, fun v hv => absurd hv (Finset.notMem_empty v), hP, hϖ, hϖ', hd, fun _ _ => Iff.rfl, fun _ _ _ => rfl,
       hα, hdiv, r1, fun γ hγ => ⟨h01.2.2.1 γ (r1 γ hγ), r2 γ hγ⟩, r3⟩
   refine ⟨⟨R, hR⟩, fun W _ _ Φ hΦ => ?_⟩
-  have hfix : ∀ k ∈ hyp V P, rightTr (fin V) W k Φ = Φ := by
+  have hfix : ∀ k ∈ GlobalTheory.Hk3.hyp V P, rightTr (fin V) W k Φ = Φ := by
     rintro k ⟨hk, e', f', hP', hs⟩
     have h3 : f' = f := (h01.2.2.2.1 e' f' hP').2
     rw [h3] at hs

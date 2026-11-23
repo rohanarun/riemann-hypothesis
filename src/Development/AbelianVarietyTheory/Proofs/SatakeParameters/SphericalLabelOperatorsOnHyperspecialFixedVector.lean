@@ -351,14 +351,14 @@ noncomputable abbrev stabG (V : HSp D) : Subgroup (GA D V) :=
 theorem mem_stabG (k : GA D V) : k ∈ stabG V ↔ k ∈ KsphC V ∅ := by
   rw [GlobalTheory.AdelicU.KsphC_eq]; rfl
 
-theorem hyp_eq (h : IsPrimeIdem P e f) : hyp V P = {k | k ∈ KsphC V ∅ ∧ SuppF V f k} := by
+theorem hyp_eq (h : IsPrimeIdem P e f) : GlobalTheory.Hk3.hyp V P = {k | k ∈ KsphC V ∅ ∧ SuppF V f k} := by
   refine Set.ext fun k => and_congr_right fun _ => ⟨?_, fun hk => ⟨e, f, h, hk⟩⟩
   rintro ⟨e', f', h', hk⟩
   obtain ⟨-, rfl⟩ := ((supported_group_and_prime_idempotents V).2.2.1 P e f h).2.2.2.1 e' f' h'
   exact hk
 
 theorem exists_hyp (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) :
-    ∃ K : Subgroup (GA D V), hyp V P = K := by
+    ∃ K : Subgroup (GA D V), GlobalTheory.Hk3.hyp V P = K := by
   obtain ⟨e, f, h⟩ := (supported_group_and_prime_idempotents V).2.1 P
   have h0 := (supported_group_and_prime_idempotents V).2.2.1 P e f h
   obtain ⟨L, hL⟩ := ((supported_group_and_prime_idempotents V).1 f h0.1 h0.2.1).1
@@ -376,7 +376,7 @@ theorem isLab_of_divAt (h : IsPrimeIdem P e f) (h1 : ϖ ∈ P.asIdeal) (h2 : ϖ 
   exact ⟨R, e, f, ϖ, g, fun v hv => absurd hv (Finset.notMem_empty v), h, h1, h2, hd, fun _ _ => Iff.rfl,
     fun _ _ _ => rfl, hg, hD, r1, r2⟩
 
-theorem reps_of_sphOp (hK : hyp V P = K) (h : IsPrimeIdem P e f) (h1 : ϖ ∈ P.asIdeal) (h2 : ϖ ∉ P.asIdeal ^ 2)
+theorem reps_of_sphOp (hK : GlobalTheory.Hk3.hyp V P = K) (h : IsPrimeIdem P e f) (h1 : ϖ ∈ P.asIdeal) (h2 : ϖ ∉ P.asIdeal ^ 2)
     (hg : SuppF V f g) (hD : DivAt V e (ϖ : D.host.E) d g) {R : Finset (GA D V)} (hR : SphOp V P d R) :
     Reps K g R := by
   obtain ⟨e', f', ϖ', α, -, h', h1', h2', hd, -, -, hα, hD', -, hc⟩ := hR
@@ -398,7 +398,7 @@ theorem sphOp_rep (h : IsLab V P d) : SphOp V P d (rep V P d) := by
   rw [Hk3.rep, dite_eq_left h]
   exact h.choose_spec
 
-theorem exists_reps (hK : hyp V P = K) {R : Finset (GA D V)} (hR : SphOp V P d R) :
+theorem exists_reps (hK : GlobalTheory.Hk3.hyp V P = K) {R : Finset (GA D V)} (hR : SphOp V P d R) :
     ∃ g, Reps K g R ∧ Reps K g (rep V P d) := by
   obtain ⟨e, f, ϖ, α, -, h, h1, h2, -, -, -, hα, hD, -⟩ := id hR
   exact ⟨α, reps_of_sphOp hK h h1 h2 hα hD hR, reps_of_sphOp hK h h1 h2 hα hD (sphOp_rep ⟨R, hR⟩)⟩
@@ -459,16 +459,16 @@ end Labels
 
 
 open GlobalTheory.IdemSupport in
-theorem label_operators : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), (∀ d R, SphOp V P d R → R.card = (rep V P d).card ∧ ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → ∑ γ ∈ R, π γ u = opOf π P (Finsupp.single d 1) u) ∧ (∀ c, ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → ∀ k ∈ hyp V P, π k (opOf π P c u) = opOf π P c u) ∧ (IsLab V P (List.replicate V.rank 0) ∧ ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → opOf π P (Finsupp.single (List.replicate V.rank 0) 1) u = u) ∧ (∀ d, (IsLab V P d ↔ IsLab V P (dualLab d)) ∧ (rep V P (dualLab d)).card = (rep V P d).card) ∧ ∀ e f g, IsPrimeIdem P e f → SuppF V f g → ∃ d, IsLab V P d ∧ (∀ γ ∈ rep V P d, ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * g * k₂) ∧ ∀ γ ∈ rep V P (dualLab d), ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * g⁻¹ * k₂ := by
+theorem label_operators : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), (∀ d R, SphOp V P d R → R.card = (rep V P d).card ∧ ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → ∑ γ ∈ R, π γ u = opOf π P (Finsupp.single d 1) u) ∧ (∀ c, ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k (opOf π P c u) = opOf π P c u) ∧ (IsLab V P (List.replicate V.rank 0) ∧ ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → opOf π P (Finsupp.single (List.replicate V.rank 0) 1) u = u) ∧ (∀ d, (IsLab V P d ↔ IsLab V P (dualLab d)) ∧ (rep V P (dualLab d)).card = (rep V P d).card) ∧ ∀ e f g, IsPrimeIdem P e f → SuppF V f g → ∃ d, IsLab V P d ∧ (∀ γ ∈ rep V P d, ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * g * k₂) ∧ ∀ γ ∈ rep V P (dualLab d), ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * g⁻¹ * k₂ := by
   intro D V P
   obtain ⟨K, hK⟩ := exists_hyp V P
   obtain ⟨-, ϖ, -, h1, h2⟩ := exists_real_unif D P
   have fix : ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M),
-      (∀ k ∈ hyp V P, π k u = u) → ∀ x, ∀ l ∈ K, π (x * l) u = π x u := by
+      (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → ∀ x, ∀ l ∈ K, π (x * l) u = π x u := by
     intro M _ _ π u hu x l hl
     rw [map_mul, mul_apply_eq_comp, hu l (hK ▸ hl)]
   have c1 : ∀ d R, SphOp V P d R → R.card = (rep V P d).card ∧ ∀ (M : Type) [AddCommGroup M] [Module ℂ M]
-      (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) →
+      (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) →
       ∑ γ ∈ R, π γ u = opOf π P (Finsupp.single d 1) u := by
     intro d R hR
     obtain ⟨g, r1, r2⟩ := exists_reps hK hR

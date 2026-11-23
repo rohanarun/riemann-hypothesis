@@ -207,7 +207,7 @@ def stabN (π : Formalism.L2.NG.FinTyp L n) (H : Subgroup (Formalism.AUTREP.GAf 
     rw [← Module.End.mul_apply, ← map_mul]
     simp
 
-theorem hecke_eq_smul_of_isot : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E) (Q : principalLevelFrame.RowPsi V n), StdPsi hF Q → ∀ {Sp : D.what₂.Tau → SPar} (θ : InfFam D) (M : DSModel V Sp) (π : Formalism.L2.NG.FinTyp D.host.E n) Pr d B (a : ℂ), SphOp V Pr d B → (∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → principalLevelFrame.Hecke₃ Q B x = a • x) → ∀ U ∈ principalLevelFrame.isotIn (principalLevelFrame.actM Q M) (principalLevelFrame.Minf θ Q M) π, (∀ k ∈ hyp V Pr, postOn M (principalLevelFrame.rtA k) U = U) → heckeOn M B U = a • U := by
+theorem hecke_eq_smul_of_isot : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E) (Q : principalLevelFrame.RowPsi V n), StdPsi hF Q → ∀ {Sp : D.what₂.Tau → SPar} (θ : InfFam D) (M : DSModel V Sp) (π : Formalism.L2.NG.FinTyp D.host.E n) Pr d B (a : ℂ), SphOp V Pr d B → (∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → principalLevelFrame.Hecke₃ Q B x = a • x) → ∀ U ∈ principalLevelFrame.isotIn (principalLevelFrame.actM Q M) (principalLevelFrame.Minf θ Q M) π, (∀ k ∈ GlobalTheory.Hk3.hyp V Pr, postOn M (principalLevelFrame.rtA k) U = U) → heckeOn M B U = a • U := by
   intro D V n hF Q hQ Sp θ M π Pr d B a hB ha U hU hfix
   have hBG : ∀ γ ∈ B, Q.ψ (principalLevelFrame.pre Q γ) = γ := by
     obtain ⟨e, f, ϖ, α, _, _, _, _, _, _, _, _, _, _, hc⟩ := hB
@@ -227,7 +227,7 @@ theorem hecke_eq_smul_of_isot : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.
     refine Finset.sum_congr rfl fun γ hγ => ?_
     rw [principalLevelFrame.actM_apply, hBG γ hγ]
   have hΦ : ∀ Φ : π.S →ₗ[ℂ] MMap M, principalLevelFrame.IsEqvA (principalLevelFrame.actM Q M) π Φ → ∀ x : π.S,
-      (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) →
+      (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) →
       heckeOn M B (Φ x) = a • Φ x := by
     intro Φ hE x hx
     have h1 := ha x x.2 hx
@@ -239,7 +239,7 @@ theorem hecke_eq_smul_of_isot : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.
       rw [hOn, ← map_smul, ← h2, map_sum]
     exact Finset.sum_congr rfl fun γ _ => (hE _ x).symm
   let W : Submodule ℂ (MMap M) := Submodule.span ℂ {T | ∃ Φ : π.S →ₗ[ℂ] MMap M, principalLevelFrame.IsEqvA (principalLevelFrame.actM Q M) π Φ ∧ ∃ x : π.S,
-      (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) ∧ T = Φ x}
+      (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) ∧ T = Φ x}
   have hWe : ∀ T ∈ W, heckeOn M B T = a • T := by
     intro T hT
     induction hT using Submodule.span_induction with
@@ -249,7 +249,7 @@ theorem hecke_eq_smul_of_isot : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.
     | zero => simp
     | add T T' _ _ h h' => rw [map_add (f := _), h, h', smul_add]
     | smul c T _ h => rw [map_smul, h, smul_comm]
-  let H : Subgroup (Formalism.AUTREP.GAf D.host.E n) := Subgroup.closure {κ | Q.ψ κ ∈ hyp V Pr}
+  let H : Subgroup (Formalism.AUTREP.GAf D.host.E n) := Subgroup.closure {κ | Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr}
   have hH : H ≤ ReciprocityTheory.Aut.Umax D.host.E n := (Subgroup.closure_le _).2 fun κ hκ => (hQ.2 κ).2 hκ.1
   have hfixH : ∀ h ∈ H, principalLevelFrame.actM Q M h U = U := by
     intro h hh

@@ -250,12 +250,12 @@ namespace GlobalTheory.Mem.R3.LabEig
 
 def IsSphScalars {D : D7} {V : HSp D} {n : ℕ} (Q : principalLevelFrame.RowPsi V n) (π : Formalism.L2.NG.FinTyp D.host.E n)
     (c : Pl D.host.E → List ℤ → ℂ) : Prop :=
-  ∀ P d, IsLab V P d → ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) →
+  ∀ P d, IsLab V P d → ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) →
     principalLevelFrame.Hecke₃ Q (GlobalTheory.Hk3.rep V P d) x = c P d • x
 
 theorem exists_isSphScalars {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E)
     (Q : principalLevelFrame.RowPsi V n) (hQ : StdPsi hF Q) (π : Formalism.L2.NG.FinTyp D.host.E n) : ∃ c, IsSphScalars Q π c := by
-  have h : ∀ P d, ∃ a : ℂ, IsLab V P d → ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) →
+  have h : ∀ P d, ∃ a : ℂ, IsLab V P d → ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) →
       principalLevelFrame.Hecke₃ Q (GlobalTheory.Hk3.rep V P d) x = a • x := by
     intro P d
     by_cases hd : IsLab V P d
@@ -285,11 +285,11 @@ theorem isotE_sub : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Type}
     have hB' := GlobalTheory.Hk3.OpsRows.sphOp_rep hdW
     have ha := hEig P d hdW
     obtain ⟨htr1, htr2⟩ := GlobalTheory.FrameTransport.sph_eigen_frame_indep hF PY (PW i0) hPY (hPW i0) P d
-    have hvec : ∀ y ∈ (principalLevelFrame.FinTyp.conjT π).S, (∀ κ, PY.ψ κ ∈ hyp (Yc D 0) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
+    have hvec : ∀ y ∈ (principalLevelFrame.FinTyp.conjT π).S, (∀ κ, PY.ψ κ ∈ GlobalTheory.Hk3.hyp (Yc D 0) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
         principalLevelFrame.Hecke₃ PY (GlobalTheory.Hk3.rep (Yc D 0) P d) y = star (c P d) • y := by
       intro y hy hfy
       have hy' : (fun g => star (y g)) ∈ π.S := hy
-      have hfy' : ∀ κ, PY.ψ κ ∈ hyp (Yc D 0) P →
+      have hfy' : ∀ κ, PY.ψ κ ∈ GlobalTheory.Hk3.hyp (Yc D 0) P →
           Formalism.L2.NG.rt D.host.E n κ (fun g => star (y g)) = fun g => star (y g) := by
         intro κ hκ
         rw [← principalLevelFrame.conj_rt, hfy κ hκ]
@@ -299,7 +299,7 @@ theorem isotE_sub : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Type}
       have e2 := congrArg star (congrFun e g)
       simp only [Pi.smul_apply, smul_eq_mul, star_star, star_mul'] at e2
       rw [Pi.smul_apply, smul_eq_mul, e2, mul_comm]
-    have hfixU : ∀ k ∈ hyp (Yc D 0) P, postOn (R.MY 0) (principalLevelFrame.rtA k) (R.HE.e x) = R.HE.e x := by
+    have hfixU : ∀ k ∈ GlobalTheory.Hk3.hyp (Yc D 0) P, postOn (R.MY 0) (principalLevelFrame.rtA k) (R.HE.e x) = R.HE.e x := by
       intro k hk
       ext1 v
       rw [postOn_apply]
@@ -366,11 +366,11 @@ theorem isotL_sub : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Type}
   have hB0 := GlobalTheory.Hk3.OpsRows.sphOp_rep hd0
   have ha := hEig P d hd0
   obtain ⟨hiff, htr⟩ := GlobalTheory.FrameTransport.sph_eigen_frame_indep hF (PW i) (PW i0) (hPW i) (hPW i0) P d
-  have hvec : ∀ y ∈ π.S, (∀ κ, (PW i).ψ κ ∈ hyp (Wc D i) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
+  have hvec : ∀ y ∈ π.S, (∀ κ, (PW i).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
       principalLevelFrame.Hecke₃ (PW i) B y = c P d • y := by
     intro y hy hfy
     rw [htr B _ hSph hB0 y hfy, ha y hy (fun κ hκ => hfy κ ((hiff κ).2 hκ))]
-  have hUfix : ∀ k ∈ hyp (Wc D i) P, postOn (R.MW i (sg0 D A)) (principalLevelFrame.rtA k) U = U := by
+  have hUfix : ∀ k ∈ GlobalTheory.Hk3.hyp (Wc D i) P, postOn (R.MW i (sg0 D A)) (principalLevelFrame.rtA k) U = U := by
     intro k hk
     obtain ⟨h1, h2⟩ := (LO i (R.levL F false (sg0 D A)) P hG).1 k hk
     have hl := principalLevelFrame.mult_lev hUM

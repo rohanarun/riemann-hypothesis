@@ -258,7 +258,7 @@ theorem adjoin_scalar {M : Type} [AddCommGroup M] [Module ℂ M] (s : Set (Modul
 variable {D : D7}
 
 theorem scalar_of_split {V : HSp D} {M : Type} [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (P : Pl D.host.E)
-    (hP : Formalism.DivisionValues.conjPl P ≠ P) (S : M → Prop) (fu : ∀ u, S u → ∀ k ∈ hyp V P, π k u = u) (a b : List ℤ → ℂ)
+    (hP : Formalism.DivisionValues.conjPl P ≠ P) (S : M → Prop) (fu : ∀ u, S u → ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) (a b : List ℤ → ℂ)
     (ha : ∀ u, S u → ∀ k, k ≤ V.rank →
       opOf π P (Finsupp.single (splitLab V.rank k) 1) u = a (splitLab V.rank k) • u)
     (hb : ∀ u, S u → ∀ k, k ≤ V.rank →
@@ -375,7 +375,7 @@ theorem mem_one_part : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T0 : T
   intro P d Rp hfull
   obtain ⟨⟨e, f, hPf, hS, hJ, hχ⟩, hsph⟩ := primeIdem_and_sphOp_of_isHeckeOpFull hfull
   have hG : GlobalTheory.Hk3.Good R A.μ0 P := good_of_offS R hL P hS
-  have hfix : ∀ w' : (R.HW i σ).H, ∀ k ∈ hyp (Wc D i) P,
+  have hfix : ∀ w' : (R.HW i σ).H, ∀ k ∈ GlobalTheory.Hk3.hyp (Wc D i) P,
       rRep (R.MW i σ) k ((R.HW i σ).e w') = (R.HW i σ).e w' := by
     intro w' k hk
     obtain ⟨hk1, hk2⟩ := (GlobalTheory.LevOp.mem_hyp hPf).1 hk
@@ -384,7 +384,7 @@ theorem mem_one_part : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T0 : T
     unfold rRep
     ext v g
     simp [postOn, rLin, LinearMap.compMultilinearMap_apply, hinv]
-  have hSfix : ∀ u, Sw u → ∀ k ∈ hyp (Wc D i) P, rRep (R.MW i σ) k u = u := by
+  have hSfix : ∀ u, Sw u → ∀ k ∈ GlobalTheory.Hk3.hyp (Wc D i) P, rRep (R.MW i σ) k u = u := by
     intro u hu k hk
     obtain ⟨w', -, rfl⟩ := (hSw u).1 hu
     exact hfix w' k hk

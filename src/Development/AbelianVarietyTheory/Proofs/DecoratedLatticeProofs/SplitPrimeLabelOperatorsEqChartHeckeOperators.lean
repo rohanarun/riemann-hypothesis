@@ -63,7 +63,7 @@ theorem opOf_eq_sum_rep {V : HSp D} {v : HeightOneSpectrum (𝓞 D.host.F)} {w :
       exact (hs _).2 ⟨y, rfl⟩
     · obtain ⟨y, -, rfl⟩ := Finset.mem_image.1 hγ
       exact mem_finPts.2 (projInf_emb _ _ v y)
-  have hhyp : ∀ k ∈ hyp V w, π k x = x := by
+  have hhyp : ∀ k ∈ GlobalTheory.Hk3.hyp V w, π k x = x := by
     rintro k ⟨hk, e', f', hef', hsf⟩
     obtain ⟨y, rfl⟩ := (Supp.suppF_iff_of_isPrimeIdem V hef' h k).1 hsf
     exact hx y ((Supp.emb_mem_KsphC V y).1 hk)

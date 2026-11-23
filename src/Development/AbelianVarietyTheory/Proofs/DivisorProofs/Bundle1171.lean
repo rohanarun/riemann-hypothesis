@@ -301,7 +301,7 @@ theorem part_in_eigenpart : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T
   obtain ⟨a, ha⟩ := _root_.GlobalTheory.SphScalar.spherical_scalar hF (PW i0) (hPW i0) π P d B0 hB0
   obtain ⟨⟨x0, hx0S, hx0, hx0T⟩, hEigOp, -⟩ := hEig
   have hB0full := ((LO i0 (R.levL F false (sg0 D A)) P hG).2.1 SF d B0).2 ⟨hoff, hB0⟩
-  have hfix0 : ∀ κ, (PW i0).ψ κ ∈ hyp (Wc D i0) P → Formalism.L2.NG.rt D.host.E n κ x0 = x0 := by
+  have hfix0 : ∀ κ, (PW i0).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i0) P → Formalism.L2.NG.rt D.host.E n κ x0 = x0 := by
     intro κ hκ
     obtain ⟨h1, h2⟩ := (LO i0 (R.levL F false (sg0 D A)) P hG).1 _ hκ
     rw [hx0T κ h1]
@@ -311,11 +311,11 @@ theorem part_in_eigenpart : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T
     rw [ha x0 hx0S hfix0] at e2
     exact smul_left_injective ℂ hx0 e2
   obtain ⟨hiff, htr⟩ := _root_.GlobalTheory.FrameTransport.sph_eigen_frame_indep hF (PW i) (PW i0) (hPW i) (hPW i0) P d
-  have hvec : ∀ y ∈ π.S, (∀ κ, (PW i).ψ κ ∈ hyp (Wc D i) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
+  have hvec : ∀ y ∈ π.S, (∀ κ, (PW i).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
       principalLevelFrame.Hecke₃ (PW i) B y = c P d • y := by
     intro y hy hfy
     rw [htr B B0 hSph hB0 y hfy, ha y hy (fun κ hκ => hfy κ ((hiff κ).2 hκ)), hac]
-  have hUfix : ∀ k ∈ hyp (Wc D i) P, postOn (R.MW i (sg0 D A)) (principalLevelFrame.rtA k) U = U := by
+  have hUfix : ∀ k ∈ GlobalTheory.Hk3.hyp (Wc D i) P, postOn (R.MW i (sg0 D A)) (principalLevelFrame.rtA k) U = U := by
     intro k hk
     obtain ⟨h1, h2⟩ := (LO i (R.levL F false (sg0 D A)) P hG).1 k hk
     have hl := principalLevelFrame.mult_lev hUM

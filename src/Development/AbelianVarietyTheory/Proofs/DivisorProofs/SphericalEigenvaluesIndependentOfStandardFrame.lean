@@ -130,7 +130,7 @@ theorem suppF_iff (hQ : StdPsi hF Q) (hQ' : StdPsi hF Q') (f : Formalism.L2.Thet
   ⟨suppF_of_stdPsi hQ hQ' f κ, suppF_of_stdPsi hQ' hQ f κ⟩
 
 theorem hyp_iff (hQ : StdPsi hF Q) (hQ' : StdPsi hF Q') (Pr : Pl D.host.E) (κ : Formalism.AUTREP.GAf D.host.E n) :
-    Q.ψ κ ∈ hyp V Pr ↔ Q'.ψ κ ∈ hyp V' Pr := by
+    Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr ↔ Q'.ψ κ ∈ GlobalTheory.Hk3.hyp V' Pr := by
   constructor
   · rintro ⟨h1, e, f, hp, hs⟩
     exact ⟨(ksph_iff hQ hQ' κ).1 h1, e, f, hp, (suppF_iff hQ hQ' f κ).1 hs⟩
@@ -257,9 +257,9 @@ theorem heckeOperator_image {B : Finset (GA D V)} (hB : ∀ γ ∈ B, γ ∈ GfC
 
 theorem heckeOperator_eq_heckeAlgebraAction {Pr : Pl D.host.E} {d : List ℤ} {R : Finset (GA D V')}
     (hR : SphOp V' Pr d R) (x : Formalism.AUTREP.GAf D.host.E n → ℂ)
-    (hx : ∀ κ, Q'.ψ κ ∈ hyp V' Pr → Formalism.L2.NG.rt D.host.E n κ x = x) :
+    (hx : ∀ κ, Q'.ψ κ ∈ GlobalTheory.Hk3.hyp V' Pr → Formalism.L2.NG.rt D.host.E n κ x = x) :
     principalLevelFrame.Hecke₃ Q' R x = fun h => GlobalTheory.Hk3.opOf (rreg V') Pr (Finsupp.single d 1) (fun g => x (principalLevelFrame.pre Q' g)) (Q'.ψ h) := by
-  have hu : ∀ k ∈ hyp V' Pr, rreg V' k (fun g => x (principalLevelFrame.pre Q' g)) = fun g => x (principalLevelFrame.pre Q' g) := by
+  have hu : ∀ k ∈ GlobalTheory.Hk3.hyp V' Pr, rreg V' k (fun g => x (principalLevelFrame.pre Q' g)) = fun g => x (principalLevelFrame.pre Q' g) := by
     intro k hk
     have hkf : k ∈ GfC V' := hk.1.1
     obtain ⟨c, rfl⟩ := Q'.onto k hkf
@@ -281,11 +281,11 @@ theorem heckeOperator_eq_heckeAlgebraAction {Pr : Pl D.host.E} {d : List ℤ} {R
   show x (h * principalLevelFrame.pre Q' γ) = x (principalLevelFrame.pre Q' (Q'.ψ h * γ))
   rw [← psi_pre Q' (sphOp_sub_GfC hR γ hγ), ← map_mul, pre_psi, pre_psi]
 
-theorem sph_eigen_frame_indep : ∀ {D : D7} {V V' : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E) (Q : principalLevelFrame.RowPsi V n) (Q' : principalLevelFrame.RowPsi V' n), StdPsi hF Q → StdPsi hF Q' → ∀ Pr d, (∀ κ, Q.ψ κ ∈ hyp V Pr ↔ Q'.ψ κ ∈ hyp V' Pr) ∧ ∀ B B', SphOp V Pr d B → SphOp V' Pr d B' → ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → principalLevelFrame.Hecke₃ Q B x = principalLevelFrame.Hecke₃ Q' B' x := by
+theorem sph_eigen_frame_indep : ∀ {D : D7} {V V' : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E) (Q : principalLevelFrame.RowPsi V n) (Q' : principalLevelFrame.RowPsi V' n), StdPsi hF Q → StdPsi hF Q' → ∀ Pr d, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr ↔ Q'.ψ κ ∈ GlobalTheory.Hk3.hyp V' Pr) ∧ ∀ B B', SphOp V Pr d B → SphOp V' Pr d B' → ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → principalLevelFrame.Hecke₃ Q B x = principalLevelFrame.Hecke₃ Q' B' x := by
   intro D V V' n hF Q Q' hQ hQ' Pr d
   refine ⟨hyp_iff hQ hQ' Pr, ?_⟩
   intro B B' hB hB' x hx
-  have hx' : ∀ κ, Q'.ψ κ ∈ hyp V' Pr → Formalism.L2.NG.rt D.host.E n κ x = x :=
+  have hx' : ∀ κ, Q'.ψ κ ∈ GlobalTheory.Hk3.hyp V' Pr → Formalism.L2.NG.rt D.host.E n κ x = x :=
     fun κ hk => hx κ ((hyp_iff hQ hQ' Pr κ).2 hk)
   rw [heckeOperator_image (Q' := Q') (sphOp_sub_GfC hB) x, heckeOperator_eq_heckeAlgebraAction (sphOp_image hQ hQ' hB) x hx',
     heckeOperator_eq_heckeAlgebraAction hB' x hx']

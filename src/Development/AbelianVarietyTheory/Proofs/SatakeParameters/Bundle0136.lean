@@ -263,8 +263,8 @@ variable {D : D7}
 
 theorem exists_dual (V : HSp D) (P : Pl D.host.E) (d : List ℤ) (R : Finset (GA D V)) (h : SphOp V P d R) :
     ∃ α ∈ GfC V, ∃ R', SphOp V P (dualLab d) R' ∧ R'.card = R.card ∧
-      (∀ γ ∈ R, ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * α * k₂) ∧
-      ∀ γ ∈ R', ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * α⁻¹ * k₂ := by
+      (∀ γ ∈ R, ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * α * k₂) ∧
+      ∀ γ ∈ R', ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * α⁻¹ * k₂ := by
   obtain ⟨e, f, ϖ, α, hS, hef, hϖ, hϖ2, hd, hJ, hχ, hα, hdiv, hR, hrep⟩ := h
   obtain ⟨he, v, hf⟩ := HeckeDual.idem_of_isPrimeIdem hef
   obtain ⟨a, rfl⟩ := (HeckeDual.suppF_iff V hf α).1 hα
@@ -295,7 +295,7 @@ theorem exists_dual (V : HSp D) (P : Pl D.host.E) (d : List ℤ) (R : Finset (GA
     rw [show ϖ = 0 from RingOfIntegers.ext h]
     exact zero_mem _)
   have hh : ∀ (β γ : GA D V), (∃ k₁ ∈ {k | k ∈ KsphC V ∅ ∧ SuppF V f k}, ∃ k₂ ∈ {k | k ∈ KsphC V ∅ ∧ SuppF V f k},
-      γ = k₁ * β * k₂) → ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * β * k₂ := by
+      γ = k₁ * β * k₂) → ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * β * k₂ := by
     rintro β γ ⟨k₁, g₁, k₂, g₂, rfl⟩
     exact ⟨k₁, ⟨g₁.1, e, f, hef, g₁.2⟩, k₂, ⟨g₂.1, e, f, hef, g₂.2⟩, rfl⟩
   refine ⟨_, GlobalTheory.AdelicU.mem_finPts.2 (GlobalTheory.AdelicU.projInf_emb _ _ v a), R',
@@ -322,10 +322,10 @@ theorem opOf_dualC {V : HSp D} {M : Type} [AddCommGroup M] [Module ℂ M] (π : 
 
 theorem exists_dual_rep (V : HSp D) (P : Pl D.host.E) (d : List ℤ) :
     ∃ α ∈ GfC V, ∃ R' : Finset (GA D V), R'.card = (Hk3.rep V P d).card ∧
-      (∀ γ ∈ Hk3.rep V P d, ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * α * k₂) ∧
-      (∀ γ ∈ R', ∃ k₁ ∈ hyp V P, ∃ k₂ ∈ hyp V P, γ = k₁ * α⁻¹ * k₂) ∧
+      (∀ γ ∈ Hk3.rep V P d, ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * α * k₂) ∧
+      (∀ γ ∈ R', ∃ k₁ ∈ GlobalTheory.Hk3.hyp V P, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V P, γ = k₁ * α⁻¹ * k₂) ∧
       ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M),
-        (∀ k ∈ hyp V P, π k u = u) → ∑ γ ∈ R', π γ u = ∑ γ ∈ Hk3.rep V P (dualLab d), π γ u := by
+        (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → ∑ γ ∈ R', π γ u = ∑ γ ∈ Hk3.rep V P (dualLab d), π γ u := by
   by_cases h : IsLab V P d
   · have hs : SphOp V P d (Hk3.rep V P d) := by
       unfold Hk3.rep
@@ -344,14 +344,14 @@ theorem hk_apply (V : HSp D) (P : Pl D.host.E) (c : List ℤ →₀ ℂ) (F : GA
   rw [LinearMap.sum_apply, Finset.sum_apply]
   rfl
 
-theorem liftInt_hk : ∀ {D : D7} (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D) (χS χT : (AE D)ˣ →* Circle) (om : GA D S × GA D T →* Module.End ℂ (WO S T → ℂ)) (P : Pl D.host.E), IsWeilDatumO ψ S T χS χT om → ∀ (ν : Measure (GA D T)) (𝓕 : Set (GA D T)), ν.IsHaarMeasure → IsFundamentalDomain (GQ T) 𝓕 ν → VacFix ψ om P → ∀ cS cT, Match ψ om P cS (dualC cT) → ∀ f, IsVacAt ψ S T P f → ∀ Φ : GA D T → ℂ, (∀ γ ∈ GQ T, ∀ h, Φ (γ * h) = Φ h) → (∀ k ∈ hyp T P, ∀ h, Φ (h * k) = Φ h) → (∀ g, ∀ y ∈ GfC T, IntegrableOn (fun h => thetaKO om g h f * Φ (h * y)) 𝓕 ν) → Lift.liftInt ν 𝓕 (thetaKO om) f (hk T P cT Φ) = hk S P cS (Lift.liftInt ν 𝓕 (thetaKO om) f Φ) := by
+theorem liftInt_hk : ∀ {D : D7} (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D) (χS χT : (AE D)ˣ →* Circle) (om : GA D S × GA D T →* Module.End ℂ (WO S T → ℂ)) (P : Pl D.host.E), IsWeilDatumO ψ S T χS χT om → ∀ (ν : Measure (GA D T)) (𝓕 : Set (GA D T)), ν.IsHaarMeasure → IsFundamentalDomain (GQ T) 𝓕 ν → VacFix ψ om P → ∀ cS cT, Match ψ om P cS (dualC cT) → ∀ f, IsVacAt ψ S T P f → ∀ Φ : GA D T → ℂ, (∀ γ ∈ GQ T, ∀ h, Φ (γ * h) = Φ h) → (∀ k ∈ GlobalTheory.Hk3.hyp T P, ∀ h, Φ (h * k) = Φ h) → (∀ g, ∀ y ∈ GfC T, IntegrableOn (fun h => thetaKO om g h f * Φ (h * y)) 𝓕 ν) → Lift.liftInt ν 𝓕 (thetaKO om) f (hk T P cT Φ) = hk S P cS (Lift.liftInt ν 𝓕 (thetaKO om) f Φ) := by
   intro D ψ S T χS χT om P hW ν 𝓕 hν h𝓕 hfix cS cT hM f hf Φ hΦl hΦr hint
   have : IsTopologicalGroup (GA D T) := Formalism.L2.GlobalTheoryTheory.GenusMassVolumes.Unfold.topGroupHA _ _
   have : BorelSpace (GA D T) := ⟨rfl⟩
   have : Countable (GQ T) := Formalism.L2.GlobalTheoryTheory.GenusMassVolumes.Unfold.countableGamma D.sp.cm.sig T.gram
   have : ν.IsMulRightInvariant := GlobalTheory.AdelicPointsUnimod.isMulRightInvariant_of_isHaarMeasure D T ν hν
   obtain ⟨hl, hr⟩ := GlobalTheory.thetaKO_rat_left_and_eigen_right ψ S T χS χT om hW f hf.1
-  have hfT : ∀ k ∈ hyp T P, om (1, k) f = f := fun k hk => by
+  have hfT : ∀ k ∈ GlobalTheory.Hk3.hyp T P, om (1, k) f = f := fun k hk => by
     obtain ⟨e, f', hef⟩ : ∃ e f', IsPrimeIdem P e f' := hk.2.imp fun _ h => h.imp fun _ h => h.1
     refine hfix f hf 1 ⟨⟨one_mem _, fun y => ?_, by simp⟩, e, f', hef, fun i j => ?_⟩ k hk
     · have : finMat D.sp.cm.sig S.gram (1 : GA D S) = 1 := by
@@ -378,7 +378,7 @@ theorem liftInt_hk : ∀ {D : D7} (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D)
       simp only [h8]
       exact h7.symm
     simp only [h6]
-    exact integral_move h𝓕 (hyp T P) α _ R' (fun h => thetaKO om g h f) Φ h2 h3 h1 hΦl hΦr
+    exact integral_move h𝓕 (GlobalTheory.Hk3.hyp T P) α _ R' (fun h => thetaKO om g h f) Φ h2 h3 h1 hΦl hΦr
       (fun γ hγ h => by simpa only [one_mul] using hl 1 (one_mem _) γ hγ g h)
       (fun k hk h => by simpa only [one_mul, mul_one] using hr 1 k 1 (by rw [hfT k hk, one_smul]) g h)
       (hint g α hα)

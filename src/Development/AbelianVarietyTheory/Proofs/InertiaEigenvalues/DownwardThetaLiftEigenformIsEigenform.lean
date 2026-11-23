@@ -148,7 +148,7 @@ theorem dualC_dualC' (c : List ℤ →₀ ℂ) : dualC (dualC c) = c := by
   rw [this, Finsupp.mapDomain_id]
 
 theorem scalar_of_split' {V : HSp D} {M : Type} [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (P : Pl D.host.E)
-    (hP : Formalism.DivisionValues.conjPl P ≠ P) (S : M → Prop) (fu : ∀ u, S u → ∀ k ∈ hyp V P, π k u = u)
+    (hP : Formalism.DivisionValues.conjPl P ≠ P) (S : M → Prop) (fu : ∀ u, S u → ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u)
     (ha : ∀ k, k ≤ V.rank → ∃ l : ℂ, ∀ u, S u → opOf π P (Finsupp.single (splitLab V.rank k) 1) u = l • u)
     (hb : ∀ k, k ≤ V.rank → ∃ l : ℂ, ∀ u, S u →
       opOf π (Formalism.DivisionValues.conjPl P) (Finsupp.single (splitLab V.rank k) 1) u = l • u) (d : List ℤ) :
@@ -250,7 +250,7 @@ theorem downEig : GlobalTheory.Hk3.HoweUnram → ∀ (D : D7) (G : Type) [Group 
         refine hP PP (hPP.imp id ?_)
         intro h
         exact absurd h (Finset.notMem_empty _))
-  have hfix : ∀ P, Good R t P → ∀ u, Sset u → ∀ k ∈ hyp (Wc D i) P,
+  have hfix : ∀ P, Good R t P → ∀ u, Sset u → ∀ k ∈ GlobalTheory.Hk3.hyp (Wc D i) P,
       GlobalTheory.Hk3.LabDet.rRep (R.MW i (sg0 D A)) k u = u := by
     rintro P hP u ⟨y, -, rfl⟩ k hk
     exact GlobalTheory.Hk3.LabDet.mult_lev _ _ _ _ _ (hC.thP.thF_mem i t y) k ((hlev P hP).1 k hk).1 ((hlev P hP).1 k hk).2

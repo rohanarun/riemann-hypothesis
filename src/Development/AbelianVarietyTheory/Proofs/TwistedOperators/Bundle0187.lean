@@ -206,14 +206,14 @@ theorem hkG_left {G W : Type} [Group G] [AddCommGroup W] [Module ℂ W] (φ : GA
 theorem hkG_right {G W : Type} [Group G] [AddCommGroup W] [Module ℂ W] (φ : GA D V →* G) (hφ : Function.Surjective φ)
     {e f : Formalism.L2.Theta.AE D} (hP : IsPrimeIdem P e f) {J : Subgroup (GA D V)}
     (hJ : ∀ g, SuppF V f g → (g ∈ J ↔ g ∈ KsphC V ∅)) (c : List ℤ →₀ ℂ) (F : G → W)
-    (hF : ∀ k ∈ hyp V P, ∀ h, F (h * φ k) = F h) {k₁ k₂ : GA D V} (hk₁ : k₁ ∈ J)
+    (hF : ∀ k ∈ GlobalTheory.Hk3.hyp V P, ∀ h, F (h * φ k) = F h) {k₁ k₂ : GA D V} (hk₁ : k₁ ∈ J)
     (s₁ : SuppF V f k₁) (s₂ : SuppF V (1 - f) k₂) (z : ℂ) (hz : ∀ h, F (h * φ (k₁ * k₂)) = z • F h) (h : G) :
     hkG φ P c F (h * φ (k₁ * k₂)) = z • hkG φ P c F h := by
   obtain ⟨x, rfl⟩ := hφ h
   rw [← map_mul φ x (k₁ * k₂), ← sub_eq_zero, ← Module.forall_dual_apply_eq_zero_iff ℂ]
   intro l
   rw [map_sub, map_smul, dual_hkG, dual_hkG, sub_eq_zero, smul_eq_mul]
-  have hinv : ∀ k ∈ hyp V P, ∀ y, (fun y => l (F (φ y))) (y * k) = (fun y => l (F (φ y))) y := by
+  have hinv : ∀ k ∈ GlobalTheory.Hk3.hyp V P, ∀ y, (fun y => l (F (φ y))) (y * k) = (fun y => l (F (φ y))) y := by
     intro k hk y
     show l (F (φ (y * k))) = l (F (φ y))
     rw [map_mul, hF k hk]
@@ -233,13 +233,13 @@ theorem adForms_spherical (β : GL (Fin V.rank) (Lev.EAf D)) (Λ : Submodule (�
     {W : Type} [NormedAddCommGroup W] [InnerProductSpace ℂ W] (ρ : GQ V →* Module.End ℂ W)
     (χ' : (levEnv V β L).J →* ℂˣ) (hχ' : ∀ k, (((levEnv V β L).χ k : ℂˣ) : ℂ) = 1 → ((χ' k : ℂˣ) : ℂ) = 1)
     {F : Bridge.Gf V → W} (hF : F ∈ Bridge.AdForms (Bridge.ratF V) ρ (levEnv V β L).J χ') (c : List ℤ →₀ ℂ) :
-    (∀ k ∈ hyp V P, ∀ h, F (h * (finHom V).rangeRestrict k) = F h) ∧
+    (∀ k ∈ GlobalTheory.Hk3.hyp V P, ∀ h, F (h * (finHom V).rangeRestrict k) = F h) ∧
       hkF V P c F ∈ Bridge.AdForms (Bridge.ratF V) ρ (levEnv V β L).J χ' := by
   obtain ⟨e, f, hP⟩ := (_root_.GlobalTheory.IdemSupport.supported_group_and_prime_idempotents V).2.1 P
   have hPf := (_root_.GlobalTheory.IdemSupport.supported_group_and_prime_idempotents V).2.2.1 P e f hP
   obtain ⟨hJf, hχf, hsplit⟩ := (GlobalTheory.T.level_hyperspecial_trivialCharacter_splits_off_places V β Λ N (flag1L L) hB).2 P e f hP hN hPP
   have hFl := (adForms_iff (Bridge.ratF V) ρ (levEnv V β L).J χ' F).1 hF
-  have hinv : ∀ k ∈ hyp V P, ∀ h, F (h * (finHom V).rangeRestrict k) = F h := by
+  have hinv : ∀ k ∈ GlobalTheory.Hk3.hyp V P, ∀ h, F (h * (finHom V).rangeRestrict k) = F h := by
     rintro k ⟨hkK, e', f', hP', hk⟩ h
     obtain ⟨-, rfl⟩ := hPf.2.2.2.1 e' f' hP'
     have hkJ : k ∈ levG V β (flag1L L) := (hJf k hk).2 hkK

@@ -123,7 +123,7 @@ variable {D : D7} {V : HSp D} {n : ℕ}
 
 def IsSphVec (Q : principalLevelFrame.RowPsi V n) (π : Formalism.L2.NG.FinTyp D.host.E n) (P : HeightOneSpectrum (𝓞 D.host.E))
     (x : Formalism.AUTREP.GAf D.host.E n → ℂ) : Prop :=
-  x ∈ π.S ∧ ∀ κ, Q.ψ κ ∈ hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x
+  x ∈ π.S ∧ ∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x
 
 def ActsOnSph (Q : principalLevelFrame.RowPsi V n) (π : Formalism.L2.NG.FinTyp D.host.E n) (P : HeightOneSpectrum (𝓞 D.host.E)) (d : List ℤ)
     (a : ℂ) : Prop :=
@@ -144,7 +144,7 @@ theorem actsOnSph_sphEig {hF : D.host.F = maximalRealSubfield D.host.E} {Q : pri
       obtain ⟨a, ha⟩ := GlobalTheory.SphScalar.spherical_scalar hF Q hQ π P d B hB
       refine ⟨a, fun B' hB' x hx => ?_⟩
       have hEq : principalLevelFrame.Hecke₃ Q B' x = principalLevelFrame.Hecke₃ Q B x := by
-        have hx' := lift_fixed Q x (hyp V P) (fun _ hk => hk.1.1) hx.2
+        have hx' := lift_fixed Q x (GlobalTheory.Hk3.hyp V P) (fun _ hk => hk.1.1) hx.2
         have hsum := fun C hC =>
           ((GlobalTheory.SphLabelOps.label_operators V P).1 d C hC).2 (GA D V → ℂ) (rtV V) (lift Q x) hx'
         have hmem : ∀ {C}, SphOp V P d C → ∀ γ ∈ C, γ ∈ GfC V := by
@@ -169,7 +169,7 @@ variable {Sp : D.what₂.Tau → SPar} {θ : D.what₂.Tau → (Ainf D.host.F �
 
 theorem fixed_of_full {P : HeightOneSpectrum (𝓞 D.host.E)} {d : List ℤ} {B : Finset (GA D V)}
     (hB : Hecke₂ V J χ Sb P d B) {U : MMap M} (hU : U ∈ Mult θ M J χ) :
-    ∀ k ∈ hyp V P, postOn M (principalLevelFrame.rtA k) U = U := by
+    ∀ k ∈ GlobalTheory.Hk3.hyp V P, postOn M (principalLevelFrame.rtA k) U = U := by
   intro k hk
   obtain ⟨e, f, ϖ, α, -, hP, -, -, -, hJ, hχ, -⟩ := hB
   rw [GlobalTheory.SphLabelOps.hyp_eq hP] at hk
@@ -187,7 +187,7 @@ private theorem scalar_on_fixed_isot {hF : D.host.F = maximalRealSubfield D.host
     {d : List ℤ} {B : Finset (GA D V)} {a : ℂ} (hB : Hecke₂ V J χ Sb Pr d B)
     (ha : ActsOnSph Q π Pr d a)
     (U : MMap M) (hU : U ∈ principalLevelFrame.isotIn (principalLevelFrame.actM Q M) (principalLevelFrame.Minf θ Q M) π)
-    (hfix : ∀ k ∈ hyp V Pr, postOn M (principalLevelFrame.rtA k) U = U) :
+    (hfix : ∀ k ∈ GlobalTheory.Hk3.hyp V Pr, postOn M (principalLevelFrame.rtA k) U = U) :
     heckeOn M B U = a • U := by
   classical
   have hS : SphOp V Pr d B := by
@@ -216,7 +216,7 @@ private theorem scalar_on_fixed_isot {hF : D.host.F = maximalRealSubfield D.host
     refine Finset.sum_congr rfl fun γ hγ => ?_
     rw [principalLevelFrame.actM_apply, hBG γ hγ]
   have hΦ : ∀ Φ : π.S →ₗ[ℂ] MMap M, principalLevelFrame.IsEqvA (principalLevelFrame.actM Q M) π Φ → ∀ x : π.S,
-      (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) →
+      (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) →
       heckeOn M B (Φ x) = a • Φ x := by
     intro Φ hE x hx
     have h1 := ha B hS x ⟨x.2, hx⟩
@@ -228,7 +228,7 @@ private theorem scalar_on_fixed_isot {hF : D.host.F = maximalRealSubfield D.host
       rw [hOn, ← map_smul, ← h2, map_sum]
     exact Finset.sum_congr rfl fun γ _ => (hE _ x).symm
   let W : Submodule ℂ (MMap M) := Submodule.span ℂ {T | ∃ Φ : π.S →ₗ[ℂ] MMap M, principalLevelFrame.IsEqvA (principalLevelFrame.actM Q M) π Φ ∧ ∃ x : π.S,
-      (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) ∧ T = Φ x}
+      (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ (x : Formalism.AUTREP.GAf D.host.E n → ℂ) = x) ∧ T = Φ x}
   have hWe : ∀ T ∈ W, heckeOn M B T = a • T := by
     intro T hT
     induction hT using Submodule.span_induction with
@@ -238,7 +238,7 @@ private theorem scalar_on_fixed_isot {hF : D.host.F = maximalRealSubfield D.host
     | zero => simp
     | add T T' _ _ h h' => rw [map_add (f := _), h, h', smul_add]
     | smul c T _ h => rw [map_smul, h, smul_comm]
-  let H : Subgroup (Formalism.AUTREP.GAf D.host.E n) := Subgroup.closure {κ | Q.ψ κ ∈ hyp V Pr}
+  let H : Subgroup (Formalism.AUTREP.GAf D.host.E n) := Subgroup.closure {κ | Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr}
   have hH : H ≤ ReciprocityTheory.Aut.Umax D.host.E n := (Subgroup.closure_le _).2 fun κ hκ => (hQ.2 κ).2 hκ.1
   have hfixH : ∀ h ∈ H, principalLevelFrame.actM Q M h U = U := by
     intro h hh

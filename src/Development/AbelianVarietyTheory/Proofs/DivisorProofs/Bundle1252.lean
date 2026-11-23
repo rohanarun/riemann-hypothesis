@@ -344,12 +344,12 @@ theorem sph_mem_GfC {P : Pl D.host.E} {d : List ℤ} {B : Finset (GA D V)} (hB :
   obtain ⟨e, f, ϖ, α, -, -, -, -, -, -, -, -, -, -, hR⟩ := hB
   exact fun γ hγ => (hR.1 γ hγ).1
 
-theorem hyp_sub (P : Pl D.host.E) : hyp V P ⊆ GfC V := fun k hk => hk.1.1
+theorem hyp_sub (P : Pl D.host.E) : GlobalTheory.Hk3.hyp V P ⊆ GfC V := fun k hk => hk.1.1
 
 theorem heckeOperator_eq_of_spherical (Q : RowPsi V n) (P : Pl D.host.E) (d : List ℤ) (B B' : Finset (GA D V)) (hB : SphOp V P d B)
-    (hB' : SphOp V P d B') (x : Formalism.AUTREP.GAf D.host.E n → ℂ) (hx : ∀ κ, Q.ψ κ ∈ hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) :
+    (hB' : SphOp V P d B') (x : Formalism.AUTREP.GAf D.host.E n → ℂ) (hx : ∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V P → Formalism.L2.NG.rt D.host.E n κ x = x) :
     Hecke₃ Q B x = Hecke₃ Q B' x := by
-  have hu := lift_fixed Q x (hyp V P) (hyp_sub P) hx
+  have hu := lift_fixed Q x (GlobalTheory.Hk3.hyp V P) (hyp_sub P) hx
   have e1 := ((GlobalTheory.SphLabelOps.label_operators V P).1 d B hB).2 (GA D V → ℂ) (rtV V) (lift Q x) hu
   have e2 := ((GlobalTheory.SphLabelOps.label_operators V P).1 d B' hB').2 (GA D V → ℂ) (rtV V) (lift Q x) hu
   have e := e1.trans e2.symm
@@ -383,7 +383,7 @@ theorem row_type_eig : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Ty
   intro D G _ _ Pl0 T A Ks _ _ _ R F s hOk hCore hX SF hSF n hF PY PW hPY hPW π hπ i0
   classical
   have hsc : ∀ Pr d B, SphOp (Wc D i0) Pr d B → ∃ a : ℂ, ∀ x ∈ π.S,
-      (∀ κ, (PW i0).ψ κ ∈ hyp (Wc D i0) Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → Hecke₃ (PW i0) B x = a • x :=
+      (∀ κ, (PW i0).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i0) Pr → Formalism.L2.NG.rt D.host.E n κ x = x) → Hecke₃ (PW i0) B x = a • x :=
     fun Pr d B h => _root_.GlobalTheory.SphScalar.spherical_scalar hF (PW i0) (hPW i0) π Pr d B h
 
   obtain ⟨c0, hBase⟩ := hCore.lev.βW i0
@@ -393,7 +393,7 @@ theorem row_type_eig : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Ty
       (levChi _ (R.βW i0) (R.datWp i0 (R.levL F false (sg0 D A)))) SF Pr d B → ∀ x,
       IsTypeVec ((PW i0).ψ ⁻¹' levS _ (R.βW i0) (R.datWp i0 (R.levL F false (sg0 D A))))
         (fun κ => levChi _ (R.βW i0) (R.datWp i0 (R.levL F false (sg0 D A))) ((PW i0).ψ κ)) x →
-      ∀ κ, (PW i0).ψ κ ∈ hyp (Wc D i0) Pr → Formalism.L2.NG.rt D.host.E n κ x = x := by
+      ∀ κ, (PW i0).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i0) Pr → Formalism.L2.NG.rt D.host.E n κ x = x := by
     intro Pr d B hB x hx κ hκ
     have hOff : OffS D SF Pr := by
       obtain ⟨e, f, ϖ, α, h, -⟩ := hB

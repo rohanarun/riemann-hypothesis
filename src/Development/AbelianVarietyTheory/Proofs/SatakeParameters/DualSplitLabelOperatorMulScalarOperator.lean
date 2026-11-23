@@ -137,7 +137,7 @@ theorem idem_unique {P : Pl D.host.E} {e e' f' : AE D} (he : IsIdemAt e P) (h : 
   rw [h1, h1', GlobalTheory.IdemSupport.placeIdem_unique hε' hε]
 
 theorem hyp_eq_locPart {P : Pl D.host.E} {e : AE D} (he : IsIdemAt e P) (V : HSp D) :
-    hyp V P = locPart V (KsphC V ∅) e := by
+    GlobalTheory.Hk3.hyp V P = locPart V (KsphC V ∅) e := by
   refine Set.ext fun k => ⟨?_, fun h => ⟨h.1, e, e + cA D e, Or.inl ⟨he, rfl⟩, h.2⟩⟩
   rintro ⟨h1, e', f', h2, h3⟩
   rw [idem_unique he h2] at h3
@@ -192,7 +192,7 @@ theorem sphOp_of {P : Pl D.host.E} {e : AE D} (he : IsIdemAt e P) {ϖ : 𝓞 D.h
   ⟨e, e + cA D e, ϖ, α, fun v hv => absurd hv (Finset.notMem_empty v), Or.inl ⟨he, rfl⟩, h1, h2, hd,
     fun _ _ => Iff.rfl, fun _ _ _ => rfl, hα, hD, hR, hc⟩
 
-theorem dual_rel : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), conjPl P ≠ P → ∀ j, j ≤ V.rank → ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → opOf π P (Finsupp.single (dualLab (splitLab V.rank j)) 1) (opOf π P (Finsupp.single (splitLab V.rank V.rank) 1) u) = opOf π P (Finsupp.single (splitLab V.rank (V.rank - j)) 1) u := by
+theorem dual_rel : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), conjPl P ≠ P → ∀ j, j ≤ V.rank → ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → opOf π P (Finsupp.single (dualLab (splitLab V.rank j)) 1) (opOf π P (Finsupp.single (splitLab V.rank V.rank) 1) u) = opOf π P (Finsupp.single (splitLab V.rank (V.rank - j)) 1) u := by
   classical
   intro D V P hP j hj M _ _ π u hu
   obtain ⟨e, he⟩ := exists_idem hP
@@ -236,7 +236,7 @@ theorem dual_rel : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), conjPl P ≠ P �
   have S2 := shift hα.2.1 hDα r1 r2
     (by rw [label_shift hj]; simp [splitLab, List.pairwise_append, List.pairwise_replicate])
   rw [label_shift hj] at S2
-  have fixw : ∀ k ∈ hyp V P, π k (π z u) = π z u := fun k hk => by
+  have fixw : ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k (π z u) = π z u := fun k hk => by
     have hk' : k ∈ locPart V (KsphC V ∅) e := by rw [← hyp_eq_locPart he V]; exact hk
     have := congrArg (fun g => π g u) (hKz k hk')
     simp only [map_mul, Module.End.mul_apply, hu k hk] at this

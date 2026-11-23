@@ -61,7 +61,7 @@ theorem step_hk : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0 T : Type} {
   have hio := hC.chain.ioY t k (by omega)
   obtain ⟨hνH, hνF⟩ := haar_fd R hC.models t (k + 1) hkk
   obtain ⟨hμH, hμF⟩ := haar_fd R hC.models t k (by omega)
-  have lo : ∀ j, j < D.R.m → (∀ κ ∈ hyp (Yc D j) P, κ ∈ levG _ (R.βY j) (R.datYt t j R.triv) ∧
+  have lo : ∀ j, j < D.R.m → (∀ κ ∈ GlobalTheory.Hk3.hyp (Yc D j) P, κ ∈ levG _ (R.βY j) (R.datYt t j R.triv) ∧
         levChi _ (R.βY j) (R.datYt t j R.triv) κ = 1) ∧
       ∀ c, ∀ U ∈ Mult R.θ (R.MY j) (levS _ (R.βY j) (R.datYt t j R.triv)) (levChi _ (R.βY j) (R.datYt t j R.triv)),
         postOn (R.MY j) (hk _ P c) U ∈ Mult R.θ (R.MY j) (levS _ (R.βY j) (R.datYt t j R.triv)) (levChi _ (R.βY j) (R.datYt t j R.triv)) := by

@@ -47,7 +47,7 @@ theorem triv_iff (hQ : StdPsi hF Q) (s : SplitPlace D.host.E) (κ : GAf D.host.E
   exact ⟨fun h => Subtype.ext (Units.ext (e2.trans h)), fun h => e2.symm.trans (by rw [h]; rfl)⟩
 
 theorem hyp_iff (hQ : StdPsi hF Q) (s : SplitPlace D.host.E) (κ : GAf D.host.E n) :
-    Q.ψ κ ∈ hyp V s.w ↔ κ ∈ locK n s.v := by
+    Q.ψ κ ∈ GlobalTheory.Hk3.hyp V s.w ↔ κ ∈ locK n s.v := by
   rw [GlobalTheory.HypDict.mem_hyp_iff_embV D _ s.w rfl]
   constructor
   · rintro ⟨k, hk, e⟩

@@ -190,7 +190,7 @@ theorem exists_pair (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D) (χS χT : (A
       (ιS : Formalism.UG.UJ σ (JS : Matrix (Fin S.rank) (Fin S.rank) (LP D P)) →* GA D S)
       (ιT : Formalism.UG.UJ σ (JT : Matrix (Fin T.rank) (Fin T.rank) (LP D P)) →* GA D T)
       (κ : Matrix (Fin T.rank) (Fin S.rank) (LP D P) → WO S T), LocPair ϖ σ q δ JS JT ψ' ρ ω ∧
-      (∀ g, ιS g ∈ hyp S P ↔ (g : GL (Fin S.rank) (LP D P)) ∈ Formalism.UG.GLint (Fin S.rank) (Formalism.UG.intL _)) ∧
+      (∀ g, ιS g ∈ GlobalTheory.Hk3.hyp S P ↔ (g : GL (Fin S.rank) (LP D P)) ∈ Formalism.UG.GLint (Fin S.rank) (Formalism.UG.intL _)) ∧
       (∀ g h (m : thetaSub ψ S T), ((ω (g, h) m : thetaSub ψ S T) : WO S T → ℂ) = om (ιS g, ιT h) m) ∧
       (∀ m : thetaSub ψ S T, LocVac ρ m ↔ IsVacAt ψ S T P m) ∧
       (∀ x (m : thetaSub ψ S T), (ρ x m : WO S T → ℂ) = heisO ψ S T (κ x) m) ∧ (∀ x, IsHalf e (κ x)) ∧
@@ -231,7 +231,7 @@ theorem exists_pair (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D) (χS χT : (A
     refine ⟨fun hm => ⟨m.2, fun e' f' he' u hu hh => hm u hu ?_⟩, fun hm u hu hh => hm.2 e e he u hu (Or.inl hh)⟩
     obtain ⟨rfl, -⟩ := ((GlobalTheory.IdemSupport.supported_group_and_prime_idempotents S).2.2.1 P e e he).2.2.2.1 e' f' he'
     rwa [h.1.2.1, or_self] at hh
-  have hhyp : ∀ {V : HSp D} {β ι}, GrpChart V e σ π β ι → ∀ g, ι g ∈ hyp V P ↔
+  have hhyp : ∀ {V : HSp D} {β ι}, GrpChart V e σ π β ι → ∀ g, ι g ∈ GlobalTheory.Hk3.hyp V P ↔
       g.1 ∈ Formalism.UG.GLint (Fin V.rank) (Formalism.UG.intL (LP D P)) := fun hι g =>
     ⟨fun hg => (hι.2.2.2 g).1 hg.1, fun hg => ⟨(hι.2.2.2 g).2 hg, e, e, he, hι.1 g⟩⟩
   have hone : ∀ (n : ℕ) (i j : Fin n), σ ((1 : Matrix (Fin n) (Fin n) (LP D P)) i j) = (1 : Matrix (Fin n) (Fin n) (LP D P)) j i :=
@@ -268,7 +268,7 @@ def CommAt (ψ : AddChar (AF D.host.F) ℂ) (S T : HSp D) (e : AE D) (A : Module
   ∀ f, IsThetaFunO ψ S T f → IsThetaFunO ψ S T (A f) ∧ ∀ u, IsHalf e u → A (heisO ψ S T u f) = heisO ψ S T u (A f)
 
 theorem gen_killed (hH : HoweUnram) (hW : IsWeilDatumO ψ S T χS χT om) (hP : Formalism.DivisionValues.conjPl P = P) (hfix : VacFix ψ om P)
-    (he : IsPrimeIdem P e e) {f : WO S T → ℂ} (hf : IsThetaFunO ψ S T f) (hK : ∀ k ∈ hyp S P, om (k, 1) f = f) :
+    (he : IsPrimeIdem P e e) {f : WO S T → ℂ} (hf : IsThetaFunO ψ S T f) (hK : ∀ k ∈ GlobalTheory.Hk3.hyp S P, om (k, 1) f = f) :
     f ∈ Submodule.span ℂ {φ | ∃ g s, IsVacAt ψ S T P s ∧ (∀ A, CommAt ψ S T e A → A f = 0 → A s = 0) ∧ φ = om (1, g) s} := by
   have : CharZero (LP D P) := algebraRat.charZero _
   obtain ⟨ϖ, σ, q, δ, JS, JT, ψ', ρ, ω, ιS, ιT, κ, hp, hhyp, hω, hvac, hρ, hκ, -⟩ := exists_pair ψ S T χS χT om P hW hP hfix e he
@@ -434,7 +434,7 @@ theorem step_inert : GlobalTheory.Hk3.HoweUnram → ∀ (D : D7) (G : Type) [Gro
     have h := (GlobalTheory.VacGood.fock_vacua_good R F hC t P hgood).2.2 i 1
     have e1 : R.ptP i t 1 = R.vP i t := pure_one _ _
     rwa [e1] at h
-  have hK : ∀ k ∈ hyp (Vc D i) P, R.ωP i t (k, 1) f = f := fun k hk => by
+  have hK : ∀ k ∈ GlobalTheory.Hk3.hyp (Vc D i) P, R.ωP i t (k, 1) f = f := fun k hk => by
     obtain ⟨-, a, a', ha, sk⟩ := id hk
     rw [(hpi a a' ha).2] at sk
     rw [hT.2 k (hlev k hk).1 (suppIn_of_suppF hv hε sk), (hlev k hk).2, inv_one, one_smul]

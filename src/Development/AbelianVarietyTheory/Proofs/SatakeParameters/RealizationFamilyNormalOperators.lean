@@ -225,13 +225,13 @@ theorem supp_rep {V : HSp D} {P : Pl D.host.E} (d : List ℤ) {e f : AE D} (hP :
   · rw [rep_empty h]; simp
 
 theorem mem_hyp {V : HSp D} {P : Pl D.host.E} {e f : AE D} (hP : IsPrimeIdem P e f) (k : GA D V) :
-    k ∈ hyp V P ↔ k ∈ KsphC V ∅ ∧ SuppF V f k := by
+    k ∈ GlobalTheory.Hk3.hyp V P ↔ k ∈ KsphC V ∅ ∧ SuppF V f k := by
   refine ⟨fun ⟨h, e', f', h1, h2⟩ => ?_, fun h => ⟨h.1, e, f, hP, h.2⟩⟩
   obtain ⟨rfl, rfl⟩ := ((supported_group_and_prime_idempotents V).2.2.1 P e f hP).2.2.2.1 e' f' h1
   exact ⟨h, h2⟩
 
 theorem opOf_comm {V : HSp D} {M : Type} [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (P P' : Pl D.host.E)
-    (c c' : List ℤ →₀ ℂ) (u : M) (hu : ∀ k ∈ hyp V P, π k u = u) :
+    (c c' : List ℤ →₀ ℂ) (u : M) (hu : ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) :
     opOf π P c (opOf π P' c' u) = opOf π P' c' (opOf π P c u) := by
   obtain ⟨e, f, hP⟩ := (supported_group_and_prime_idempotents V).2.1 P
   obtain ⟨e', f', hP'⟩ := (supported_group_and_prime_idempotents V).2.1 P'
@@ -253,7 +253,7 @@ theorem pairwise_dualLab {d : List ℤ} (h : d.Pairwise fun a b => b ≤ a) : (d
   exact h.imp fun h => neg_le_neg h
 
 theorem exists_sphOp_pair {V : HSp D} {P : Pl D.host.E} {d : List ℤ} {e f : AE D} (hP : IsPrimeIdem P e f)
-    (K : Subgroup (GA D V)) (hK : ∀ g, g ∈ hyp V P ↔ g ∈ K) (h : IsLab V P d) :
+    (K : Subgroup (GA D V)) (hK : ∀ g, g ∈ GlobalTheory.Hk3.hyp V P ↔ g ∈ K) (h : IsLab V P d) :
     ∃ α R', SuppF V f α ∧ IsCosetRep V {k | k ∈ KsphC V ∅ ∧ SuppF V f k} α (Hk3.rep V P d) ∧ SphOp V P (dualLab d) R' ∧
       IsCosetRep V {k | k ∈ KsphC V ∅ ∧ SuppF V f k} α⁻¹ R' := by
   have hu := ((supported_group_and_prime_idempotents V).2.2.1 P e f hP).2.2.2.1
@@ -318,7 +318,7 @@ theorem local_level {e f : AE D} (hP : IsPrimeIdem P e f) :
 variable {W : Type} [NormedAddCommGroup W] [InnerProductSpace ℂ W] (ρ : GQ V →* Module.End ℂ W)
 
 theorem fixed_of_mem (F : Bridge.Gf V → W) (hF : F ∈ Bridge.AdForms (Bridge.ratF V) ρ (levEnv V β L).J (levEnv V β L).χ) :
-    ∀ k ∈ hyp V P, rtr (fin V) W k F = F := by
+    ∀ k ∈ GlobalTheory.Hk3.hyp V P, rtr (fin V) W k F = F := by
   intro k hk
   refine ((supported_group_and_prime_idempotents V).2.1 P).elim fun e he => he.elim fun f hP => ?_
   have h0 := local_level V β Λ L hβ P hoff hP

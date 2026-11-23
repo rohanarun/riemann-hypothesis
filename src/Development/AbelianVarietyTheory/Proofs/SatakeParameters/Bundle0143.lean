@@ -95,7 +95,7 @@ theorem conj_cases (V : HSp D) {Q : HeightOneSpectrum (𝓞 D.host.E)} {e f : Fo
     · subst hx; simp only [Submodule.zero_mem]
     · exact (ht x hx).trans (h3 x hx).symm
 
-theorem hyp_conj (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) : hyp V (conjPl P) = hyp V P := by
+theorem hyp_conj (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) : GlobalTheory.Hk3.hyp V (conjPl P) = GlobalTheory.Hk3.hyp V P := by
   obtain ⟨e, f, h⟩ := (GlobalTheory.IdemSupport.supported_group_and_prime_idempotents V).2.1 P
   rcases conj_cases V h with ⟨-, h'⟩ | ⟨hc, -⟩
   · rw [GlobalTheory.SphLabelOps.hyp_eq h', GlobalTheory.SphLabelOps.hyp_eq h]
@@ -141,7 +141,7 @@ theorem isLab_conj (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) (d : List
     exact ⟨R, this⟩
 
 theorem sum_rep_conj (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) {M : Type} [AddCommGroup M] [Module ℂ M]
-    (π : GA D V →* Module.End ℂ M) (u : M) (hu : ∀ k ∈ hyp V P, π k u = u) (d : List ℤ) :
+    (π : GA D V →* Module.End ℂ M) (u : M) (hu : ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) (d : List ℤ) :
     ∑ γ ∈ rep V (conjPl P) d, π γ u = ∑ γ ∈ rep V P (dualLab d), π γ u := by
   by_cases hd : IsLab V (conjPl P) d
   · have h1 := sphOp_conj V P d _ (GlobalTheory.SphLabelOps.sphOp_rep hd)
@@ -149,7 +149,7 @@ theorem sum_rep_conj (V : HSp D) (P : HeightOneSpectrum (𝓞 D.host.E)) {M : Ty
   · have hd' : ¬ IsLab V P (dualLab d) := fun h => hd ((isLab_conj V P d).2 h)
     rw [Hk3.rep, dite_eq_right hd, Hk3.rep, dite_eq_right hd']
 
-theorem sph_conj : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), hyp V (conjPl P) = hyp V P ∧ (∀ d, IsLab V (conjPl P) d ↔ IsLab V P (dualLab d)) ∧ ∀ c, ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → opOf π (conjPl P) c u = opOf π P (dualC c) u := by
+theorem sph_conj : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), GlobalTheory.Hk3.hyp V (conjPl P) = GlobalTheory.Hk3.hyp V P ∧ (∀ d, IsLab V (conjPl P) d ↔ IsLab V P (dualLab d)) ∧ ∀ c, ∀ (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → opOf π (conjPl P) c u = opOf π P (dualC c) u := by
   intro D V P
   refine ⟨hyp_conj V P, isLab_conj V P, fun c M _ _ π u hu => ?_⟩
   rw [opOf, opOf, dualC, Finsupp.sum_mapDomain_index (h := fun d (z : ℂ) => z • ∑ γ ∈ rep V P d, π γ) (fun _ => zero_smul ℂ _) (fun _ _ _ => add_smul _ _ _)]
@@ -238,7 +238,7 @@ theorem isLab_of_shift {P : Pl D.host.E} (hP : conjPl P ≠ P) {V : HSp D} {d : 
   · exact (List.pairwise_map.1 hd).imp fun h => by omega
   · exact suppAt_inv (suppAt_mul (suppAt_inv hα) hs)
 
-theorem central_shift : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), conjPl P ≠ P → ∀ (d : List ℤ) (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ hyp V P, π k u = u) → opOf π P (Finsupp.single (splitLab V.rank V.rank) 1) (opOf π P (Finsupp.single d 1) u) = opOf π P (Finsupp.single (d.map fun x => x - 1) 1) u := by
+theorem central_shift : ∀ {D : D7} (V : HSp D) (P : Pl D.host.E), conjPl P ≠ P → ∀ (d : List ℤ) (M : Type) [AddCommGroup M] [Module ℂ M] (π : GA D V →* Module.End ℂ M) (u : M), (∀ k ∈ GlobalTheory.Hk3.hyp V P, π k u = u) → opOf π P (Finsupp.single (splitLab V.rank V.rank) 1) (opOf π P (Finsupp.single d 1) u) = opOf π P (Finsupp.single (d.map fun x => x - 1) 1) u := by
   classical
   intro D V P hP d M _ _ π u hu
   have c1 := (GlobalTheory.SphLabelOps.label_operators V P).1

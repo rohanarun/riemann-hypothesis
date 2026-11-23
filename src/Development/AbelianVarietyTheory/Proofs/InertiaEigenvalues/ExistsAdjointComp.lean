@@ -221,7 +221,7 @@ theorem eig_of_split {V : HSp D} {X : Type} [AddCommGroup X] [Module ℂ X] (π 
     {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [FiniteDimensional ℂ H] (E : H →ₗ[ℂ] X)
     (hinj : Function.Injective E) (ok : Pl D.host.E → Prop) (P : Pl D.host.E) (hok : ok P) (hP : Formalism.DivisionValues.conjPl P ≠ P)
     (h : Pl D.host.E → (List ℤ →₀ ℂ) → Module.End ℂ H) (hN : NormalFam ok h)
-    (ho : ∀ c x, opOf π P c (E x) = E (h P c x)) (hfix : ∀ x, ∀ k ∈ hyp V P, π k (E x) = E x)
+    (ho : ∀ c x, opOf π P c (E x) = E (h P c x)) (hfix : ∀ x, ∀ k ∈ GlobalTheory.Hk3.hyp V P, π k (E x) = E x)
     (s : List ℤ → ℂ) (y u : H) (hy0 : y = 0 → u = 0) (hy : ∀ d, IsLab V P d → h P (Finsupp.single d 1) y = s d • y)
     (hu : ∀ k, k ≤ V.rank → ∀ l : ℂ, h P (Finsupp.single (splitLab V.rank k) 1) y = l • y →
       h P (Finsupp.single (splitLab V.rank k) 1) u = l • u) (d : List ℤ) (hd : IsLab V P d) :

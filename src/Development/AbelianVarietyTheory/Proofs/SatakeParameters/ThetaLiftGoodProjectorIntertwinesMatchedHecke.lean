@@ -97,7 +97,7 @@ theorem integral_comb {G H X M ι κ : Type} [Group G] [Group H] [TopologicalSpa
 
 variable {D : D7}
 
-theorem one_mem_hyp (S : HSp D) (P : Pl D.host.E) : (1 : GA D S) ∈ hyp S P := by
+theorem one_mem_hyp (S : HSp D) (P : Pl D.host.E) : (1 : GA D S) ∈ GlobalTheory.Hk3.hyp S P := by
   obtain ⟨e, f', hef⟩ := (_root_.GlobalTheory.IdemSupport.supported_group_and_prime_idempotents S).2.1 P
   refine ⟨⟨one_mem _, fun y => ?_, by simp⟩, e, f', hef, fun i j => ?_⟩
   · have : finMat D.sp.cm.sig S.gram (1 : GA D S) = 1 := by
@@ -113,16 +113,16 @@ theorem theta_comb {ψ : AddChar (AF D.host.F) ℂ} {S T : HSp D} {χS χT : (AE
     (h𝓕 : IsFundamentalDomain (GQ S) 𝓕 ν) (hfix : VacFix ψ om P) {cS cT : List ℤ →₀ ℂ}
     (hM : Match ψ om P (dualC cS) cT) {X : Type} [NormedAddCommGroup X] [NormedSpace ℂ X] [FiniteDimensional ℂ X]
     (L : X →ₗ[ℂ] (WO S T → ℂ)) (hL : ∀ w, IsVacAt ψ S T P (L w)) (F : GA D S → X) (hc : Continuous F)
-    (hFl : ∀ γ ∈ GQ S, ∀ h, F (γ * h) = F h) (hFr : ∀ k ∈ hyp S P, ∀ h, F (h * k) = F h) (g : GA D T) :
+    (hFl : ∀ γ ∈ GQ S, ∀ h, F (γ * h) = F h) (hFr : ∀ k ∈ GlobalTheory.Hk3.hyp S P, ∀ h, F (h * k) = F h) (g : GA D T) :
     ∫ h in 𝓕, thetaKO om h g (L (∑ d ∈ cS.support, cS d • ∑ a ∈ Hk3.rep S P d, F (h * a))) ∂ν =
       hk T P cT (fun g => ∫ h in 𝓕, thetaKO om h g (L (F h)) ∂ν) g := by
   have : IsTopologicalGroup (GA D S) := Formalism.L2.GlobalTheoryTheory.GenusMassVolumes.Unfold.topGroupHA _ _
   have : BorelSpace (GA D S) := ⟨rfl⟩
   have : Countable (GQ S) := Formalism.L2.GlobalTheoryTheory.GenusMassVolumes.Unfold.countableGamma D.sp.cm.sig S.gram
   have : ν.IsMulRightInvariant := GlobalTheory.AdelicPointsUnimod.isMulRightInvariant_of_isHaarMeasure D S ν hν
-  have hfS : ∀ w, ∀ k ∈ hyp S P, om (k, 1) (L w) = L w := fun w k hk => hfix _ (hL w) k hk 1 (one_mem_hyp T P)
+  have hfS : ∀ w, ∀ k ∈ GlobalTheory.Hk3.hyp S P, om (k, 1) (L w) = L w := fun w k hk => hfix _ (hL w) k hk 1 (one_mem_hyp T P)
   rw [ThetaIntHecke.hk_apply]
-  refine integral_comb h𝓕 (hyp S P) om (LinearMap.proj (R := ℂ) (φ := fun _ : WO S T => ℂ) 0) L F cS.support cS
+  refine integral_comb h𝓕 (GlobalTheory.Hk3.hyp S P) om (LinearMap.proj (R := ℂ) (φ := fun _ : WO S T => ℂ) 0) L F cS.support cS
     (Hk3.rep S P) (fun d => Hk3.rep S P (dualLab d)) cT.support cT (Hk3.rep T P) (fun w γ hγ h g => ?_) hfS hFl hFr
     (fun g y => ?_) (fun d => ?_) (fun w => ?_) g
   · have := (GlobalTheory.thetaKO_rat_left_and_eigen_right ψ S T χS χT om hW _ (hL w).1).1 γ hγ 1 (one_mem _) h g

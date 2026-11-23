@@ -309,7 +309,7 @@ theorem reps_comap {G H : Type} [Group G] [Group H] [DecidableEq G] (ψ : G →*
       exact hinj (huniq (ψ g'') ⟨hγ', hg'K⟩)
 
 theorem sphOp_facts {P : HeightOneSpectrum (𝓞 D.host.E)} {e f : AE D} {Kv : Subgroup (GA D V)} {d : List ℤ}
-    {R : Finset (GA D V)} (hef : IsPrimeIdem P e f) (hK : hyp V P = Kv) (hR : SphOp V P d R) :
+    {R : Finset (GA D V)} (hef : IsPrimeIdem P e f) (hK : GlobalTheory.Hk3.hyp V P = Kv) (hR : SphOp V P d R) :
     (∀ γ ∈ R, γ ∈ GfC V ∧ SuppF V f γ) ∧ ∃ α, Reps Kv α R := by
   obtain ⟨e', f', ϖ, α, -, h', -, -, -, -, -, -, -, hs, hc⟩ := hR
   obtain ⟨-, rfl⟩ := ((GlobalTheory.IdemSupport.supported_group_and_prime_idempotents V).2.2.1 P e f hef).2.2.2.1 e' f' h'
@@ -325,7 +325,7 @@ open GlobalTheory.IdemSupport
 
 theorem spherical_scalar : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = maximalRealSubfield D.host.E)
     (Q : principalLevelFrame.RowPsi V n), StdPsi hF Q → ∀ (π : Formalism.L2.NG.FinTyp D.host.E n) Pr d B, SphOp V Pr d B →
-      ∃ a : ℂ, ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) →
+      ∃ a : ℂ, ∀ x ∈ π.S, (∀ κ, Q.ψ κ ∈ GlobalTheory.Hk3.hyp V Pr → Formalism.L2.NG.rt D.host.E n κ x = x) →
         principalLevelFrame.Hecke₃ Q B x = a • x := by
   intro D V n hF Q _ π Pr d B hB
   classical
@@ -336,10 +336,10 @@ theorem spherical_scalar : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = m
   obtain ⟨-, hsplit, hcomm0⟩ := SG.1 f hff hcf
   have hf0 : f * (1 - f) = 0 := by rw [mul_sub, mul_one, hff, sub_self]
   have hKvG : ∀ k ∈ Kv, k ∈ GfC V := fun k hk => by
-    have : k ∈ hyp V Pr := by rw [hKv]; exact hk
+    have : k ∈ GlobalTheory.Hk3.hyp V Pr := by rw [hKv]; exact hk
     exact this.1.1
   have hKvS : ∀ k ∈ Kv, SuppF V f k := fun k hk => by
-    have : k ∈ hyp V Pr := by rw [hKv]; exact hk
+    have : k ∈ GlobalTheory.Hk3.hyp V Pr := by rw [hKv]; exact hk
     rw [GlobalTheory.SphLabelOps.hyp_eq hef] at this
     exact this.2
   have hon : ∀ g ∈ GfC V, ∃ y, Q.ψ y = g := fun g hg => Q.onto g hg
@@ -360,7 +360,7 @@ theorem spherical_scalar : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = m
     Q.inj (by rw [map_mul, map_mul]; exact (hcomm0 (1 - f) _ _ hf0 (hKvS _ hk) hb).eq)
 
   have hlab : ∀ a ∈ Loc, ∃ dd, IsLab V Pr dd ∧
-      ∀ γ ∈ GlobalTheory.Hk3.rep V Pr dd, ∃ k₁ ∈ hyp V Pr, ∃ k₂ ∈ hyp V Pr, γ = k₁ * Q.ψ a * k₂ := fun a ha => by
+      ∀ γ ∈ GlobalTheory.Hk3.rep V Pr dd, ∃ k₁ ∈ GlobalTheory.Hk3.hyp V Pr, ∃ k₂ ∈ GlobalTheory.Hk3.hyp V Pr, γ = k₁ * Q.ψ a * k₂ := fun a ha => by
     obtain ⟨dd, h1, h2, -⟩ := (GlobalTheory.SphLabelOps.label_operators V Pr).2.2.2.2 e f (Q.ψ a) hef ha
     exact ⟨dd, h1, h2⟩
   choose! dd hdd1 hdd2 using hlab
@@ -404,13 +404,13 @@ theorem spherical_scalar : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = m
   have hBr : ∀ γ ∈ B, ∃ y, Q.ψ y = γ := fun γ hγ => hon γ (hBG γ hγ).1
 
   have hfixA : ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ k ∈ K, rtHom D.host.E n k x = x) →
-      ∀ k ∈ hyp V Pr, rtA V k (ext0 Q x) = ext0 Q x := by
+      ∀ k ∈ GlobalTheory.Hk3.hyp V Pr, rtA V k (ext0 Q x) = ext0 Q x := by
     intro x hx k hk
     have hk' : k ∈ Kv := by rw [hKv] at hk; exact hk
     obtain ⟨κ, rfl⟩ := hon k (hKvG k hk')
     rw [← extendByZeroThroughUnitaryFrame_right_translate]
     exact congrArg _ (hx κ hk')
-  have hfixBack : ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ k ∈ hyp V Pr, rtA V k (ext0 Q x) = ext0 Q x) →
+  have hfixBack : ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ k ∈ GlobalTheory.Hk3.hyp V Pr, rtA V k (ext0 Q x) = ext0 Q x) →
       ∀ k ∈ K, rtHom D.host.E n k x = x := by
     intro x hx k hk
     apply extendByZeroThroughUnitaryFrame_injective Q
@@ -427,7 +427,7 @@ theorem spherical_scalar : ∀ {D : D7} {V : HSp D} {n : ℕ} (hF : D.host.F = m
     intro a ha x
     rw [extendByZeroThroughUnitaryFrame_hecke Q _ (hrepG a ha), opOf_single]
   have hopfix : ∀ c, ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, (∀ k ∈ K, rtHom D.host.E n k x = x) →
-      ∀ k ∈ hyp V Pr, rtA V k (GlobalTheory.Hk3.opOf (rtA V) Pr c (ext0 Q x)) = GlobalTheory.Hk3.opOf (rtA V) Pr c (ext0 Q x) :=
+      ∀ k ∈ GlobalTheory.Hk3.hyp V Pr, rtA V k (GlobalTheory.Hk3.opOf (rtA V) Pr c (ext0 Q x)) = GlobalTheory.Hk3.opOf (rtA V) Pr c (ext0 Q x) :=
     fun c x hx => (GlobalTheory.SphLabelOps.label_operators V Pr).2.1 c _ (rtA V) _ (hfixA x hx)
 
   have hTB : ∀ x : Formalism.AUTREP.GAf D.host.E n → ℂ, principalLevelFrame.Hecke₃ Q B x = ∑ γ ∈ B, rtHom D.host.E n (principalLevelFrame.pre Q γ) x := by

@@ -402,7 +402,7 @@ theorem isotE_sub_eigenpart : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0
     have hB' := GlobalTheory.Hk3.OpsRows.sphOp_rep hdW
     obtain ⟨a, ha⟩ := _root_.GlobalTheory.SphScalar.spherical_scalar hF (PW i0) (hPW i0) π P d _ hB'
     obtain ⟨⟨x0, hx0S, hx0ne, hx0T⟩, hE2, -⟩ := hEig
-    have hx0fix : ∀ κ, (PW i0).ψ κ ∈ hyp (Wc D i0) P → Formalism.L2.NG.rt D.host.E n κ x0 = x0 := by
+    have hx0fix : ∀ κ, (PW i0).ψ κ ∈ GlobalTheory.Hk3.hyp (Wc D i0) P → Formalism.L2.NG.rt D.host.E n κ x0 = x0 := by
       intro κ hκ
       have e0 := hx0T κ (levW.1 _ hκ).1
       simp only [(levW.1 _ hκ).2, one_smul] at e0
@@ -412,11 +412,11 @@ theorem isotE_sub_eigenpart : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0
       rw [hE2 P d _ ((levW.2.1 SF d _).2 ⟨(hoff SF hSF P).2 hP, hB'⟩) x0 hx0S hx0T] at e1
       exact smul_left_injective ℂ hx0ne e1.symm
     obtain ⟨htr1, htr2⟩ := _root_.GlobalTheory.FrameTransport.sph_eigen_frame_indep hF PY (PW i0) hPY (hPW i0) P d
-    have hvec : ∀ y ∈ (principalLevelFrame.FinTyp.conjT π).S, (∀ κ, PY.ψ κ ∈ hyp (Yc D 0) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
+    have hvec : ∀ y ∈ (principalLevelFrame.FinTyp.conjT π).S, (∀ κ, PY.ψ κ ∈ GlobalTheory.Hk3.hyp (Yc D 0) P → Formalism.L2.NG.rt D.host.E n κ y = y) →
         principalLevelFrame.Hecke₃ PY (GlobalTheory.Hk3.rep (Yc D 0) P d) y = star (c P d) • y := by
       intro y hy hfy
       have hy' : (fun g => star (y g)) ∈ π.S := hy
-      have hfy' : ∀ κ, PY.ψ κ ∈ hyp (Yc D 0) P →
+      have hfy' : ∀ κ, PY.ψ κ ∈ GlobalTheory.Hk3.hyp (Yc D 0) P →
           Formalism.L2.NG.rt D.host.E n κ (fun g => star (y g)) = fun g => star (y g) := by
         intro κ hκ
         rw [← principalLevelFrame.conj_rt, hfy κ hκ]
@@ -426,7 +426,7 @@ theorem isotE_sub_eigenpart : ∀ {D : D7} {G : Type} [Group G] [Fintype G] {Pl0
       have e2 := congrArg star (congrFun e g)
       simp only [Pi.smul_apply, smul_eq_mul, star_star, star_mul'] at e2
       rw [Pi.smul_apply, smul_eq_mul, e2, mul_comm]
-    have hfixU : ∀ k ∈ hyp (Yc D 0) P, postOn (R.MY 0) (principalLevelFrame.rtA k) (R.HE.e x) = R.HE.e x := by
+    have hfixU : ∀ k ∈ GlobalTheory.Hk3.hyp (Yc D 0) P, postOn (R.MY 0) (principalLevelFrame.rtA k) (R.HE.e x) = R.HE.e x := by
       intro k hk
       ext1 v
       rw [postOn_apply]
