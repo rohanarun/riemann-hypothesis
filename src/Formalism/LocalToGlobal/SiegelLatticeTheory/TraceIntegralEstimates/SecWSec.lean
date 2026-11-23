@@ -16,6 +16,8 @@ namespace Formalism.L2.S.Pv.SecW
 
 open Formalism.L2.SG.HidaSetting Formalism.L2.SG.RealObj Formalism.L2.SG.RealObj.InfCut Formalism.L2.SG.RealObj.InfCut.NilradicalHermitianFrames.NH
 
+attribute [-instance] PI.WSF.instMeasurableSpaceMat
+
 variable {n r k : ℕ} {ε : Fin n → Bool} {e f : Fin r → Fin n → ℂ} {z z' : Fin n → ℂ}
   {w w' : Fin k → Fin n → ℂ} {sc T T' : ℝ}
 
