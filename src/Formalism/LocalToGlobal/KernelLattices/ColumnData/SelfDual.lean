@@ -193,8 +193,8 @@ theorem alg_step (cc : Ideal (𝓞 D.host.K)) (hcc : cc ≠ ⊥) {N N' : ℕ}
 variable (D) in
 theorem coord (δ : ℂ) (hδ : δ ≠ 0) (u : D.what₂.Tau → ℂ)
     (hu : ∀ y : D.host.E, ∃ k : D.host.K,
-      ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ y = δ * D.host.φ₀ (k : D.host.E)) :
-    ∃ x : D.host.E, ∀ τ, u τ = δ * Formalism.MainNotions.TaylorLogMetric.embT D τ x := by
+      ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ y = δ * D.host.φ₀ (k : D.host.E)) :
+    ∃ x : D.host.E, ∀ τ, u τ = δ * Formalism.L2.Ker.Cd.embT D τ x := by
   choose g hg using hu
   have ginj : ∀ k k' : D.host.K, δ * D.host.φ₀ (k : D.host.E) = δ * D.host.φ₀ (k' : D.host.E) →
       k = k' := fun k k' h => Subtype.ext (D.host.φ₀.injective (mul_left_cancel₀ hδ h))
@@ -203,8 +203,8 @@ theorem coord (δ : ℂ) (hδ : δ ≠ 0) (u : D.what₂.Tau → ℂ)
       map_add' := fun y1 y2 => by
         apply ginj
         calc δ * D.host.φ₀ (g (y1 + y2) : D.host.E)
-            = ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ (y1 + y2) := (hg _).symm
-          _ = ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ y1 + ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ y2 := by
+            = ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ (y1 + y2) := (hg _).symm
+          _ = ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ y1 + ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ y2 := by
               simp only [map_add (f := _), mul_add, Finset.sum_add_distrib]
           _ = δ * D.host.φ₀ (g y1 : D.host.E) + δ * D.host.φ₀ (g y2 : D.host.E) := by
               rw [hg, hg]
@@ -213,8 +213,8 @@ theorem coord (δ : ℂ) (hδ : δ ≠ 0) (u : D.what₂.Tau → ℂ)
       map_smul' := fun k y => by
         apply ginj
         calc δ * D.host.φ₀ (g (k • y) : D.host.E)
-            = ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ (k • y) := (hg _).symm
-          _ = D.host.φ₀ (k : D.host.E) * ∑ τ, u τ * Formalism.MainNotions.TaylorLogMetric.embT D τ y := by
+            = ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ (k • y) := (hg _).symm
+          _ = D.host.φ₀ (k : D.host.E) * ∑ τ, u τ * Formalism.L2.Ker.Cd.embT D τ y := by
               rw [Finset.mul_sum]
               refine Finset.sum_congr rfl fun τ _ => ?_
               rw [Algebra.smul_def, IntermediateField.algebraMap_apply, map_mul,
@@ -231,8 +231,8 @@ theorem coord (δ : ℂ) (hδ : δ ≠ 0) (u : D.what₂.Tau → ℂ)
     rw [Algebra.traceForm_apply] at this
     exact this
   refine ⟨x, ?_⟩
-  set u' : D.what₂.Tau → ℂ := fun τ => u τ - δ * Formalism.MainNotions.TaylorLogMetric.embT D τ x with hu'
-  have h0 : ∀ y : D.host.E, ∑ τ, u' τ * Formalism.MainNotions.TaylorLogMetric.embT D τ y = 0 := by
+  set u' : D.what₂.Tau → ℂ := fun τ => u τ - δ * Formalism.L2.Ker.Cd.embT D τ x with hu'
+  have h0 : ∀ y : D.host.E, ∑ τ, u' τ * Formalism.L2.Ker.Cd.embT D τ y = 0 := by
     intro y
     have h1 := FL.sum_tau_trace D (x * y)
     rw [hx] at h1
@@ -267,7 +267,7 @@ theorem coord (δ : ℂ) (hδ : δ ≠ 0) (u : D.what₂.Tau → ℂ)
   have hτ := (Finset.sum_eq_zero_iff_of_nonneg (fun τ _ => Complex.normSq_nonneg (u' τ))).mp hsq'
     τ (Finset.mem_univ _)
   rw [Complex.normSq_eq_zero] at hτ
-  have : u τ - δ * Formalism.MainNotions.TaylorLogMetric.embT D τ x = 0 := hτ
+  have : u τ - δ * Formalism.L2.Ker.Cd.embT D τ x = 0 := hτ
   exact sub_eq_zero.mp this
 
 end Formalism.L2.Ker.Cd.IntegralLatticeDensity.SD
