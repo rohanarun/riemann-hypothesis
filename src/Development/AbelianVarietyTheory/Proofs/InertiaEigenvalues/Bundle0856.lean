@@ -46,7 +46,7 @@ namespace GlobalTheory.LevelType
 
 open GlobalTheory.SmGL.DepthZero ValuativeRel Matrix
 
-theorem factor_eq_det_of_isSubquotient_jac : ∀ (F : Type) [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F] (n β : Type) [Fintype n] [DecidableEq n] [Fintype β] [LinearOrder β] (c : β → ℕ) (f : (Σ j, Fin (c j)) ≃ n) (V : Type) [AddCommGroup V] [Module ℂ V] (σ : Representation ℂ (GL n F) V) (ψ : Fˣ →* ℂˣ) (s : ∀ j, IrrRep (GL (Fin (c j)) F)), Nonempty (σ.Equiv (detRep n ψ)) → IsSubquotient (piTensor fun j => (s j).ρ) (jac f σ) → ∀ j, ∀ g ∈ KO F (Fin (c j)), ∀ v, (s j).ρ g v = (ψ (Matrix.GeneralLinearGroup.det g) : ℂ) • v := by
+theorem factor_eq_det_of_isSubquotient_jac : ∀ (F : Type) [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F] (n β : Type) [Fintype n] [DecidableEq n] [Fintype β] [LinearOrder β] (c : β → ℕ) (f : (Σ j, Fin (c j)) ≃ n) (V : Type) [AddCommGroup V] [Module ℂ V] (σ : Representation ℂ (GL n F) V) (ψ : Fˣ →* ℂˣ) (s : ∀ j, IrrRep (GL (Fin (c j)) F)), Nonempty (σ.Equiv (detRep n ψ)) → IsSubquotient (piTensor fun j => (s j).ρ) (GlobalTheory.SmGL.jac f σ) → ∀ j, ∀ g ∈ KO F (Fin (c j)), ∀ v, (s j).ρ g v = (ψ (Matrix.GeneralLinearGroup.det g) : ℂ) • v := by
   intro F _ _ _ _ n β _ _ _ _ c f V _ _ σ ψ s ⟨E⟩ hsub j g hg v
   classical
 
@@ -83,7 +83,7 @@ theorem factor_eq_det_of_isSubquotient_jac : ∀ (F : Type) [Field F] [Valuative
     rw [deltaHalf_apply]
     exact Finset.prod_eq_one fun b _ => isUnram_absPow F _ _ (hval (hlK b))
 
-  have hjac : ∀ x, jac f σ l x = (ψ (GeneralLinearGroup.det g) : ℂ) • x := by
+  have hjac : ∀ x, GlobalTheory.SmGL.jac f σ l x = (ψ (GeneralLinearGroup.det g) : ℂ) • x := by
     intro x
     obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ x
     rw [jac_mk, hδ, inv_one, Units.val_one, one_smul, hσ, hdet, Submodule.Quotient.mk_smul]
@@ -183,19 +183,19 @@ theorem isSubquotient_comp' {G G' V W : Type} [Group G] [Group G'] [AddCommGroup
   exact ⟨⟨S.toSubmodule, fun g _ hv => S.apply_mem_toSubmodule (ψ g) hv⟩,
     ⟨f.toLinearMap, fun g => f.isIntertwining' (ψ g)⟩, hf⟩
 
-theorem isSubquotient_of_empty_second_block : ∀ (F : Type) [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F] (r : ℕ) (c : Bool → ℕ) (f : (Σ j, Fin (c j)) ≃ Fin r) (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin r) F) V) (s : ∀ j, IrrRep (GL (Fin (c j)) F)), c true = 0 → IsSubquotient (piTensor fun j => (s j).ρ) (jac f π) → ∃ φ : Fin r ≃ Fin (c false), IsSubquotient ((s false).ρ.comp (reix F φ) : Representation ℂ (GL (Fin r) F) (s false).V) π := by
+theorem isSubquotient_of_empty_second_block : ∀ (F : Type) [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F] (r : ℕ) (c : Bool → ℕ) (f : (Σ j, Fin (c j)) ≃ Fin r) (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin r) F) V) (s : ∀ j, IrrRep (GL (Fin (c j)) F)), c true = 0 → IsSubquotient (piTensor fun j => (s j).ρ) (GlobalTheory.SmGL.jac f π) → ∃ φ : Fin r ≃ Fin (c false), IsSubquotient ((s false).ρ.comp (reix F φ) : Representation ℂ (GL (Fin r) F) (s false).V) π := by
   intro F _ _ _ _ r c f V _ _ π s hc hsub
   refine ⟨(falseEquiv f hc).symm, ?_⟩
   let ι : GL (Fin r) F →* Levi F (fun j => Fin (c j)) :=
     (MonoidHom.mulSingle (fun j => GL (Fin (c j)) F) false).comp (reix F (falseEquiv f hc).symm)
   have hι : ∀ h, leviEmb F f (ι h) = h := fun h => leviEmb_mulSingle f hc h
 
-  let q : π.IntertwiningMap ((jac f π).comp ι) :=
+  let q : π.IntertwiningMap ((GlobalTheory.SmGL.jac f π).comp ι) :=
     ⟨(twKer π (unipRad F f) 1).mkQ, fun h => by
       ext w
-      show Submodule.Quotient.mk (π h w) = jac f π (ι h) (Submodule.Quotient.mk w)
+      show Submodule.Quotient.mk (π h w) = GlobalTheory.SmGL.jac f π (ι h) (Submodule.Quotient.mk w)
       rw [jac_mk, deltaHalf_eq_one hc, inv_one, Units.val_one, one_smul, hι]⟩
-  have h3 : IsSubquotient ((jac f π).comp ι) π :=
+  have h3 : IsSubquotient ((GlobalTheory.SmGL.jac f π).comp ι) π :=
     IsSubquotient.of_surjective q (Submodule.mkQ_surjective _)
   have h2 := isSubquotient_comp' hsub ι
 

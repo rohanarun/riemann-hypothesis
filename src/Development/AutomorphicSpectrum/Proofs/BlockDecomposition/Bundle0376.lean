@@ -415,14 +415,14 @@ variable {n : Type} [Fintype n] [DecidableEq n]
 
 def jacDrop (hm : StrictMono o) (hne : ∀ j, d j ≠ 0 → j ∈ Set.range o)
     (he : ∀ a t, e' ⟨a, t⟩ = e ⟨o a, t⟩) (π : Representation ℂ (GL n k) V) :
-    (jac e π).Equiv
-      ((jac e' π).comp (GlobalTheory.CompanionTheory.FineProd.dropHom (k := k) d o) :
+    (GlobalTheory.SmGL.jac e π).Equiv
+      ((GlobalTheory.SmGL.jac e' π).comp (GlobalTheory.CompanionTheory.FineProd.dropHom (k := k) d o) :
         Representation ℂ (Levi k fun j => Fin (d j)) _) :=
   have h3 : twKer π (unipRad k e) 1 = twKer π (unipRad k e') 1 := by rw [unipRad_eq hm hne he]
   .mk (Submodule.quotEquivOfEq _ _ h3) fun g => by
     refine Submodule.linearMap_qext _ (LinearMap.ext fun v => ?_)
-    show Submodule.quotEquivOfEq _ _ h3 (jac e π g (Submodule.Quotient.mk v)) =
-      jac e' π (GlobalTheory.CompanionTheory.FineProd.dropHom (k := k) d o g) (Submodule.Quotient.mk v)
+    show Submodule.quotEquivOfEq _ _ h3 (GlobalTheory.SmGL.jac e π g (Submodule.Quotient.mk v)) =
+      GlobalTheory.SmGL.jac e' π (GlobalTheory.CompanionTheory.FineProd.dropHom (k := k) d o g) (Submodule.Quotient.mk v)
     rw [jac_mk, jac_mk, map_smul, deltaHalf_drop hm hne, leviEmb_eq hm he]
     rfl
 
@@ -450,7 +450,7 @@ open GlobalTheory.PRep GlobalTheory.SmGL ValuativeRel PositivityTheory.Lbc
 
 namespace GlobalTheory.CompanionTheory.Casselman
 
-theorem mk_mem_fixed_jac : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (N h : ℕ) (d : Fin h → ℕ) (hd : ∑ a, d a = N) (J : Subgroup (GL (Fin N) k)), IsOpen (J : Set (GL (Fin N) k)) → IsCompact (J : Set (GL (Fin N) k)) → HasIwahoriFact k N J d hd → (∀ a, 0 < d a) → ∀ (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsSmooth π → ∀ v : fixed π J, (Submodule.Quotient.mk (v : V) : Jacquet π (unipRad k (stdBlocks d hd))) ∈ fixed (jac (stdBlocks d hd) π) (KM k N J d hd) := by
+theorem mk_mem_fixed_jac : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (N h : ℕ) (d : Fin h → ℕ) (hd : ∑ a, d a = N) (J : Subgroup (GL (Fin N) k)), IsOpen (J : Set (GL (Fin N) k)) → IsCompact (J : Set (GL (Fin N) k)) → HasIwahoriFact k N J d hd → (∀ a, 0 < d a) → ∀ (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsSmooth π → ∀ v : fixed π J, (Submodule.Quotient.mk (v : V) : Jacquet π (unipRad k (stdBlocks d hd))) ∈ fixed (GlobalTheory.SmGL.jac (stdBlocks d hd) π) (KM k N J d hd) := by
   intro k _ _ _ _ N h d hd J _ hc _ _ V _ _ π _ v x
   have hx : leviEmb k (stdBlocks d hd) (x : Levi k (Bl d)) ∈ J := x.2
   have hv : π (leviEmb k (stdBlocks d hd) (x : Levi k (Bl d))) (v : V) = (v : V) := by

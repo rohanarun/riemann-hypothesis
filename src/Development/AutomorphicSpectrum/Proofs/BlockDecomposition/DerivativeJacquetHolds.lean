@@ -294,7 +294,7 @@ abbrev iota (n t : ℕ) : GL (Fin n) k →* Levi k (fun a => Fin (dd n t a)) :=
 theorem isSubquotient_twist_deriv (ψ : AddChar k Circle) (n j : ℕ) {V : Type} [AddCommGroup V] [Module ℂ V]
     (π : Representation ℂ (GL (Fin (n + j + 1)) k) V) :
     IsSubquotient (twist (GlobalTheory.BZMir.deriv k ψ j π) (detChar (Fin n) (absPow k (-(((j : ℂ) + 1) / 2)))))
-      ((jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) :
+      ((GlobalTheory.SmGL.jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) :
         Representation ℂ (GL (Fin n) k) _) := by
   obtain ⟨L, hL, hLe⟩ := exists_jac_deriv ψ n j π
   refine isSubquotient_of_quot _ _ _ L hL fun g x => ?_
@@ -303,7 +303,7 @@ theorem isSubquotient_twist_deriv (ψ : AddChar k Circle) (n j : ℕ) {V : Type}
     (delta_mulSingle n j g)
   refine Eq.trans ?_ h1
   have h2 := hLe g v
-  have h3 : (jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) g (Submodule.Quotient.mk v) =
+  have h3 : (GlobalTheory.SmGL.jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) g (Submodule.Quotient.mk v) =
       (((deltaHalf k (fun a => Fin (dd n (j + 1) a))
         (Pi.mulSingle (M := fun a => GL (Fin (dd n (j + 1) a)) k) (0 : Fin 2) g))⁻¹ : ℂˣ) : ℂ) •
       Submodule.Quotient.mk (π (leviEmb k (stdBlocks (dd n (j + 1)) (dd_sum n j))

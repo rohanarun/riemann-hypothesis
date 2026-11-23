@@ -158,23 +158,23 @@ theorem stage : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [
     (π : Representation ℂ (GL (Fin n) k) V), IsSmooth π →
     ∀ (X : Fin s → Type) [∀ a, AddCommGroup (X a)] [∀ a, Module ℂ (X a)]
     (ρ : ∀ a, Representation ℂ (GL (Fin (d a)) k) (X a)), (∀ a, IsSmooth (ρ a)) →
-    IsSubquotient (piTensor ρ) (jac e π) →
+    IsSubquotient (piTensor ρ) (GlobalTheory.SmGL.jac e π) →
     ∀ (t : Fin s → ℕ) (d' : ∀ a, Fin (t a) → ℕ) (e' : ∀ a, (Σ b, Fin (d' a b)) ≃ Fin (d a))
     (Y : ∀ a, Fin (t a) → Type) [∀ a b, AddCommGroup (Y a b)] [∀ a b, Module ℂ (Y a b)]
     (ρ' : ∀ a b, Representation ℂ (GL (Fin (d' a b)) k) (Y a b)),
-    (∀ a, IsSubquotient (piTensor (ρ' a)) (jac (e' a) (ρ a))) →
+    (∀ a, IsSubquotient (piTensor (ρ' a)) (GlobalTheory.SmGL.jac (e' a) (ρ a))) →
     ∃ E : (Σ c : Fin (∑ a, t a), Fin (d' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2)) ≃ Fin n,
-      IsSubquotient (piTensor fun c => ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (jac E π) := _root_.GlobalTheory.JacStages.isSubquotient_jac_refine
+      IsSubquotient (piTensor fun c => ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (GlobalTheory.SmGL.jac E π) := _root_.GlobalTheory.JacStages.isSubquotient_jac_refine
 
 theorem degZero : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
     (N : ℕ), N = 0 → ∀ (V : Type) [AddCommGroup V] [Module ℂ V] [Nontrivial V]
     (π : Representation ℂ (GL (Fin N) k) V) (d : Fin 0 → ℕ) (X : Fin 0 → Type) [∀ a, AddCommGroup (X a)]
     [∀ a, Module ℂ (X a)] (ρ : ∀ a, Representation ℂ (GL (Fin (d a)) k) (X a)) (e : (Σ a, Fin (d a)) ≃ Fin N),
-    IsSubquotient (piTensor ρ) (jac e π) := _root_.GlobalTheory.piTensor_isSubquotient_jac_degZero
+    IsSubquotient (piTensor ρ) (GlobalTheory.SmGL.jac e π) := _root_.GlobalTheory.piTensor_isSubquotient_jac_degZero
 
 theorem oneBlock : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
     (N : ℕ) (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V)
-    (e : (Σ _ : Fin 1, Fin N) ≃ Fin N), IsSubquotient (piTensor fun _ : Fin 1 => π) (jac e π) := _root_.GlobalTheory.SingleBlockJac.isSubquotient_piTensor_jac
+    (e : (Σ _ : Fin 1, Fin N) ≃ Fin N), IsSubquotient (piTensor fun _ : Fin 1 => π) (GlobalTheory.SmGL.jac e π) := _root_.GlobalTheory.SingleBlockJac.isSubquotient_piTensor_jac
 
 open GlobalTheory.Published GlobalTheory.LocGL.SupportUnique
 
@@ -183,7 +183,7 @@ variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchim
 theorem finiteRing_sq_sub_mul_sq_eq_of_card (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFiniteness) (hZ : ZelevinskyPolynomialRing) (N : ℕ) :
     ∀ (x : IrrGL (k := k)), x.1 = N → ∀ s : Multiset (IrrGL (k := k)), HasSupport x.rep s →
       ∃ (r : ℕ) (u : Fin r → IrrGL (k := k)) (e : (Σ a, Fin (u a).1) ≃ Fin x.1),
-        (∀ a, u a ∈ s) ∧ IsSubquotient (piTensor fun a => (u a).rep) (jac e x.rep) := by
+        (∀ a, u a ∈ s) ∧ IsSubquotient (piTensor fun a => (u a).rep) (GlobalTheory.SmGL.jac e x.rep) := by
   induction N using Nat.strong_induction_on with
   | _ N ih =>
     rintro x rfl s hs
@@ -200,7 +200,7 @@ theorem finiteRing_sq_sub_mul_sq_eq_of_card (hG : GeometricLemma) (hBZ : Bernste
         ¬ Subsingleton (Jacquet x.rep (unipRad k e)) := by
       by_contra! hn
       exact hc ⟨x.2.rep.smooth, hn⟩
-    obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (jac e x.rep)
+    obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (GlobalTheory.SmGL.jac e x.rep)
       (not_subsingleton_iff_nontrivial.1 hJ)
     have hτsm : IsSmooth τ := hτs.isSmooth (isSmooth_jac e x.2.rep.smooth)
     have hy : ∀ j, ∃ y : IrrRep (GL (Fin (d j)) k), IsSubquotient y.ρ
@@ -247,7 +247,7 @@ theorem finiteRing_sq_sub_mul_sq_eq_of_card (hG : GeometricLemma) (hBZ : Bernste
     have ψ := fun j => (hyσ j).some
     let χ : (piTensor fun j => (z j).rep).Equiv τ :=
       (piTensorEquiv fun j => ((ψ j).trans (IrrGL.equivOf (y j).ρ (y j).smooth (y j).irr)).symm).trans φ
-    have hz : IsSubquotient (piTensor fun j => (z j).rep) (jac e x.rep) :=
+    have hz : IsSubquotient (piTensor fun j => (z j).rep) (GlobalTheory.SmGL.jac e x.rep) :=
       (IsSubquotient.of_injective χ.toIntertwiningMap χ.toLinearEquiv.injective).trans hτs
     obtain ⟨E', hE'⟩ := stage k x.1 r d e _ x.rep x.2.rep.smooth _ (fun j => (z j).rep) (fun j => (z j).2.rep.smooth) hz
       T (fun a b => (u a b).1) E _ (fun a b => (u a b).rep) hsub
@@ -255,7 +255,7 @@ theorem finiteRing_sq_sub_mul_sq_eq_of_card (hG : GeometricLemma) (hBZ : Bernste
     exact Multiset.mem_of_le (Finset.single_le_sum (f := t) (fun _ _ => Multiset.zero_le _)
       (Finset.mem_univ (finSigmaFinEquiv.symm c).1)) (hu _ _)
 
-theorem exists_isSubquotient_jac_of_hasSupport : GlobalTheory.Published.GeometricLemma → GlobalTheory.Published.BernsteinZelevinskyFiniteness → GlobalTheory.Published.ZelevinskyPolynomialRing → ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] [CharZero k] (x : IrrGL (k := k)) (s : Multiset (IrrGL (k := k))), HasSupport x.rep s → ∃ (r : ℕ) (u : Fin r → IrrGL (k := k)) (e : (Σ a, Fin (u a).1) ≃ Fin x.1), (∀ a, u a ∈ s) ∧ IsSubquotient (piTensor fun a => (u a).rep) (jac e x.rep) :=
+theorem exists_isSubquotient_jac_of_hasSupport : GlobalTheory.Published.GeometricLemma → GlobalTheory.Published.BernsteinZelevinskyFiniteness → GlobalTheory.Published.ZelevinskyPolynomialRing → ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] [CharZero k] (x : IrrGL (k := k)) (s : Multiset (IrrGL (k := k))), HasSupport x.rep s → ∃ (r : ℕ) (u : Fin r → IrrGL (k := k)) (e : (Σ a, Fin (u a).1) ≃ Fin x.1), (∀ a, u a ∈ s) ∧ IsSubquotient (piTensor fun a => (u a).rep) (GlobalTheory.SmGL.jac e x.rep) :=
   fun hG hBZ hZ _ _ _ _ _ _ x s hs => finiteRing_sq_sub_mul_sq_eq_of_card hG hBZ hZ x.1 x rfl s hs
 
 end GlobalTheory.CuspQuot

@@ -359,7 +359,7 @@ theorem depthZeroInduction : GlobalTheory.Published.GeometricLemma → GlobalThe
     have h3 := mem_fixed.1 hy1 g hg
     have h4 : deltaHalf k (fun a => Fin (u a).1) g = 1 :=
       deltaHalf_of_mem_leviK fun a _ => StepData.KOne_le_KO (hg a trivial)
-    simpa [jac, twist_apply, h4] using h3
+    simpa [GlobalTheory.SmGL.jac, twist_apply, h4] using h3
   obtain ⟨v, hv, rfl⟩ := _root_.GlobalTheory.LocGL.ProRadOnto.exists_proRad_fixed_mk_eq k e x.rep ((hBZ k).1 _ _ x.rep hxs x.2.rep.irr) y hy2
   refine (Submodule.ne_bot_iff _).2 ⟨v, mem_fixed.2 fun g hg => mem_fixed.1 hv g (KOne_le_proRad e hg), ?_⟩
   rintro rfl

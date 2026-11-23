@@ -83,7 +83,7 @@ theorem twKer_eq_bot {V : Type} [AddCommGroup V] [Module ℂ V] {N : ℕ} (e : (
   simp
 
 def toJac {V : Type} [AddCommGroup V] [Module ℂ V] (N : ℕ) (π : Representation ℂ (GL (Fin N) k) V) :
-    (piTensor fun _ : Fin 1 => π).IntertwiningMap (jac (GlobalTheory.JacTensor.oneBlock N) π) where
+    (piTensor fun _ : Fin 1 => π).IntertwiningMap (GlobalTheory.SmGL.jac (GlobalTheory.JacTensor.oneBlock N) π) where
   toLinearMap := Submodule.mkQ _ ∘ₗ (PiTensorProduct.subsingletonEquiv (R := ℂ) (s := fun _ : Fin 1 => V) (0 : Fin 1)).toLinearMap
   isIntertwining' g := by
     refine LinearMap.ext fun x => ?_

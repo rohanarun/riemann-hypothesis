@@ -341,8 +341,8 @@ theorem jac_refinePlace_equiv : ∀ (k : Type) [Field k] [ValuativeRel k] [Topol
     (s n : ℕ) (d : Fin s → ℕ) (e : (Σ a, Fin (d a)) ≃ Fin n) (t : Fin s → ℕ) (d' : ∀ a, Fin (t a) → ℕ)
     (e' : ∀ a, (Σ b, Fin (d' a b)) ≃ Fin (d a)) (V : Type) [AddCommGroup V] [Module ℂ V]
     (π : Representation ℂ (GL (Fin n) k) V),
-    Nonempty (Representation.Equiv ((jac (refinePlace e e') π).comp (flatHom fun a b => GL (Fin (d' a b)) k))
-      (relJacD e' (jac e π))) := by
+    Nonempty (Representation.Equiv ((GlobalTheory.SmGL.jac (refinePlace e e') π).comp (flatHom fun a b => GL (Fin (d' a b)) k))
+      (relJacD e' (GlobalTheory.SmGL.jac e π))) := by
   intro k _ _ _ _ s n d e t d' e' V _ _ π
   classical
   set A := twKer π (unipRad k e) 1 with hA
@@ -368,7 +368,7 @@ theorem jac_refinePlace_equiv : ∀ (k : Type) [Field k] [ValuativeRel k] [Topol
     rw [SetLike.mem_coe, this]
     exact Submodule.add_mem_sup (Submodule.subset_span ⟨⟨u', hu'⟩, v, rfl⟩)
       (Submodule.subset_span ⟨⟨l, hl⟩, π u' v, rfl⟩)
-  have hK : twKer (jac e π) (relUnipD k e') 1 = B.map A.mkQ := by
+  have hK : twKer (GlobalTheory.SmGL.jac e π) (relUnipD k e') 1 = B.map A.mkQ := by
     have hB' : B.map A.mkQ = C.map A.mkQ := by
       rw [le_antisymm hBAC (sup_le hAB hCB), Submodule.map_sup, Submodule.mkQ_map_self, bot_sup_eq]
     rw [hB', hC, Submodule.map_span]
@@ -384,7 +384,7 @@ theorem jac_refinePlace_equiv : ∀ (k : Type) [Field k] [ValuativeRel k] [Topol
       refine Submodule.subset_span ⟨l, Submodule.Quotient.mk v, ?_⟩
       rw [jac_mk, deltaHalf_relUnipD e' l.1 l.2]
       simp
-  let φ : (V ⧸ B) ≃ₗ[ℂ] (V ⧸ A) ⧸ twKer (jac e π) (relUnipD k e') 1 :=
+  let φ : (V ⧸ B) ≃ₗ[ℂ] (V ⧸ A) ⧸ twKer (GlobalTheory.SmGL.jac e π) (relUnipD k e') 1 :=
     (Submodule.quotientQuotientEquivQuotient A B hAB).symm.trans (Submodule.quotEquivOfEq _ _ hK.symm)
   have hφ : ∀ v : V, φ (Submodule.Quotient.mk v) = Submodule.Quotient.mk (Submodule.Quotient.mk v) := by
     intro v

@@ -105,8 +105,8 @@ theorem isSubquotient_pullback {G L W : Type} [Group G] [Group L] [AddCommGroup 
 theorem jac_dropPlacing_equiv (d : Fin r → ℕ) (o : Fin r' → Fin r) (ho : StrictMono o)
     (hz : ∀ j, d j ≠ 0 → j ∈ Set.range o) (f : (Σ j, Fin (d j)) ≃ Fin N)
     (π : Representation ℂ (GL (Fin N) k) V) :
-    Nonempty ((jac f π).Equiv
-      ((jac (dropPlacing d o ho hz f) π).comp (dropHom d o) :
+    Nonempty ((GlobalTheory.SmGL.jac f π).Equiv
+      ((GlobalTheory.SmGL.jac (dropPlacing d o ho hz f) π).comp (dropHom d o) :
         Representation ℂ (Levi k fun j => Fin (d j)) _)) := by
   have hs' : ∀ g, ((leviEmb k (dropPlacing d o ho hz f)).comp (dropHom d o)) g ∈
       Subgroup.normalizer (unipRad k (dropPlacing d o ho hz f) : Set (GL (Fin N) k)) :=
@@ -120,7 +120,7 @@ theorem jac_dropPlacing_equiv (d : Fin r → ℕ) (o : Fin r' → Fin r) (ho : S
   have e : twist (jacquet π (unipRad k (dropPlacing d o ho hz f))
       ((leviEmb k (dropPlacing d o ho hz f)).comp (dropHom d o)) hs')
         (deltaHalf k fun j => Fin (d j))⁻¹ =
-      ((jac (dropPlacing d o ho hz f) π).comp (dropHom d o) :
+      ((GlobalTheory.SmGL.jac (dropPlacing d o ho hz f) π).comp (dropHom d o) :
         Representation ℂ (Levi k fun j => Fin (d j)) _) := by
     refine MonoidHom.ext fun g => LinearMap.ext fun v => ?_
     rw [twist_apply, MonoidHom.comp_apply]
@@ -135,13 +135,13 @@ theorem jhMult_jac_ne_zero_of_jm (y : Fin r → IrrGL (k := k)) (o : Fin r' → 
     (hz : ∀ j, (y j).1 ≠ 0 → j ∈ Set.range o) (hd : ∑ a, (y (o a)).1 = N)
     (f : (Σ j, Fin (y j).1) ≃ Fin N) (π : Representation ℂ (GL (Fin N) k) V)
     (h : jm (fun a => y (o a)) hd π ≠ 0) :
-    jhMult (piTensor fun j => (y j).rep) (jac f π) ≠ 0 := by
+    jhMult (piTensor fun j => (y j).rep) (GlobalTheory.SmGL.jac f π) ≠ 0 := by
   obtain ⟨φ⟩ := GlobalTheory.CompanionTheory.FineProd.TensorLine.piTensor_drop_equiv y o ho hz
   obtain ⟨ψ⟩ := jac_dropPlacing_equiv (fun j => (y j).1) o ho hz f π
   obtain ⟨χ⟩ := (Placing.parInd_jac_placing k _ _ _
     (stdBlocks (fun a => (y (o a)).1) hd) (dropPlacing (fun j => (y j).1) o ho hz f) V).2 π
   have h1 : IsSubquotient (piTensor fun a => (y (o a)).rep)
-      (jac (dropPlacing (fun j => (y j).1) o ho hz f) π) :=
+      (GlobalTheory.SmGL.jac (dropPlacing (fun j => (y j).1) o ho hz f) π) :=
     (jhMult_ne_zero_iff.1 h).trans (.of_injective χ.toIntertwiningMap χ.toLinearEquiv.injective)
   have h2 := isSubquotient_pullback (dropHom (k := k) (fun j => (y j).1) o) h1
   exact jhMult_ne_zero_iff.2
@@ -155,7 +155,7 @@ theorem sigma_clOf {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [I
   subst h
   exact Sigma.ext rfl (heq_of_eq (clOf_self x))
 
-theorem jhMult_row : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] {n p N : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsSmooth π → ∀ (zz : Fin n → IrrGL (k := k)) (σ : Fin p ↪o Fin n) (c : Fin n → ℕ), (∀ a, c (σ a) = (zz (σ a)).1) → (∀ j, j ∉ Set.range σ → c j = 0) → ∀ (hz : ∑ a, (zz (σ a)).1 = N) (f : (Σ j, Fin (c j)) ≃ Fin N), jm (fun a => zz (σ a)) hz π ≠ 0 → jhMult (piTensor fun j => (clOf (zz j) (c j)).rep.ρ) (jac f π) ≠ 0 := by
+theorem jhMult_row : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] {n p N : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsSmooth π → ∀ (zz : Fin n → IrrGL (k := k)) (σ : Fin p ↪o Fin n) (c : Fin n → ℕ), (∀ a, c (σ a) = (zz (σ a)).1) → (∀ j, j ∉ Set.range σ → c j = 0) → ∀ (hz : ∑ a, (zz (σ a)).1 = N) (f : (Σ j, Fin (c j)) ≃ Fin N), jm (fun a => zz (σ a)) hz π ≠ 0 → jhMult (piTensor fun j => (clOf (zz j) (c j)).rep.ρ) (GlobalTheory.SmGL.jac f π) ≠ 0 := by
   intro k _ _ _ _ n p N V _ _ π _ zz σ c hc h0 hz f h
   let y : Fin n → IrrGL (k := k) := fun j => ⟨c j, clOf (zz j) (c j)⟩
   have hy : (fun a => y (σ a)) = fun a => zz (σ a) := funext fun a => sigma_clOf _ _ (hc a)
@@ -187,7 +187,7 @@ theorem jac_fixed_of_smooth : ∀ {k : Type} [Field k] [ValuativeRel k] [Topolog
     (π : Representation ℂ (GL (Fin n) k) V), IsSmooth π →
     ∀ w : Jacquet π (unipRad k (stdBlocks (fun _ : Fin n => 1) hd)), ∃ m, 1 ≤ m ∧
       ∀ u ∈ PositivityTheory.Lbc.KM k n (Zls.Km k n m) (fun _ : Fin n => 1) hd,
-        jac (stdBlocks (fun _ : Fin n => 1) hd) π u w = w := by
+        GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin n => 1) hd) π u w = w := by
   intro k _ _ _ _ n hd V _ _ π hπ w
   obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ w
   obtain ⟨m, hm, hK⟩ := _root_.GlobalTheory.CompanionTheory.CongruenceBasis.exists_Km_subset k n {g | π g v = v} (hπ v) (by simp)

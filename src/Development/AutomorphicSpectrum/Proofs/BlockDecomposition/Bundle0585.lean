@@ -122,8 +122,8 @@ theorem twKer_comp_thetaW {h N : ℕ} (d : Fin h → ℕ) (hd : ∑ a, d a = N) 
 
 def jacCompThetaW {h N : ℕ} (d : Fin h → ℕ) (hd : ∑ a, d a = N) (hd' : ∑ a, d (Fin.rev a) = N)
     (π : Representation ℂ (GL (Fin N) k) V) :
-    (jac (stdBlocks d hd) (π.comp (thetaW k N))).Equiv
-      ((jac (stdBlocks (fun a => d (Fin.rev a)) hd') π).comp (thetaL d)) :=
+    (GlobalTheory.SmGL.jac (stdBlocks d hd) (π.comp (thetaW k N))).Equiv
+      ((GlobalTheory.SmGL.jac (stdBlocks (fun a => d (Fin.rev a)) hd') π).comp (thetaL d)) :=
   .mk (Submodule.quotEquivOfEq _ _ (twKer_comp_thetaW d hd hd' π)) fun g => by
     refine LinearMap.ext fun v => ?_
     obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ v

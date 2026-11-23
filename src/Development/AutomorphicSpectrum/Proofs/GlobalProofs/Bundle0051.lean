@@ -246,7 +246,7 @@ theorem occurs (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFiniteness)
     (hAB : ∀ x ∈ A 0, x ∉ A 1) (hU : ∀ x ∈ A 0, ∀ y ∈ A 1, ∀ j : ℤ, |j| ≤ 1 → x ≠ y.nu (j : ℂ))
     (e : (Σ i, Fin (d i)) ≃ Fin (d 0 + d 1)) (Q : Irr k (d 0 + d 1))
     (hQ : IsSubquotient Q.π (multiProd e fun i => (p i).π)) :
-    IsSubquotient (piTensor fun i => (p i).π) (jac e Q.π) := by
+    IsSubquotient (piTensor fun i => (p i).π) (GlobalTheory.SmGL.jac e Q.π) := by
   classical
   obtain ⟨s, u, e₃, hc, φ, hφ⟩ := GlobalTheory.CompanionTheory.CuspEmbed.main hBZ hG k _ Q
   have hS₁ : HasSupport Q.π (Finset.univ.val.map u) :=

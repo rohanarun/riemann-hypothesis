@@ -370,7 +370,7 @@ theorem jm_mul_prod_jmL_le : ∀ {k : Type} [Field k] [ValuativeRel k] [Topologi
   rw [hjm]
   let ρ' : ∀ a b, Representation ℂ (GL (Fin (d' a b)) k) _ := fun a b => ((Wb a).get b).rep
   have hjf : jm f hf π = jhMult (piTensor fun c : Fin (∑ a, t a) =>
-      ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (jac (refinePlace e e') π) := by
+      ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (GlobalTheory.SmGL.jac (refinePlace e e') π) := by
     rw [hE]; rfl
   rw [hjf]
   rw [← GlobalTheory.SmGL.EmptyBlocks.jhMult_comp_surjective (flatHom fun a b => GL (Fin (d' a b)) k) (flatHom_surjective _)]
@@ -378,9 +378,9 @@ theorem jm_mul_prod_jmL_le : ∀ {k : Type} [Field k] [ValuativeRel k] [Topologi
   obtain ⟨φS⟩ := GlobalTheory.JacStagesProof.jac_refinePlace_equiv k g N d e t d' e' V π
   rw [jhMult_congr_left φR, jhMult_congr_right _ φS]
   obtain ⟨φT⟩ := relJacD_piTensor_equiv k g d t d' e' _ fun a => (y a).rep
-  refine le_trans (mul_le_mul' le_rfl ?_) (jhMult_mul_relJacD_le k g d t d' e' _ _ _ (piTensor fun a => (y a).rep) (jac e π)
+  refine le_trans (mul_le_mul' le_rfl ?_) (jhMult_mul_relJacD_le k g d t d' e' _ _ _ (piTensor fun a => (y a).rep) (GlobalTheory.SmGL.jac e π)
     (piTensor fun a => piTensor (ρ' a)) (isSmooth_piTensor fun a => (y a).2.rep.smooth) (isSmooth_jac e hπ))
   rw [jhMult_congr_right _ φT]
-  exact prod_jhMult_le_piTensor g _ _ _ (fun a => piTensor (ρ' a)) fun a => jac (e' a) (y a).rep
+  exact prod_jhMult_le_piTensor g _ _ _ (fun a => piTensor (ρ' a)) fun a => GlobalTheory.SmGL.jac (e' a) (y a).rep
 
 end GlobalTheory.CompanionTheory.CsStages

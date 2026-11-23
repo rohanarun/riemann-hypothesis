@@ -121,20 +121,20 @@ theorem exists_intertwiningMap_piTensor_ofChar {k : Type} [Field k] [ValuativeRe
     (π : Representation ℂ (GL (Fin n) k) V) (ξ : Fin n → (kˣ →* ℂˣ)) (hξ : ∀ a, IsSmoothChar (ξ a))
     (hd : ∑ a, (IrrGL.ofChar (ξ a) (hξ a)).1 = n)
     (f : Jacquet π (unipRad k (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd)) →ₗ[ℂ] ℂ) (hf : f ≠ 0)
-    (hfe : ∀ t w, f (jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π t w) =
+    (hfe : ∀ t w, f (GlobalTheory.SmGL.jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π t w) =
       PositivityTheory.Lbc.torusChar ξ t * f w) :
-    ∃ g : (jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap
+    ∃ g : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap
         (piTensor fun a => (IrrGL.ofChar (ξ a) (hξ a)).rep), ∃ w, g w ≠ 0 := by
   let E : (piTensor fun a => detRep (Fin 1) (ξ a)).Equiv (piTensor fun a => (IrrGL.ofChar (ξ a) (hξ a)).rep) :=
     piTensorEquiv fun a => equivRep (IrrRep.det (Fin 1) (ξ a) (hξ a))
   let o : PiTensorProduct ℂ (fun _ : Fin n => ℂ) := PiTensorProduct.tprod ℂ fun _ => 1
-  let g₀ : (jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap
+  let g₀ : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap
       (piTensor fun a => detRep (Fin 1) (ξ a)) :=
     { toFun := fun w => f w • o
       map_add' := fun v w => by simp [add_smul]
       map_smul' := fun c w => by simp [mul_smul]
       isIntertwining' := fun t => LinearMap.ext fun w => by
-        show f (jac _ π t w) • o = piTensor (fun a => detRep (Fin 1) (ξ a)) t (f w • o)
+        show f (GlobalTheory.SmGL.jac _ π t w) • o = piTensor (fun a => detRep (Fin 1) (ξ a)) t (f w • o)
         rw [hfe]
         exact (mul_smul _ _ _).trans (piTensor_detRep_apply ξ t (f w • o)).symm }
   obtain ⟨w, hw⟩ : ∃ w, f w ≠ 0 := by
@@ -146,7 +146,7 @@ theorem exists_intertwiningMap_piTensor_ofChar {k : Type} [Field k] [ValuativeRe
   rw [LinearEquiv.map_eq_zero_iff] at h1
   exact (smul_ne_zero hw (tprod_one_ne_zero n)) h1
 
-theorem chartotensor : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (n : ℕ) {V : Type} [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin n) k) V) (ξ : Fin n → (kˣ →* ℂˣ)) (hξ : ∀ a, IsSmoothChar (ξ a)) (hd : ∑ a, (IrrGL.ofChar (ξ a) (hξ a)).1 = n) (f : Jacquet π (unipRad k (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd)) →ₗ[ℂ] ℂ), f ≠ 0 → (∀ t w, f (jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π t w) = PositivityTheory.Lbc.torusChar ξ t * f w) → ∃ g : (jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap (piTensor fun a => (IrrGL.ofChar (ξ a) (hξ a)).rep), ∃ w, g w ≠ 0 := by
+theorem chartotensor : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (n : ℕ) {V : Type} [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin n) k) V) (ξ : Fin n → (kˣ →* ℂˣ)) (hξ : ∀ a, IsSmoothChar (ξ a)) (hd : ∑ a, (IrrGL.ofChar (ξ a) (hξ a)).1 = n) (f : Jacquet π (unipRad k (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd)) →ₗ[ℂ] ℂ), f ≠ 0 → (∀ t w, f (GlobalTheory.SmGL.jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π t w) = PositivityTheory.Lbc.torusChar ξ t * f w) → ∃ g : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (IrrGL.ofChar (ξ a) (hξ a)).1) hd) π).IntertwiningMap (piTensor fun a => (IrrGL.ofChar (ξ a) (hξ a)).rep), ∃ w, g w ≠ 0 := by
   intro k _ _ _ _ n V _ _ π ξ hξ hd f hf hfe
   exact exists_intertwiningMap_piTensor_ofChar n π ξ hξ hd f hf hfe
 
@@ -165,7 +165,7 @@ theorem finiteDimensional_fixed_jac :
     ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (n : ℕ)
       (hd : ∑ _a : Fin n, 1 = n) {V : Type} [AddCommGroup V] [Module ℂ V]
       (π : Representation ℂ (GL (Fin n) k) V), IsAdmissible π → PositivityTheory.Lbc.C0 k → PositivityTheory.Lbc.C3 k →
-      ∀ m, 1 ≤ m → FiniteDimensional ℂ ↥(fixed (jac (stdBlocks (fun _ : Fin n => 1) hd) π)
+      ∀ m, 1 ≤ m → FiniteDimensional ℂ ↥(fixed (GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin n => 1) hd) π)
         (PositivityTheory.Lbc.KM k n (Zls.Km k n m) (fun _ : Fin n => 1) hd)) := by
   intro k _ _ _ _ n hd V _ _ π hπ h0 h3 m hm
   obtain ⟨hopen, hcompact, hfact⟩ := h0 n m n (fun _ : Fin n => 1) hd hm
@@ -175,7 +175,7 @@ theorem finiteDimensional_fixed_jac :
   let f : ↥(fixed π (Zls.Km k n m)) →ₗ[ℂ]
       Jacquet π (unipRad k (stdBlocks (fun _ : Fin n => 1) hd)) :=
     (Submodule.mkQ _).comp (Submodule.subtype _)
-  have hle : fixed (jac (stdBlocks (fun _ : Fin n => 1) hd) π)
+  have hle : fixed (GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin n => 1) hd) π)
       (PositivityTheory.Lbc.KM k n (Zls.Km k n m) (fun _ : Fin n => 1) hd) ≤ LinearMap.range f := by
     intro w hw
     obtain ⟨v, hv⟩ := hsurj w hw
@@ -324,9 +324,9 @@ theorem smul_eq_of_equiv {G V W : Type} [Group G] [AddCommGroup V] [Module ℂ V
 theorem scalar_mul_eq : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (N : ℕ) (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), ∀ (x : Fin 2 → IrrGL (k := k)) (hd : ∑ a, (x a).1 = N), Zc.jm x hd π ≠ 0 → ∀ (t : kˣ) (c c0 c1 : ℂ), (∀ v, π (Matrix.GeneralLinearGroup.scalar (Fin N) t) v = c • v) → Zl.ScalarBy (x 0) t c0 → Zl.ScalarBy (x 1) t c1 → c0 * c1 = c := by
   intro k _ _ _ _ N V _ _ π x hd hj t c c0 c1 hc h0 h1
   obtain ⟨S, T, ⟨E⟩⟩ := exists_step_of_jhMult_ne_zero (show jhMult (piTensor fun a => (x a).rep)
-    (jac (stdBlocks (fun a => (x a).1) hd) π) ≠ 0 from hj)
+    (GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hd) π) ≠ 0 from hj)
   let g : Levi k (fun a => Fin (x a).1) := fun a => Matrix.GeneralLinearGroup.scalar (Fin (x a).1) t
-  have hjac : ∀ v, jac (stdBlocks (fun a => (x a).1) hd) π g v = c • v := by
+  have hjac : ∀ v, GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hd) π g v = c • v := by
     intro v
     obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ v
     rw [jac_mk, show deltaHalf k (fun a => Fin (x a).1) g = 1 from deltaHalf_scalar _ t,

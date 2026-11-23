@@ -382,7 +382,7 @@ theorem exists_subQuot_of_jm_ne_zero :
     ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k],
     ∀ {h N : ℕ} (x : Fin h → IrrGL (k := k)) (hd : ∑ a, (x a).1 = N) {V : Type} [AddCommGroup V] [Module ℂ V]
       (π : Representation ℂ (GL (Fin N) k) V), Zc.jm x hd π ≠ 0 →
-      ∃ S T : Subrepresentation (jac (stdBlocks (fun a => (x a).1) hd) π),
+      ∃ S T : Subrepresentation (GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hd) π),
         Nonempty ((subQuot S T).Equiv (piTensor fun a => (x a).rep)) := by
   intro k _ _ _ _ h N x hd V _ _ π hjm
   obtain ⟨r, hr, hpos⟩ : ∃ r, GlobalTheory.SmGL.OccursTimes (GlobalTheory.SmGL.piTensor fun a => (x a).rep)

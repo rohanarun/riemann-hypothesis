@@ -77,7 +77,7 @@ theorem segSub_spec (Δ : Segment k) :
     (segSub h Δ).toRepresentation.IsIrreducible ∧
       (∀ S' : Subrepresentation (multiProd (GlobalTheory.Published.consecBlocks Δ.len Δ.d) (segTerm (cuspRep Δ).ρ Δ.len)),
         S'.toRepresentation.IsIrreducible → S' = segSub h Δ) ∧
-      Nonempty ((jac (GlobalTheory.Published.consecBlocks Δ.len Δ.d) (segSub h Δ).toRepresentation).Equiv
+      Nonempty ((GlobalTheory.SmGL.jac (GlobalTheory.Published.consecBlocks Δ.len Δ.d) (segSub h Δ).toRepresentation).Equiv
         (piTensor (segTerm (cuspRep Δ).ρ Δ.len))) :=
   (h k Δ.d Δ.len Δ.d_pos Δ.len_pos (cuspRep Δ) (cuspRep_isCuspidal Δ)).choose_spec
 
@@ -106,7 +106,7 @@ theorem embeds_iff (Δ : Segment k) (σ : IrrRep (GL (Fin Δ.d) k)) (hσ : σ.cl
 
 theorem jac_iff (Δ : Segment k) (σ : IrrRep (GL (Fin Δ.d) k)) (hσ : σ.cl = Δ.start)
     (e : (Σ _ : Fin Δ.len, Fin Δ.d) ≃ Fin (Δ.len * Δ.d)) (π : IrrRep (GL (Fin (Δ.len * Δ.d)) k)) :
-    Nonempty ((jac e π.ρ).Equiv (piTensor (segTerm σ.ρ Δ.len))) ↔ Nonempty (π.ρ.Equiv (segIrr h Δ).ρ) := by
+    Nonempty ((GlobalTheory.SmGL.jac e π.ρ).Equiv (piTensor (segTerm σ.ρ Δ.len))) ↔ Nonempty (π.ρ.Equiv (segIrr h Δ).ρ) := by
   constructor
   · rintro ⟨ψ⟩
     obtain ⟨f, hf⟩ := (Model.evalOne_bijective e π.smooth (piTensor (segTerm σ.ρ Δ.len))).2

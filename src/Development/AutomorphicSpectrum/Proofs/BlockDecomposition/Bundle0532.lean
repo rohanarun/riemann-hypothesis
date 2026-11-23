@@ -363,7 +363,7 @@ theorem evalMap_law {π : Representation ℂ (GL (Fin (a + b)) k) V}
       (Submodule.Quotient.mk (π (leviEmb k (two (stdSum (rfl : a + b = a + b))) M) x) :
         Jacquet π (unipRad k (two (stdSum (rfl : a + b = a + b))))) =
         (deltaHalf k (Two (Fin a) (Fin b)) M : ℂ) •
-          jac (two (stdSum (rfl : a + b = a + b))) π M (Submodule.Quotient.mk x) := by
+          GlobalTheory.SmGL.jac (two (stdSum (rfl : a + b = a + b))) π M (Submodule.Quotient.mk x) := by
     intro M x
     rw [jac_mk, smul_smul, ← Units.val_mul, mul_inv_cancel, Units.val_one, one_smul]
   have hint := Representation.IntertwiningMap.isIntertwining _ _ φ xy

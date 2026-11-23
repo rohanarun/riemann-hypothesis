@@ -34,8 +34,8 @@ variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchim
 theorem two_le_jhMult {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃ Fin N)
     {B : Representation ℂ (GL (Fin N) k) V} (hB : IsSmooth B) (S : Subrepresentation B)
     {τ : Representation ℂ (Levi k fun a => Fin (d a)) Y} (hτ : τ.IsIrreducible)
-    (h1 : IsSubquotient τ (jac e S.toRepresentation)) (h2 : IsSubquotient τ (jac e (subQuot ⊤ S))) :
-    2 ≤ jhMult τ (jac e B) := by
+    (h1 : IsSubquotient τ (GlobalTheory.SmGL.jac e S.toRepresentation)) (h2 : IsSubquotient τ (GlobalTheory.SmGL.jac e (subQuot ⊤ S))) :
+    2 ≤ jhMult τ (GlobalTheory.SmGL.jac e B) := by
   let ι : S.toRepresentation.IntertwiningMap B := ⟨S.toSubmodule.subtype, fun _ => rfl⟩
   let p : B.IntertwiningMap (subQuot ⊤ S) :=
     ⟨Submodule.mkQ _ ∘ₗ LinearMap.codRestrict (⊤ : Subrepresentation B).toSubmodule LinearMap.id
@@ -45,12 +45,12 @@ theorem two_le_jhMult {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃
     obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ x
     exact ⟨v.1, rfl⟩
   let P := jacMap e p
-  let K : Subrepresentation (jac e B) := ⟨LinearMap.ker P.toLinearMap, fun g x hx => by
-    show P (jac e B g x) = 0
+  let K : Subrepresentation (GlobalTheory.SmGL.jac e B) := ⟨LinearMap.ker P.toLinearMap, fun g x hx => by
+    show P (GlobalTheory.SmGL.jac e B g x) = 0
     rw [P.isIntertwining]
     have hx' : P x = 0 := hx
     rw [hx', map_zero]⟩
-  let κ : K.toRepresentation.IntertwiningMap (jac e B) := ⟨K.toSubmodule.subtype, fun _ => rfl⟩
+  let κ : K.toRepresentation.IntertwiningMap (GlobalTheory.SmGL.jac e B) := ⟨K.toSubmodule.subtype, fun _ => rfl⟩
   have hadd := jhMult_exact κ P hτ Subtype.val_injective (GlobalTheory.JacquetExact.jacMap_surjective e p hps)
     (fun u => u.2) fun v hv => ⟨⟨v, hv⟩, rfl⟩
   have hz : ∀ x, P (jacMap e ι x) = 0 := fun x => by
@@ -59,13 +59,13 @@ theorem two_le_jhMult {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃
     show Submodule.Quotient.mk (p (ι v)) = 0
     rw [this]
     rfl
-  let ψ : (jac e S.toRepresentation).IntertwiningMap K.toRepresentation :=
+  let ψ : (GlobalTheory.SmGL.jac e S.toRepresentation).IntertwiningMap K.toRepresentation :=
     ⟨LinearMap.codRestrict K.toSubmodule (jacMap e ι).toLinearMap hz, fun g => LinearMap.ext fun x =>
       Subtype.ext ((jacMap e ι).isIntertwining _ _ g x)⟩
   have hψ : Function.Injective ψ := fun x y h =>
     GlobalTheory.JacquetExact.jacMap_injective e hB ι Subtype.val_injective (congrArg Subtype.val h)
   have h3 : jhMult τ K.toRepresentation ≠ 0 := jhMult_ne_zero_iff.2 (h1.trans (.of_injective ψ hψ))
-  have h4 : jhMult τ (jac e (subQuot ⊤ S)) ≠ 0 := jhMult_ne_zero_iff.2 h2
+  have h4 : jhMult τ (GlobalTheory.SmGL.jac e (subQuot ⊤ S)) ≠ 0 := jhMult_ne_zero_iff.2 h2
   rw [hadd]
   have h5 := ENat.one_le_iff_ne_zero.2 h3
   have h6 := ENat.one_le_iff_ne_zero.2 h4
@@ -74,10 +74,10 @@ theorem two_le_jhMult {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃
 theorem isIrreducible_of_jhMult_eq_one {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃ Fin N)
     {B : Representation ℂ (GL (Fin N) k) V} (hB : IsSmooth B)
     {τ : Representation ℂ (Levi k fun a => Fin (d a)) Y} (hτ : τ.IsIrreducible)
-    (h1 : jhMult τ (jac e B) = 1)
+    (h1 : jhMult τ (GlobalTheory.SmGL.jac e B) = 1)
     (occ : ∀ {U : Type} [AddCommGroup U] [Module ℂ U] (ρ : Representation ℂ (GL (Fin N) k) U),
-      Nontrivial U → IsSubquotient ρ B → IsSubquotient τ (jac e ρ)) : B.IsIrreducible := by
-  have hsub : IsSubquotient τ (jac e B) := jhMult_ne_zero_iff.1 (by rw [h1]; exact one_ne_zero)
+      Nontrivial U → IsSubquotient ρ B → IsSubquotient τ (GlobalTheory.SmGL.jac e ρ)) : B.IsIrreducible := by
+  have hsub : IsSubquotient τ (GlobalTheory.SmGL.jac e B) := jhMult_ne_zero_iff.1 (by rw [h1]; exact one_ne_zero)
   have hnt : Nontrivial V := by
     by_contra hn
     rw [not_nontrivial_iff_subsingleton] at hn
@@ -125,7 +125,7 @@ theorem isIrreducible_of_occurs (hG : GeometricLemma) (hBZ : BernsteinZelevinsky
     (p : ∀ i, Irr k (d i)) {A : Fin 2 → Multiset (IrrGL (k := k))} (hA : ∀ i, HasSupport (p i).π (A i))
     (hAB : ∀ x ∈ A 0, x ∉ A 1) {N : ℕ} (e : (Σ i, Fin (d i)) ≃ Fin N)
     (hOcc : ∀ Q : Irr k N, IsSubquotient Q.π (multiProd e fun i => (p i).π) →
-      IsSubquotient (piTensor fun i => (p i).π) (jac e Q.π)) :
+      IsSubquotient (piTensor fun i => (p i).π) (GlobalTheory.SmGL.jac e Q.π)) :
     (multiProd e fun i => (p i).π).IsIrreducible := by
   have hτ : (piTensor fun i => (p i).π).IsIrreducible :=
     _root_.GlobalTheory.ExtTensorIrr.piTensor_isIrreducible hBZ k _ _ fun i => (p i).toIrrRep
@@ -148,7 +148,7 @@ theorem occurs_of_embedding (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFini
     (F : ∀ i, Representation ℂ (GL (Fin (d i)) k) (X i)) (hFs : ∀ i, IsSmooth (F i))
     (hF : ∀ i (y : IrrRep (GL (Fin (d i)) k)), IsSubquotient y.ρ (F i) → HasSupport y.ρ (A i))
     (φ : Q.π.IntertwiningMap (multiProd e F)) (hφ : Function.Injective φ) :
-    IsSubquotient (piTensor fun i => (p i).π) (jac e Q.π) := by
+    IsSubquotient (piTensor fun i => (p i).π) (GlobalTheory.SmGL.jac e Q.π) := by
   have hirr : (piTensor fun i => (p i).π).IsIrreducible := _root_.GlobalTheory.ExtTensorIrr.piTensor_isIrreducible hBZ k _ _ fun i => (p i).toIrrRep
   haveI := GlobalTheory.SmGL.Model.nontrivial_of_isIrreducible Q.irr
 
@@ -168,12 +168,12 @@ theorem occurs_of_embedding (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFini
   obtain ⟨x₀, hx₀⟩ := hψ
   let R : Subrepresentation (piTensor F) := ⟨LinearMap.range ψ.toLinearMap, by
     rintro g _ ⟨x, rfl⟩
-    exact ⟨jac e Q.π g x, ψ.isIntertwining _ _ g x⟩⟩
+    exact ⟨GlobalTheory.SmGL.jac e Q.π g x, ψ.isIntertwining _ _ g x⟩⟩
   have hRn : Nontrivial R.toSubmodule :=
     ⟨⟨⟨ψ x₀, ⟨x₀, rfl⟩⟩, 0, fun h => hx₀ (congrArg Subtype.val h)⟩⟩
   have hRF : IsSubquotient R.toRepresentation (piTensor F) :=
     .of_injective ⟨R.toSubmodule.subtype, fun _ => rfl⟩ Subtype.val_injective
-  have hRJ : IsSubquotient R.toRepresentation (jac e Q.π) :=
+  have hRJ : IsSubquotient R.toRepresentation (GlobalTheory.SmGL.jac e Q.π) :=
     .of_surjective ⟨LinearMap.codRestrict R.toSubmodule ψ.toLinearMap (fun x => ⟨x, rfl⟩), fun g =>
       LinearMap.ext fun x => Subtype.ext (ψ.isIntertwining _ _ g x)⟩ (by
         rintro ⟨_, x, rfl⟩
@@ -194,7 +194,7 @@ theorem occurs_of_embedding (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFini
   have hys : ∀ j, HasSupport (y j).ρ (A j) := fun j =>
     hF j (y j) (isSubquotient_factor F j (y j).irr ((hy j).trans (isSubquotient_comp hτF _)))
   have h1 := jhMult_jac_multiProd hG hBZ p hA hAB e e hτ hτs y hy hys
-  have h2 : jhMult τ (jac e (multiProd e fun i => (p i).π)) ≠ 0 :=
+  have h2 : jhMult τ (GlobalTheory.SmGL.jac e (multiProd e fun i => (p i).π)) ≠ 0 :=
     jhMult_ne_zero_iff.2 (hτJ.trans (GlobalTheory.JacquetExact.isSubquotient_jac e (isSmooth_parInd _ _) hQ))
   rw [h1] at h2
   obtain ⟨θ⟩ := nonempty_equiv_of_isSubquotient hτ hirr (jhMult_ne_zero_iff.1 h2)
@@ -208,7 +208,7 @@ theorem occurs_of_prod₂ (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFinite
     (hF₀ : ∀ y : IrrRep (GL (Fin (d 0)) k), IsSubquotient y.ρ F₀.ρ → HasSupport y.ρ (A 0))
     (hF₁ : ∀ y : IrrRep (GL (Fin (d 1)) k), IsSubquotient y.ρ F₁.ρ → HasSupport y.ρ (A 1))
     (φ : Q.π.IntertwiningMap (prod₂ F₀.ρ F₁.ρ)) (hφ : Function.Injective φ) :
-    IsSubquotient (piTensor fun i => (p i).π) (jac e Q.π) := by
+    IsSubquotient (piTensor fun i => (p i).π) (GlobalTheory.SmGL.jac e Q.π) := by
   let R : ∀ i : Fin 2, SmRep (GL (Fin (d i)) k) := fun i =>
     Fin.cases (motive := fun i => SmRep (GL (Fin (d i)) k)) F₀
       (fun j => Fin.cases (motive := fun j : Fin 1 => SmRep (GL (Fin (d j.succ)) k)) F₁ (fun l => l.elim0) j) i

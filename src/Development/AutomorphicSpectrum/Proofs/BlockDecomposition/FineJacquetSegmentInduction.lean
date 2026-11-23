@@ -144,8 +144,8 @@ theorem exists_class (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) (Γ :
 
 theorem fine_tensor (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) (Γ : Segment k) (hF : FineJac Γ) (u : IrrGL (k := k))
     (hu : IsLSeg Γ u.rep) (hs : ∑ i, (dec Γ i).1 = u.1) :
-    Nonempty ((jac (stdBlocks (fun i => (dec Γ i).1) hs) u.rep).Equiv (piTensor fun i => (dec Γ i).rep)) := by
-  have hJ : HasFiniteLength (jac (stdBlocks (fun i => (dec Γ i).1) hs) u.rep) :=
+    Nonempty ((GlobalTheory.SmGL.jac (stdBlocks (fun i => (dec Γ i).1) hs) u.rep).Equiv (piTensor fun i => (dec Γ i).rep)) := by
+  have hJ : HasFiniteLength (GlobalTheory.SmGL.jac (stdBlocks (fun i => (dec Γ i).1) hs) u.rep) :=
     _root_.GlobalTheory.CompanionTheory.JacquetBridge.jacquetFiniteLength k _ _ _ _ _ _ u.2.rep.smooth (hasFiniteLength_of_isIrreducible u.2.rep.irr)
   exact _root_.GlobalTheory.CompanionTheory.FineStep.nonempty_equiv_of_jhMult_eq_one _ _ (GlobalTheory.CompanionTheory.FrobJm.piTensor_rep_isIrreducible hA (dec Γ)) hJ ((hF u.rep hu).1 hs)
     fun X _ _ ρ hi hq => GlobalTheory.T.irreducible_subquotient_jacquet_segment hA Γ hF u hu hs X ρ hi hq

@@ -241,8 +241,8 @@ theorem deltaHalf_drop (G : Levi k fun j => Fin (b j)) :
 
 include hz in
 theorem nonempty_jac_equiv (π : Representation ℂ (GL (Fin N) k) V) :
-    Nonempty ((jac (stdBlocks b hb) π).Equiv
-      ((jac (stdBlocks (fun i => b (ι i)) hb') π).comp (restrictHom b ι))) := by
+    Nonempty ((GlobalTheory.SmGL.jac (stdBlocks b hb) π).Equiv
+      ((GlobalTheory.SmGL.jac (stdBlocks (fun i => b (ι i)) hb') π).comp (restrictHom b ι))) := by
   have hU := unipRad_drop (k := k) ι b hb hb' hz
   have hK : GlobalTheory.PRep.twKer π (GlobalTheory.SmGL.unipRad k (stdBlocks b hb)) 1 =
       GlobalTheory.PRep.twKer π (GlobalTheory.SmGL.unipRad k (stdBlocks (fun i => b (ι i)) hb')) 1 := by
@@ -316,8 +316,8 @@ variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchim
 theorem isSubquotient_jac_drop (ι : Fin r ↪o Fin c) (b : Fin c → ℕ) (hb : ∑ j, b j = N) (hb' : ∑ i, b (ι i) = N)
     (hz : ∀ j, (¬ ∃ i, ι i = j) → b j = 0) (π : Representation ℂ (GL (Fin N) k) V)
     (s : ∀ j, IrrRep (GL (Fin (b j)) k)) (hI : (piTensor fun i => (s (ι i)).ρ).IsIrreducible)
-    (h : IsSubquotient (piTensor fun j => (s j).ρ) (jac (stdBlocks b hb) π)) :
-    IsSubquotient (piTensor fun i => (s (ι i)).ρ) (jac (stdBlocks (fun i => b (ι i)) hb') π) := by
+    (h : IsSubquotient (piTensor fun j => (s j).ρ) (GlobalTheory.SmGL.jac (stdBlocks b hb) π)) :
+    IsSubquotient (piTensor fun i => (s (ι i)).ρ) (GlobalTheory.SmGL.jac (stdBlocks (fun i => b (ι i)) hb') π) := by
   have hres : Function.Surjective (restrictHom (k := k) b ι) := fun H =>
     ⟨extFam (M := fun j => GL (Fin (b j)) k) ι H 1, by
       funext i
@@ -382,15 +382,15 @@ theorem isSubquotient_jac_drop (ι : Fin r ↪o Fin c) (b : Fin c → ℕ) (hb :
     rw [he, LinearEquiv.symm_apply_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
     rfl
   have h1 : GlobalTheory.SmGL.IsSubquotient (GlobalTheory.SmGL.piTensor fun j => (s j).ρ)
-      ((jac (stdBlocks (fun i => b (ι i)) hb') π).comp (restrictHom b ι)) :=
+      ((GlobalTheory.SmGL.jac (stdBlocks (fun i => b (ι i)) hb') π).comp (restrictHom b ι)) :=
     h.trans (GlobalTheory.JacStages.isSubquotient_of_equiv (nonempty_jac_equiv ι b hb hb' hz π).some)
   exact GlobalTheory.JacStages.isSubquotient_of_comp (restrictHom b ι) hres (hsub0.trans h1)
 
 theorem of_eq_of_jac (D₁ D₂ : Fin r → ℕ) (hD : D₁ = D₂) (h₁ : ∑ i, D₁ i = N) (h₂ : ∑ i, D₂ i = N)
     (π : Representation ℂ (GL (Fin N) k) V) (σ₁ : ∀ i, IrrRep (GL (Fin (D₁ i)) k))
     (σ₂ : ∀ i, IrrRep (GL (Fin (D₂ i)) k))
-    (hsub : IsSubquotient (piTensor fun i => (σ₁ i).ρ) (jac (stdBlocks D₁ h₁) π))
-    (φ : (jac (stdBlocks D₂ h₂) π).Equiv (piTensor fun i => (σ₂ i).ρ)) (i : Fin r) :
+    (hsub : IsSubquotient (piTensor fun i => (σ₁ i).ρ) (GlobalTheory.SmGL.jac (stdBlocks D₁ h₁) π))
+    (φ : (GlobalTheory.SmGL.jac (stdBlocks D₂ h₂) π).Equiv (piTensor fun i => (σ₂ i).ρ)) (i : Fin r) :
     IrrGL.of (σ₁ i).ρ (σ₁ i).smooth (σ₁ i).irr = IrrGL.of (σ₂ i).ρ (σ₂ i).smooth (σ₂ i).irr := by
   subst hD
   have hsq : GlobalTheory.SmGL.IsSubquotient (piTensor fun i => (σ₁ i).ρ) (piTensor fun i => (σ₂ i).ρ) :=
@@ -456,7 +456,7 @@ theorem exists_cell_data (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {
     (hd : ∑ i, (x i).1 = N) (y : Fin c → IrrGL (k := k)) (hy : ∑ i, (y i).1 = N) (hyc : ∀ i, (y i).IsCusp)
     (hjm : 1 ≤ jm y hy (prodIrr x hd)) :
     ∃ (b : Fin h → Fin c → ℕ) (hb : ∀ i, ∑ j, b i j = (x i).1) (s : ∀ i j, IrrRep (GL (Fin (b i j)) k)),
-      (∀ i, IsSubquotient (piTensor fun j => (s i j).ρ) (jac (stdBlocks (b i) (hb i)) (x i).rep)) ∧
+      (∀ i, IsSubquotient (piTensor fun j => (s i j).ρ) (GlobalTheory.SmGL.jac (stdBlocks (b i) (hb i)) (x i).rep)) ∧
       ∀ j, ∃ a, (∀ i, i ≠ a → b i j = 0) ∧ IrrGL.of (s a j).ρ (s a j).smooth (s a j).irr = y j := by
   classical
   have hτ := GlobalTheory.CompanionTheory.SocleJm.isIrreducible_piTensor hA y
@@ -468,7 +468,7 @@ theorem exists_cell_data (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {
   have hr : ∀ (b : SizeMatrix M M') i, ∑ j, b.1 i j = (x i).1 := fun b i => by simpa [M] using b.2.1 i
   let fR : ∀ (b : SizeMatrix M M') i, (Σ j, Fin (b.1 i j)) ≃ M i := fun b i => stdBlocks (b.1 i) (hr b i)
   let gC : ∀ (b : SizeMatrix M M') j, (Σ i, Fin (b.1 i j)) ≃ M' j := fun b => b.nonempty_cols.some
-  have h0 : jhMult (piTensor fun j => (y j).rep) (jac (stdBlocks (fun j => (y j).1) hy) (prodIrr x hd)) ≠ 0 :=
+  have h0 : jhMult (piTensor fun j => (y j).rep) (GlobalTheory.SmGL.jac (stdBlocks (fun j => (y j).1) hy) (prodIrr x hd)) ≠ 0 :=
     ENat.one_le_iff_ne_zero.1 hjm
   have h1 := hG.jhMult_eq (m := M) (m' := M') (stdBlocks (fun i => (x i).1) hd) (stdBlocks (fun j => (y j).1) hy)
     (isSmooth_piTensor fun i => (x i).2.rep.smooth) fR gC hτ
@@ -490,9 +490,9 @@ theorem exists_cell_data (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {
 
 theorem exists_row (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {p c : ℕ} (x : IrrGL (k := k)) (s : Fin p → IrrGL (k := k))
     (hs : ∑ i, (s i).1 = x.1) (d : ℕ) (hsd : ∀ i, (s i).1 = d) (hsc : ∀ i, (s i).IsCusp)
-    (hu : Nonempty ((jac (stdBlocks (fun i => (s i).1) hs) x.rep).Equiv (piTensor fun i => (s i).rep)))
+    (hu : Nonempty ((GlobalTheory.SmGL.jac (stdBlocks (fun i => (s i).1) hs) x.rep).Equiv (piTensor fun i => (s i).rep)))
     (b : Fin c → ℕ) (hb : ∑ j, b j = x.1) (w : ∀ j, IrrRep (GL (Fin (b j)) k))
-    (hsub : IsSubquotient (piTensor fun j => (w j).ρ) (jac (stdBlocks b hb) x.rep))
+    (hsub : IsSubquotient (piTensor fun j => (w j).ρ) (GlobalTheory.SmGL.jac (stdBlocks b hb) x.rep))
     (y : Fin c → IrrGL (k := k)) (hyc : ∀ j, (y j).IsCusp)
     (hw : ∀ j, b j ≠ 0 → IrrGL.of (w j).ρ (w j).smooth (w j).irr = y j) :
     ∃ f : Fin p ↪o Fin c, (∀ i, b (f i) ≠ 0) ∧ ∀ i, y (f i) = s i := by
@@ -555,7 +555,7 @@ theorem exists_row (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {p c : 
     (fun i => (s i).2.rep) hdrop ψ i
   exact (hyy i).symm.trans (h2.trans (IrrGL.of_rep (s i)))
 
-theorem shuffle2 : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {p q N c : ℕ} (u v : IrrGL (k := k)) (s : Fin p → IrrGL (k := k)) (t : Fin q → IrrGL (k := k)) (hs : ∑ i, (s i).1 = u.1) (ht : ∑ i, (t i).1 = v.1) (d : ℕ) (hsd : ∀ i, (s i).1 = d) (htd : ∀ j, (t j).1 = d) (hsc : ∀ i, (s i).IsCusp) (htc : ∀ i, (t i).IsCusp) (hu : Nonempty ((jac (stdBlocks (fun i => (s i).1) hs) u.rep).Equiv (piTensor fun i => (s i).rep))) (hv : Nonempty ((jac (stdBlocks (fun i => (t i).1) ht) v.rep).Equiv (piTensor fun i => (t i).rep))) (hd : ∑ i, (![u, v] i).1 = N) (y : Fin c → IrrGL (k := k)) (hy : ∑ i, (y i).1 = N) (hyc : ∀ i, (y i).IsCusp) (h : 1 ≤ jm y hy (prodIrr ![u, v] hd)), ∃ (f : Fin p ↪o Fin c) (g : Fin q ↪o Fin c), Disjoint (Set.range f) (Set.range g) ∧ (∀ i, y (f i) = s i) ∧ ∀ j, y (g j) = t j := by
+theorem shuffle2 : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {p q N c : ℕ} (u v : IrrGL (k := k)) (s : Fin p → IrrGL (k := k)) (t : Fin q → IrrGL (k := k)) (hs : ∑ i, (s i).1 = u.1) (ht : ∑ i, (t i).1 = v.1) (d : ℕ) (hsd : ∀ i, (s i).1 = d) (htd : ∀ j, (t j).1 = d) (hsc : ∀ i, (s i).IsCusp) (htc : ∀ i, (t i).IsCusp) (hu : Nonempty ((GlobalTheory.SmGL.jac (stdBlocks (fun i => (s i).1) hs) u.rep).Equiv (piTensor fun i => (s i).rep))) (hv : Nonempty ((GlobalTheory.SmGL.jac (stdBlocks (fun i => (t i).1) ht) v.rep).Equiv (piTensor fun i => (t i).rep))) (hd : ∑ i, (![u, v] i).1 = N) (y : Fin c → IrrGL (k := k)) (hy : ∑ i, (y i).1 = N) (hyc : ∀ i, (y i).IsCusp) (h : 1 ≤ jm y hy (prodIrr ![u, v] hd)), ∃ (f : Fin p ↪o Fin c) (g : Fin q ↪o Fin c), Disjoint (Set.range f) (Set.range g) ∧ (∀ i, y (f i) = s i) ∧ ∀ j, y (g j) = t j := by
   intro k _ _ _ _ hA p q N c u v s t hs ht d hsd htd hsc htc hu hv hd y hy hyc h
   obtain ⟨b, hb, w, hsub, hcol⟩ := exists_cell_data hA ![u, v] hd y hy hyc h
   have hw : ∀ i : Fin 2, ∀ j, b i j ≠ 0 → IrrGL.of (w i j).ρ (w i j).smooth (w i j).irr = y j := by

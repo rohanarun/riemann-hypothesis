@@ -53,7 +53,7 @@ theorem exists_embedding {α n : Type} {m : α → Type} [Fintype α] [LinearOrd
     [∀ a, DecidableEq (m a)] [Fintype n] [DecidableEq n] (e : (Σ a, m a) ≃ n) {η : kˣ →* ℂˣ} (hη : IsSmoothChar η) :
     ∃ f : (detRep n η).IntertwiningMap (parInd e (ofChar (detLevi e η))), Function.Injective f := by
   have hsm : IsSmooth (detRep n η) := (isSmooth_ofChar_iff _).2 hη.detChar
-  let ψ : (jac e (detRep n η)).IntertwiningMap (ofChar (detLevi e η)) :=
+  let ψ : (GlobalTheory.SmGL.jac e (detRep n η)).IntertwiningMap (ofChar (detLevi e η)) :=
     { toLinearMap := (twKer (detRep n η) (unipRad k e) 1).liftQ LinearMap.id
         (by rw [twKer_detRep]; exact bot_le)
       isIntertwining' := fun g => LinearMap.ext fun x => by

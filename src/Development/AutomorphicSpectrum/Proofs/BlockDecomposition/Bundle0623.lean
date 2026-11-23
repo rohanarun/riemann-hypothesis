@@ -325,7 +325,7 @@ theorem row_ne_zero {n p N : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V]
     (π : Representation ℂ (GL (Fin N) k) V) (hπ : IsSmooth π) (zz : Fin n → IrrGL (k := k)) (σ : Fin p ↪o Fin n)
     (c : Fin n → ℕ) (hc : ∀ a, c (σ a) = (zz (σ a)).1) (hc0 : ∀ j, j ∉ Set.range σ → c j = 0)
     (hz : ∑ a, (zz (σ a)).1 = N) (f : (Σ j, Fin (c j)) ≃ Fin N) (h : jm (fun a => zz (σ a)) hz π ≠ 0) :
-    jhMult (piTensor fun j => (clOf (zz j) (c j)).rep.ρ) (jac f π) ≠ 0 :=
+    jhMult (piTensor fun j => (clOf (zz j) (c j)).rep.ρ) (GlobalTheory.SmGL.jac f π) ≠ 0 :=
   GlobalTheory.T.jacquet_multiplicity_order_embedding π hπ zz σ c hc hc0 hz f h
 
 theorem col_equiv (a : IrrGL (k := k)) {α : Type} [Fintype α] [LinearOrder α] (b : α → ℕ) (i₀ : α)
@@ -366,10 +366,10 @@ theorem jhMult_jac_multiProd_ne_zero {α β n : Type} [Fintype α] [LinearOrder 
     (τ : Representation ℂ (Levi k m') Y) (hτ : τ.IsIrreducible) (hτs : IsSmooth τ)
     (b₀ : SizeMatrix m m') (s₀ : ∀ i j, IrrCl (GL (Fin (b₀.1 i j)) k))
     (hrow : ∀ (f : ∀ i, (Σ j, Fin (b₀.1 i j)) ≃ m i) i,
-      jhMult (piTensor fun j => (s₀ i j).rep.ρ) (jac (f i) (ρ i)) ≠ 0)
+      jhMult (piTensor fun j => (s₀ i j).rep.ρ) (GlobalTheory.SmGL.jac (f i) (ρ i)) ≠ 0)
     (hcol : ∀ g : ∀ j, (Σ i, Fin (b₀.1 i j)) ≃ m' j,
       jhMult τ (piTensor fun j => multiProd (g j) fun i => (s₀ i j).rep.ρ) ≠ 0) :
-    jhMult τ (jac E' (multiProd E ρ)) ≠ 0 := by
+    jhMult τ (GlobalTheory.SmGL.jac E' (multiProd E ρ)) ≠ 0 := by
   classical
   haveI : Fintype (SizeMatrix m m') := Fintype.ofFinite _
   have hG := GlobalTheory.CompanionTheory.GeoLink.geometricLemma k
@@ -427,7 +427,7 @@ theorem wd_prod₂_of_interleave_fin (hA : GlobalTheory.Published.IrreducibleAdm
   have hτs : IsSmooth τ := isSmooth_piTensor fun j => (w.get j).2.rep.smooth
   let s₀ : ∀ i j, IrrCl (GL (Fin (b₀.1 i j)) k) := fun i j => clOf (w.get j) (b₀.1 i j)
   have hrowf : ∀ (f : ∀ i, (Σ j, Fin (b₀.1 i j)) ≃ m i) i,
-      jhMult (piTensor fun j => (s₀ i j).rep.ρ) (jac (f i) (ρ i)) ≠ 0 := by
+      jhMult (piTensor fun j => (s₀ i j).rep.ρ) (GlobalTheory.SmGL.jac (f i) (ρ i)) ≠ 0 := by
     intro f
     refine Fin.forall_fin_two.2 ⟨?_, ?_⟩
     · refine row_ne_zero (X 0).rep (hs 0) w.get σ₀ (fun j => b₀.1 0 j) (fun a => ?_) (fun j hj => ?_) hdeg0
@@ -452,7 +452,7 @@ theorem wd_prod₂_of_interleave_fin (hA : GlobalTheory.Published.IrreducibleAdm
   have hφ : Nonempty ((prod₂ (X 0).rep (X 1).rep).Equiv (prodIrr X hd)) :=
     nonempty_prod₂_equiv_prodIrr_rep X hd
   let E' := stdBlocks (fun a => (w.get a).1) hd'
-  have e1 : jm w.get hd' (prod₂ (X 0).rep (X 1).rep) = jhMult τ (jac E' (prodIrr X hd)) :=
+  have e1 : jm w.get hd' (prod₂ (X 0).rep (X 1).rep) = jhMult τ (GlobalTheory.SmGL.jac E' (prodIrr X hd)) :=
     jhMult_congr_right τ (GlobalTheory.SmGL.Exponents.jacEquiv E' hφ.some)
   rw [e1]
   exact jhMult_jac_multiProd_ne_zero (stdBlocks (fun a => (X a).1) hd) E' ρ hs hl τ hτ hτs b₀ s₀ hrowf hcolf

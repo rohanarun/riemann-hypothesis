@@ -384,7 +384,7 @@ theorem jm_le_jm_concat : ∀ {k : Type} [Field k] [ValuativeRel k] [Topological
       (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k)
       (GlobalTheory.JacStages.flatHom_surjective (fun a b => GL (Fin (x a b).1) k))
       (GlobalTheory.CompanionTheory.SocleJm.isIrreducible_piTensor hA (concat c x))
-  have hρ : IsSmooth (jac e π) := GlobalTheory.SmGL.isSmooth_jac e hs
+  have hρ : IsSmooth (GlobalTheory.SmGL.jac e π) := GlobalTheory.SmGL.isSmooth_jac e hs
   have hτ : IsSubquotient
       ((piTensor fun l => (x (finSigmaFinEquiv.symm l).1 (finSigmaFinEquiv.symm l).2).rep).comp
         (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k))
@@ -398,16 +398,16 @@ theorem jm_le_jm_concat : ∀ {k : Type} [Field k] [ValuativeRel k] [Topological
     refine GlobalTheory.JHMult.jhMult_ne_zero_iff.1 ?_
     exact Order.one_le_iff_ne_zero.1 (hpos a)
   obtain ⟨φ3⟩ := GlobalTheory.JacStagesProof.jac_refinePlace_equiv k s N (fun a => (y a).1) e c (fun a b => (x a b).1) e' V π
-  calc Zc.jm y hy π = jhMult (piTensor fun a => (y a).rep) (jac e π) := rfl
+  calc Zc.jm y hy π = jhMult (piTensor fun a => (y a).rep) (GlobalTheory.SmGL.jac e π) := rfl
     _ ≤ jhMult ((piTensor fun l => (x (finSigmaFinEquiv.symm l).1 (finSigmaFinEquiv.symm l).2).rep).comp
-          (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k)) (relJacD e' (jac e π)) :=
+          (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k)) (relJacD e' (GlobalTheory.SmGL.jac e π)) :=
         jhMult_le_relJacD e' hσ hρ hτ
     _ = jhMult ((piTensor fun l => (x (finSigmaFinEquiv.symm l).1 (finSigmaFinEquiv.symm l).2).rep).comp
           (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k))
-          ((jac (refinePlace e e') π).comp (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k)) :=
+          ((GlobalTheory.SmGL.jac (refinePlace e e') π).comp (GlobalTheory.JacStages.flatHom fun a b => GL (Fin (x a b).1) k)) :=
         (GlobalTheory.SmGL.jhMult_congr_right _ φ3).symm
     _ = jhMult (piTensor fun l => (x (finSigmaFinEquiv.symm l).1 (finSigmaFinEquiv.symm l).2).rep)
-          (jac (refinePlace e e') π) :=
+          (GlobalTheory.SmGL.jac (refinePlace e e') π) :=
         GlobalTheory.SmGL.EmptyBlocks.jhMult_comp_surjective _ (GlobalTheory.JacStages.flatHom_surjective _) _ _
     _ = Zc.jm (concat c x) hcat π := by
         rw [hE]

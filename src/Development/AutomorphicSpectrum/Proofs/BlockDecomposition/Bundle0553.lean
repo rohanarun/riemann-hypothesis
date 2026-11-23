@@ -255,8 +255,8 @@ variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchim
 theorem jhMult_jac_of_le (e : (Σ a, Fin (d a)) ≃ Fin N)
     {σ : Representation ℂ (Levi k fun a => Fin (d a)) U} (hσ : σ.IsIrreducible)
     {π : Representation ℂ (GL (Fin N) k) V} (hπ : IsSmooth π) {S T : Subrepresentation π} (h : T ≤ S) :
-    jhMult σ (jac e S.toRepresentation) =
-      jhMult σ (jac e T.toRepresentation) + jhMult σ (jac e (subQuot S T)) := by
+    jhMult σ (GlobalTheory.SmGL.jac e S.toRepresentation) =
+      jhMult σ (GlobalTheory.SmGL.jac e T.toRepresentation) + jhMult σ (GlobalTheory.SmGL.jac e (subQuot S T)) := by
   let j : S.toRepresentation.IntertwiningMap π := ⟨S.toSubmodule.subtype, fun _ => rfl⟩
   have hS : IsSmooth S.toRepresentation := (IsSubquotient.of_injective j Subtype.val_injective).isSmooth hπ
   let ι : T.toRepresentation.IntertwiningMap S.toRepresentation := ⟨Submodule.inclusion h, fun _ => rfl⟩
@@ -284,8 +284,8 @@ theorem jhMult_jac_of_le (e : (Σ a, Fin (d a)) ≃ Fin N)
 theorem exists_irrRep_of_subrep (e : (Σ a, Fin (d a)) ≃ Fin N)
     {σ : Representation ℂ (Levi k fun a => Fin (d a)) U} (hσ : σ.IsIrreducible)
     {π : Representation ℂ (GL (Fin N) k) V} (hπ : IsSmooth π) (hl : HasFiniteLength π)
-    (S : Subrepresentation π) (hS : jhMult σ (jac e S.toRepresentation) ≠ 0) :
-    ∃ τ : IrrRep (GL (Fin N) k), IsSubquotient τ.ρ S.toRepresentation ∧ jhMult σ (jac e τ.ρ) ≠ 0 := by
+    (S : Subrepresentation π) (hS : jhMult σ (GlobalTheory.SmGL.jac e S.toRepresentation) ≠ 0) :
+    ∃ τ : IrrRep (GL (Fin N) k), IsSubquotient τ.ρ S.toRepresentation ∧ jhMult σ (GlobalTheory.SmGL.jac e τ.ρ) ≠ 0 := by
   have φ := Subrepresentation.subrepresentationSubmoduleOrderIso (ρ := π)
   obtain ⟨_, _⟩ := isFiniteLength_iff_isNoetherian_isArtinian.1 hl
   have : WellFoundedGT (Subrepresentation π) := φ.toOrderEmbedding.wellFoundedGT
@@ -305,7 +305,7 @@ theorem exists_irrRep_of_subrep (e : (Σ a, Fin (d a)) ≃ Fin N)
   let p : S.toRepresentation.IntertwiningMap (subQuot S T) := ⟨Submodule.mkQ _, fun _ => rfl⟩
   let j : S.toRepresentation.IntertwiningMap π := ⟨S.toSubmodule.subtype, fun _ => rfl⟩
   rw [jhMult_jac_of_le e hσ hπ hT.le] at hS
-  by_cases h0 : jhMult σ (jac e T.toRepresentation) = 0
+  by_cases h0 : jhMult σ (GlobalTheory.SmGL.jac e T.toRepresentation) = 0
   · rw [h0, zero_add] at hS
     have hq : IsSubquotient (subQuot S T) S.toRepresentation :=
       .of_surjective p (Submodule.Quotient.mk_surjective _)
@@ -327,7 +327,7 @@ theorem exists_irrRep_wd : ∀ {k : Type} [Field k] [ValuativeRel k] [Topologica
   have hT2 : IsSubquotient (⊤ : Subrepresentation π).toRepresentation π :=
     .of_injective (topEquiv π).toIntertwiningMap (topEquiv π).injective
   have h1 : jhMult (piTensor fun a => (w.get a).rep)
-      (jac (stdBlocks (fun a => (w.get a).1) hd) (⊤ : Subrepresentation π).toRepresentation) ≠ 0 :=
+      (GlobalTheory.SmGL.jac (stdBlocks (fun a => (w.get a).1) hd) (⊤ : Subrepresentation π).toRepresentation) ≠ 0 :=
     jhMult_ne_zero_iff.2 ((jhMult_ne_zero_iff.1 hw).trans
       (GlobalTheory.JacquetExact.isSubquotient_jac _ (hT2.isSmooth hπ) hT1))
   obtain ⟨τ, h2, h3⟩ := exists_irrRep_of_subrep _ hσ hπ hl ⊤ h1

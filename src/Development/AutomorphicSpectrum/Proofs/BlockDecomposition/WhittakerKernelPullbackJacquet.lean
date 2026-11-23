@@ -254,13 +254,13 @@ theorem twKer_unipRad_le (ψ : AddChar k Circle) (π : Representation ℂ (GL (F
 
 theorem jac_secondEmb (π : Representation ℂ (GL (Fin N) k) V) {u : GL (Fin (d 1)) k}
     (hu : u ∈ unipB k (Fin (d 1))) (v : V) :
-    jac (stdBlocks d h) π (secondEmb d u) (Submodule.Quotient.mk v) =
+    GlobalTheory.SmGL.jac (stdBlocks d h) π (secondEmb d u) (Submodule.Quotient.mk v) =
       Submodule.Quotient.mk (π (secEmb d h u) v) := by
   rw [jac_mk, deltaHalf_secondEmb d hu]
   simp [secEmb]
 
 theorem whitKer_jac_eq_map (ψ : AddChar k Circle) (π : Representation ℂ (GL (Fin N) k) V) :
-    whitKer ψ d (jac (stdBlocks d h) π) =
+    whitKer ψ d (GlobalTheory.SmGL.jac (stdBlocks d h) π) =
       (twKer π (derUnip k N (d 0)) (derChar k ψ N (d 0))).map
         (Submodule.mkQ (twKer π (unipRad k (stdBlocks d h)) 1)) := by
   apply le_antisymm
@@ -290,7 +290,7 @@ theorem whitKer_jac_eq_map (ψ : AddChar k Circle) (π : Representation ℂ (GL 
     exact Submodule.subset_span ⟨⟨u, hu⟩, Submodule.Quotient.mk v, rfl⟩
 
 theorem comap_whitKer_jac (ψ : AddChar k Circle) (π : Representation ℂ (GL (Fin N) k) V) :
-    (whitKer ψ d (jac (stdBlocks d h) π)).comap
+    (whitKer ψ d (GlobalTheory.SmGL.jac (stdBlocks d h) π)).comap
         (Submodule.mkQ (twKer π (unipRad k (stdBlocks d h)) 1)) =
       twKer π (derUnip k N (d 0)) (derChar k ψ N (d 0)) := by
   rw [whitKer_jac_eq_map, Submodule.comap_map_eq, Submodule.ker_mkQ]
@@ -300,7 +300,7 @@ end Chars
 
 theorem whitKer_jac_comap_eq_twKer_derUnip : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (ψ : AddChar k Circle) (n j : ℕ) (V : Type) [AddCommGroup V] [Module ℂ V]
     (π : Representation ℂ (GL (Fin (n + j + 1)) k) V) (hd : ∑ a, (![n, j + 1] a) = n + j + 1),
-    (whitKer ψ ![n, j + 1] (jac (stdBlocks ![n, j + 1] hd) π)).comap
+    (whitKer ψ ![n, j + 1] (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π)).comap
         (Submodule.mkQ (twKer π (unipRad k (stdBlocks ![n, j + 1] hd)) 1)) =
       twKer π (derUnip k (n + j + 1) n) (derChar k ψ (n + j + 1) n) :=
   fun _ _ _ _ _ ψ _ _ _ _ _ π hd => comap_whitKer_jac _ hd ψ π

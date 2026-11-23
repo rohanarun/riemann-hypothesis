@@ -52,7 +52,7 @@ theorem mk_parab (e : (Σ a, m a) ≃ n) (τ : Representation ℂ (GL n k) V) (p
     refine Set.mem_ofPred.mpr ⟨⟨u, hu⟩, y, ?_⟩
     simp
   have hL : ∀ y : V, (Submodule.Quotient.mk (τ (leviEmb k e (leviProj k e p)) y) : Jacquet τ (unipRad k e)) =
-      ((deltaHalf k m (leviProj k e p) : ℂˣ) : ℂ) • jac e τ (leviProj k e p) (Submodule.Quotient.mk y) := by
+      ((deltaHalf k m (leviProj k e p) : ℂˣ) : ℂ) • GlobalTheory.SmGL.jac e τ (leviProj k e p) (Submodule.Quotient.mk y) := by
     intro y
     rw [jac_mk, smul_smul, Units.mul_inv, one_smul]
   have e1 : τ (p : GL n k) w = τ (leviEmb k e (leviProj k e p)) (τ u w) := by
@@ -62,11 +62,11 @@ theorem mk_parab (e : (Σ a, m a) ≃ n) (τ : Representation ℂ (GL n k) V) (p
   rw [e1, hL, hL, key]
 
 def frobFun (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : Representation ℂ (Levi k m) W}
-    (f : (jac e τ).IntertwiningMap ρ) (v : V) : GL n k → W :=
+    (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) : GL n k → W :=
   fun g => f (Submodule.Quotient.mk (τ g v))
 
 theorem frobFun_law (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : Representation ℂ (Levi k m) W}
-    (f : (jac e τ).IntertwiningMap ρ) (v : V) (p : parab k e) (g : GL n k) :
+    (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) (p : parab k e) (g : GL n k) :
     frobFun e f v (p * g) = (deltaHalf k m (leviProj k e p) : ℂ) • ρ (leviProj k e p) (frobFun e f v g) := by
   have h1 : frobFun e f v (p * g) =
       f (Submodule.Quotient.mk (τ (leviEmb k e (leviProj k e p)) (τ g v))) := by
@@ -81,7 +81,7 @@ theorem frobFun_law (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V}
   rw [← h2, jac_mk, map_smul, smul_smul, Units.mul_inv, one_smul]
 
 theorem frobFun_mem (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : Representation ℂ (Levi k m) W}
-    (f : (jac e τ).IntertwiningMap ρ) (v : V) :
+    (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) :
     frobFun e f v ∈ indSpace (parab k e) ((twist ρ (deltaHalf k m)).comp (leviProj k e)) := by
   show ∀ (h : ↥(parab k e)) (g : GL n k),
     frobFun e f v (↑h * g) = ((twist ρ (deltaHalf k m)).comp (leviProj k e)) h (frobFun e f v g)
@@ -89,7 +89,7 @@ theorem frobFun_mem (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V}
   rw [frobFun_law, MonoidHom.comp_apply, twist_apply]
 
 theorem frobFun_translate (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : Representation ℂ (Levi k m) W}
-    (f : (jac e τ).IntertwiningMap ρ) (v : V) (h x : GL n k) :
+    (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) (h x : GL n k) :
     frobFun e f v (x * h) = frobFun e f (τ h v) x := by
   show f (Submodule.Quotient.mk (τ (x * h) v)) = f (Submodule.Quotient.mk (τ x (τ h v)))
   first
@@ -97,7 +97,7 @@ theorem frobFun_translate (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n
   | rw [map_mul]
 
 theorem frobFun_smooth (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} (hτ : IsSmooth τ)
-    {ρ : Representation ℂ (Levi k m) W} (f : (jac e τ).IntertwiningMap ρ) (v : V) :
+    {ρ : Representation ℂ (Levi k m) W} (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) :
     (⟨frobFun e f v, frobFun_mem e f v⟩ : indSpace (parab k e) ((twist ρ (deltaHalf k m)).comp (leviProj k e))) ∈
       smoothPart (ind (parab k e) ((twist ρ (deltaHalf k m)).comp (leviProj k e))) := by
   show IsOpen {g : GL n k | (ind (parab k e) ((twist ρ (deltaHalf k m)).comp (leviProj k e))) g
@@ -128,7 +128,7 @@ theorem frobFun_smooth (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k)
     rfl
 
 def frobInv (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} (hτ : IsSmooth τ)
-    {ρ : Representation ℂ (Levi k m) W} (f : (jac e τ).IntertwiningMap ρ) :
+    {ρ : Representation ℂ (Levi k m) W} (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) :
     τ.IntertwiningMap (parInd e ρ) where
   toLinearMap :=
     { toFun := fun v => ⟨⟨frobFun e f v, frobFun_mem e f v⟩, frobFun_smooth e hτ f v⟩
@@ -145,7 +145,7 @@ def frobInv (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} (hτ : 
     exact (frobFun_translate e f v g x).symm
 
 theorem frobInv_one (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} (hτ : IsSmooth τ)
-    {ρ : Representation ℂ (Levi k m) W} (f : (jac e τ).IntertwiningMap ρ) (v : V) :
+    {ρ : Representation ℂ (Levi k m) W} (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (v : V) :
     (frobInv e hτ f v).1.1 1 = f (Submodule.Quotient.mk v) := by
   show f (Submodule.Quotient.mk (τ 1 v)) = f (Submodule.Quotient.mk v)
   first
@@ -153,7 +153,7 @@ theorem frobInv_one (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V}
   | rw [map_one]
 
 theorem exists_frobInv_ne_zero (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} (hτ : IsSmooth τ)
-    {ρ : Representation ℂ (Levi k m) W} (f : (jac e τ).IntertwiningMap ρ) (hf : ∃ v, f v ≠ 0) :
+    {ρ : Representation ℂ (Levi k m) W} (f : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ) (hf : ∃ v, f v ≠ 0) :
     ∃ v, frobInv e hτ f v ≠ 0 := by
   obtain ⟨w, hw⟩ := hf
   obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ w
@@ -165,7 +165,7 @@ theorem exists_frobInv_ne_zero (e : (Σ a, m a) ≃ n) {τ : Representation ℂ 
 theorem exists_map_prodIrr {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k]
     {h N : ℕ} (x : Fin h → IrrGL (k := k)) (hd : ∑ a, (x a).1 = N) {V : Type} [AddCommGroup V] [Module ℂ V]
     (τ : Representation ℂ (GL (Fin N) k) V) (hτ : IsSmooth τ)
-    (f : (jac (stdBlocks (fun a => (x a).1) hd) τ).IntertwiningMap (piTensor fun a => (x a).rep))
+    (f : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hd) τ).IntertwiningMap (piTensor fun a => (x a).rep))
     (hf : ∃ v, f v ≠ 0) : ∃ g : τ.IntertwiningMap (prodIrr x hd), ∃ v, g v ≠ 0 := by
   exact ⟨frobInv (stdBlocks (fun a => (x a).1) hd) hτ f, exists_frobInv_ne_zero _ hτ f hf⟩
 

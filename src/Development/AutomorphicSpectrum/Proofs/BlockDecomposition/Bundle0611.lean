@@ -411,7 +411,7 @@ theorem jhMult_cell_colour : ∀ {k : Type} [Field k] [ValuativeRel k] [Topologi
     · exact ⟨(IrrRep.det (Fin (b i j)) 1 isSmoothChar_one).cl, fun h' => absurd h' hij⟩
   choose s₀ hs₀ using hex
   have hfirst : ∀ i, jhMult (piTensor fun j => (s₀ i j).rep.ρ)
-      (jac (stdBlocks (b i) (hrow i)) (x i).rep) = jmL (sub W c i) (x i).rep := fun i =>
+      (GlobalTheory.SmGL.jac (stdBlocks (b i) (hrow i)) (x i).rep) = jmL (sub W c i) (x i).rep := fun i =>
     GlobalTheory.T.jacquet_multiplicity_sublist_padding W c i (fun j => (⟨b i j, s₀ i j⟩ : IrrGL (k := k))) (fun j hj => hs₀ i j hj)
       (fun j hj => hzero i j hj) (hrow i) (x i).rep
   rw [Finset.sum_eq_single s₀]

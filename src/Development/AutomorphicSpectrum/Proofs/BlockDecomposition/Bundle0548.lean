@@ -353,7 +353,7 @@ theorem jhMult_jac_exact (e : (Σ a, m a) ≃ n) {σ : Representation ℂ (Levi 
     {π₂ : Representation ℂ (GL n k) U} (ι : π₁.IntertwiningMap π) (p : π.IntertwiningMap π₂)
     (hπ : IsSmooth π) (hι : Function.Injective ι) (hp : Function.Surjective p)
     (he : Function.Exact ι p) :
-    jhMult σ (jac e π) = jhMult σ (jac e π₁) + jhMult σ (jac e π₂) := by
+    jhMult σ (GlobalTheory.SmGL.jac e π) = jhMult σ (GlobalTheory.SmGL.jac e π₁) + jhMult σ (GlobalTheory.SmGL.jac e π₂) := by
   refine jhMult_exact (jacMap e ι) (jacMap e p) hσ
     (GlobalTheory.JacInj.jacMap_injective k _ _ _ e W V π₁ π ι hπ hι) (fun x => ?_) (fun x => ?_)
     (fun x hx => ?_)
@@ -375,7 +375,7 @@ theorem jhMult_jac_exact (e : (Σ a, m a) ≃ n) {σ : Representation ℂ (Levi 
 
 theorem one_le_jhMult_jac (e : (Σ a, m a) ≃ n) {ρ : Representation ℂ (Levi k m) X}
     (hρ : ρ.IsIrreducible) {τ : Representation ℂ (GL n k) V} (f : τ.IntertwiningMap (parInd e ρ))
-    (hf : ∃ v, f v ≠ 0) : 1 ≤ jhMult ρ (jac e τ) := by
+    (hf : ∃ v, f v ≠ 0) : 1 ≤ jhMult ρ (GlobalTheory.SmGL.jac e τ) := by
   obtain ⟨v, hv⟩ := hf
   obtain ⟨x, hx⟩ : ∃ x, (f v).1.1 x ≠ 0 := by
     by_contra h
@@ -408,8 +408,8 @@ theorem isIrreducible_piTensor (hA : GlobalTheory.Published.IrreducibleAdmissibl
 theorem exists_isSocle_of_forall_isAtom (e : (Σ a, m a) ≃ n) {ρ : Representation ℂ (Levi k m) X}
     (hρ : ρ.IsIrreducible) {π : Representation ℂ (GL n k) V} (hs : IsSmooth π) [Nontrivial V]
     (hfl : HasFiniteLength π)
-    (hone : ∀ T : Subrepresentation π, IsAtom T → 1 ≤ jhMult ρ (jac e T.toRepresentation))
-    (hjm : jhMult ρ (jac e π) ≤ 1) : ∃ τ : IrrRep (GL n k), IsSocle τ.ρ π := by
+    (hone : ∀ T : Subrepresentation π, IsAtom T → 1 ≤ jhMult ρ (GlobalTheory.SmGL.jac e T.toRepresentation))
+    (hjm : jhMult ρ (GlobalTheory.SmGL.jac e π) ≤ 1) : ∃ τ : IrrRep (GL n k), IsSocle τ.ρ π := by
   obtain ⟨hGT, hLT⟩ := (hasFiniteLength_iff_wellFounded _).1 hfl
   haveI : IsAtomic (Subrepresentation π) := isAtomic_of_orderBot_wellFounded_lt wellFounded_lt
   have hnt : (⊤ : Subrepresentation π) ≠ ⊥ := fun hb => by
@@ -440,10 +440,10 @@ theorem exists_isSocle_of_forall_isAtom (e : (Σ a, m a) ≃ n) {ρ : Representa
       have h2 : (u : V) ∈ (T ⊓ S) := ⟨u.2, h1⟩
       rw [hdis] at h2
       exact Subtype.ext h2
-    have h1 : 1 ≤ jhMult ρ (jac e (subQuot ⊤ S)) :=
+    have h1 : 1 ≤ jhMult ρ (GlobalTheory.SmGL.jac e (subQuot ⊤ S)) :=
       (hone T hT).trans (jhMult_le_of_injective hρ (jacMap e (p.comp ιT))
         (GlobalTheory.JacInj.jacMap_injective k _ _ _ e _ _ _ _ _ hQ hinj))
-    have h2 : (2 : ℕ∞) ≤ jhMult ρ (jac e π) := by
+    have h2 : (2 : ℕ∞) ≤ jhMult ρ (GlobalTheory.SmGL.jac e π) := by
       rw [hadd]
       exact (by norm_num : (2 : ℕ∞) = 1 + 1).le.trans (add_le_add (hone S hS) h1)
     exact absurd (h2.trans hjm) (by norm_num)
@@ -467,7 +467,7 @@ theorem nontrivial_indSp (e : (Σ a, m a) ≃ n) {ρ : Representation ℂ (Levi 
 set_option synthInstance.maxHeartbeats 200000 in
 theorem one_le_jhMult_jac_atom (e : (Σ a, m a) ≃ n) {ρ : Representation ℂ (Levi k m) X}
     (hρ : ρ.IsIrreducible) (T : Subrepresentation (parInd e ρ)) (hT : IsAtom T) :
-    1 ≤ jhMult ρ (jac e T.toRepresentation) := by
+    1 ≤ jhMult ρ (GlobalTheory.SmGL.jac e T.toRepresentation) := by
   let ιT : T.toRepresentation.IntertwiningMap (parInd e ρ) := ⟨T.toSubmodule.subtype, fun _ => rfl⟩
   refine one_le_jhMult_jac e hρ ιT ?_
   by_contra hc

@@ -322,7 +322,7 @@ theorem len_eq_one (hJ : LSegJacquet k) {Δ : Segment k} {x : IrrGL (k := k)} (h
   have h1 := jmL_decWord hJ Δ h
   rw [jmL, dite_eq_left hd, jm] at h1
   have hsub : IsSubquotient (piTensor fun a => ((decWord Δ).get a).rep)
-      (jac (stdBlocks (fun a => ((decWord Δ).get a).1) hd) x.rep) :=
+      (GlobalTheory.SmGL.jac (stdBlocks (fun a => ((decWord Δ).get a).1) hd) x.rep) :=
     jhMult_ne_zero_iff.1 (by rw [h1]; exact one_ne_zero)
   have hu := GlobalTheory.SmGL.CuspRow.block_unique_of_isCuspidal k x.1 _ x.rep _ _ _ _
     (fun a => ((decWord Δ).get a).rep) hx.2 (fun a => nontrivial_of_irreducible ((decWord Δ).get a).2.rep.irr) hsub

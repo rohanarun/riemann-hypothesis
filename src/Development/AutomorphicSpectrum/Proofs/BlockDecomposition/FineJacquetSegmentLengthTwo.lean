@@ -36,15 +36,15 @@ theorem two_le_jhMult_of_map {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d 
     (f : B.IntertwiningMap π) (hf : Function.Surjective f) {Z : Representation ℂ (GL (Fin N) k) U}
     (ι : Z.IntertwiningMap B) (hι : Function.Injective ι) (h0 : ∀ z, f (ι z) = 0)
     {τ : Representation ℂ (Levi k fun a => Fin (d a)) Y} (hτ : τ.IsIrreducible)
-    (h1 : IsSubquotient τ (jac e Z)) (h2 : IsSubquotient τ (jac e π)) :
-    2 ≤ jhMult τ (jac e B) := by
+    (h1 : IsSubquotient τ (GlobalTheory.SmGL.jac e Z)) (h2 : IsSubquotient τ (GlobalTheory.SmGL.jac e π)) :
+    2 ≤ jhMult τ (GlobalTheory.SmGL.jac e B) := by
   let P := jacMap e f
-  let K : Subrepresentation (jac e B) := ⟨LinearMap.ker P.toLinearMap, fun g x hx => by
-    show P (jac e B g x) = 0
+  let K : Subrepresentation (GlobalTheory.SmGL.jac e B) := ⟨LinearMap.ker P.toLinearMap, fun g x hx => by
+    show P (GlobalTheory.SmGL.jac e B g x) = 0
     rw [P.isIntertwining]
     have hx' : P x = 0 := hx
     rw [hx', map_zero]⟩
-  let κ : K.toRepresentation.IntertwiningMap (jac e B) := ⟨K.toSubmodule.subtype, fun _ => rfl⟩
+  let κ : K.toRepresentation.IntertwiningMap (GlobalTheory.SmGL.jac e B) := ⟨K.toSubmodule.subtype, fun _ => rfl⟩
   have hadd := jhMult_exact κ P hτ Subtype.val_injective (GlobalTheory.JacquetExact.jacMap_surjective e f hf)
     (fun u => u.2) fun v hv => ⟨⟨v, hv⟩, rfl⟩
   have hz : ∀ x, P (jacMap e ι x) = 0 := fun x => by
@@ -52,13 +52,13 @@ theorem two_le_jhMult_of_map {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d 
     show Submodule.Quotient.mk (f (ι v)) = 0
     rw [h0]
     rfl
-  let ψ : (jac e Z).IntertwiningMap K.toRepresentation :=
+  let ψ : (GlobalTheory.SmGL.jac e Z).IntertwiningMap K.toRepresentation :=
     ⟨LinearMap.codRestrict K.toSubmodule (jacMap e ι).toLinearMap hz, fun g => LinearMap.ext fun x =>
       Subtype.ext ((jacMap e ι).isIntertwining _ _ g x)⟩
   have hψ : Function.Injective ψ := fun x y h =>
     GlobalTheory.JacquetExact.jacMap_injective e hB ι hι (congrArg Subtype.val h)
   have h3 : jhMult τ K.toRepresentation ≠ 0 := jhMult_ne_zero_iff.2 (h1.trans (.of_injective ψ hψ))
-  have h4 : jhMult τ (jac e π) ≠ 0 := jhMult_ne_zero_iff.2 h2
+  have h4 : jhMult τ (GlobalTheory.SmGL.jac e π) ≠ 0 := jhMult_ne_zero_iff.2 h2
   rw [hadd]
   have h5 := ENat.one_le_iff_ne_zero.2 h3
   have h6 := ENat.one_le_iff_ne_zero.2 h4
@@ -138,7 +138,7 @@ def SegConcl {d l : ℕ} {V : Type} [AddCommGroup V] [Module ℂ V] (σ : Repres
   ∃ S : Subrepresentation (multiProd e (segTerm σ l)),
     S.toRepresentation.IsIrreducible ∧
     (∀ S' : Subrepresentation (multiProd e (segTerm σ l)), S'.toRepresentation.IsIrreducible → S' = S) ∧
-    Nonempty ((jac e S.toRepresentation).Equiv (piTensor (segTerm σ l)))
+    Nonempty ((GlobalTheory.SmGL.jac e S.toRepresentation).Equiv (piTensor (segTerm σ l)))
 
 theorem exists_sub_of_equiv {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃ Fin N) {V W Y U : Type} [AddCommGroup V]
     [Module ℂ V] [AddCommGroup W] [Module ℂ W] [AddCommGroup Y] [Module ℂ Y] [AddCommGroup U] [Module ℂ U]
@@ -147,10 +147,10 @@ theorem exists_sub_of_equiv {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a
     (Φ : A.Equiv B) (ψ : τ.Equiv τ')
     (H : ∃ S : Subrepresentation A, S.toRepresentation.IsIrreducible ∧
       (∀ S' : Subrepresentation A, S'.toRepresentation.IsIrreducible → S' = S) ∧
-      Nonempty ((jac e S.toRepresentation).Equiv τ)) :
+      Nonempty ((GlobalTheory.SmGL.jac e S.toRepresentation).Equiv τ)) :
     ∃ S : Subrepresentation B, S.toRepresentation.IsIrreducible ∧
       (∀ S' : Subrepresentation B, S'.toRepresentation.IsIrreducible → S' = S) ∧
-      Nonempty ((jac e S.toRepresentation).Equiv τ') := by
+      Nonempty ((GlobalTheory.SmGL.jac e S.toRepresentation).Equiv τ') := by
   obtain ⟨S, hS, hu, ⟨φ⟩⟩ := H
   refine ⟨subrepIso Φ S, GlobalTheory.Parabolic.isIrreducible_of_equiv (subEquiv Φ S) hS, fun S' hS' => ?_,
     ⟨((Exponents.jacEquiv _ (subEquiv Φ S).symm).trans φ).trans ψ⟩⟩
@@ -160,7 +160,7 @@ theorem exists_sub_of_equiv {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a
 theorem exists_sub (hZ : GlobalTheory.Published.SegmentRepresentation) (Δ : Segment k) {N : ℕ} (hd : ∑ a, (Δ.term a).1 = N) :
     ∃ S : Subrepresentation (prodIrr Δ.term hd), S.toRepresentation.IsIrreducible ∧
       (∀ S' : Subrepresentation (prodIrr Δ.term hd), S'.toRepresentation.IsIrreducible → S' = S) ∧
-      Nonempty ((jac (stdBlocks (fun a => (Δ.term a).1) hd) S.toRepresentation).Equiv
+      Nonempty ((GlobalTheory.SmGL.jac (stdBlocks (fun a => (Δ.term a).1) hd) S.toRepresentation).Equiv
         (piTensor fun a => (Δ.term a).rep)) := by
   have hN : N = Δ.len * Δ.d := by
     rw [← hd]
@@ -210,7 +210,7 @@ theorem jm_eq_zero_of_sub (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) 
     (hd : ∑ a, (x a).1 = N) {V : Type} [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V)
     (hc : IsCosocle π (prodIrr x hd)) (S : Subrepresentation (prodIrr x hd))
     (hu : ∀ S' : Subrepresentation (prodIrr x hd), S'.toRepresentation.IsIrreducible → S' = S) (hS : S ≠ ⊤)
-    (φ : (jac (stdBlocks (fun a => (x a).1) hd) S.toRepresentation).Equiv (piTensor fun a => (x a).rep))
+    (φ : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hd) S.toRepresentation).Equiv (piTensor fun a => (x a).rep))
     (hJ : jm x hd (prodIrr x hd) = 1) : jm x hd π = 0 := by
   obtain ⟨hi, f, hf, -⟩ := hc
   have hle := sub_le_ker (GlobalTheory.CompanionTheory.ProdFL.hasFiniteLength_prodIrr hA x hd) hi f hf S hu hS
@@ -226,7 +226,7 @@ theorem sub_ne_top {s N : ℕ} {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃ Fi
     [Module ℂ V] [AddCommGroup Y] [Module ℂ Y] [AddCommGroup U] [Module ℂ U]
     {P : Representation ℂ (GL (Fin N) k) V} (S : Subrepresentation P)
     {τ : Representation ℂ (Levi k fun a => Fin (d a)) Y} {τ' : Representation ℂ (Levi k fun a => Fin (d a)) U}
-    (φ : (jac e S.toRepresentation).Equiv τ') (h1 : IsSubquotient τ (jac e P)) (h2 : ¬ IsSubquotient τ τ') :
+    (φ : (GlobalTheory.SmGL.jac e S.toRepresentation).Equiv τ') (h1 : IsSubquotient τ (GlobalTheory.SmGL.jac e P)) (h2 : ¬ IsSubquotient τ τ') :
     S ≠ ⊤ := by
   rintro rfl
   let ι : (⊤ : Subrepresentation P).toRepresentation.IntertwiningMap P :=
@@ -244,7 +244,7 @@ theorem jm_term_eq_zero (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) (h
   have h1 : jm (dec (seg2 ρ hρ)) hy (prodIrr (seg2 ρ hρ).term hd) = 1 :=
     jm_perm_prod hA (seg2 ρ hρ) Fin.revPerm hy hd
   have h2 : jhMult (piTensor fun a => (dec (seg2 ρ hρ) a).rep)
-      (jac (stdBlocks (fun a => ((seg2 ρ hρ).term a).1) hd) (prodIrr (seg2 ρ hρ).term hd)) ≠ 0 := by
+      (GlobalTheory.SmGL.jac (stdBlocks (fun a => ((seg2 ρ hρ).term a).1) hd) (prodIrr (seg2 ρ hρ).term hd)) ≠ 0 := by
     refine ne_of_eq_of_ne h1 one_ne_zero
   exact jm_eq_zero_of_sub hA _ hd π hc S hu
     (sub_ne_top _ S φ (jhMult_ne_zero_iff.1 h2) (not_isSubquotient_dec hA ρ hρ)) φ

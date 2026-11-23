@@ -226,7 +226,7 @@ theorem mapsToProd_of_jac₂ : ∀ (g : ℕ) [Fact g.Prime] (a b n : ℕ) (h : a
       simp
     have key : ∀ (M : Levi ℚ_[g] (Two (Fin a) (Fin b))) (w : V),
         (Submodule.Quotient.mk (π (leviEmb ℚ_[g] (two (stdSum h)) M) w) : Jacquet π (unipRad ℚ_[g] (two (stdSum h)))) =
-          (deltaHalf ℚ_[g] (Two (Fin a) (Fin b)) M : ℂ) • jac (two (stdSum h)) π M (Submodule.Quotient.mk w) := by
+          (deltaHalf ℚ_[g] (Two (Fin a) (Fin b)) M : ℂ) • GlobalTheory.SmGL.jac (two (stdSum h)) π M (Submodule.Quotient.mk w) := by
       intro M w
       rw [jac_mk, smul_smul, ← Units.val_mul, mul_inv_cancel, Units.val_one, one_smul]
     have hint := Representation.IntertwiningMap.isIntertwining _ _ φ (x, y) (Submodule.Quotient.mk v : Jacquet π (unipRad ℚ_[g] (two (stdSum h))))

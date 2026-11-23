@@ -367,7 +367,7 @@ theorem twKer_le_ker_evalOne (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (G
     Units.val_one, one_smul, sub_self]
 
 def frobMap (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : Representation ℂ (Levi k m) W}
-    (f : τ.IntertwiningMap (parInd e ρ)) : (jac e τ).IntertwiningMap ρ where
+    (f : τ.IntertwiningMap (parInd e ρ)) : (GlobalTheory.SmGL.jac e τ).IntertwiningMap ρ where
   toLinearMap := (twKer τ (unipRad k e) 1).liftQ (evalOne e f) (twKer_le_ker_evalOne e f)
   isIntertwining' g := by
     refine LinearMap.ext fun y => ?_
@@ -384,7 +384,7 @@ def frobMap (e : (Σ a, m a) ≃ n) {τ : Representation ℂ (GL n k) V} {ρ : R
     have h2 : evalOne e f (τ (leviEmb k e g) v) =
         (deltaHalf k m g : ℂ) • ρ g (evalOne e f v) := (eval_map e f _ v).trans h
     show (twKer τ (unipRad k e) 1).liftQ (evalOne e f) (twKer_le_ker_evalOne e f)
-        (jac e τ g (Submodule.Quotient.mk v)) = ρ g (evalOne e f v)
+        (GlobalTheory.SmGL.jac e τ g (Submodule.Quotient.mk v)) = ρ g (evalOne e f v)
     rw [jac_mk, map_smul]
     change (((deltaHalf k m g)⁻¹ : ℂˣ) : ℂ) • evalOne e f (τ (leviEmb k e g) v) = _
     rw [h2, smul_smul, ← Units.val_mul, inv_mul_cancel, Units.val_one, one_smul]

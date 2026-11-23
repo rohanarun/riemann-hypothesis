@@ -344,7 +344,7 @@ theorem sph_of_isBlockVec : GlobalTheory.Published.BernsteinZelevinskyFiniteness
       rw [hblk h hh h1 h2 u hu, map_smul] at this
       exact this.symm
   obtain ⟨hx0, hx⟩ := _root_.GlobalTheory.JacBlockTwo.jacquet_ne_zero_of_isBlockVec_two hDZ k r t χ _ _ (Ψ v) hsm hirr hχt hv' hblk'
-  obtain ⟨Y, _, _, τ, hτ, hsub, y, hy0, hy⟩ := _root_.GlobalTheory.EigenSubquot.exists_irreducible_subquotient_eigen _ _ (jac (two (stdSum (rfl : r + t = r + t)))
+  obtain ⟨Y, _, _, τ, hτ, hsub, y, hy0, hy⟩ := _root_.GlobalTheory.EigenSubquot.exists_irreducible_subquotient_eigen _ _ (GlobalTheory.SmGL.jac (two (stdSum (rfl : r + t = r + t)))
     (multiProd (two (stdSum (rfl : r + t = r + t))) (Exponents.twoRep π₁.π π₂.π)))
     {h | ∃ g ∈ KO k (Fin t), h = Pi.mulSingle true g}
     (fun h => (χ (Matrix.GeneralLinearGroup.det (h true)) : ℂ)) _ hx0

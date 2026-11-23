@@ -119,7 +119,7 @@ theorem jac_deriv_rel (ψ : AddChar k Circle) (n j : ℕ) {V : Type} [AddCommGro
     ∃ L : Jacquet π (unipRad k (stdBlocks (dd n (j + 1)) (dd_sum n j))) →ₗ[ℂ]
         TwJacquet (iterPhi k ψ j (resM k π)).ρ (MirUin k n) 1,
       Function.Surjective L ∧ ∀ g x,
-        L (((jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) :
+        L (((GlobalTheory.SmGL.jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) :
           Representation ℂ (GL (Fin n) k) _) g x) =
         twist (GlobalTheory.BZMir.deriv k ψ j π) (detChar (Fin n) (absPow k (-(((j : ℂ) + 1) / 2)))) g (L x) := by
   obtain ⟨L, hL, hLe⟩ := exists_jac_deriv ψ n j π
@@ -130,7 +130,7 @@ theorem jac_deriv_rel (ψ : AddChar k Circle) (n j : ℕ) {V : Type} [AddCommGro
     (delta_mulSingle n j g)
   refine Eq.trans ?_ h1
   have h2 := hLe g v
-  have h3 : (jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) g (Submodule.Quotient.mk v) =
+  have h3 : (GlobalTheory.SmGL.jac (stdBlocks (dd n (j + 1)) (dd_sum n j)) π).comp (iota n (j + 1)) g (Submodule.Quotient.mk v) =
       (((deltaHalf k (fun a => Fin (dd n (j + 1) a))
         (Pi.mulSingle (M := fun a => GL (Fin (dd n (j + 1) a)) k) (0 : Fin 2) g))⁻¹ : ℂˣ) : ℂ) •
       Submodule.Quotient.mk (π (leviEmb k (stdBlocks (dd n (j + 1)) (dd_sum n j))

@@ -215,7 +215,7 @@ theorem hasSupport_of_isSubquotient_prodIrr {c N : ℕ} {y : Fin c → IrrGL (k 
 theorem exists_sum_of_jac (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFiniteness) {N : ℕ}
     {π : Representation ℂ (GL (Fin N) k) V} {s : Multiset (IrrGL (k := k))} (hs : HasSupport π s) {r : ℕ} {d : Fin r → ℕ}
     (e' : (Σ j, Fin (d j)) ≃ Fin N) {τ : Representation ℂ (Levi k fun j => Fin (d j)) W} (hτ : τ.IsIrreducible)
-    (hτs : IsSubquotient τ (jac e' π)) (y : ∀ j, IrrRep (GL (Fin (d j)) k))
+    (hτs : IsSubquotient τ (GlobalTheory.SmGL.jac e' π)) (y : ∀ j, IrrRep (GL (Fin (d j)) k))
     (hy : ∀ j, IsSubquotient (y j).ρ (τ.comp (MonoidHom.mulSingle (fun j => GL (Fin (d j)) k) j) :
       Representation ℂ (GL (Fin (d j)) k) W)) :
     ∃ t : Fin r → Multiset (IrrGL (k := k)), (∀ j, HasSupport (y j).ρ (t j)) ∧ s = ∑ j, t j := by
@@ -264,7 +264,7 @@ theorem eq_of_hasSupport (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFiniten
         ¬ Subsingleton (Jacquet x.rep (unipRad k e)) := by
       by_contra! hn
       exact hc ⟨x.2.rep.smooth, hn⟩
-    obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (jac e x.rep)
+    obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (GlobalTheory.SmGL.jac e x.rep)
       (not_subsingleton_iff_nontrivial.1 hJ)
     have hτsm : IsSmooth τ := hτs.isSmooth (isSmooth_jac e x.2.rep.smooth)
     have hy : ∀ j, ∃ y : IrrRep (GL (Fin (d j)) k), IsSubquotient y.ρ

@@ -177,7 +177,7 @@ theorem exists_scalarBy (x : IrrGL (k := k)) (t : kˣ) : ∃ c : ℂ, Zl.ScalarB
 
 theorem jm_ne_zero_of_equiv {h N : ℕ} (x : Fin h → IrrGL (k := k)) (hx : ∑ a, (x a).1 = N) {V : Type} [AddCommGroup V]
     [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V)
-    (S : Subrepresentation (jac (stdBlocks (fun a => (x a).1) hx) π))
+    (S : Subrepresentation (GlobalTheory.SmGL.jac (stdBlocks (fun a => (x a).1) hx) π))
     (Φ : S.toRepresentation.Equiv (piTensor fun a => (x a).rep)) : Zc.jm x hx π ≠ 0 :=
   jhMult_ne_zero_iff.2 ⟨S, Φ.toIntertwiningMap, Φ.surjective⟩
 
@@ -192,14 +192,14 @@ theorem exists_constituent (N : ℕ) {V : Type} [AddCommGroup V] [Module ℂ V]
       Zl.ScalarBy (x 0) (Zls.unifU k) (μ * (Nat.card 𝓀[k] : ℂ) ^ (((d 0 * d 1 : ℕ) : ℂ) / 2)) ∧
       ∃ c1 : ℂ, Zl.ScalarBy (x 1) (Zls.unifU k) c1 := by
   have hBZ := GlobalTheory.CompanionTheory.Published.bernsteinZelevinskyFiniteness
-  have hfl : HasFiniteLength (jac (stdBlocks d hd) π) :=
+  have hfl : HasFiniteLength (GlobalTheory.SmGL.jac (stdBlocks d hd) π) :=
     (hBZ k).2.1 (Fin 2) (Fin N) (fun a => Fin (d a)) (stdBlocks d hd) V π hs
       (hasFiniteLength_of_isIrreducible hi)
   set ν : ℂ := μ * (Nat.card 𝓀[k] : ℂ) ^ (((d 0 * d 1 : ℕ) : ℂ) / 2) with hν
   set w' : Jacquet π (unipRad k (stdBlocks d hd)) := Submodule.Quotient.mk w with hw'
-  have heig : jac (stdBlocks d hd) π (omegaLevi k d) w' = ν • w' := by
+  have heig : GlobalTheory.SmGL.jac (stdBlocks d hd) π (omegaLevi k d) w' = ν • w' := by
     rw [hw', jac_mk, leviEmb_omegaLevi, hμ, deltaHalf_omegaLevi, smul_smul, hν, mul_comm]
-  set E := eigenSub (jac (stdBlocks d hd) π) (omegaLevi k d) (omegaLevi_comm d) ν with hE
+  set E := eigenSub (GlobalTheory.SmGL.jac (stdBlocks d hd) π) (omegaLevi k d) (omegaLevi_comm d) ν with hE
   have hEne : E ≠ ⊥ := by
     intro h
     have : w' ∈ E.toSubmodule := mem_eigenSub.2 heig
@@ -305,7 +305,7 @@ theorem isCuspidal_of_jacquet_min_left {n a b : ℕ} {V W W' : Type} [AddCommGro
     intro g h1 h2 v
     have hd : deltaHalf k (Two (Fin a) (Fin b)) (leviTwo k _ _ g) = 1 := by
       rw [deltaHalf_two, h1, h2]; simp
-    show jac (two (stdSum h)) π (leviTwo k _ _ g) _ = _
+    show GlobalTheory.SmGL.jac (two (stdSum h)) π (leviTwo k _ _ g) _ = _
     rw [jac_mk, hd]; simp
   have hN : ∀ u ∈ unipRad k (two (stdSum h)), ∀ v : V,
       (Submodule.Quotient.mk (π u v) : V ⧸ Kab) = Submodule.Quotient.mk v := by
@@ -412,7 +412,7 @@ theorem exists_quotient_jac₂ (hA : GlobalTheory.Published.IrreducibleAdmissibl
     exact Nat.find_min hP hca ⟨hc, d, h', not_subsingleton_iff_nontrivial.1 hns⟩
   generalize Nat.find hP = a at ha h hJ hmin
   have hBZ := bernsteinZelevinsky hA
-  have hfl : HasFiniteLength (jac (two (stdSum h)) π) :=
+  have hfl : HasFiniteLength (GlobalTheory.SmGL.jac (two (stdSum h)) π) :=
     (hBZ k).2.1 _ _ _ (two (stdSum h)) V π hs (hasFiniteLength_of_isIrreducible hi)
   obtain ⟨Y, _, _, τ, hτs, hτi, q, hq⟩ :=
     IrrQuot.exists_irreducible_smooth_quotient _ (isSmooth_jac (two (stdSum h)) hs) hfl hJ
@@ -423,7 +423,7 @@ theorem exists_quotient_jac₂ (hA : GlobalTheory.Published.IrreducibleAdmissibl
   let φ : (jac₂ (stdSum h) π).IntertwiningMap (extTensor (F false) (F true)) :=
     ⟨B.toLinearEquiv.toLinearMap ∘ₗ E.toLinearEquiv.toLinearMap ∘ₗ q.toLinearMap, fun g =>
       LinearMap.ext fun v => by
-        show B (E (q (jac (two (stdSum h)) π (leviTwo k _ _ g) v))) =
+        show B (E (q (GlobalTheory.SmGL.jac (two (stdSum h)) π (leviTwo k _ _ g) v))) =
           extTensor (F false) (F true) g (B (E (q v)))
         have e1 : E (τ (leviTwo k _ _ g) (q v)) = piTensor F (leviTwo k _ _ g) (E (q v)) :=
           E.toIntertwiningMap.isIntertwining _ _ _ _

@@ -324,7 +324,7 @@ theorem isCuspidal_jac₂_inr : ∀ (k : Type) [Field k] [ValuativeRel k] [Topol
     intro g h1 h2 v
     have hd : deltaHalf k (Two (Fin a) (Fin b)) (leviTwo k _ _ g) = 1 := by
       rw [deltaHalf_two, h1, h2]; simp
-    show jac (two (stdSum h)) π (leviTwo k _ _ g) _ = _
+    show GlobalTheory.SmGL.jac (two (stdSum h)) π (leviTwo k _ _ g) _ = _
     rw [jac_mk, hd]; simp
   have hN : ∀ u ∈ unipRad k (two (stdSum h)), ∀ v : V,
       (Submodule.Quotient.mk (π u v) : V ⧸ Kab) = Submodule.Quotient.mk v := by
@@ -394,22 +394,22 @@ theorem isSubquotient_jac_refine : ∀ (k : Type) [Field k] [ValuativeRel k] [To
     (π : Representation ℂ (GL (Fin n) k) V), IsSmooth π →
     ∀ (X : Fin s → Type) [∀ a, AddCommGroup (X a)] [∀ a, Module ℂ (X a)]
     (ρ : ∀ a, Representation ℂ (GL (Fin (d a)) k) (X a)), (∀ a, IsSmooth (ρ a)) →
-    IsSubquotient (piTensor ρ) (jac e π) →
+    IsSubquotient (piTensor ρ) (GlobalTheory.SmGL.jac e π) →
     ∀ (t : Fin s → ℕ) (d' : ∀ a, Fin (t a) → ℕ) (e' : ∀ a, (Σ b, Fin (d' a b)) ≃ Fin (d a))
     (Y : ∀ a, Fin (t a) → Type) [∀ a b, AddCommGroup (Y a b)] [∀ a b, Module ℂ (Y a b)]
     (ρ' : ∀ a b, Representation ℂ (GL (Fin (d' a b)) k) (Y a b)),
-    (∀ a, IsSubquotient (piTensor (ρ' a)) (jac (e' a) (ρ a))) →
+    (∀ a, IsSubquotient (piTensor (ρ' a)) (GlobalTheory.SmGL.jac (e' a) (ρ a))) →
     ∃ E : (Σ c : Fin (∑ a, t a), Fin (d' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2)) ≃ Fin n,
-      IsSubquotient (piTensor fun c => ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (jac E π) := by
+      IsSubquotient (piTensor fun c => ρ' (finSigmaFinEquiv.symm c).1 (finSigmaFinEquiv.symm c).2) (GlobalTheory.SmGL.jac E π) := by
   intro k _ _ _ _ n s d e V _ _ π hπ X _ _ ρ _ hsub t d' e' Y _ _ ρ' hρ'
   refine ⟨refinePlace e e', ?_⟩
   refine isSubquotient_of_comp (flatHom fun a b => GL (Fin (d' a b)) k) (flatHom_surjective _) ?_
   obtain ⟨φR⟩ := _root_.GlobalTheory.JacStages.piTensor_flatHom_equiv s t (fun a b => GL (Fin (d' a b)) k) Y ρ'
   obtain ⟨φT⟩ := _root_.GlobalTheory.JacStages.relJacD_piTensor_equiv k s d t d' e' X ρ
   obtain ⟨φS⟩ := _root_.GlobalTheory.JacStagesProof.jac_refinePlace_equiv k s n d e t d' e' V π
-  have h1 : IsSubquotient (piTensor fun a => piTensor (ρ' a)) (piTensor fun a => jac (e' a) (ρ a)) :=
+  have h1 : IsSubquotient (piTensor fun a => piTensor (ρ' a)) (piTensor fun a => GlobalTheory.SmGL.jac (e' a) (ρ a)) :=
     GlobalTheory.piTensor_isSubquotient_of_forall _ _ _ _ _ _ hρ'
-  have h3 := _root_.GlobalTheory.JacStagesExact.isSubquotient_relJacD k s d t d' e' _ _ (piTensor ρ) (jac e π) (isSmooth_jac e hπ) hsub
+  have h3 := _root_.GlobalTheory.JacStagesExact.isSubquotient_relJacD k s d t d' e' _ _ (piTensor ρ) (GlobalTheory.SmGL.jac e π) (isSmooth_jac e hπ) hsub
   exact (isSubquotient_of_equiv φR).trans (h1.trans ((isSubquotient_of_equiv φT.symm).trans
     (h3.trans (isSubquotient_of_equiv φS.symm))))
 

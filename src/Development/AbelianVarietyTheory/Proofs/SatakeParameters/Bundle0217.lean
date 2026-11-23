@@ -94,7 +94,7 @@ theorem exists_jac_map_ne_zero : GlobalTheory.Published.BernsteinZelevinskyFinit
     (∀ (h : d 0 = d 1) (α : ℂˣ), ¬ Nonempty ((h ▸ σ 0 : Irr k (d 1)).π.Equiv
       (twist (σ 1).π (detChar (Fin (d 1)) (unrChar k α))))) →
     ∀ (e : (Σ i, Fin (d i)) ≃ n) (e' : (Σ i, Fin (d (Equiv.swap 0 1 i))) ≃ n),
-    ∃ (φ : (jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
+    ∃ (φ : (GlobalTheory.SmGL.jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
         (piTensor fun i => (σ (Equiv.swap 0 1 i)).π)) (x : Jacquet (multiProd e fun i => (σ i).π) (unipRad k e')), φ x ≠ 0 := by
   intro _ hGL k _ _ _ _ n _ _ d σ hσ hd1 hnt e e'
   obtain ⟨z, c, c', hz, hcc, hX, hbad⟩ := _root_.GlobalTheory.CellCentral.exists_central_scalar_ne_cell k d σ hσ hd1 hnt
@@ -128,7 +128,7 @@ theorem exists_jac_map_ne_zero : GlobalTheory.Published.BernsteinZelevinskyFinit
     have h1 : E.toLinearEquiv (subQuot (S t.succ) (S t.castSucc) z y) = _ := LinearMap.congr_fun (E.isIntertwining' z) y
     have h2 := hbad (b t) (hbad' t ht) (b t).nonempty_rows.some (b t).nonempty_cols.some (E.toLinearEquiv y)
     exact h1.trans (h2.trans (LinearEquiv.map_smul E.toLinearEquiv c' y).symm)
-  obtain ⟨φ, v, hv⟩ := _root_.GlobalTheory.exists_intertwining_of_central_step (jac e' (multiProd e fun i => (σ i).π))
+  obtain ⟨φ, v, hv⟩ := _root_.GlobalTheory.exists_intertwining_of_central_step (GlobalTheory.SmGL.jac e' (multiProd e fun i => (σ i).π))
     (piTensor fun j => (σ (Equiv.swap 0 1 j)).π) N S hmono h0 hN z hz (b.symm G0) c (fun _ => c')
     (fun _ _ => hcc.symm) hstep
     ⟨(h4 (b.symm G0) f₀ g₀).some.trans E₀⟩ hX

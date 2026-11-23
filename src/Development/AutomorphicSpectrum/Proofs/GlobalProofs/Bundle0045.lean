@@ -143,7 +143,7 @@ theorem exists_of_cell (h' : CellSemisimplification k) {α β : Type} [Fintype �
     {τ : Representation ℂ (Levi k m') Y} (hτ : τ.IsIrreducible) (hτs : IsSmooth τ)
     (h0 : jhMult τ (cellFunctor f g (piTensor ρ)) ≠ 0) :
     ∃ s : ∀ i j, IrrRep (GL (Fin (b i j)) k),
-      (∀ i, IsSubquotient (piTensor fun j => (s i j).ρ) (jac (f i) (ρ i))) ∧
+      (∀ i, IsSubquotient (piTensor fun j => (s i j).ρ) (GlobalTheory.SmGL.jac (f i) (ρ i))) ∧
         IsSubquotient τ (piTensor fun j => multiProd (g j) fun i => (s i j).ρ) := by
   obtain ⟨T, -, hT⟩ := h' α β m m' _ f g X ρ hρ hl
   rw [hT ⟨Y, τ, hτs, hτ⟩] at h0
@@ -200,7 +200,7 @@ theorem jhMult_jac_multiProd (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFin
     (hy : ∀ i, IsSubquotient (y i).ρ (τ.comp (MonoidHom.mulSingle (fun i => GL (Fin (d i)) k) i) :
       Representation ℂ (GL (Fin (d i)) k) Y))
     (hys : ∀ i, HasSupport (y i).ρ (A i)) :
-    jhMult τ (jac e' (multiProd e fun i => (p i).π)) = jhMult τ (piTensor fun i => (p i).π) := by
+    jhMult τ (GlobalTheory.SmGL.jac e' (multiProd e fun i => (p i).π)) = jhMult τ (piTensor fun i => (p i).π) := by
   classical
   let M := fun i : Fin 2 => Fin (d i)
   haveI : Fintype (SizeMatrix M M) := Fintype.ofFinite _
@@ -217,7 +217,7 @@ theorem jhMult_jac_multiProd (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFin
   have hf : f b₀ = f₀ := by simp [f]
   have hg : g b₀ = g₀ := by simp [g]
   have h1 := (hG k).1.jhMult_eq (m := M) (m' := M) e e' hρ f g hτ
-  refine (show jhMult τ (jac e' (multiProd e fun i => (p i).π)) = _ from h1).trans ?_
+  refine (show jhMult τ (GlobalTheory.SmGL.jac e' (multiProd e fun i => (p i).π)) = _ from h1).trans ?_
   rw [Finset.sum_eq_single b₀]
   · have key : ∀ (f' : ∀ i, (Σ j, Fin (b₀.1 i j)) ≃ M i) (g' : ∀ j, (Σ i, Fin (b₀.1 i j)) ≃ M j), f' = f₀ → g' = g₀ →
         jhMult τ (cellFunctor f' g' (piTensor fun i => (p i).π)) = jhMult τ (piTensor fun i => (p i).π) := by

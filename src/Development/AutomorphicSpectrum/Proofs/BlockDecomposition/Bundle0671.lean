@@ -155,27 +155,27 @@ theorem isLSeg_of_dec : ∀ {k : Type} [Field k] [ValuativeRel k] [TopologicalSp
   subst hN
   have hone := (fine L.ρ hL).1 hd
   let e := stdBlocks (fun a => (dec Δ a).1) hd
-  have hfl : HasFiniteLength (jac e L.ρ) :=
+  have hfl : HasFiniteLength (GlobalTheory.SmGL.jac e L.ρ) :=
     GlobalTheory.CompanionTheory.JacquetBridge.jacquetFiniteLength k _ _ _ e _ L.ρ L.smooth (hasFiniteLength_of_isIrreducible L.irr)
-  haveI : WellFoundedGT (Subrepresentation (jac e L.ρ)) := ((hasFiniteLength_iff_wellFounded _).1 hfl).1
+  haveI : WellFoundedGT (Subrepresentation (GlobalTheory.SmGL.jac e L.ρ)) := ((hasFiniteLength_iff_wellFounded _).1 hfl).1
   have h0 : jm (dec Δ) hd L.ρ ≠ 0 := by rw [hone]; exact one_ne_zero
-  have hne : (⊥ : Subrepresentation (jac e L.ρ)) ≠ ⊤ :=
+  have hne : (⊥ : Subrepresentation (GlobalTheory.SmGL.jac e L.ρ)) ≠ ⊤ :=
     bot_ne_top_of_isSubquotient (GlobalTheory.CompanionTheory.FrobJm.piTensor_rep_isIrreducible hA (dec Δ)) (jhMult_ne_zero_iff.1 h0)
-  obtain ⟨M, hM, -⟩ := (eq_top_or_exists_le_coatom (⊥ : Subrepresentation (jac e L.ρ))).resolve_left hne
-  let q : (jac e L.ρ).IntertwiningMap (subQuot ⊤ M) :=
-    ⟨(Submodule.mkQ _) ∘ₗ LinearMap.codRestrict (⊤ : Subrepresentation (jac e L.ρ)).toSubmodule
+  obtain ⟨M, hM, -⟩ := (eq_top_or_exists_le_coatom (⊥ : Subrepresentation (GlobalTheory.SmGL.jac e L.ρ))).resolve_left hne
+  let q : (GlobalTheory.SmGL.jac e L.ρ).IntertwiningMap (subQuot ⊤ M) :=
+    ⟨(Submodule.mkQ _) ∘ₗ LinearMap.codRestrict (⊤ : Subrepresentation (GlobalTheory.SmGL.jac e L.ρ)).toSubmodule
       LinearMap.id (fun v => trivial), fun g => rfl⟩
   have hq : Function.Surjective q := by
     intro y
     obtain ⟨⟨v, hv⟩, rfl⟩ := Submodule.Quotient.mk_surjective _ y
     exact ⟨v, rfl⟩
   have hirr : (subQuot ⊤ M).IsIrreducible := isIrreducible_subQuot hM.covBy_top
-  have hsq : IsSubquotient (subQuot ⊤ M) (jac e L.ρ) := .of_surjective q hq
+  have hsq : IsSubquotient (subQuot ⊤ M) (GlobalTheory.SmGL.jac e L.ρ) := .of_surjective q hq
   obtain ⟨σ, ⟨ψ⟩⟩ := _root_.GlobalTheory.CompanionTheory.LeviTensor.nonempty_equiv_piTensor hA (fun a => (dec Δ a).1)
     ⟨_, subQuot ⊤ M, hsq.isSmooth (isSmooth_jac e L.smooth), hirr⟩
   let y : Fin Δ.len → IrrGL (k := k) := fun a => ⟨(dec Δ a).1, σ a⟩
   have hy : ∑ a, (y a).1 = Δ.deg := hd
-  let g : (jac (stdBlocks (fun a => (y a).1) hy) L.ρ).IntertwiningMap (piTensor fun a => (y a).rep) :=
+  let g : (GlobalTheory.SmGL.jac (stdBlocks (fun a => (y a).1) hy) L.ρ).IntertwiningMap (piTensor fun a => (y a).rep) :=
     ψ.toIntertwiningMap.comp q
   have hg : Function.Surjective g := ψ.toLinearEquiv.surjective.comp hq
   have h1 : 1 ≤ jm y hy L.ρ :=

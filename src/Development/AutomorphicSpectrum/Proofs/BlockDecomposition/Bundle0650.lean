@@ -166,7 +166,7 @@ theorem exists_equiv_of_jm_ne_zero {l N : ℕ} (x y : Fin l → IrrGL (k := k)) 
   have h1 := (GlobalTheory.CompanionTheory.GeoLink.geometricLemma k).1.jhMult_eq (stdBlocks (fun a => (x a).1) hx)
     (stdBlocks (fun a => (y a).1) hy) (isSmooth_piTensor fun i => (x i).2.rep.smooth) f g hτ
   have h2 : jm y hy (prodIrr x hx) = jhMult (piTensor fun j => (y j).rep)
-      (jac (stdBlocks (fun a => (y a).1) hy) (parInd (stdBlocks (fun a => (x a).1) hx)
+      (GlobalTheory.SmGL.jac (stdBlocks (fun a => (y a).1) hy) (parInd (stdBlocks (fun a => (x a).1) hx)
         (piTensor fun i => (x i).rep))) := rfl
   rw [h2, h1] at h
   obtain ⟨b, -, hb⟩ := Finset.exists_ne_zero_of_sum_ne_zero h

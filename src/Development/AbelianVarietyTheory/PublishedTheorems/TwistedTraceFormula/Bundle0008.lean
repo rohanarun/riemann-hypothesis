@@ -322,11 +322,11 @@ def Concl {d : ℕ} (σ : Representation ℂ (GL (Fin d) k) V) (l : ℕ) : Prop 
     S.toRepresentation.IsIrreducible ∧
     (∀ S' : Subrepresentation (multiProd (consecBlocks l d) (segTerm σ l)),
       S'.toRepresentation.IsIrreducible → S' = S) ∧
-    Nonempty ((jac (consecBlocks l d) S.toRepresentation).Equiv (piTensor (segTerm σ l)))
+    Nonempty ((GlobalTheory.SmGL.jac (consecBlocks l d) S.toRepresentation).Equiv (piTensor (segTerm σ l)))
 
 def jacCongr {α n : Type} {m : α → Type} [Fintype α] [LinearOrder α] [∀ a, Fintype (m a)] [∀ a, DecidableEq (m a)]
     [Fintype n] [DecidableEq n] (e : (Σ a, m a) ≃ n) {π : Representation ℂ (GL n k) V}
-    {τ : Representation ℂ (GL n k) W} (φ : π.Equiv τ) : (jac e π).Equiv (jac e τ) :=
+    {τ : Representation ℂ (GL n k) W} (φ : π.Equiv τ) : (GlobalTheory.SmGL.jac e π).Equiv (GlobalTheory.SmGL.jac e τ) :=
   equivOfBijective (jacMap e φ.toIntertwiningMap) (Function.bijective_iff_has_inverse.2
     ⟨jacMap e φ.symm.toIntertwiningMap,
       fun y => by
@@ -339,7 +339,7 @@ def jacCongr {α n : Type} {m : α → Type} [Fintype α] [LinearOrder α] [∀ 
 theorem concl_of_isSocle {d l : ℕ} {σ : Representation ℂ (GL (Fin d) k) V}
     {τ : Representation ℂ (GL (Fin (l * d)) k) W}
     (h : IsSocle τ (multiProd (consecBlocks l d) (segTerm σ l)))
-    (hj : Nonempty ((jac (consecBlocks l d) τ).Equiv (piTensor (segTerm σ l)))) : Concl σ l := by
+    (hj : Nonempty ((GlobalTheory.SmGL.jac (consecBlocks l d) τ).Equiv (piTensor (segTerm σ l)))) : Concl σ l := by
   obtain ⟨hi, f, hf, hS⟩ := h
   have inc : ∀ S : Subrepresentation (multiProd (consecBlocks l d) (segTerm σ l)),
       ∃ g : S.toRepresentation.IntertwiningMap (multiProd (consecBlocks l d) (segTerm σ l)),
@@ -364,7 +364,7 @@ theorem concl_two {χ : kˣ →* ℂˣ} (hχ : IsSmoothChar χ) : Concl (detRep 
   refine concl_of_isSocle (τ := detRep (Fin (2 * 1)) (χ * absPow k ((((2 : ℕ) : ℂ) - 1) / 2))) ?_ ⟨ψ⟩
   obtain ⟨X, _, _, π, f, ⟨φ⟩, hf, h0, h, -⟩ := ProjLine.exists_line hη
   let a : (ofChar (detLevi (consecBlocks 2 1) (χ * absPow k ((((2 : ℕ) : ℂ) - 1) / 2)))).Equiv
-      (jac (consecBlocks 2 1) (detRep (Fin (2 * 1)) (χ * absPow k ((((2 : ℕ) : ℂ) - 1) / 2)))) :=
+      (GlobalTheory.SmGL.jac (consecBlocks 2 1) (detRep (Fin (2 * 1)) (χ * absPow k ((((2 : ℕ) : ℂ) - 1) / 2)))) :=
     .mk (Submodule.quotEquivOfEqBot _ (twKer_detRep _ _)).symm fun g => LinearMap.ext fun c => by
       simp only [LinearMap.comp_apply]
       rw [Model.jac_detRep, ofChar_apply]

@@ -441,7 +441,7 @@ theorem main (hA : GlobalTheory.Published.IrreducibleAdmissibleGL) {l c N : ℕ}
     · by_contra hne
       exact h (GlobalTheory.T.cuspidal_cell_multiplicity_of_size_matrix x y hxc hyc b (f b) (g b) hne)
   have h2 : jm y hy (prodIrr x hx) = jhMult (piTensor fun j => (y j).rep)
-      (jac (stdBlocks (fun a => (y a).1) hy) (parInd (stdBlocks (fun a => (x a).1) hx)
+      (GlobalTheory.SmGL.jac (stdBlocks (fun a => (y a).1) hy) (parInd (stdBlocks (fun a => (x a).1) hx)
         (piTensor fun i => (x i).rep))) := rfl
   rw [h2, h1, Finset.sum_congr rfl fun b _ => hterm b, Finset.sum_boole, card_permCell x y hxc]
 

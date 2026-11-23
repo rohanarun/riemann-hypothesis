@@ -455,14 +455,14 @@ theorem exists_one_le_jm_coarse : ∀ {k : Type} [Field k] [ValuativeRel k] [Top
   have hE : refinePlace e e' = stdBlocks (fun a => (concat c x a).1) hcat :=
     GlobalTheory.CompanionTheory.JmTrans.refinePlace_stdBlocks (x := fun a i => (x a i).1) hd (fun _ => rfl) hcat
   obtain ⟨φS⟩ := _root_.GlobalTheory.JacStagesProof.jac_refinePlace_equiv k s N d e c (fun a b => (x a b).1) e' V π
-  have hsub : IsSubquotient (piTensor fun l => (concat c x l).rep) (jac (refinePlace e e') π) := by
+  have hsub : IsSubquotient (piTensor fun l => (concat c x l).rep) (GlobalTheory.SmGL.jac (refinePlace e e') π) := by
     rw [hE]
     exact jhMult_ne_zero_iff.1 (ENat.one_le_iff_ne_zero.1 h1)
   have hnt := nontrivial_of_isSubquotient (GlobalTheory.CompanionTheory.SocleJm.isIrreducible_piTensor hA (concat c x)) hsub
   have hnt2 := @Function.Surjective.nontrivial _ _ hnt _ φS.symm.surjective
   have hnt3 := @Function.Surjective.nontrivial _ _ hnt2 _
-    (Submodule.Quotient.mk_surjective (twKer (jac e π) (relUnipD k e') 1))
-  obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (jac e π) hnt3
+    (Submodule.Quotient.mk_surjective (twKer (GlobalTheory.SmGL.jac e π) (relUnipD k e') 1))
+  obtain ⟨Y, _, _, τ, hτ, hτs⟩ := GlobalTheory.IrrSubquot.exists_irreducible_subquotient _ _ (GlobalTheory.SmGL.jac e π) hnt3
   let T : IrrRep (Levi k fun a => Fin (d a)) := ⟨Y, τ, hτs.isSmooth (isSmooth_jac e hs), hτ⟩
   obtain ⟨σ, ⟨φ⟩⟩ := GlobalTheory.CompanionTheory.LeviTensor.nonempty_equiv_piTensor hA d T
   refine ⟨fun a => ⟨d a, σ a⟩, hd, fun _ => rfl, ENat.one_le_iff_ne_zero.2 (jhMult_ne_zero_iff.2 ?_)⟩

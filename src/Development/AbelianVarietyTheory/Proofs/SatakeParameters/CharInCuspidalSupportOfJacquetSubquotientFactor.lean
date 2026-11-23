@@ -225,7 +225,7 @@ theorem inSupport_iff {π : Representation ℂ (GL n k) V} {ψ : kˣ →* ℂˣ}
         fun z => (absPow k ((modExp (fun a => Fin (d a)) a : ℂ) / 2) z : ℂ) * ψ z := by
   refine exists₄_congr fun s d e a => and_congr_right fun ha => ⟨?_, ?_⟩
   · rintro ⟨Y, _, _, σ, hσ, ⟨S, φ, hφ⟩, hact⟩
-    have h0 : Flag (jac e π) Set.univ {1}
+    have h0 : Flag (GlobalTheory.SmGL.jac e π) Set.univ {1}
         (fun z => Pi.mulSingle a (GeneralLinearGroup.scalar (Fin (d a)) z)) fun z => ψ z := by
       refine ⟨S.toSubmodule, (LinearMap.ker φ.toLinearMap).map S.toSubmodule.subtype, fun h => ?_,
         fun g _ x hx => S.apply_mem_toSubmodule g hx, ?_, ?_, fun z x hx => ?_⟩
@@ -262,7 +262,7 @@ theorem inSupport_iff {π : Representation ℂ (GL n k) V} {ψ : kˣ →* ℂˣ}
       rintro _ ⟨u, v, rfl⟩
       simpa using h4 _ u.2 v)
     let U : ∀ S : Submodule ℂ V, (∀ g ∈ Set.range (leviEmb k e), ∀ x ∈ S, π g x ∈ S) →
-        Subrepresentation (jac e π) := fun S hS => ⟨S.map (Submodule.mkQ _), by
+        Subrepresentation (GlobalTheory.SmGL.jac e π) := fun S hS => ⟨S.map (Submodule.mkQ _), by
       rintro g _ ⟨x, hx, rfl⟩
       exact Submodule.smul_mem _ _ ⟨_, hS _ ⟨g, rfl⟩ x hx, rfl⟩⟩
     have hne : Nontrivial ((U S h2).toSubmodule ⧸
@@ -279,7 +279,7 @@ theorem inSupport_iff {π : Representation ℂ (GL n k) V} {ψ : kˣ →* ℂˣ}
     refine (Submodule.Quotient.eq _).2 ⟨_, T.smul_mem
       ((deltaHalf k _ (Pi.mulSingle (M := fun a => GL (Fin (d a)) k) a g))⁻¹ : ℂˣ)
       (h5 (GeneralLinearGroup.det g) x hx), ?_⟩
-    show _ = jac e π _ (Submodule.Quotient.mk x) - _ • Submodule.Quotient.mk x
+    show _ = GlobalTheory.SmGL.jac e π _ (Submodule.Quotient.mk x) - _ • Submodule.Quotient.mk x
     rw [jac_mk, blockScalar, ← ProdSupport.eq_scalar_det ha, smul_sub, smul_smul, deltaHalf_mulSingle,
       Units.inv_mul_cancel_left, map_sub, map_smul, map_smul]
     rfl
@@ -300,7 +300,7 @@ variable {k : Type} [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchim
 
 theorem inSupport_of_flag_jac (π : Representation ℂ (GL n k) V) (f : (Σ j, c j) ≃ n) (j₀ : β) {s : ℕ}
     {d : Fin s → ℕ} (e : (Σ a, Fin (d a)) ≃ c j₀) (a : Fin s) (ha : d a = 1) (ψ : kˣ →* ℂˣ)
-    (h : Flag (jac f π) {g | g j₀ ∈ Set.range (leviEmb k e)}
+    (h : Flag (GlobalTheory.SmGL.jac f π) {g | g j₀ ∈ Set.range (leviEmb k e)}
       (MonoidHom.mulSingle (fun j => GL (c j) k) j₀ '' unipRad k e)
       (fun z => Pi.mulSingle j₀ (blockScalar e a z))
       fun z => (absPow k ((modExp (fun a => Fin (d a)) a : ℂ) / 2) z : ℂ) * ψ z) : InSupport π ψ := by
@@ -346,7 +346,7 @@ theorem inSupport_of_flag_jac (π : Representation ℂ (GL n k) V) (f : (Σ j, c
         (fun b => by simp [hlt])]
     ring
   have hjac : ∀ g x, Submodule.mkQ _ (π (leviEmb k f g) x) =
-      (deltaHalf k c g : ℂ) • jac f π g (Submodule.mkQ _ x) := fun g x => by
+      (deltaHalf k c g : ℂ) • GlobalTheory.SmGL.jac f π g (Submodule.mkQ _ x) := fun g x => by
     simp only [Submodule.mkQ_apply]
     rw [jac_mk, smul_smul, Units.mul_inv, one_smul]
   refine inSupport_iff.2 ⟨_, D, E, o j₀ a, hD, ?_⟩
@@ -413,7 +413,7 @@ theorem inSupport_of_flag_jac (π : Representation ℂ (GL n k) V) (f : (Σ j, c
 theorem inSupport_of_factor {π : Representation ℂ (GL n k) V} (hπ : IsSmooth π) (f : (Σ j, c j) ≃ n)
     {Y : β → Type} [∀ j, AddCommGroup (Y j)] [∀ j, Module ℂ (Y j)]
     (σ : ∀ j, Representation ℂ (GL (c j) k) (Y j)) (hY : ∀ j, Nontrivial (Y j))
-    (hsub : IsSubquotient (piTensor σ) (jac f π)) (j₀ : β) {ψ : kˣ →* ℂˣ} (h : InSupport (σ j₀) ψ) :
+    (hsub : IsSubquotient (piTensor σ) (GlobalTheory.SmGL.jac f π)) (j₀ : β) {ψ : kˣ →* ℂˣ} (h : InSupport (σ j₀) ψ) :
     InSupport π ψ := by
   obtain ⟨s, d, e, a, ha, h⟩ := inSupport_iff.1 h
   obtain ⟨S, φ, hφ⟩ := hsub
@@ -422,7 +422,7 @@ theorem inSupport_of_factor {π : Representation ℂ (GL n k) V} (hπ : IsSmooth
     (fun g hg => ⟨g, hg, fun x => φ.isIntertwining _ _ g x⟩)
     (fun z x => (φ.isIntertwining _ _ _ x).trans (one_smul _ _).symm)
   simp only [one_mul] at h1
-  let ι : S.toRepresentation.IntertwiningMap (jac f π) := ⟨S.toSubmodule.subtype, fun _ => rfl⟩
+  let ι : S.toRepresentation.IntertwiningMap (GlobalTheory.SmGL.jac f π) := ⟨S.toSubmodule.subtype, fun _ => rfl⟩
   refine inSupport_of_flag_jac π f j₀ e a ha ψ
     (h1.map (MonoidHom.mulSingle (fun j => GL (c j) k) j₀) (unipRad k e) ι Subtype.val_injective ?_ ?_)
   · rintro g ⟨l, hl⟩ u hu
@@ -447,7 +447,7 @@ theorem main : GlobalTheory.Published.BernsteinZelevinskyFiniteness → GlobalTh
       (V : Type) [AddCommGroup V] [Module ℂ V] (ρ : Representation ℂ (GL (Fin r) k) V) (β : Type)
       [Fintype β] [LinearOrder β] (c : β → ℕ) (f : (Σ j, Fin (c j)) ≃ Fin r)
       (s : ∀ j, IrrRep (GL (Fin (c j)) k)) (j₀ : β) (ψ : kˣ →* ℂˣ), IsSmooth ρ →
-      IsSubquotient (piTensor fun j => (s j).ρ) (jac f ρ) → InSupport (s j₀).ρ ψ → InSupport ρ ψ :=
+      IsSubquotient (piTensor fun j => (s j).ρ) (GlobalTheory.SmGL.jac f ρ) → InSupport (s j₀).ρ ψ → InSupport ρ ψ :=
   fun _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ f s j₀ _ hρ hsub h =>
     inSupport_of_factor hρ f (fun j => (s j).ρ) (fun j => Model.nontrivial_of_isIrreducible (s j).irr)
       hsub j₀ h

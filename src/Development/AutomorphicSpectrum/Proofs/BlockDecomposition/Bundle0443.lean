@@ -266,7 +266,7 @@ end GlobalTheory.CompanionTheory.JacquetLemma
 
 namespace GlobalTheory.CompanionTheory.JacquetLemma
 
-theorem jacquet_surjective : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (N h : ℕ) (d : Fin h → ℕ) (hd : ∑ a, d a = N) (J : Subgroup (GL (Fin N) k)), IsOpen (J : Set (GL (Fin N) k)) → IsCompact (J : Set (GL (Fin N) k)) → HasIwahoriFact k N J d hd → (∀ a, 0 < d a) → ∀ (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsAdmissible π → ∀ w ∈ fixed (jac (stdBlocks d hd) π) (KM k N J d hd), ∃ v : fixed π J, (Submodule.Quotient.mk (v : V) : Jacquet π (unipRad k (stdBlocks d hd))) = w := by
+theorem jacquet_surjective : ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (N h : ℕ) (d : Fin h → ℕ) (hd : ∑ a, d a = N) (J : Subgroup (GL (Fin N) k)), IsOpen (J : Set (GL (Fin N) k)) → IsCompact (J : Set (GL (Fin N) k)) → HasIwahoriFact k N J d hd → (∀ a, 0 < d a) → ∀ (V : Type) [AddCommGroup V] [Module ℂ V] (π : Representation ℂ (GL (Fin N) k) V), IsAdmissible π → ∀ w ∈ fixed (GlobalTheory.SmGL.jac (stdBlocks d hd) π) (KM k N J d hd), ∃ v : fixed π J, (Submodule.Quotient.mk (v : V) : Jacquet π (unipRad k (stdBlocks d hd))) = w := by
   intro k _ _ _ _ N h d hd J hJo hJc hI hpos V _ _ π hπ w hw
   obtain ⟨a, hac, hstrict, hshrink⟩ := _root_.GlobalTheory.CompanionTheory.CentralDom.exists_central_strictlyDominant k N h d hd J hJo hJc hI hpos
   obtain ⟨T, hT⟩ := _root_.GlobalTheory.CompanionTheory.HeckeExist.exists_heckeOp k N J hJo hJc V π hπ.1 (leviEmb k (stdBlocks d hd) a)
@@ -276,7 +276,7 @@ theorem jacquet_surjective : ∀ (k : Type) [Field k] [ValuativeRel k] [Topologi
   let p : fixed π J →ₗ[ℂ] (V ⧸ q) := q.mkQ.comp (fixed π J).subtype
   let S : Submodule ℂ (V ⧸ q) := LinearMap.range p
   haveI : FiniteDimensional ℂ S := inferInstanceAs (FiniteDimensional ℂ (LinearMap.range p))
-  let A : Module.End ℂ (V ⧸ q) := jac (stdBlocks d hd) π a
+  let A : Module.End ℂ (V ⧸ q) := GlobalTheory.SmGL.jac (stdBlocks d hd) π a
   have hAinj : Function.Injective A := rep_injective _ a
   have hAS : ∀ x ∈ S, A x ∈ S := by
     rintro _ ⟨v, rfl⟩
@@ -292,7 +292,7 @@ theorem jacquet_surjective : ∀ (k : Type) [Field k] [ValuativeRel k] [Topologi
 
   have hpow : (A ^ j) (Submodule.Quotient.mk u) =
       (((deltaHalf k (Bl d) (a ^ j))⁻¹ : ℂˣ) : ℂ) • (Submodule.Quotient.mk u' : V ⧸ q) := by
-    have h1 : A ^ j = jac (stdBlocks d hd) π (a ^ j) := (map_pow (jac (stdBlocks d hd) π) a j).symm
+    have h1 : A ^ j = GlobalTheory.SmGL.jac (stdBlocks d hd) π (a ^ j) := (map_pow (GlobalTheory.SmGL.jac (stdBlocks d hd) π) a j).symm
     have h2 : leviEmb k (stdBlocks d hd) (a ^ j) = g ^ j := map_pow _ _ _
     rw [h1, jac_mk, h2]
 
@@ -304,7 +304,7 @@ theorem jacquet_surjective : ∀ (k : Type) [Field k] [ValuativeRel k] [Topologi
 
   have hM : ∀ m ∈ KM k N J d hd, π (leviEmb k (stdBlocks d hd) m) u' - u' ∈ q := by
     intro m hm
-    have h1 : jac (stdBlocks d hd) π m (Submodule.Quotient.mk u) = Submodule.Quotient.mk u := by
+    have h1 : GlobalTheory.SmGL.jac (stdBlocks d hd) π m (Submodule.Quotient.mk u) = Submodule.Quotient.mk u := by
       have := hw ⟨m, hm⟩
       simpa using this
     rw [jac_mk, _root_.GlobalTheory.CompanionTheory.HalfModCompact.deltaHalf_eq_one_of_mem_KM k N h d hd J hJc m hm] at h1

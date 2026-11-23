@@ -234,7 +234,7 @@ variable (k) in
 theorem exists_jac_map_of_ne (hG : GeometricLemma) (n : Type) [Fintype n] [DecidableEq n] (d : Fin 2 → ℕ)
     (σ : ∀ i, Irr k (d i)) (hσ : ∀ i, 0 < d i ∧ IsCuspidal (σ i).π) (hd : d 0 ≠ d 1)
     (e : (Σ i, Fin (d i)) ≃ n) (e' : (Σ i, Fin (d (Equiv.swap 0 1 i))) ≃ n) :
-    ∃ (φ : (jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
+    ∃ (φ : (GlobalTheory.SmGL.jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
         (piTensor fun i => (σ (Equiv.swap 0 1 i)).π)) (x : Jacquet (multiProd e fun i => (σ i).π) (unipRad k e')),
       φ x ≠ 0 := by
   obtain ⟨N, b, hb⟩ := (hG k).1 (Fin 2) (Fin 2) n (fun i => Fin (d i)) (fun j => Fin (d (Equiv.swap 0 1 j))) e e'
@@ -277,7 +277,7 @@ variable (k) in
 theorem exists_jac_map_of_eq (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFiniteness) (n : Type) [Fintype n]
     [DecidableEq n] {D : ℕ} (hD : 0 < D) (σ : Fin 2 → Irr k D) (hc : ∀ i, IsCuspidal (σ i).π)
     (hne : ¬ Nonempty ((σ 0).π.Equiv (σ 1).π)) (e e' : (Σ _ : Fin 2, Fin D) ≃ n) :
-    ∃ (φ : (jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
+    ∃ (φ : (GlobalTheory.SmGL.jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
         (piTensor fun i => (σ (Equiv.swap 0 1 i)).π)) (x : Jacquet (multiProd e fun i => (σ i).π) (unipRad k e')),
       φ x ≠ 0 := by
   obtain ⟨N, b, hb⟩ := (hG k).1 (Fin 2) (Fin 2) n (fun _ => Fin D) (fun _ => Fin D) e e'
@@ -371,7 +371,7 @@ theorem exists_jac_map_of_eq (hG : GeometricLemma) (hBZ : BernsteinZelevinskyFin
 
 theorem swap_equiv_of_irreducible : GlobalTheory.Published.GeometricLemma → GlobalTheory.Published.BernsteinZelevinskyFiniteness → ∀ (k : Type) [Field k] [ValuativeRel k] [TopologicalSpace k] [IsNonarchimedeanLocalField k] (n : Type) [Fintype n] [DecidableEq n] (d : Fin 2 → ℕ) (σ : ∀ i, GlobalTheory.SplitRead.Irr k (d i)), (∀ i, 0 < d i ∧ GlobalTheory.SmGL.IsCuspidal (σ i).π) → GlobalTheory.LocGL.IrrGL.of (σ 0).π (σ 0).smooth (σ 0).irr ≠ GlobalTheory.LocGL.IrrGL.of (σ 1).π (σ 1).smooth (σ 1).irr → ∀ (e : (Σ i, Fin (d i)) ≃ n) (e' : (Σ i, Fin (d (Equiv.swap 0 1 i))) ≃ n), (GlobalTheory.SmGL.multiProd e fun i => (σ i).π).IsIrreducible → (GlobalTheory.SmGL.multiProd e' fun i => (σ (Equiv.swap 0 1 i)).π).IsIrreducible → Nonempty ((GlobalTheory.SmGL.multiProd e fun i => (σ i).π).Equiv (GlobalTheory.SmGL.multiProd e' fun i => (σ (Equiv.swap 0 1 i)).π)) := by
   intro hG hBZ k _ _ _ _ n _ _ d σ hσ hne e e' h1 h2
-  have key : ∃ (φ : (jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
+  have key : ∃ (φ : (GlobalTheory.SmGL.jac e' (multiProd e fun i => (σ i).π)).IntertwiningMap
         (piTensor fun i => (σ (Equiv.swap 0 1 i)).π)) (x : Jacquet (multiProd e fun i => (σ i).π) (unipRad k e')),
       φ x ≠ 0 := by
     by_cases hd : d 0 = d 1

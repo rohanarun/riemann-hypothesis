@@ -79,16 +79,16 @@ set_option maxHeartbeats 1000000 in
 theorem deriv_equiv (ψ : AddChar k Circle) (n j : ℕ) {V : Type} [AddCommGroup V] [Module ℂ V]
     (π : Representation ℂ (GL (Fin (n + j + 1)) k) V) (hd : ∑ a, (![n, j + 1] a) = n + j + 1) :
     Nonempty ((GlobalTheory.BZMir.deriv k ψ j π).Equiv
-      (twist (whit2 ψ ![n, j + 1] (jac (stdBlocks ![n, j + 1] hd) π)) (detChar (Fin n) (absPow k (((j : ℂ) + 1) / 2))))) := by
+      (twist (whit2 ψ ![n, j + 1] (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π)) (detChar (Fin n) (absPow k (((j : ℂ) + 1) / 2))))) := by
   obtain ⟨q, hqs, hqk, hqg⟩ := _root_.GlobalTheory.CompanionTheory.DerivQuot.exists_deriv_quot k ψ n j V π hd
   have hcm := _root_.GlobalTheory.CompanionTheory.BZNuPair.DerComap.whitKer_jac_comap_eq_twKer_derUnip k ψ n j V π hd
-  refine equiv_of_ker _ _ _ q ((whitKer ψ ![n, j + 1] (jac (stdBlocks ![n, j + 1] hd) π)).mkQ ∘ₗ
+  refine equiv_of_ker _ _ _ q ((whitKer ψ ![n, j + 1] (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π)).mkQ ∘ₗ
       (twKer π (unipRad k (stdBlocks ![n, j + 1] hd)) 1).mkQ) hqs
     ((Submodule.mkQ_surjective _).comp (Submodule.mkQ_surjective _)) ?_
     (fun g v => π (leviEmb k (stdBlocks ![n, j + 1] hd) (firstEmb ![n, j + 1] g)) v) hqg ?_
   · rw [hqk, ← hcm, LinearMap.ker_comp, Submodule.ker_mkQ]
   · intro g v
-    show Submodule.Quotient.mk (jac (stdBlocks ![n, j + 1] hd) π (firstEmb ![n, j + 1] g) (Submodule.Quotient.mk v)) = _
+    show Submodule.Quotient.mk (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π (firstEmb ![n, j + 1] g) (Submodule.Quotient.mk v)) = _
     rw [jac_mk, ← deltaHalf_firstEmb]
     rfl
 
@@ -193,10 +193,10 @@ theorem deriv_irr_sub (ψ : AddChar k Circle) (hc : Continuous ψ) (n j : ℕ) {
   have hd := sumTwo n j
   obtain ⟨E⟩ := deriv_equiv ψ n j π hd
   have hJs := isSmooth_jac (stdBlocks ![n, j + 1] hd) hs
-  have hJf : HasFiniteLength (jac (stdBlocks ![n, j + 1] hd) π) :=
+  have hJf : HasFiniteLength (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π) :=
     (GlobalTheory.CompanionTheory.Published.bernsteinZelevinskyFiniteness k).2.1 (Fin 2) (Fin (n + j + 1)) (fun a => Fin (![n, j + 1] a)) (stdBlocks ![n, j + 1] hd) V π hs
       (hasFiniteLength_of_isIrreducible hi)
-  have hnt' : Nontrivial (_ ⧸ whitKer ψ ![n, j + 1] (jac (stdBlocks ![n, j + 1] hd) π)) :=
+  have hnt' : Nontrivial (_ ⧸ whitKer ψ ![n, j + 1] (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π)) :=
     E.toLinearEquiv.symm.toEquiv.nontrivial
   obtain ⟨S, f, hf⟩ := _root_.GlobalTheory.CompanionTheory.BZNuPair.WhitSub.exists_irr_sub k ψ hc ![n, j + 1] _ _ hJs hJf hnt'
   let χ := detChar (Fin n) (absPow k (((j : ℂ) + 1) / 2))
@@ -212,7 +212,7 @@ theorem deriv_jm (ψ : AddChar k Circle) (hc : Continuous ψ) (n j : ℕ) {V : T
   have hd := sumTwo n j
   obtain ⟨E⟩ := deriv_equiv ψ n j π hd
   have hJs := isSmooth_jac (stdBlocks ![n, j + 1] hd) hs
-  have hJf : HasFiniteLength (jac (stdBlocks ![n, j + 1] hd) π) :=
+  have hJf : HasFiniteLength (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π) :=
     (GlobalTheory.CompanionTheory.Published.bernsteinZelevinskyFiniteness k).2.1 (Fin 2) (Fin (n + j + 1)) (fun a => Fin (![n, j + 1] a)) (stdBlocks ![n, j + 1] hd) V π hs
       (hasFiniteLength_of_isIrreducible hi)
   let χ := detChar (Fin n) (absPow k (((j : ℂ) + 1) / 2))
@@ -221,7 +221,7 @@ theorem deriv_jm (ψ : AddChar k Circle) (hc : Continuous ψ) (n j : ℕ) {V : T
   have hmul : χ' * χ = 1 := by
     ext g
     simp [χ, χ', detChar, absPow_neg]
-  have h1 : IsSubquotient S.ρ (twist (whit2 ψ ![n, j + 1] (jac (stdBlocks ![n, j + 1] hd) π)) χ) :=
+  have h1 : IsSubquotient S.ρ (twist (whit2 ψ ![n, j + 1] (GlobalTheory.SmGL.jac (stdBlocks ![n, j + 1] hd) π)) χ) :=
     hS.trans (IsSubquotient.of_injective E.toIntertwiningMap E.injective)
   have h2 := isSubquotient_untwist h1 hmul
   obtain ⟨s, hsub, ⟨e0⟩⟩ := _root_.GlobalTheory.CompanionTheory.BZNuPair.exists_constituent_of_whit2 k ψ hc ![n, j + 1] _ _ hJs hJf (irrTwist S χ' hχ') h2

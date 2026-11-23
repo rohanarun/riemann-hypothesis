@@ -55,7 +55,7 @@ theorem unipRad_one (h : ∑ _ : Fin 1, n = n) : unipRad k (stdBlocks (fun _ : F
   rwa [stdBlocks_one, stdBlocks_one] at this
 
 def jacEquiv (h : ∑ _ : Fin 1, n = n) (π : Representation ℂ (GL (Fin n) k) V) :
-    (lv π).Equiv (jac (stdBlocks (fun _ : Fin 1 => n) h) π) := by
+    (lv π).Equiv (GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin 1 => n) h) π) := by
   have hK : twKer π (unipRad k (stdBlocks (fun _ : Fin 1 => n) h)) 1 = ⊥ := by
     rw [unipRad_one]
     refine Submodule.span_eq_bot.2 ?_
@@ -64,9 +64,9 @@ def jacEquiv (h : ∑ _ : Fin 1, n = n) (π : Representation ℂ (GL (Fin n) k) 
     simp
   have hd : ∀ g, deltaHalf k (fun _ : Fin 1 => Fin n) g = 1 := fun g => by
     simp [deltaHalf_apply, modExp, Finset.filter_singleton]
-  let f : (lv π).IntertwiningMap (jac (stdBlocks (fun _ : Fin 1 => n) h) π) :=
+  let f : (lv π).IntertwiningMap (GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin 1 => n) h) π) :=
     ⟨(twKer π (unipRad k (stdBlocks (fun _ : Fin 1 => n) h)) 1).mkQ, fun g => LinearMap.ext fun v => by
-      show Submodule.Quotient.mk (π (g 0) v) = jac _ π g (Submodule.Quotient.mk v)
+      show Submodule.Quotient.mk (π (g 0) v) = GlobalTheory.SmGL.jac _ π g (Submodule.Quotient.mk v)
       rw [jac_mk, hd, leviEmb_one]
       simp⟩
   refine equivOfBijective f ⟨(injective_iff_map_eq_zero _).2 fun v hv => ?_, Submodule.Quotient.mk_surjective _⟩
@@ -100,7 +100,7 @@ theorem isIrreducible_comp {τ : Representation ℂ (GL (Fin n) k) X} (h : τ.Is
 
 theorem jhMult_one (h : ∑ _ : Fin 1, n = n) (τ : Representation ℂ (GL (Fin n) k) X)
     (π : Representation ℂ (GL (Fin n) k) V) :
-    jhMult (piTensor fun _ : Fin 1 => τ) (jac (stdBlocks (fun _ : Fin 1 => n) h) π) =
+    jhMult (piTensor fun _ : Fin 1 => τ) (GlobalTheory.SmGL.jac (stdBlocks (fun _ : Fin 1 => n) h) π) =
       jhMult (lv τ) (lv π) := by
   rw [← jhMult_congr_left (piTensorEquiv τ), ← jhMult_congr_right _ (jacEquiv h π)]
 

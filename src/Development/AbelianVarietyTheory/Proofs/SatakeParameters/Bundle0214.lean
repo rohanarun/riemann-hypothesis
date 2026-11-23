@@ -129,11 +129,11 @@ theorem inSupport_of_KO_eigen (hD : GlobalTheory.Published.DepthZeroJacquetInjec
     intro g hg
     rw [deltaHalf_apply]
     exact Finset.prod_eq_one fun a _ => isUnram_absPow k _ _ (hg a)
-  have hθ : ∀ g ∈ S, jac e σ g (Submodule.Quotient.mk y) = θ g • (Submodule.Quotient.mk y : Jacquet σ (unipRad k e)) := by
+  have hθ : ∀ g ∈ S, GlobalTheory.SmGL.jac e σ g (Submodule.Quotient.mk y) = θ g • (Submodule.Quotient.mk y : Jacquet σ (unipRad k e)) := by
     intro g hg
     rw [jac_mk, hK _ (hKOlevi g hg), Submodule.Quotient.mk_smul, smul_smul]
   obtain ⟨Y, _, _, τ, hτi, hτs, y₀, hy₀, hy₀θ⟩ :=
-    GlobalTheory.EigenSubquot.exists_irreducible_subquotient_eigen _ _ (jac e σ) S θ _ hy' hθ
+    GlobalTheory.EigenSubquot.exists_irreducible_subquotient_eigen _ _ (GlobalTheory.SmGL.jac e σ) S θ _ hy' hθ
   have hrank : Module.rank ℂ Y ≤ ℵ₀ := by
     obtain ⟨S', f, hf⟩ := hτs
     haveI := GlobalTheory.LocGL.secondCountableTopology_GL k (Fin m)
