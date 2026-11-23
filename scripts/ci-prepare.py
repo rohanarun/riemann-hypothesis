@@ -20,7 +20,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-REPO = "leanprover-community/riemann-hypothesis"
+CACHE_REPO = "leanprover-community/riemann-hypothesis"
+REPO = os.environ.get("GITHUB_REPOSITORY", CACHE_REPO)
 BASE = "https://rh-cache.taucetiproject.org"
 
 _SETTINGS_SPEC = importlib.util.spec_from_file_location("rh_cache_settings", Path(__file__).with_name("cache-settings.py"))
@@ -138,7 +139,7 @@ def mapping(data):
 
 def validate_record(record, *, allow_historical=False):
     publication.identity_fields(record, toolchain=record.get("toolchain") if allow_historical else TOOLCHAIN)
-    if (record.get("repository") != REPO or
+    if (record.get("repository") != CACHE_REPO or
             record.get("input_fingerprint") != publication.fingerprint(record) or
             type(record.get("build_exit_code")) is not int or not 0 <= record["build_exit_code"] <= 255):
         raise ValueError("Invalid published CI cache metadata")
@@ -185,7 +186,7 @@ def downloads(cache, entries, sha256s):
     with tempfile.TemporaryDirectory(prefix="downloads-", dir=cache) as temp:
         temp = Path(temp)
         config = temp / "curl.conf"
-        config.write_text("".join(f'url = "{BASE}/artifacts/{REPO}/{name[:-5]}.art"\noutput = {json.dumps(str(temp / name), ensure_ascii=False)}\n'
+        config.write_text("".join(f'url = "{BASE}/artifacts/{CACHE_REPO}/{name[:-5]}.art"\noutput = {json.dumps(str(temp / name), ensure_ascii=False)}\n'
                                   for name in missing))
         subprocess.run(["curl", "--disable", "--fail", "--silent", "--show-error", "--location",
                         "--retry", "3", "--parallel", "--parallel-max", "500", "--config", str(config)],
@@ -279,7 +280,7 @@ def prepare(args):
         subprocess.run(["lake", "exe", "mathlib/cache", "get"], cwd=deps, env=env, check=True)
         cache = state / "baseline"
         cache.mkdir(exist_ok=True)
-        map_data = get(f"{BASE}/revisions/{REPO}/tc/{settings.TOOLCHAIN_DIR}/{REVISION}.jsonl")
+        map_data = get(f"{BASE}/revisions/{CACHE_REPO}/tc/{settings.TOOLCHAIN_DIR}/{REVISION}.jsonl")
         manifest = get(f"{BASE}/bootstrap/{REVISION}/modules.jsonl.gz")
         if digest(map_data) != MAP_SHA or digest(manifest) != MANIFEST_SHA:
             raise ValueError("Pinned baseline integrity mismatch")
