@@ -449,6 +449,7 @@ section Three
 variable {l : ℕ} [Fact l.Prime] {O : Type} [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] [IsCoef l O]
   [Algebra ℤ_[l] O] {F : Frame l (ResidueField O)} (T : Setup F 3)
 
+attribute [local instance] IsCO.toIsLocalRing in
 def Setup.ThickOf : Prop :=
   ∀ Φ, T.IsPhi Φ → ∀ (x : Ideal T.S.A) (L : T.S.Loc x) (P : Ideal L.R) [P.IsPrime], Thick L.ρ P →
     T.B.IsThick (T.back Φ L P)

@@ -186,6 +186,7 @@ private theorem diag_eq {l : ℕ} [Fact l.Prime] {k : Type} [Field k] [CharP k l
 
 theorem finPtOf : FinPtOf := by
   intro l _ O _ _ _ _ F C₀ hF S hoff A _ _ _ _ _ ρ hρ hψ g
+  haveI : IsLocalRing S.R := IsCO.toIsLocalRing O
   haveI : IsLocalHom (algebraMap O A) := UpperTheory.V.Pr.IsCD.isLocalHom
   haveI : Finite (IsLocalRing.ResidueField A) := UpperTheory.V.Pr.IsCD.fin (O := O)
   haveI : IsNoetherianRing A := PrincipalIdealRing.isNoetherianRing

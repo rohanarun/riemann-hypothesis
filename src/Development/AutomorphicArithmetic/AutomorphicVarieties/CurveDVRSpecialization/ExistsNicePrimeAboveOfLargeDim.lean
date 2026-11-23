@@ -12,6 +12,7 @@ theorem UpperTheory.V.Pr.exists_nice_prime_above_of_large_dim :
     ∀ (l : ℕ) [Fact l.Prime] (O : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] [UpperTheory.V.Fr.IsCoef l O] (F : UpperTheory.V.Fr.Frame l (IsLocalRing.ResidueField O)) (C₀ n : ℕ), F.Ok C₀ → F.Big C₀ → (n = 2 ∨ n = 3) → ∀ (S : UpperTheory.V.Fr.Space O F n) (x : Ideal S.A) (L : S.Loc x), ¬ S.u.triP ≤ x → ∀ I : Ideal S.B, S.FinLam I → ∀ P : Ideal L.R, I ≤ L.π P → ((n * F.d + 1 : ℕ) : WithBot ℕ∞) ≤ UpperTheory.V.Pr.qdim P → ∃ p, UpperTheory.V.Pr.Nice L.ρ p ∧ P ≤ p := by
   intro l _ O _ _ _ _ F C₀ n hOk hBig hn S x L hx I hI P hIP hdim
   haveI := L.co
+  haveI : IsLocalRing L.R := UpperTheory.V.Alg.IsCO.toIsLocalRing L.O'
   haveI : IsLocalHom (algebraMap L.O' L.R) := L.co.isLocalHom
   haveI : CharP (IsLocalRing.ResidueField O) l := UpperTheory.V.Fr.IsCoef.char (O := O)
   obtain ⟨_, hP⟩ := UpperTheory.V.Fr.l51 hOk hn S x L hx
