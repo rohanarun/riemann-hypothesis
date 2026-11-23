@@ -25,16 +25,16 @@ theorem SemilocResidueDeg.proof (hDim : SemilocResidueFibreDim.Statement) (hAdj 
   intro K _ ι _ K' _ ι' _ κ v P' n s α W hv hP' hZ hs hsP hW W' hW' _ G' J' hJ
   have hrel : ∀ k', ∃ i, (X ⟨k', i⟩ : MRing ι') ∉ W' := hW'.1.2.2
   choose i' hi' using hrel
-  have hfib : IsProjVarF (fibreIdeal κ G') 0 := hDim K ι K' ι' κ v P' n s α W hv hP' hZ hs hsP hW W' hW' G'
+  have hfib : IsProjVarF (ReciprocityTheory.ChartRestriction.G.AI.I4.fibreIdeal κ G') 0 := hDim K ι K' ι' κ v P' n s α W hv hP' hZ hs hsP hW W' hW' G'
   have hz : ∀ k : FibreBlock κ, G'.x' ⟨k.1, i' k.1⟩ ≠ 0 := by
     intro k h0
     apply hi' k.1
     rw [← G'.genericFibre_ker_target, RingHom.mem_ker, aeval_X]
     exact h0
-  have hj : IsChart (fibreIdeal κ G') (fun k => i' k.1) := by
+  have hj : IsChart (ReciprocityTheory.ChartRestriction.G.AI.I4.fibreIdeal κ G') (fun k => i' k.1) := by
     intro k hk
     apply hz k
-    rw [fibreIdeal, RingHom.mem_ker, aeval_X] at hk
+    rw [ReciprocityTheory.ChartRestriction.G.AI.I4.fibreIdeal, RingHom.mem_ker, aeval_X] at hk
     exact hk
   refine ⟨_, hAdj K ι K' ι' κ v P' n s α W hv hP' hZ hs hsP hW W' hW' G' i' hi', ?_⟩
   rw [hJ.1 _ Fin.elim0 _ hfib hj]
@@ -147,7 +147,7 @@ def SemilocResidueFrac.Statement : Prop :=
     (K' : Type) [Fintype K'] (ι' : K' → Type) [∀ k, Fintype (ι' k)]
     (κ : K → K') (v : (Σ k, ι k) → (Σ k', ι' k')) (P' : Ideal (MRing ι')) (n : ℕ) (s : MRing ι) (α : K → ℕ)
     (W : Ideal (MRing ι)) (hv : IsBlockMap κ v) (hP' : IsArithVar P' (n + 1)),
-    IsArithVar (imageZ v P') (n + 1) → IsMultiHomog s α → s ∉ imageZ v P' → W ∈ divSupp (imageZ v P') s →
+    IsArithVar (imageZ v P') (n + 1) → ReciprocityTheory.ChartRestriction.G.Geo.IsMultiHomog s α → s ∉ imageZ v P' → W ∈ divSupp (imageZ v P') s →
     ∀ (W' : Ideal (MRing ι')) (hW' : W' ∈ fibreOver v P' W) [IsLocalRing (locRing P' W')]
       (G' : GenFibre v W') (i' : ∀ k', ι' k'), (∀ k', (X ⟨k', i' k'⟩ : MRing ι') ∉ W') →
     ∀ (F : Type) [Field F] [Algebra F G'.Φ'], (∀ c : F, ∃ a b : ℤ, (b : F) ≠ 0 ∧ c = a / b) →

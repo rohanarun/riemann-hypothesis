@@ -18,7 +18,7 @@ open MvPolynomial MeasureTheory Filter Topology ReciprocityTheory.ChartRestricti
 variable {K : Type} [Fintype K] {ι : K → Type} [∀ k, Fintype (ι k)] {P : Ideal (MRing ι)} {e : ℕ}
   (M : CxModel P e) (Ψ : (((k : K) → ι k) → ℂ) →ₗ[ℂ] (Fin (e + 1) → ℂ))
 
-theorem exists_sheet (L : HermLine ι) (r : ℝ) (E : Set M.Xc) (hP : IsArithVar P (e + 1))
+theorem exists_sheet (L : ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (r : ℝ) (E : Set M.Xc) (hP : IsArithVar P (e + 1))
     (hL : IsSmoothHerm L) (x : M.Xc) (hx : x ∉ modelBad M Ψ E) :
     ∃ γ : (Fin e → ℂ) → (Σ k, ι k) → ℂ, IsSheet P Ψ (modelQ M Ψ x) (modelW M Ψ x) γ ∧
       maDensity (fun (_ : Fin e) y' => r * Real.log (L.h (γ y'))) (modelQ M Ψ x) =
@@ -125,7 +125,7 @@ theorem exists_sheet (L : HermLine ι) (r : ℝ) (E : Set M.Xc) (hP : IsArithVar
       have heq : (fun y' => r * Real.log (L.h (γ y'))) =ᶠ[𝓝 (Q u)]
           fun y' => r * Real.log (L.h (γ₀ y')) + (G y').re + C := by
         filter_upwards [hψ0a.continuousAt.eventually_ne hψ0u,
-          hγ₀a.continuousAt.eventually (isOpen_blockNonzero.mem_nhds hblk)] with y' h0 hb
+          hγ₀a.continuousAt.eventually (ReciprocityTheory.ChartRestriction.G.Geo.isOpen_blockNonzero.mem_nhds hblk)] with y' h0 hb
         have hpos : 0 < L.h (γ₀ y') := L.pos _ hb
         have hn0 : ‖(ψ0 y')⁻¹‖ ^ L.a k0 ≠ 0 :=
           zpow_ne_zero _ (norm_ne_zero_iff.mpr (inv_ne_zero h0))
