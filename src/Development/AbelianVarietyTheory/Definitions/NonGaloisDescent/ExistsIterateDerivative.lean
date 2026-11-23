@@ -206,10 +206,10 @@ theorem toBcris_apply (m : P.MMl) (i : ι) :
     toBcris t ϖ P m i = ϖ.iB t K (GlobalTheory.BKReal.coordL P (invL l (S O K e)) m i) := rfl
 
 theorem toW_toCris_of_mem_L {v : Vec K a ι} (hv : v ∈ P.L) (hv' : v ∈ P.MM) :
-    toW t ϖ P ⟨v, mem_ME_of_mem_L hv⟩ = inclL t ϖ P (fun i => ϖ.iTot t K (GlobalTheory.BKReal.coordL P _ ⟨v, hv⟩ i)) ∧
-      toCris t ϖ P ⟨v, hv'⟩ = fun i => toOCr l O (ϖ.iTot t K (GlobalTheory.BKReal.coordL P _ ⟨v, hv⟩ i)) :=
+    toW t ϖ P ⟨v, mem_ME_of_mem_L hv⟩ = inclL t ϖ P (fun i => ϖ.iTot t K (GlobalTheory.BKReal.coordL P (A O K) ⟨v, hv⟩ i)) ∧
+      toCris t ϖ P ⟨v, hv'⟩ = fun i => toOCr l O (ϖ.iTot t K (GlobalTheory.BKReal.coordL P (A O K) ⟨v, hv⟩ i)) :=
   ⟨toW_of_mx t ϖ P _ _ fun τ => (mx_mulVec_coordL P _ ⟨v, hv⟩ τ).symm,
-    funext fun i => ϖ.iC_of_mem t K (GlobalTheory.BKReal.coordL P _ ⟨v, hv⟩ i)⟩
+    funext fun i => ϖ.iC_of_mem t K (GlobalTheory.BKReal.coordL P (A O K) ⟨v, hv⟩ i)⟩
 
 end Real
 
