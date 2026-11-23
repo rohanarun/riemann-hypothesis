@@ -465,7 +465,7 @@ noncomputable section
 theorem BlockMetricChange.proof (hMeas : BlockMeasureChange.Statement)
     (hMet : BlockDefectMetricChange.Statement) : BlockMetricChange.Statement := by
   intro D K _ _ ι _ Ω _ _ I d d' hI hy hk
-  have hdeg : d'.A.a = unitDeg d.k₀ := hk ▸ d'.deg
+  have hdeg : d'.A.a = ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg d.k₀ := hk ▸ d'.deg
   have hle : d'.P0 ≤ mCoordIdeal d.y := hy ▸ d'.normalForm_baseLattice_le_dualSpan_sup_line
   have hp : IsSemipositiveRel d'.P0 (mCoordIdeal d.y) d'.A := hy ▸ d'.semipos
 

@@ -198,15 +198,15 @@ section Pivot
 
 variable {K : Type} [Fintype K] [DecidableEq K] {ι : K → Type} [∀ k, Fintype (ι k)]
 
-theorem h_eq_zero_of_fs (k₀ : K) (A : ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (hA : A.a = unitDeg k₀) (z : (Σ k, ι k) → ℂ)
-    (hz : (ReciprocityTheory.ChartRestriction.G.Geo.HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (unitDeg k₀)).h z = 0) : A.h z = 0 := by
+theorem h_eq_zero_of_fs (k₀ : K) (A : ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (hA : A.a = ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k₀) (z : (Σ k, ι k) → ℂ)
+    (hz : (ReciprocityTheory.ChartRestriction.G.Geo.HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k₀)).h z = 0) : A.h z = 0 := by
   obtain ⟨k, -, hk⟩ := Finset.prod_eq_zero_iff.mp hz
   have hk0 : k = k₀ := by
     by_contra hne
-    simp [unitDeg, hne] at hk
+    simp [ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg, hne] at hk
   subst hk0
   have hρ : (fsMetric (ι := ι k)).ρ (fun i => z ⟨k, i⟩) = 0 := by
-    simpa [unitDeg] using hk
+    simpa [ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg] using hk
   have hzk : (fun i => z ⟨k, i⟩) = 0 := by
     by_contra hne
     exact ((fsMetric (ι := ι k)).pos _ hne).ne' hρ
@@ -225,9 +225,9 @@ theorem h_eq_zero_of_fs (k₀ : K) (A : ReciprocityTheory.ChartRestriction.G.Geo
     · simp [hc, hp]
   have hs := A.smul c z hc0
   rw [hfix, hA] at hs
-  have hprod : (∏ k', ‖c k'‖ ^ unitDeg k k') = 2 := by
-    rw [Finset.prod_eq_single k (fun k' _ hk' => by simp [unitDeg, hk']) (fun h => absurd (Finset.mem_univ k) h)]
-    simp [hc, unitDeg]
+  have hprod : (∏ k', ‖c k'‖ ^ ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k k') = 2 := by
+    rw [Finset.prod_eq_single k (fun k' _ hk' => by simp [ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg, hk']) (fun h => absurd (Finset.mem_univ k) h)]
+    simp [hc, ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg]
   rw [hprod] at hs
   linarith
 
@@ -240,7 +240,7 @@ theorem BlockDefectMetricChange.proof (hR : BlockRealGramComparison.Statement)
   have h₁ := hR D K ι Ω (d.withMetric A' P0' hdeg hc hle hp)
   have h₀ := hR D K ι Ω d
   have hc₁ := hC D K ι Ω d A' P0' hdeg hc hle hp
-  have hFS := GroundTheory.Heights₂.Heights.Inter.isSmoothHerm_ofMetrics_fs (ι := ι) (unitDeg d.k₀)
+  have hFS := GroundTheory.Heights₂.Heights.Inter.isSmoothHerm_ofMetrics_fs (ι := ι) (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg d.k₀)
   have htop : I K ι (mCoordIdeal d.y) (D + 1) (fun _ => A') =
       I K ι (mCoordIdeal d.y) (D + 1) (fun _ => d.A) + ((D : ℝ) + 1) * blockMetricInt d A' := by
     rw [← hM D K ι Ω d A' hdeg hp.1, ← top_sub_top_blockMixPot hInt I hI d.arith d.semipos.1 hp.1 hFS

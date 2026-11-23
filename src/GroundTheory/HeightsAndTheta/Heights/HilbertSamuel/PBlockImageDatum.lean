@@ -244,7 +244,7 @@ theorem BlockImageDatum.proof (hA : BlockImageArith.Statement) (hI : BlockImageI
   let d₀ : HSMBlockDatum D K ι Ω :=
     { y := d.y
       k₀ := d.k₀
-      A := HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (unitDeg d.k₀)
+      A := HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg d.k₀)
       P0 := ⊥
       J := d.J
       R := d.R
@@ -263,10 +263,10 @@ theorem BlockImageDatum.proof (hA : BlockImageArith.Statement) (hI : BlockImageI
       vol := d.vol }
   have hh : ∀ z ∈ mcPts (mCoordIdeal d.y), d₀.A.h z = d'.m.ρ (blockMapC d.k₀ M z) := by
     intro z hz
-    change ∏ k, (fsMetric (ι := ι k)).ρ (fun i => z ⟨k, i⟩) ^ (unitDeg d.k₀ k) =
+    change ∏ k, (fsMetric (ι := ι k)).ρ (fun i => z ⟨k, i⟩) ^ (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg d.k₀ k) =
       (fsMetric (ι := ι d.k₀)).ρ (fun i => ∑ j, (N i j : ℂ) * blockMapC d.k₀ M z j)
-    rw [Finset.prod_eq_single d.k₀ (fun k _ hk => by simp [unitDeg, hk]) (by simp)]
-    simp only [unitDeg, if_true, zpow_one]
+    rw [Finset.prod_eq_single d.k₀ (fun k _ hk => by simp [ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg, hk]) (by simp)]
+    simp only [ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg, if_true, zpow_one]
     congr 1
     funext i
     exact (blockMapC_N hB hz i).symm

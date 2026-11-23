@@ -41,7 +41,7 @@ noncomputable section
 def BlockComplexGramMetricChange.Statement : Prop :=
   ∀ (D : ℕ) (K : Type) [Fintype K] [DecidableEq K] (ι : K → Type) [∀ k, Fintype (ι k)] (Ω : Type) [Field Ω]
     [CharZero Ω] (d : HSMBlockDatum D K ι Ω) (A' : ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι) (P0' : Ideal (MRing ι))
-    (hdeg : A'.a = unitDeg d.k₀) (hc : IsConjInvariantH A') (hle : P0' ≤ mCoordIdeal d.y)
+    (hdeg : A'.a = ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg d.k₀) (hc : IsConjInvariantH A') (hle : P0' ≤ mCoordIdeal d.y)
     (hp : IsSemipositiveRel P0' (mCoordIdeal d.y) A'),
     (fun n => blockCChi (d.withMetric A' P0' hdeg hc hle hp) n - blockCChi d n -
         (n : ℝ) ^ (D + 1) / (D.factorial : ℝ) * blockMetricInt d A') =o[atTop] pw D
@@ -156,7 +156,7 @@ def BlockImageGenDeg.Statement : Prop :=
     [CharZero Ω] (κ : Type) [Fintype κ] (y : (Σ k, ι k) → Ω) (k₀ : K) (M : Matrix (Ix κ) (ι k₀) ℤ)
     (N : Matrix (ι k₀) (Ix κ) ℤ) (x : Ix κ → Ω),
     IsArithVar (mCoordIdeal y) (D + 1) → BlockBirational y k₀ → IsBlockImage y k₀ M N x →
-    genDeg (ι := GlobalTheory κ) (coordIdeal ℤ x) D 1 = genDeg (mCoordIdeal y) D (unitDeg k₀)
+    genDeg (ι := GlobalTheory κ) (coordIdeal ℤ x) D 1 = genDeg (mCoordIdeal y) D (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k₀)
 
 end
 
@@ -252,7 +252,7 @@ def BlockImageMetrics.Statement : Prop :=
       (hN : ∀ u : Ix J → ℂ, (fun i => ∑ j, (N i j : ℂ) * u j) = 0 → u = 0) (P : Ideal (MRing (GlobalTheory J))),
       IsSemipositiveRel ⊥ P (HermLine.ofCone (linPullMetric N hN))) ∧
     ∀ (K : Type) [Fintype K] [DecidableEq K] (ι : K → Type) [∀ k, Fintype (ι k)] (k₀ : K) (P : Ideal (MRing ι)),
-      IsSemipositiveRel ⊥ P (HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (unitDeg k₀))
+      IsSemipositiveRel ⊥ P (HermLine.ofMetrics (fun k => fsMetric (ι := ι k)) (ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.unitDeg k₀))
 
 section Inhabitants
 

@@ -408,7 +408,7 @@ theorem proof : ConstantShift.Statement := by
   intro K _ ι _ I P D A η hI hP hA
   have hS : IsSmoothHerm (HermLine.constShift A η) := isSmoothHerm_constShift hA η
   set g := geomDeg P A D with hg
-  let L : ℕ → Fin (D + 1) → HermLine ι := fun n i =>
+  let L : ℕ → Fin (D + 1) → ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι := fun n i =>
     if (i : ℕ) < n then HermLine.constShift A η else A
   have hLs : ∀ n i, IsSmoothHerm (L n i) := by
     intro n i
@@ -426,7 +426,7 @@ theorem proof : ConstantShift.Statement := by
     intro n hn
     set j : Fin (D + 1) := ⟨n, hn⟩ with hj
     set σ : Equiv.Perm (Fin (D + 1)) := Equiv.swap j (Fin.last D) with hσ
-    set M : Fin D → HermLine ι := Fin.init (L n ∘ σ) with hMdef
+    set M : Fin D → ReciprocityTheory.ChartRestriction.G.Geo.HermLine ι := Fin.init (L n ∘ σ) with hMdef
     have hσl : σ (Fin.last D) = j := Equiv.swap_apply_right _ _
     have hne : ∀ i : Fin D, σ (Fin.castSucc i) ≠ j := by
       intro i h'
