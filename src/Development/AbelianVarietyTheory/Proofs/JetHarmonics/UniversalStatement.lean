@@ -46,14 +46,14 @@ theorem ker_aug_eq (κ : Type) (m : ℕ) : RingHom.ker (Chart.jetAug V κ m) =
     rintro _ ⟨_, ⟨j, rfl⟩, rfl⟩
     exact zR_mem_ker m j
 
-theorem ker_aug_le {κ : Type} {m : ℕ} {K : Ideal (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m)} (h : ∀ j, zR m j ∈ K) :
+theorem ker_aug_le {κ : Type} {m : ℕ} {K : Ideal (Chart.JetR V κ m)} (h : ∀ j, zR m j ∈ K) :
     RingHom.ker (Chart.jetAug V κ m) ≤ K := by
   rw [ker_aug_eq, Ideal.map_span, Ideal.span_le]
   rintro _ ⟨_, ⟨j, rfl⟩, rfl⟩
   exact h j
 
-theorem jet_finite (κ : Type) [Finite κ] (m : ℕ) : Module.Finite V (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m) := by
-  haveI : Algebra.IsIntegral V (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m) := ⟨fun w => by
+theorem jet_finite (κ : Type) [Finite κ] (m : ℕ) : Module.Finite V (Chart.JetR V κ m) := by
+  haveI : Algebra.IsIntegral V (Chart.JetR V κ m) := ⟨fun w => by
     have hw : w - algebraMap V _ (Chart.jetAug V κ m w) ∈ RingHom.ker (Chart.jetAug V κ m) := by
       rw [RingHom.mem_ker, map_sub, AlgHom.commutes]
       simp
@@ -67,7 +67,7 @@ theorem jet_finite (κ : Type) [Finite κ] (m : ℕ) : Module.Finite V (Reciproc
   exact Algebra.IsIntegral.finite
 
 theorem surj_of_first_order {σ κ : Type} {m : ℕ} (β : σ → κ) (hβ : Function.Surjective β)
-    (f : ReciprocityTheory.ChartRestriction.G.Chart.JetR V σ m →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m)
+    (f : Chart.JetR V σ m →ₐ[V] Chart.JetR V κ m)
     (hf : ∀ i, f (zR m i) - zR m (β i) ∈ RingHom.ker (Chart.jetAug V κ m) ^ 2) : Function.Surjective f := by
   refine surj_of_sq f (Chart.jetAug V κ m) m (ker_jetAug_pow κ m) (Ideal.span (Set.range (zR m))) ?_ ?_
   · rw [Ideal.map_span, Ideal.span_le]
@@ -82,10 +82,10 @@ theorem surj_of_first_order {σ κ : Type} {m : ℕ} (β : σ → κ) (hβ : Fun
       (Ideal.mem_sup_right (hf i))
     rwa [sub_sub_cancel] at this
 
-theorem bij_of_first_order {σ κ : Type} [Finite σ] {m : ℕ} (β : σ ≃ κ) (f : ReciprocityTheory.ChartRestriction.G.Chart.JetR V σ m →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m)
+theorem bij_of_first_order {σ κ : Type} [Finite σ] {m : ℕ} (β : σ ≃ κ) (f : Chart.JetR V σ m →ₐ[V] Chart.JetR V κ m)
     (hf : ∀ i, f (zR m i) - zR m (β i) ∈ RingHom.ker (Chart.jetAug V κ m) ^ 2) : Function.Bijective f := by
   refine ⟨?_, surj_of_first_order β β.surjective f hf⟩
-  let r : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V σ m := jetLift V (RingHom.ker (Chart.jetAug V σ m)) (ker_jetAug_pow σ m)
+  let r : Chart.JetR V κ m →ₐ[V] Chart.JetR V σ m := jetLift V (RingHom.ker (Chart.jetAug V σ m)) (ker_jetAug_pow σ m)
     (fun k => zR m (β.symm k)) (fun k => zR_mem_ker m _)
   have hr : ∀ k, r (zR m k) = zR m (β.symm k) := fun k => jetLift_zR _ _ _ _ k
   have hle : (RingHom.ker (Chart.jetAug V κ m)).map r ≤ RingHom.ker (Chart.jetAug V σ m) := by
@@ -103,7 +103,7 @@ theorem bij_of_first_order {σ κ : Type} [Finite σ] {m : ℕ} (β : σ ≃ κ)
     OrzechProperty.injective_of_surjective_endomorphism (r.comp f).toLinearMap hs
   exact Function.Injective.of_comp (f := r) hi
 
-theorem exists_lin {κ : Type} [Fintype κ] (w : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1) (hw : Chart.jetAug V κ 1 w = 0) :
+theorem exists_lin {κ : Type} [Fintype κ] (w : Chart.JetR V κ 1) (hw : Chart.jetAug V κ 1 w = 0) :
     ∃ c : κ → V, w = ∑ k, c k • zR 1 k := by
   have h1 : w ∈ Ideal.span (Set.range (zR (R := V) (κ := κ) 1)) :=
     ker_aug_le (fun j => Ideal.subset_span (Set.mem_range_self j)) (RingHom.mem_ker.2 hw)
@@ -116,10 +116,10 @@ theorem exists_lin {κ : Type} [Fintype κ] (w : ReciprocityTheory.ChartRestrict
   rw [← pow_two, show (2 : ℕ) = 1 + 1 from rfl, ker_jetAug_pow, Ideal.mem_bot, sub_mul, sub_eq_zero] at this
   rw [this, Algebra.smul_def]
 
-def toFirst (κ : Type) (m : ℕ) : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ (m + 1) →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1 :=
+def toFirst (κ : Type) (m : ℕ) : Chart.JetR V κ (m + 1) →ₐ[V] Chart.JetR V κ 1 :=
   Ideal.Quotient.factorₐ V (Ideal.pow_le_pow_right (by omega))
 
-theorem mem_sq_of_toFirst {κ : Type} {m : ℕ} (w : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ (m + 1)) (hw : toFirst κ m w = 0) :
+theorem mem_sq_of_toFirst {κ : Type} {m : ℕ} (w : Chart.JetR V κ (m + 1)) (hw : toFirst κ m w = 0) :
     w ∈ RingHom.ker (Chart.jetAug V κ (m + 1)) ^ 2 := by
   obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective w
   have hp : p ∈ (Ideal.span (Set.range (MvPolynomial.X : κ → MvPolynomial κ V))) ^ (1 + 1) :=
@@ -145,30 +145,30 @@ theorem toFirst_succ (κ : Type) (m : ℕ) :
     toFirst (V := V) κ (m + 1) = (toFirst κ m).comp (jetTruncR V κ (m + 1)) :=
   jet_ext fun j => by rw [AlgHom.comp_apply, trunc_zR, toFirst_zR, toFirst_zR]
 
-theorem toFirst_zero (κ : Type) : toFirst (V := V) κ 0 = AlgHom.id V (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1) :=
+theorem toFirst_zero (κ : Type) : toFirst (V := V) κ 0 = AlgHom.id V (Chart.JetR V κ 1) :=
   jet_ext fun j => toFirst_zR κ 0 j
 
 omit [GrpObj G] in
-theorem toFirst_comp {κ : Type} (z : ∀ m, Chart.sp (R₀ := V) (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m) ⟶ G)
+theorem toFirst_comp {κ : Type} (z : ∀ m, Chart.sp (R₀ := V) (Chart.JetR V κ m) ⟶ G)
     (htr : ∀ m, Chart.spMap (jetTruncR V κ m) ≫ z (m + 1) = z m) (m : ℕ) :
     Chart.spMap (toFirst κ m) ≫ z (m + 1) = z 1 := by
   induction m with
   | zero =>
-    have h : Chart.spMap (AlgHom.id V (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1)) ≫ z 1 = z 1 := by rw [spMap_id', Category.id_comp]
-    exact (congrArg (fun f : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1 →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1 => Chart.spMap f ≫ z 1) (toFirst_zero κ)).trans h
+    have h : Chart.spMap (AlgHom.id V (Chart.JetR V κ 1)) ≫ z 1 = z 1 := by rw [spMap_id', Category.id_comp]
+    exact (congrArg (fun f : Chart.JetR V κ 1 →ₐ[V] Chart.JetR V κ 1 => Chart.spMap f ≫ z 1) (toFirst_zero κ)).trans h
   | succ m ih => rw [toFirst_succ, ← Chart.spMap_comp, Category.assoc, htr, ih]
 
 theorem univ_of_dirs {d : ℕ} {κ : Type} [Fintype κ] (β : Fin d ≃ κ)
-    {x : ∀ m, Chart.sp (R₀ := V) (ReciprocityTheory.ChartRestriction.G.Chart.JetR V (Fin d) m) ⟶ G} (hx : Chart.IsUnivChart G d x)
-    (z : ∀ m, Chart.sp (R₀ := V) (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m) ⟶ G)
+    {x : ∀ m, Chart.sp (R₀ := V) (Chart.JetR V (Fin d) m) ⟶ G} (hx : Chart.IsUnivChart G d x)
+    (z : ∀ m, Chart.sp (R₀ := V) (Chart.JetR V κ m) ⟶ G)
     (htr : ∀ m, Chart.spMap (jetTruncR V κ m) ≫ z (m + 1) = z m)
     (haug : ∀ m, Chart.spMap (Chart.jetAug V κ m) ≫ z m = 1)
-    (t : Fin d → (ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ 1 →ₐ[V] DualNumber V))
+    (t : Fin d → (Chart.JetR V κ 1 →ₐ[V] DualNumber V))
     (ht : ∀ j k, t j (zR 1 (β k)) = if k = j then DualNumber.eps else 0)
     (hdir : ∀ j, Chart.spMap (t j) ≫ z 1 = Chart.spMap (dualLift (Pi.single j 1)) ≫ x 1)
     (A : Type) [CommRing A] [Algebra V A] (aug : A →ₐ[V] V) (m : ℕ) (hA : RingHom.ker aug ^ (m + 1) = ⊥)
     (y : Chart.sp (R₀ := V) A ⟶ G) (hy : Chart.spMap aug ≫ y = 1) :
-    ∃! ψ : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m →ₐ[V] A, aug.comp ψ = Chart.jetAug V κ m ∧ y = Chart.spMap ψ ≫ z m := by
+    ∃! ψ : Chart.JetR V κ m →ₐ[V] A, aug.comp ψ = Chart.jetAug V κ m ∧ y = Chart.spMap ψ ≫ z m := by
   choose ψ hψ using fun m => (hx.2.2 _ (Chart.jetAug V κ m) m (ker_jetAug_pow κ m) (z m) (haug m)).exists
   have hψ0 : ∀ m i, Chart.jetAug V κ m (ψ m (zR m i)) = 0 := fun m i =>
     (AlgHom.congr_fun (hψ m).1 (zR m i)).trans (jetAug_zR m i)
@@ -225,9 +225,9 @@ theorem univ_of_dirs {d : ℕ} {κ : Type} [Fintype κ] (β : Fin d ≃ κ)
       rw [map_sub, sub_eq_zero]
       exact (AlgHom.congr_fun (h3 m) (zR (m + 1) i)).trans (h2 i)
   let e := AlgEquiv.ofBijective (ψ m) (bij_of_first_order β (ψ m) (h4 m))
-  have he : (e.symm : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V (Fin d) m).comp (ψ m) = AlgHom.id V _ :=
+  have he : (e.symm : Chart.JetR V κ m →ₐ[V] Chart.JetR V (Fin d) m).comp (ψ m) = AlgHom.id V _ :=
     AlgHom.ext fun w => e.symm_apply_apply w
-  have he' : (ψ m).comp (e.symm : ReciprocityTheory.ChartRestriction.G.Chart.JetR V κ m →ₐ[V] ReciprocityTheory.ChartRestriction.G.Chart.JetR V (Fin d) m) = AlgHom.id V _ :=
+  have he' : (ψ m).comp (e.symm : Chart.JetR V κ m →ₐ[V] Chart.JetR V (Fin d) m) = AlgHom.id V _ :=
     AlgHom.ext fun w => e.apply_symm_apply w
   obtain ⟨φ, ⟨hφ1, hφ2⟩, hu⟩ := hx.2.2 A aug m hA y hy
   refine ⟨φ.comp e.symm, ⟨?_, ?_⟩, ?_⟩

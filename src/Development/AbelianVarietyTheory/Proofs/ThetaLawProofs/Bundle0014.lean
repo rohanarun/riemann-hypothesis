@@ -32,11 +32,11 @@ open ReciprocityTheory.ChartRestriction.G.Chart (JetR zR jetAug dualLift dualLif
 
 variable {R : Type} [CommRing R] {n : ℕ}
 
-theorem fst_dualLift (t : Fin n → R) (y : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1) :
+theorem fst_dualLift (t : Fin n → R) (y : Chart.JetR R (Fin n) 1) :
     (dualLift t y).fst = jetAug R (Fin n) 1 y :=
   AlgHom.congr_fun (fstD_comp_dualLift t) y
 
-theorem snd_dualLift_sum {k : ℕ} (c : Fin k → R) (t : Fin k → Fin n → R) (y : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1) :
+theorem snd_dualLift_sum {k : ℕ} (c : Fin k → R) (t : Fin k → Fin n → R) (y : Chart.JetR R (Fin n) 1) :
     (dualLift (∑ i, c i • t i) y).snd = ∑ i, c i * (dualLift (t i) y).snd := by
   obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective y
   induction p using MvPolynomial.induction_on with
@@ -58,12 +58,12 @@ theorem snd_dualLift_sum {k : ℕ} (c : Fin k → R) (t : Fin k → Fin n → R)
     exact Finset.sum_congr rfl fun i _ => by ring
 
 theorem spMap_dualLift_surjective (t : Fin n → R) :
-    Function.Surjective (spMap (dualLift t : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1 →+* DualNumber R)) := by
+    Function.Surjective (spMap (dualLift t : Chart.JetR R (Fin n) 1 →+* DualNumber R)) := by
   intro p
-  have hs : Function.Surjective (jetAug R (Fin n) 1 : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1 →+* R) := fun a =>
+  have hs : Function.Surjective (jetAug R (Fin n) 1 : Chart.JetR R (Fin n) 1 →+* R) := fun a =>
     ⟨algebraMap R _ a, (jetAug R (Fin n) 1).commutes a⟩
-  have hp : (p : PrimeSpectrum (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1)) ∈
-      Set.range (PrimeSpectrum.comap (jetAug R (Fin n) 1 : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1 →+* R)) := by
+  have hp : (p : PrimeSpectrum (Chart.JetR R (Fin n) 1)) ∈
+      Set.range (PrimeSpectrum.comap (jetAug R (Fin n) 1 : Chart.JetR R (Fin n) 1 →+* R)) := by
     rw [range_comap_of_surjective _ _ hs]
     intro a ha
     apply (PrimeSpectrum.isPrime p).mem_of_pow_mem (1 + 1)
@@ -77,17 +77,17 @@ theorem spMap_dualLift_surjective (t : Fin n → R) :
   change (dualLift t y).fst ∈ q.asIdeal ↔ jetAug R (Fin n) 1 y ∈ q.asIdeal
   rw [fst_dualLift]
 
-theorem top_le_preimage_of_dualLift {X : Scheme.{0}} (x : Sp (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1) ⟶ X) (U : X.Opens)
+theorem top_le_preimage_of_dualLift {X : Scheme.{0}} (x : Sp (Chart.JetR R (Fin n) 1) ⟶ X) (U : X.Opens)
     (t : Fin n → R)
-    (h : ⊤ ≤ (spMap (dualLift t : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1 →+* DualNumber R) ≫ x) ⁻¹ᵁ U) : ⊤ ≤ x ⁻¹ᵁ U := by
+    (h : ⊤ ≤ (spMap (dualLift t : Chart.JetR R (Fin n) 1 →+* DualNumber R) ≫ x) ⁻¹ᵁ U) : ⊤ ≤ x ⁻¹ᵁ U := by
   intro p _
   obtain ⟨q, rfl⟩ := spMap_dualLift_surjective t p
   exact h (Set.mem_univ q)
 
 open GlobalTheory.TangentOrigin in
-theorem evalPt_of_eq {X : Scheme.{0}} (x : Sp (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1) ⟶ X) (U : X.Opens)
+theorem evalPt_of_eq {X : Scheme.{0}} (x : Sp (Chart.JetR R (Fin n) 1) ⟶ X) (U : X.Opens)
     (hx : ⊤ ≤ x ⁻¹ᵁ U) (t : Fin n → R) (v : Sp (DualNumber R) ⟶ X)
-    (e : v = spMap (dualLift t : ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) 1 →+* DualNumber R) ≫ x) (f : Γ(X, U)) :
+    (e : v = spMap (dualLift t : Chart.JetR R (Fin n) 1 →+* DualNumber R) ≫ x) (f : Γ(X, U)) :
     ∃ h : ⊤ ≤ v ⁻¹ᵁ U, evalPt v U h f = dualLift t (evalPt x U hx f) := by
   subst e
   exact ⟨fun p _ => hx (Set.mem_univ _), evalPt_spMap_comp _ x U hx _ f⟩

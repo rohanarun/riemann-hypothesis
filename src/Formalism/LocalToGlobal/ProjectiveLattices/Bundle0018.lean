@@ -47,7 +47,7 @@ variable {E : Type} [Field E] [NumberField E] [IsCMField E] {H : Host E} {Dw : D
 
 theorem gfp_chart_iso {R : Type} [CommRing R] {G₁ G₂ : Over (Spec (CommRingCat.of R))} [GrpObj G₁] [GrpObj G₂]
     (e : G₁ ≅ G₂) [IsMonHom e.hom] {n : ℕ}
-    {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := R) (ReciprocityTheory.ChartRestriction.G.Geo.Tor.JetR R (Fin n) m) ⟶ G₁} (hx : IsUnivChart G₁ n xc) :
+    {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := R) (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin n) m) ⟶ G₁} (hx : IsUnivChart G₁ n xc) :
     IsUnivChart G₂ n (fun m => xc m ≫ e.hom) := by
   have h1 : ∀ X : Over (Spec (CommRingCat.of R)), (1 : X ⟶ G₁) ≫ e.hom = 1 := by
     intro X
@@ -64,14 +64,14 @@ theorem gfp_chart_iso {R : Type} [CommRing R] {G₁ G₂ : Over (Spec (CommRingC
     · rw [Iso.comp_inv_eq, hψ'.2, Category.assoc]
 
 def gfpEig {L : Type} [Field L] [Algebra c.F L] {x : Sp L ⟶ Xo.X} {n : ℕ}
-    {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (ReciprocityTheory.ChartRestriction.G.Geo.Tor.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
+    {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (ReciprocityTheory.ChartRestriction.G.Chart.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
     (hx : IsUnivChart _ n xc) (τ : E →+* ℂ) : Submodule L (Fin n → L) :=
   eigLat hx (fun a => (Over.pullback x).map (Xo.univ.t.act.act a)) (fun a => algebraMap c.F L (embK c τ a))
 
 section BC
 
 variable {L : Type} [Field L] {x : Sp L ⟶ Xo.X} {n : ℕ}
-  {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (ReciprocityTheory.ChartRestriction.G.Geo.Tor.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
+  {xc : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L) (ReciprocityTheory.ChartRestriction.G.Chart.JetR L (Fin n) m) ⟶ (Over.pullback x).obj Xo.univ.t.G}
 
 theorem gfpVec_tmap (hx : IsUnivChart _ n xc) (a : 𝓞 E) (cc : Fin n → L) :
     gfpVec x xc (tmap hx ((Over.pullback x).map (Xo.univ.t.act.act a)) cc) =
@@ -93,7 +93,7 @@ theorem gfpVec_tmap (hx : IsUnivChart _ n xc) (a : 𝓞 E) (cc : Fin n → L) :
   simp only [gfpVec, ht, Over.comp_left, Category.assoc, e1]
 
 theorem gfp_bc {L' : Type} [Field L'] [Algebra L L'] (hx : IsUnivChart _ n xc) :
-    ∃ (xc' : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L') (ReciprocityTheory.ChartRestriction.G.Geo.Tor.JetR L' (Fin n) m) ⟶
+    ∃ (xc' : ∀ m : ℕ, ReciprocityTheory.ChartRestriction.G.Chart.sp (R₀ := L') (ReciprocityTheory.ChartRestriction.G.Chart.JetR L' (Fin n) m) ⟶
         (Over.pullback (spMap (algebraMap L L') ≫ x)).obj Xo.univ.t.G) (hx' : IsUnivChart _ n xc'),
       (∀ cc : Fin n → L, gfpVec (spMap (algebraMap L L') ≫ x) xc' (algebraMap L L' ∘ cc) =
         spMap (dualMap (algebraMap L L')) ≫ gfpVec x xc cc) ∧

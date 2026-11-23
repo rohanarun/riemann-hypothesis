@@ -270,14 +270,14 @@ theorem series_ext_one (hJet : JetAlgSt) (hRep : RepSt) (Lr : RigLB G) (c : Cubi
   refine eq_of_germ fun z => ?_
   obtain ⟨J, hJ, hJ'⟩ := exists_good_const Lr.L Lr.isLB j z
   rw [← hτ, ← hτ]
-  refine H (sp (R₀ := R) (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin 1 × Fin d) m)) z J hJ
-    ((((Spec (CommRingCat.of (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin 1 × Fin d) m))).presheaf.germ ⊤ z trivial).hom.comp
-      (Scheme.ΓSpecIso (CommRingCat.of (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin 1 × Fin d) m))).inv.hom).comp τ.toRingHom)
+  refine H (sp (R₀ := R) (Chart.JetR R (Fin 1 × Fin d) m)) z J hJ
+    ((((Spec (CommRingCat.of (Chart.JetR R (Fin 1 × Fin d) m))).presheaf.germ ⊤ z trivial).hom.comp
+      (Scheme.ΓSpecIso (CommRingCat.of (Chart.JetR R (Fin 1 × Fin d) m))).inv.hom).comp τ.toRingHom)
     (Y m) (fun r => ?_) (fun K _ φ ε t s hs a => ?_) (fun a b e => ?_) (fun o a b => ?_)
   · rw [gs_eq _ z ⊤ trivial]
     have e₁ : τ (C r) = algebraMap R _ r := τ.commutes r
     have e₂ := congrArg (fun q => q.hom r) (Scheme.ΓSpecIso_inv_naturality
-      (CommRingCat.ofHom (algebraMap R (ReciprocityTheory.ChartRestriction.G.Chart.JetR R (Fin 1 × Fin d) m))))
+      (CommRingCat.ofHom (algebraMap R (Chart.JetR R (Fin 1 × Fin d) m))))
     exact congrArg _ ((congrArg _ e₁).trans e₂)
   · obtain ⟨h1, h2⟩ := hs 1 _ _ (hA a) m
     refine Eq.trans ?_ (congrArg Units.val (val_const hJ' t _ h1)).symm
