@@ -131,6 +131,7 @@ theorem genVal_apply (h : GenFrEx Xo c) (Z : Comp Xo c) (f : Rul Xo c) : genVal 
 variable (U : ∀ σ : c.F →+* ℂ, Unf Xo c σ r) (x : ℝ) {D : D7} (V : (c.F →+* ℂ) → HSp D)
   (dict : ∀ σ, GA D (V σ) → Σ k, Frame ((U σ).X k).Ψ r)
 
+attribute [-instance] GlobalTheory.AdmLoc.modFun in
 def genPoint (Z : Comp Xo c) (C : Submodule c.F (Rul Xo c)) : C →ₗ[c.F] Om Z := (genVal Z).toLinearMap ∘ₗ C.subtype
 
 section
