@@ -8,6 +8,13 @@ open Filter Topology Set
 
 noncomputable section
 
+-- The collapse widened this module's environment; the instance search for the
+-- ring structure of `MeroField = meroSubalgebra ⧸ meroNull` now exceeds the
+-- default budget (deterministic timeout at typeclass, 20000 heartbeats) when the
+-- statements of `germ_add`/`germ_mul` are elaborated. Raising the budget is
+-- enough; no proof changes.
+set_option synthInstance.maxHeartbeats 1000000
+
 namespace GroundTheory.Global
 namespace Elliptic
 
