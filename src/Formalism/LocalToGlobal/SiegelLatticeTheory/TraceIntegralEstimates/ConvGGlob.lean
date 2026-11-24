@@ -9,6 +9,7 @@ public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.WeilQuotientHaar
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 noncomputable section
 
 open MeasureTheory NumberField Formalism.BasicNotions Formalism.MainNotions.S

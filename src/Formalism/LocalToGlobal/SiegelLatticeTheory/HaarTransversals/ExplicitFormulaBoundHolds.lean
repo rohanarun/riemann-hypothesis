@@ -18,6 +18,7 @@ public import Formalism.LocalToGlobal.SiegelLatticeTheory.HaarTransversals.HidaS
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 noncomputable section
 
 namespace Formalism.L2.SG.Count

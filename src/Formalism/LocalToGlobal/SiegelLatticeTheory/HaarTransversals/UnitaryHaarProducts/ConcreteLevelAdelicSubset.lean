@@ -10,6 +10,7 @@ public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.AdelicUnimodular
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 noncomputable section
 
 open MeasureTheory Set Topology Formalism.MainNotions.S Matrix

@@ -17,6 +17,7 @@ public import Formalism.LocalToGlobal.SiegelLatticeTheory.WeightedGaugeFactors.F
 
 @[expose] public section
 
+attribute [-instance] GlobalTheory.CompanionTheory.QL.instMeasGL GlobalTheory.CompanionTheory.QL.instBorelGL
 noncomputable section
 
 open scoped Classical

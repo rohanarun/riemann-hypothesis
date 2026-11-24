@@ -9,6 +9,7 @@ public import Development.AbelianVarietyTheory.Proofs.HermitianTraceForms.Exists
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 open MeasureTheory Formalism.MainNotions.S NumberField
 open scoped InnerProductSpace
 open Matrix Topology Filter IsDedekindDomain Formalism.UG
