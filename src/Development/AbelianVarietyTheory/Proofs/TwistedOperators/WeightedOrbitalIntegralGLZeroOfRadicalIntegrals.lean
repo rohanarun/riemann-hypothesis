@@ -9,6 +9,7 @@ public import Development.AbelianVarietyTheory.Proofs.TwistedOperators.Bundle013
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 open MeasureTheory GlobalTheory.Orb GlobalTheory.AutomorphicL2Unitary GlobalTheory.SplitWeil
 
 namespace GlobalTheory.RadicalOrb

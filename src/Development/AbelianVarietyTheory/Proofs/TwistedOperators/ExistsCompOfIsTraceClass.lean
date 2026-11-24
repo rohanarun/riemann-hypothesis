@@ -8,6 +8,7 @@ public import Development.AbelianVarietyTheory.Proofs.FoundationProofs.Bundle029
 
 @[expose] public section
 
+attribute [-instance] Formalism.DoubleCosetMeasures.instMeasGL Formalism.DoubleCosetMeasures.instBorelGL
 noncomputable section
 
 open MeasureTheory ContinuousLinearMap Filter GlobalTheory.OpTrace GlobalTheory.AutomorphicL2Unitary GlobalTheory.Cusp GlobalTheory.IndefiniteRowSideFullHecke.TraceKernelDecomposition
