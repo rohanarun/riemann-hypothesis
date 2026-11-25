@@ -236,10 +236,6 @@ theorem nabAtr_isLattice (L : Submodule (𝓞 E) (Fin n → E)) (hL : Submodule.
     Submodule.IsFullLattice K (nabAtr emb lam L) :=
   (nabDelLattice K ι n lam _ fun τ => dualFr_tauLat_isLattice emb τ L hL).1
 
-theorem delAtr_isLattice (L : Submodule (𝓞 E) (Fin n → E)) (hL : Submodule.IsFullLattice E L) :
-    Submodule.IsFullLattice K (delAtr emb lam L) :=
-  (nabDelLattice K ι n lam _ fun τ => dualFr_tauLat_isLattice emb τ L hL).2
-
 
 
 variable [StarRing K]
