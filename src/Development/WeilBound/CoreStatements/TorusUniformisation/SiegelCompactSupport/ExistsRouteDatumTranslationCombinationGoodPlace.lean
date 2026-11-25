@@ -1183,17 +1183,6 @@ open GlobalTheory.EmbChart (tensAt compFin_tensAt tensAt_mul_right tensAt_tmul)
 variable {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algebra F E] {σ : E →ₐ[F] E}
   {v : HeightOneSpectrum (𝓞 F)}
 
-theorem hasSig_det {n r s : ℕ} {M : Matrix (Fin n) (Fin n) ℂ} (h : HasSig M r s) : M.det ≠ 0 := by
-  obtain ⟨rfl, A, hA⟩ := h
-  intro h0
-  have e : (A.submatrix id finSumFinEquiv.symm)ᵀ * M * (A.map star).submatrix id finSumFinEquiv.symm =
-      (fromBlocks 1 0 0 (-1) : Matrix (Fin r ⊕ Fin s) (Fin r ⊕ Fin s) ℂ).submatrix finSumFinEquiv.symm finSumFinEquiv.symm := by
-    rw [← hA]; rfl
-  have := congrArg det e
-  rw [det_mul, det_mul, h0, det_submatrix_equiv_self, det_fromBlocks_zero₂₁, det_neg] at this
-  simp only [mul_zero, zero_mul, det_one, one_mul, mul_one] at this
-  exact pow_ne_zero _ (neg_ne_zero.2 one_ne_zero) this.symm
-
 theorem hTens_tr {R E : Type} [CommRing R] [CommRing E] [Algebra R E] (c : E →ₐ[R] E) {α β : Type} [Fintype α] [Fintype β]
     (JA : Matrix α α E) (JB : Matrix β β E) (x y : Matrix α β E) :
     hTens c JA JB x y = trace (xᵀ * JA * y.map c * JBᵀ) := by
@@ -1288,21 +1277,6 @@ theorem mat_ext (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) {m n : Type} {y z 
 def spM (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) {m n : Type} (A B : Matrix m n (Fv F v)) : Matrix m n (AE F E) :=
   of fun i j => tensAt E v ((splitAlgEquiv h t).symm (A i j, B i j))
 
-theorem spM_fst (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) {m n : Type} (A B : Matrix m n (Fv F v)) :
-    (spM h t A B).map (piW t) = A := Matrix.ext fun i j => by
-  show splitProj t (compFin F E v (tensAt E v _)) = _
-  rw [compFin_tensAt, splitProj_symm]
-
-theorem spM_snd (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) {m n : Type} (A B : Matrix m n (Fv F v)) :
-    (spM h t A B).map (piW (t.comp σ)) = B := Matrix.ext fun i j => by
-  show splitProj (t.comp σ) (compFin F E v (tensAt E v _)) = _
-  rw [compFin_tensAt, splitProj_comp_symm]
-
-theorem spM_off (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) {m n : Type} (A B : Matrix m n (Fv F v)) :
-    (1 - ep v) • spM h t A B = 0 := Matrix.ext fun i j => by
-  show (1 - ep v) • tensAt E v _ = 0
-  rw [sub_smul, one_smul, ep_smul, compFin_tensAt, sub_self]
-
 theorem map_smul_piW (t : E →ₐ[F] Fv F v) {m n : Type} (a : AF F) (y : Matrix m n (AE F E)) :
     (a • y).map (piW t) = evFin F v a • y.map (piW t) := Matrix.ext fun _ _ => piW_smul t a _
 
@@ -1319,33 +1293,6 @@ variable {n d : ℕ} {X : Spc F E n} {W : Spc F E d}
 
 def coB (σ : E →ₐ[F] E) (X : Spc F E n) (W : Spc F E d) (t : E →ₐ[F] Fv F v) (u : Matrix (Fin n) (Fin d) (AE F E)) :
     Matrix (Fin n) (Fin d) (Fv F v) := -(X.J.map t * u.map (piW (t.comp σ)) * (W.J.map t)ᵀ)
-
-theorem ev_symp (h : IsCMExt F E σ) (t : E →ₐ[F] Fv F v) (hX : ∀ i j, σ (X.J j i) = X.J i j)
-    (hW : ∀ i j, σ (W.J j i) = -W.J i j) (w w' : Matrix (Fin n) (Fin d) (AE F E)) :
-    evFin F v (symp (R := AF F) (cA σ) (-1) (incM F X.J) (incM F W.J) w w') =
-      trace (coB σ X W t w * (-w'.map (piW t))ᵀ) - trace (coB σ X W t w' * (-w.map (piW t))ᵀ) := by
-  have a : ∀ t : E →ₐ[F] Fv F v, piW t (hTens (cA σ) (incM F X.J) (incM F W.J) w w') =
-      trace ((w.map (piW t))ᵀ * X.J.map t * w'.map (piW (t.comp σ)) * (W.J.map t)ᵀ) := fun t => by
-    rw [hTens_tr, AddMonoidHom.map_trace (piW t), Matrix.map_mul, Matrix.map_mul, Matrix.map_mul, transpose_map, transpose_map,
-      incM_piW, incM_piW, map_cA_piW]
-  have b1 : X.J.map (t.comp σ) = (X.J.map t)ᵀ := Matrix.ext fun i j => congrArg t (hX j i)
-  have b2 : (W.J.map (t.comp σ))ᵀ = -W.J.map t := Matrix.ext fun i j => (congrArg t (hW i j)).trans (map_neg t _)
-  rw [symp, ev_trace h t, map_mul, map_mul, a, a, comp_conj_conj h, b1, b2, coB, coB]
-  generalize w.map (piW t) = A
-  generalize w'.map (piW t) = A'
-  generalize w.map (piW (t.comp σ)) = B
-  generalize w'.map (piW (t.comp σ)) = B'
-  generalize X.J.map t = P
-  generalize W.J.map t = Q
-  have c1 : trace (P * B * Qᵀ * A'ᵀ) = trace (Bᵀ * Pᵀ * A' * Q) := by
-    rw [← trace_transpose, transpose_mul, transpose_mul, transpose_mul, transpose_transpose, transpose_transpose,
-      ← Matrix.mul_assoc, trace_mul_comm]
-    simp only [Matrix.mul_assoc]
-  have c2 : trace (P * B' * Qᵀ * Aᵀ) = trace (Aᵀ * P * B' * Qᵀ) := by
-    rw [trace_mul_comm]
-    simp only [Matrix.mul_assoc]
-  simp only [transpose_neg, Matrix.neg_mul, Matrix.mul_neg, neg_neg, c1, c2, map_neg, map_one, trace_neg]
-  ring
 
 end Split
 
