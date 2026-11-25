@@ -11,9 +11,9 @@ open MeasureTheory Matrix
 
 noncomputable section
 
-instance measurableSpace_matrix {m n X : Type*} [MeasurableSpace X] :
+@[reducible] instance measurableSpace_matrix {m n X : Type*} [MeasurableSpace X] :
     MeasurableSpace (Matrix m n X) :=
-  inferInstanceAs (MeasurableSpace (m → n → X))
+  Matrix.instMeasurableSpace
 
 instance borelSpace_matrix {m n X : Type*} [Countable m] [Countable n] [TopologicalSpace X]
     [MeasurableSpace X] [BorelSpace X] [SecondCountableTopology X] :

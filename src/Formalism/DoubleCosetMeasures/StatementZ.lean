@@ -10,8 +10,8 @@ open MeasureTheory Matrix ComplexConjugate
 
 namespace Formalism.DoubleCosetMeasures
 
-instance instMeasMat {m n F : Type} [MeasurableSpace F] : MeasurableSpace (Matrix m n F) :=
-  inferInstanceAs (MeasurableSpace (m → n → F))
+@[reducible] instance instMeasMat {m n F : Type} [MeasurableSpace F] : MeasurableSpace (Matrix m n F) :=
+  Matrix.instMeasurableSpace
 
 section Weil
 
