@@ -409,25 +409,6 @@ theorem exists_haar_idele : ∃ μ : Measure (AE F E)ˣ, μ.IsHaarMeasure := by
   haveI : BorelSpace (AE F E)ˣ := ⟨rfl⟩
   exact ⟨Measure.haar, inferInstance⟩
 
-theorem isClosed_stabK (B : Base F E) {n : ℕ} (X : Spc F E n)
-    (hL : IsClosed ((latHat X : AddSubgroup (Fin n → AE F E)) : Set (Fin n → AE F E))) :
-    IsClosed ((stabK (σ := σ) B X : Subgroup (UA σ X.J)) : Set (UA σ X.J)) := by
-  haveI : Module.Finite F E := Module.Finite.of_restrictScalars_finite ℚ F E
-  haveI : IsModuleTopology (AF F) (AE F E) := ⟨rfl⟩
-  haveI : IsTopologicalRing (AE F E) := IsModuleTopology.isTopologicalRing (AF F) _
-  have hm : Continuous fun g : UA σ X.J => mat g := Units.continuous_val.comp continuous_subtype_val
-  have hmi : Continuous fun g : UA σ X.J => mat g⁻¹ := hm.comp continuous_inv
-  have hp : ∀ w, Continuous (piInf (B.emb w)) := fun w => GlobalTheory.Grow.continuous_infEmb_compInf F w (B.emb w)
-  have h1 : IsClosed {g : UA σ X.J | ∀ w, Commute ((mat g).map (piInf (B.emb w))) (X.θ w)} := by
-    simp only [Set.setOf_forall]
-    exact isClosed_iInter fun w => isClosed_eq ((hm.matrix_map (hp w)).matrix_mul continuous_const)
-      (continuous_const.matrix_mul (hm.matrix_map (hp w)))
-  have h2 : IsClosed {g : UA σ X.J | ∀ z ∈ latHat X, mat g *ᵥ z ∈ latHat X ∧ mat g⁻¹ *ᵥ z ∈ latHat X} := by
-    simp only [Set.setOf_forall]
-    refine isClosed_iInter fun z => isClosed_iInter fun _ => ?_
-    exact (hL.preimage (hm.matrix_mulVec continuous_const)).inter (hL.preimage (hmi.matrix_mulVec continuous_const))
-  exact h1.inter h2
-
 end GlobalTheory.StabHaar
 end
 end
