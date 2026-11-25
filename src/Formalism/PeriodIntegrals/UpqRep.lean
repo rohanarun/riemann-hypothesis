@@ -315,9 +315,6 @@ def lowKSub (ε : Fin n → Bool) (lam : Fin n → ℝ) (σ : Matrix (Fin n) (Fi
     Submodule ℂ H :=
   sSup {S | IsKTypeOf ε σ (lowK ε lam) S}
 
-def IsOrthProjOnto (E : H →L[ℂ] H) (S : Submodule ℂ H) : Prop :=
-  E.comp E = E ∧ (∀ x y : H, ⟪E x, y⟫_ℂ = ⟪x, E y⟫_ℂ) ∧ LinearMap.range (E : H →ₗ[ℂ] H) = S
-
 def IsLowUnit (ε : Fin n → Bool) (lam : Fin n → ℝ) (σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)) (w : H) : Prop :=
   ‖w‖ = 1 ∧ w ∈ lowKSub ε lam σ
 
