@@ -271,7 +271,7 @@ theorem finAf_localIdele {e : AfE F E} {P : HeightOneSpectrum (𝓞 E)} (he : e 
     rw [map_add (f := _), map_mul, map_sub, map_one, afIso_tmul_one]; rfl
   rw [e1, GlobalTheory.Mem.ReadTwist.afIso_finAf_apply]
   by_cases hQ : Q = P
-  · subst hQ
+  · subst Q
     change (Neutral.B1.localIdele E P (atFin P k) : AdeleRing (𝓞 E) E).2 P = _
     rw [Neutral.B1.localIdele_snd_self, h1, one_mul, add_sub_cancel]
     rfl
