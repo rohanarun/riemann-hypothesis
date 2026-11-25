@@ -149,10 +149,6 @@ theorem one_le_k (D : D7) : (1 : ℝ) ≤ (D.R.k : ℝ) := by
   have h := D.R.m_add_three_le_k
   exact_mod_cast (by omega : 1 ≤ D.R.k)
 
-theorem xpow_le_exp (x N y : ℝ) (hx : 0 < x) (h : N * Real.log x ≤ y) : x ^ N ≤ Real.exp y := by
-  rw [Real.rpow_def_of_pos hx]
-  exact Real.exp_le_exp.2 (by rw [mul_comm]; exact h)
-
 theorem second_level_lt_good_of_log {D : D7} (L : SizeData₂ D) (hS : Formalism.MainNotions.SizesAt L) (hx : Real.exp 1 ≤ L.sc.x)
     (h : 514 * Real.log L.sc.x ≤ L.sc.x ^ (L.sc.eps / 8)) : L2 D L.sc < goodU L.sc.delta1 := by
   have hx0 : 0 < L.sc.x := lt_trans zero_lt_one L.sc.one_lt_alt
