@@ -220,8 +220,6 @@ theorem unrealify_smul (c : ℝ) (x : EuclideanSpace ℝ (Fin (2 * r + k + 1) ×
   ext i j
   apply Complex.ext <;> simp [unrealify]
 
-theorem continuous_of : Continuous (fun x : Mt k r => (Matrix.of x : Mx k r)) := continuous_id
-
 def unrealL (k r : ℕ) : EuclideanSpace ℝ (Fin (2 * r + k + 1) × Fin (2 * r + k + 1) × Bool) →ₗ[ℝ] Mx k r where
   toFun := unrealify
   map_add' := unrealify_add
