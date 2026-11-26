@@ -562,7 +562,9 @@ lemma isParahoricCompatible_galRep (hA : IsPlaceOver A w) (hϖ : v ϖ.val = With
       permGL σ ∈ blockParahoric (F := LocField w) f := by
     refine ⟨permGL_mem_intGL σ, fun i j hij ↦ ?_⟩
     rw [h_blocks j (σ j) (hσ j)] at hij
-    simp [σ.symm_apply_eq, Fin.ext_iff, ne_of_apply_ne f hij.ne']
+    simp only [MonoidHom.coe_toHomUnits, permMatrixHom_apply, PEquiv.toMatrix_apply,
+      Equiv.toPEquiv_apply, Equiv.Perm.coe_inv, Option.mem_def, Option.some.injEq, σ.symm_apply_eq,
+      Fin.ext_iff, ne_of_apply_ne f hij.ne', ↓reduceIte, map_zero, zero_lt_one]
   obtain ⟨θ, h_exp, hθ, σ, h_anti, z, z_mem, z_eig⟩ :
       ∃ θ : Fin (card n) → (LocField w)ˣ →* ℂˣ,
         (∃ l : ρ →ₗ[ℂ] ℂ, IsExponent ρ (torusChar θ) l ∧ l y ≠ 0) ∧
@@ -570,7 +572,9 @@ lemma isParahoricCompatible_galRep (hA : IsPlaceOver A w) (hϖ : v ϖ.val = With
         ∃ σ : Equiv.Perm (Fin (card n)), Antitone ((fun i ↦ ‖(θ i (uniformizer w) : ℂ)‖) ∘ σ) ∧
           ∃ z ∈ cyclicSpan ρ.ρ y, IsIwahoriEigen ρ (torusChar (θ ∘ σ)) z :=
     exists_sorted_isIwahoriEigen_of_diagGL_smul (v_uniformizer w) y_fixed
-      (fun t ht ↦ h_par _ ⟨ht, fun i j hij ↦ by simp [Fin.ext_iff, ne_of_apply_ne f hij.ne']⟩)
+      (fun t ht ↦ h_par _ ⟨ht, fun i j hij ↦ by
+        simp only [coe_diagGL, ne_eq, Fin.ext_iff, ne_of_apply_ne f hij.ne', not_false_eq_true,
+          diagonal_apply_ne, map_zero, zero_lt_one]⟩)
       (fun σ hσ ↦ ⟨c (permGL σ), h_par _ (h_perm σ fun i ↦ hσ i u hu)⟩) isUnitary_localFormRep hy_ne
   have z_form : IsEigenform z.val x.heckePolyAt :=
     (x.isEigenform hy hy_ne).of_mem_cyclicSpan z_mem z_eig.1
@@ -590,7 +594,8 @@ lemma isParahoricCompatible_galRep (hA : IsPlaceOver A w) (hϖ : v ϖ.val = With
       aeval (x.galRep g).val p = 0 := by
     obtain ⟨h_fin, h_kill⟩ := h_poly g ε 0 (inv_mem hg) h_art hε
     exact h_fin.aeval_eq_zero_of_roots hℓ_unit hg h_kill p
-      (by simpa [eval_prod, prod_eq_zero_iff, sub_eq_zero] using hp)
+      (by simpa only [IsRoot.def, eval_prod, eval_sub, eval_X, eval_C, prod_eq_zero_iff, mem_univ,
+        sub_eq_zero, true_and, forall_exists_index, forall_eq_apply_imp_iff] using hp)
   refine ⟨fun p hp ↦ ?_, ?_, θ, h_exp, fun b ↦ ?_⟩
   · exact h_inertia τ u hτ hu_artin hu p fun i ↦ by simpa only [hθ _ u hu] using hp (σ i)
   · -- the commutator of `s` and `τ` is inertial and comes from the unit `1`
@@ -598,15 +603,26 @@ lemma isParahoricCompatible_galRep (hA : IsPlaceOver A w) (hϖ : v ϖ.val = With
       convert IsFrob.conj hτ s.val
       exact s.prop.symm
     have h_comm : aeval (x.galRep (s * τ / s / τ)).val (X - 1 : (PadicAlgCl ℓ)[X]) = 0 :=
-      h_inertia (s * τ / s / τ) 1 (div_mem h_conj hτ) (by simp) (by simp) (X - 1) (by simp)
-    simpa [commute_iff_eq, div_eq_iff_eq_mul, Units.ext_iff, sub_eq_zero] using h_comm
+      h_inertia (s * τ / s / τ) 1 (div_mem h_conj hτ)
+        (by simp only [map_one, QuotientGroup.mk_div, QuotientGroup.mk_mul, mul_div_cancel_left,
+          div_self']) (by simp only [Units.val_one, map_one]) (X - 1)
+        (by simp only [map_one, Units.val_one, IsRoot.def, eval_sub, eval_X, eval_one, sub_self,
+          implies_true])
+    simpa only [commute_iff_eq, _root_.map_div, map_mul, aeval_sub, aeval_X, map_one, sub_eq_zero,
+      Units.val_eq_one, div_eq_iff_eq_mul, one_mul, Units.ext_iff, Units.val_mul] using h_comm
   · -- `s * τ ^ b` is a geometric Frobenius that comes from `ϖ * u ^ b`
     have h_frob : IsFrob A (w.q ^ 1) (s * τ ^ b).val⁻¹ := by
-      simpa using (zpow_mem hτ (-b)).mul_iff.2 hs_frob
+      simpa only [pow_one, Subgroup.coe_mul, SubmonoidClass.coe_pow, _root_.mul_inv_rev, one_mul,
+        _root_.zpow_neg, zpow_natCast] using (zpow_mem hτ (-b)).mul_iff.2 hs_frob
     obtain ⟨-, h_kill, -⟩ :=
-      h_poly (s * τ ^ b) (ϖ * u ^ b) 1 h_frob (by simp [hϖ_artin, hu_artin]) (by simp [hϖ, hu])
+      h_poly (s * τ ^ b) (ϖ * u ^ b) 1 h_frob
+        (by simp only [map_mul, hϖ_artin, map_pow, hu_artin, QuotientGroup.mk_mul,
+          QuotientGroup.mk_pow])
+        (by simp only [Units.val_mul, Units.val_pow_eq_pow_val, map_mul, hϖ, Int.reduceNeg, map_pow,
+          hu, one_pow, mul_one, cast_one])
     rw [← Equiv.prod_comp σ]
-    simpa [hθ _ u hu] using h_kill hℓ_unit
+    simpa only [map_mul, map_pow, Subgroup.coe_mul, SubmonoidClass.coe_pow, Units.val_mul,
+      Units.val_pow_eq_pow_val, hθ _ u hu] using h_kill hℓ_unit
 
 omit [Nonempty n] in
 /-- Let `F` and `T` commute, let `T` be semisimple with eigenvalues among `d 0, 1, …, 1`, where
@@ -680,6 +696,9 @@ lemma hecke_eq_frob_on_parahoricEigenspace (hA : IsPlaceOver A w)
       ιℓ.symm (aeval F (G.map ιℓ.toRingHom) * T * M).trace • y := by
   intro U F T
   let ρ := localFormRep V κ hw
+  have h_min (i k : Fin (card n)) (h_iff : i ≠ 0 ↔ k ≠ 0) : min 1 i.val = min 1 k.val := by
+    rw [← Fin.val_ne_zero_iff, ← Fin.val_ne_zero_iff] at h_iff
+    omega
   let S : Submodule ℂ (V.forms κ) := x.val ⊓ parahoricEigenspace ρ (min 1) (χ ∘ fun g ↦ g 0 0)
   -- Degree one. If the difference `z` of the two sides is not zero, `isParahoricCompatible_galRep`
   -- gives it an exponent `l` with characters `θ` and `l z ≠ 0`. But both `U` (seen by `l`) and `F`
@@ -692,7 +711,9 @@ lemma hecke_eq_frob_on_parahoricEigenspace (hA : IsPlaceOver A w)
       parahoricEigenspace_mem_invtSubmodule ρ hϖ hy_type⟩
     obtain ⟨hz, z_type⟩ : z ∈ S := sub_mem (S.smul_mem _ Uy_mem) (S.smul_mem _ ⟨hy, hy_type⟩)
     have χ_one : χ 1 = 1 :=
-      smul_left_injective ℂ z_ne (by simpa using (z_type.2 1 (one_mem _)).symm)
+      smul_left_injective ℂ z_ne (by
+        simpa only [one_smul, Function.comp_apply, Units.val_one, one_apply_eq, map_one,
+          one_apply_eq_self] using (z_type.2 1 (one_mem _)).symm)
     -- the unit `u` gives `χ u ≠ 1` in slot `0` and `1` in the others: it separates the two blocks
     have χ_ne : χ u ≠ 1 := fun h ↦ hζ (by rw [h, one_pow])
     have χ_slot (i : Fin (card n)) : χ (diagGL (mulSingle i u) 0 0) = 1 ↔ i ≠ 0 := by
@@ -700,35 +721,47 @@ lemma hecke_eq_frob_on_parahoricEigenspace (hA : IsPlaceOver A w)
     have blocks (i k : Fin (card n))
         (h_eq : χ (diagGL (mulSingle i u) 0 0) = χ (diagGL (mulSingle k u) 0 0)) :
         min 1 i.val = min 1 k.val := by
-      have h_iff : i ≠ 0 ↔ k ≠ 0 := by rw [← χ_slot, ← χ_slot, h_eq]
-      grind [Fin.val_ne_zero_iff]
+      exact h_min i k (by rw [← χ_slot, ← χ_slot, h_eq])
     obtain ⟨τ_roots, comm, θ, ⟨l, hl, lz_ne⟩, sτ_roots⟩ :
         IsParahoricCompatible ρ z ϖ (fun i ↦ χ (diagGL (mulSingle i u) 0 0)) F (x.galRep τ).val :=
       isParahoricCompatible_galRep hA hϖ hϖ_artin hs_frob hu hu_artin hτ hℓ hz z_ne _ z_type blocks
     have l_U : l (U y) = θ 0 ϖ * l y := by
       -- `U y` is `w.q ^ (card n - 1)` times the mean over `proIwahori` of
       -- `ρ (diag (ϖ, 1, …, 1)) y`, and this degree cancels the modulus factor in `torusChar`
-      obtain ⟨dominant, U_eq⟩ : mulSingle 0 ϖ ∈ dominantTorus ∧ U y = (w.q : ℂ) ^ (card n - 1) •
-          compactMean ρ.ρ proIwahori (ρ.ρ (diagGL (mulSingle 0 ϖ)) y) :=
-        heckeCoset_mulSingle_zero_eq hϖ hy_type.1
+      obtain ⟨dominant, U_eq⟩ := heckeCoset_mulSingle_zero_eq (ρ := ρ.ρ) hϖ hy_type.1
       have l_diag : l (ρ.ρ (diagGL (mulSingle 0 ϖ)) y) = torusChar θ (mulSingle 0 ϖ) * l y := by
         simpa only [compactMean_eq_self (ρ := ρ.ρ) y hy_type.1] using hl dominant y
-      rw [U_eq, map_smul, hl.apply_compactMean, l_diag]
+      rw [show U y = _ from U_eq, map_smul, hl.apply_compactMean, l_diag]
       simp [coe_normAbsChar_locField, norm_locField_eq_q_zpow, hϖ, field,
         (zero_lt_one.trans w.one_lt_q).ne']
     have F_mul_T : F * T = ιℓ (θ 0 ϖ) • T :=
       mul_sub_one_eq_smul_sub_one (α := fun i ↦ ιℓ (θ i ϖ))
         (fun i hi ↦ by simp only [(χ_slot i).2 hi, map_one])
-        (by simpa using hχ) (by simpa using (ιℓ.injective.ne_iff' (map_one ιℓ)).2 hζ) (by simp)
+        (by simpa only [coe_diagGL, diagonal_apply_eq, mulSingle_eq_same, ne_eq,
+          EmbeddingLike.map_eq_zero_iff] using hχ)
+        (by simpa only [coe_diagGL, diagonal_apply_eq, mulSingle_eq_same, ne_eq, map_pow] using
+          (ιℓ.injective.ne_iff' (map_one ιℓ)).2 hζ) (by simp)
         comm τ_roots (by simpa only [map_mul, map_pow] using sτ_roots)
-    exact lz_ne (by simp [z, l_U, mul_assoc B F T, F_mul_T, mul_left_comm, mul_assoc])
+    have h_tr : ιℓ.symm (B * F * T * M).trace = θ 0 ϖ * ιℓ.symm (B * T * M).trace := by
+      rw [mul_assoc B F T, F_mul_T, Matrix.mul_smul, Matrix.smul_mul, trace_smul, smul_eq_mul,
+        map_mul, RingEquiv.symm_apply_apply]
+    refine lz_ne ?_
+    simp only [z]
+    rw [map_sub, map_smul, map_smul, l_U, h_tr, smul_eq_mul, smul_eq_mul]
+    ring
   -- Horner induction on `G`: the step from `p` to `p * X` applies `U` and uses degree one
   induction G using recOnHorner with
-  | M0 => simp
-  | MC p a _ _ ih => simp [ih, add_mul, add_smul, smul_smul, mul_comm, algebraMap_eq_smul_one]
+  | M0 => simp only [map_zero, LinearMap.zero_apply, smul_zero, RingEquiv.toRingHom_eq_coe,
+      Polynomial.map_zero, zero_mul, trace_zero, zero_smul]
+  | MC p a _ _ ih =>
+    simp only [map_add, aeval_C, algebraMap_eq_smul_one, LinearMap.add_apply, LinearMap.smul_apply,
+      one_apply_eq_self, smul_add, ih, RingEquiv.toRingHom_eq_coe, smul_smul, mul_comm,
+      Polynomial.map_add, map_C, RingHom.coe_coe, add_mul, Algebra.smul_mul_assoc, one_mul,
+      trace_add, trace_smul, smul_eq_mul, map_mul, RingEquiv.symm_apply_apply, add_smul]
   | MX p _ ih =>
     nth_rw 1 [← X_mul]
-    simpa [degree_one] using congrArg U ih
+    simpa only [map_mul, aeval_X, mul_apply_eq_comp, RingEquiv.toRingHom_eq_coe, Polynomial.map_mul,
+      map_X, map_smul, degree_one] using congrArg U ih
 
 end New.Patching
 
