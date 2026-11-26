@@ -18,21 +18,6 @@ open GlobalTheory.WeilM GlobalTheory.AdelicU GlobalTheory.LFun GlobalTheory.Inde
 
 namespace GlobalTheory.ThK.Adapt
 
-theorem bijective_of_symp {R κ : Type} [CommRing R] [Fintype κ] (T : ((κ → R) × (κ → R)) →ₗ[R] (κ → R) × (κ → R))
-    (h : ∀ u w, (T u).1 ⬝ᵥ (T w).2 - (T w).1 ⬝ᵥ (T u).2 = u.1 ⬝ᵥ w.2 - w.1 ⬝ᵥ u.2) : Function.Bijective T := by
-  classical
-  let S : ((κ → R) × (κ → R)) →ₗ[R] (κ → R) × (κ → R) :=
-    { toFun := fun w => (fun k => w.1 ⬝ᵥ (T (0, Pi.single k 1)).2 - (T (0, Pi.single k 1)).1 ⬝ᵥ w.2,
-        fun k => (T (Pi.single k 1, 0)).1 ⬝ᵥ w.2 - w.1 ⬝ᵥ (T (Pi.single k 1, 0)).2)
-      map_add' := fun a b => by ext k <;> simp <;> ring
-      map_smul' := fun c a => by ext k <;> simp <;> ring }
-  have hS : Function.LeftInverse S T := fun u => by
-    ext k
-    · simpa [S] using h u (0, Pi.single k 1)
-    · simpa [S] using h (Pi.single k 1, 0) u
-  have hi : Function.Injective S := OrzechProperty.injective_of_surjective_endomorphism S hS.surjective
-  exact ⟨hS.injective, fun w => ⟨S w, hi (hS _)⟩⟩
-
 section Glue
 
 variable {κ κ₀ κ₁ : Type} (ε : κ ≃ κ₀ ⊕ κ₁)
@@ -272,22 +257,6 @@ theorem hTens_mul (J : Matrix α α S) (J' : Matrix β β S) (P : Matrix α α' 
   rw [Matrix.trace_mul_comm]
   simp only [Matrix.mul_assoc]
 
-theorem hTens_plane_left (J : Matrix α α S) (η : S) (J' : Matrix β β S) (z z' : Matrix (α ⊕ Fin 2) β S) :
-    hTens c (Matrix.fromBlocks J 0 0 !![0, 1; η, 0]) J' z z' =
-      η * ∑ j, ∑ l, z (.inr 1) j * J' j l * c (z' (.inr 0) l) + ∑ j, ∑ l, z (.inr 0) j * J' j l * c (z' (.inr 1) l) +
-        hTens c J J' (z.submatrix .inl id) (z'.submatrix .inl id) := by
-  simp [hTens, Fintype.sum_sum_type, Fin.sum_univ_two, Finset.mul_sum]
-  simp only [mul_assoc, mul_left_comm η]
-  ring
-
-theorem hTens_plane_right (J : Matrix α α S) (η : S) (J' : Matrix β β S) (z z' : Matrix α (β ⊕ Fin 2) S) :
-    hTens c J (Matrix.fromBlocks J' 0 0 !![0, 1; η, 0]) z z' =
-      η * ∑ i, ∑ k, z i (.inr 1) * J i k * c (z' k (.inr 0)) + ∑ i, ∑ k, z i (.inr 0) * J i k * c (z' k (.inr 1)) +
-        hTens c J J' (z.submatrix id .inl) (z'.submatrix id .inl) := by
-  simp [hTens, Fintype.sum_sum_type, Fin.sum_univ_two, Finset.mul_sum, Finset.sum_add_distrib]
-  simp only [mul_assoc, mul_left_comm η]
-  ring
-
 theorem conj_pair (hc : ∀ z, c (c z) = z) {J : Matrix α α S} {η : S} (hJ : ∀ i j, c (J j i) = η * J i j) (u w : α → S) :
     c (∑ i, ∑ k, u i * J i k * c (w k)) = η * ∑ i, ∑ k, w i * J i k * c (u k) := by
   set_option synthInstance.maxHeartbeats 100000 in
@@ -368,32 +337,10 @@ theorem frame_gram (hB : B.IsGood σ) (hH : H.IsAdapted σ B Y Y₁ i₀ i₁) {
 def mask (S : Type) [CommRing S] (m₁ : ℕ) (c s t : ℤ) : Matrix (Fin m₁ ⊕ Fin 2) (Fin m₁ ⊕ Fin 2) S :=
   Matrix.diagonal (Sum.elim (fun _ => (c : S)) ![(s : S), (t : S)])
 
-theorem mask_mem (hH : H.IsAdapted σ B Y Y₁ i₀ i₁) {Q : Matrix (Fin m₁ ⊕ Fin 2) (Fin m) E} (hQ : ∀ u ∈ Y.L,
-    (fun i => (Q *ᵥ u) (.inl i)) ∈ Y₁.L ∧ (Q *ᵥ u) (.inr 0) • H.x ∈ Y.L ∧ (Q *ᵥ u) (.inr 1) • H.y ∈ Y.L) (c s t : ℤ) :
-    ∀ u ∈ Y.L, (frame H * mask E m₁ c s t * Q) *ᵥ u ∈ Y.L := fun u hu => by
-  obtain ⟨h1, h2, h3⟩ := hQ u hu
-  rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec, frame_mulVec]
-  refine add_mem (add_mem ?_ ((hH.low _).1 ?_)) ?_
-  · convert zsmul_mem h2 s using 1
-    simp [mask, Matrix.mulVec_diagonal, mul_smul, Int.cast_smul_eq_zsmul]
-  · convert zsmul_mem h1 c using 1
-    funext i
-    simp [mask, Matrix.mulVec_diagonal]
-  · convert zsmul_mem h3 t using 1
-    simp [mask, Matrix.mulVec_diagonal, mul_smul, Int.cast_smul_eq_zsmul]
-
 end Plane
 
 theorem incM_mul {α β γ : Type} [Fintype β] (A : Matrix α β E) (C : Matrix β γ E) : incM F (A * C) = incM F A * incM F C :=
   Matrix.map_mul
-
-theorem incM_mask (m₁ : ℕ) (c s t : ℤ) : incM F (mask E m₁ c s t) = mask (AE F E) m₁ c s t := by
-  rw [incM, mask, Matrix.diagonal_map (map_zero _)]
-  congr 1
-  funext a
-  rcases a with a | a
-  · simp
-  · fin_cases a <;> simp
 
 theorem lat_map {A : Matrix (Fin n₁) (Fin n) E} {A' : Matrix (Fin d₁) (Fin d) E} (hA : ∀ u ∈ X.L, A *ᵥ u ∈ X₁.L)
     (hA' : ∀ u ∈ W.L, A' *ᵥ u ∈ W₁.L) {v : Pl (F := F)} {γ : Matrix (Fin n) (Fin d) (AE F E)} (hγ : γ ∈ latAtV X W v) :
