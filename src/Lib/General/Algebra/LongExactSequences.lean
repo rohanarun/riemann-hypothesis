@@ -5,6 +5,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 import Mathlib.CategoryTheory.Abelian.Exact
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Lib.Cohomology.Etale.Basic
+import TauCeti.Algebra.Homology.Ext.Coproduct
 
 /-!
 # Long exact sequences, four and five lemmas, and Ext with disjoint unions and products
@@ -28,7 +29,8 @@ comparison maps give morphisms between them.
   map X₁ → X₂ is an equivalence for F iff the quotient X₃ has no cohomology with values in F.
 * `New.Variety.H.sigma_bijective`: the cohomology `New.Variety.H (freeAb.obj Y) F n` of a disjoint
   union `Y = New.Variety.sigma X` of set-valued functors is the product of the cohomology groups of
-  the `X i`, by pull-back (`New.Variety.H.map`) along the inclusions.
+  the `X i`, by pull-back (`New.Variety.H.map`) along the inclusions; this is Tau Ceti's
+  `CategoryTheory.Abelian.Ext.coproductAddEquiv`, as `freeAb` preserves coproducts.
 * `New.Variety.H.pi_bijective`: the map Ext^n(N, ∏ F_i) → ∏ Ext^n(N, F_i) is bijective, for the
   objectwise product `New.Variety.piAbFunctor`.
 
@@ -436,7 +438,7 @@ end New.Variety
 
 section DisjointUnions
 
-open CategoryTheory Abelian.Ext Function New.Variety Comparison LongExactSeq ShortComplex
+open CategoryTheory Limits Abelian.Ext Function New.Variety Comparison LongExactSeq ShortComplex
 
 /-- Let Y = `New.Variety.sigma X` be the disjoint union of a family of set-valued functors X_i.
 Write ℤ[Y] = `freeAb.obj Y` for the free abelian functor on Y and H^n(Y, F) for Ext^n(ℤ[Y], F).
@@ -446,35 +448,19 @@ lemma New.Variety.H.sigma_bijective {C : Type 1} [Category C] {ι : Type 1} (X :
     (F : AbFunctor C) (n : ℕ) :
     Bijective fun (x : H (freeAb.obj (sigma X)) F n) (i : ι) ↦
       map F (freeAb.map (sigma.ι (C := C) (J := ι) X i)) n x := by
-  -- Dimension shifting: induction on `n`, for all coefficients `F` at once.
-  induction n generalizing F with
-  | zero =>
-    -- In degree zero, `H (freeAb.obj Y) F 0` is the set of maps from `Y` to `F ⋙ forget _`.
-    let e (Y : C ⥤ Type 1) : (Y ⟶ F ⋙ forget _) ≃ H (freeAb.obj Y) F 0 :=
-      ((homEquiv₀ (C := AbFunctor C)).trans (freeAb.homEquiv Y F)).symm
-    -- A map out of the disjoint union is the same as a family of maps out of the `X i`.
-    have h_bij : Bijective fun (f : sigma X ⟶ F ⋙ forget Ab) (i : ι) ↦ sigma.ι X i ≫ f :=
-      (Equiv.mk (fun f (i : ι) ↦ sigma.ι X i ≫ f) sigma.desc (fun f ↦ rfl) fun f ↦ rfl).bijective
-    -- Under `e`, pull-back along `sigma.ι X i` is composition with it.
-    refine (bijective_iff_of_comm_sq (fun f ↦ funext fun i ↦ ?_) (e _).bijective
-      (.piMap fun _ ↦ (e _).bijective)).1 h_bij
-    change map F (freeAb.map (sigma.ι X i)) 0 (e (sigma X) f) = e (X i) (sigma.ι X i ≫ f)
-    simp +instances [e, Adjunction.homEquiv, map, freeAb]
-  | succ n ih =>
-    -- Embed `F` in the injective `Injective.under F` and compare the long exact sequences of
-    -- 0 → F → Injective.under F → cokernel → 0.
-    have hS : (ShortComplex.mk _ _ (Limits.cokernel.condition (Injective.ι F))).ShortExact :=
-      ⟨exact_cokernel _⟩
-    -- The connecting maps are onto because `Injective.under F` has no cohomology in degree
-    -- `n + 1`.
-    have δ_surj (N : AbFunctor C) : Surjective ((LongExactSeq.covariant hS N).δ n) :=
-      fun y ↦ (exact_delta_f _ n y).1 (eq_zero_of_injective _)
-    -- write the pull-backs as comparison maps `pull` along the identity comparison
-    simp only [← id_pull] at ih ⊢
-    -- Pull-back is a morphism of long exact sequences (`pull_hom_covariant`), so the claim in
-    -- degree n for `Injective.under F` and for the cokernel gives it in degree n + 1 for F.
-    exact Hom.bijective_succ_family (fun _ ↦ pull_hom_covariant (φ := 𝟭 C) hS hS (𝟙 _) _) (ih _)
-      (ih _) (δ_surj _) fun _ ↦ δ_surj _
+  -- `sigma X` is the coproduct of the `X i`, and `freeAb` preserves it, being a left adjoint.
+  have h_sigma : IsColimit (Cofan.mk (sigma X) (sigma.ι X)) :=
+    Cofan.IsColimit.mk _ (fun s ↦ sigma.desc s.inj) (fun _ _ ↦ rfl) fun s m hm ↦ by
+      ext A ⟨i, x⟩
+      exact ConcreteCategory.congr_hom (NatTrans.congr_app (hm i) A) x
+  have : PreservesColimitsOfSize.{1, 1} (freeAb (D := C)) :=
+    (AddCommGrpCat.adj.whiskerRight C).leftAdjoint_preservesColimits
+  -- Tau Ceti computes `Ext` out of a coproduct as the product of the `Ext` out of the summands.
+  convert (coproductAddEquiv (isColimitCofanMkObjOfIsColimit freeAb _ _ h_sigma) F n).bijective
+    using 1
+  ext x i
+  rw [coproductAddEquiv_apply]
+  rfl
 
 end DisjointUnions
 
