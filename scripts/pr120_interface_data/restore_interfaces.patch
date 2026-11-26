@@ -1,0 +1,1017 @@
+diff --git a/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/Bundle0051.lean b/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/Bundle0051.lean
+index 229b858591c..da486a2bf90 100644
+--- a/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/Bundle0051.lean
++++ b/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/Bundle0051.lean
+@@ -27,6 +27,14 @@ open scoped Kronecker ComplexOrder TensorProduct
+
+ namespace GlobalTheory.ClassFin
+
++theorem adjugate_entry_mem_subring {ι : Type} [Fintype ι] [DecidableEq ι] {R : Type} [CommRing R]
++    (S : Subring R) (k : Matrix ι ι R) (hk : ∀ i j, k i j ∈ S) : ∀ i j, k.adjugate i j ∈ S := by
++  intro i j
++  let k' : Matrix ι ι S := Matrix.of fun i j => ⟨k i j, hk i j⟩
++  have h1 : k = S.subtype.mapMatrix k' := by ext i j; rfl
++  rw [h1, ← RingHom.map_adjugate]
++  exact (k'.adjugate i j).2
++
+ theorem mul_entry_mem_subring {ι : Type} [Fintype ι] {R : Type} [CommRing R]
+     (S : Subring R) (k l : Matrix ι ι R) (hk : ∀ i j, k i j ∈ S) (hl : ∀ i j, l i j ∈ S) :
+     ∀ i j, (k * l) i j ∈ S := by
+diff --git a/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/Bundle1082.lean b/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/Bundle1082.lean
+index 4c242f86097..95fbce4fc21 100644
+--- a/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/Bundle1082.lean
++++ b/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/Bundle1082.lean
+@@ -67,7 +67,7 @@ theorem cHess_comp_apply (n d : ℕ) (g : V d → ℂ) (F : V n → V d) (U : Se
+     have := Complex.conjCLE.differentiableAt.comp v ((hPa k a).restrictScalars ℝ)
+     simpa [Function.comp_def] using this
+   show wd n j (wdb n k (g ∘ F)) v = _
+-  rw [@wd_congr n j _ _ v (hwdb k),
++  rw [wd_congr n j _ _ v (hwdb k),
+     fc_wd_sum n j Finset.univ (fun a y => wdb d a g (F y) *
+       (starRingEnd ℂ) (fderiv ℂ F y (bas n k) a)) v (fun a _ => (hWa a).mul (hCa k a))]
+   refine Finset.sum_congr rfl fun a _ => ?_
+diff --git a/src/Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/Bundle0604.lean b/src/Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/Bundle0604.lean
+index b813193c433..d33d0324f9e 100644
+--- a/src/Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/Bundle0604.lean
++++ b/src/Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/Bundle0604.lean
+@@ -50,6 +50,28 @@ theorem al_ne (a : K.O) (ha : K.Small a) : al K a ≠ 0 := by
+   intro h
+   exact ha.1 ((IsFractionRing.injective K.O K.E) (by simpa using h))
+
++theorem isIntegral_sigma {r : B.A} (hr : IsIntegral K.O r) : IsIntegral K.O (B.σ r) := by
++  obtain ⟨q, hq, h0⟩ := hr
++  have hsub : ∀ x : K.O, K.c (algebraMap K.O K.E x) ∈ (algebraMap K.O K.E).range := fun x => by
++    obtain ⟨y, hy⟩ := K.c_int x; exact ⟨y, hy.symm⟩
++  let ψ : K.O ≃+* (algebraMap K.O K.E).range :=
++    RingEquiv.ofBijective (algebraMap K.O K.E).rangeRestrict
++      ⟨fun x y h => IsFractionRing.injective K.O K.E (congrArg Subtype.val h), (algebraMap K.O K.E).rangeRestrict_surjective⟩
++  let cO : K.O →+* K.O := ψ.symm.toRingHom.comp
++    (((K.c : K.E →+* K.E).comp (algebraMap K.O K.E)).codRestrict _ hsub)
++  have hcO : ∀ x, algebraMap K.O K.E (cO x) = K.c (algebraMap K.O K.E x) := fun x => by
++    have := ψ.apply_symm_apply ⟨K.c (algebraMap K.O K.E x), hsub x⟩
++    exact congrArg Subtype.val this
++  have hcomp : (algebraMap K.O B.A).comp cO = (B.σ : B.A →+* B.A).comp (algebraMap K.O B.A) := by
++    ext x
++    simp only [RingHom.comp_apply, RingHom.coe_coe]
++    rw [IsScalarTower.algebraMap_apply K.O K.E B.A, IsScalarTower.algebraMap_apply K.O K.E B.A x, B.σ_alg, hcO]
++  refine ⟨q.map cO, hq.map cO, ?_⟩
++  rw [eval₂_map, hcomp]
++  have := hom_eval₂ q (algebraMap K.O B.A) (B.σ : B.A →+* B.A) r
++  rw [h0, map_zero] at this
++  exact this.symm
++
+ theorem sigma_smul (c : K.E) (x : B.A) : B.σ (c • x) = K.c c • B.σ x := by
+   rw [Algebra.smul_def, Algebra.smul_def, map_mul, B.σ_alg]
+
+@@ -207,13 +229,13 @@ theorem exists_pos : ∀ (K : UQ) (B : InvAlg K) (ι : Type) [Fintype ι] (e π
+             intro h2; apply hni; rw [hei, add_mul, smul_add]; exact h1.add h2
+           have h3 : ¬ IsIntegral K.O ((t ^ (-(pi + 1))) • (f * B.σ m)) := by
+             intro h3; apply h2
+-            have := isIntegral_sigma _ B _ h3
++            have := isIntegral_sigma B h3
+             rwa [sigma_smul, map_mul, B.σ_σ, map_zpow₀, hct] at this
+           exact core f hf hfld (pi + 1) (B.σ m) (hM.2.2 m hm) h3
+         · exact core f hf hfld (pi + 1) m hm h1
+       rw [hei, add_mul, smul_add]
+       refine M.add_mem (Hf r hr) ?_
+-      have := hM.2.2 _ (Hf (B.σ r) (isIntegral_sigma _ B _ hr))
++      have := hM.2.2 _ (Hf (B.σ r) (isIntegral_sigma B hr))
+       rwa [sigma_smul, map_mul, B.σ_σ, map_zpow₀, hct] at this
+   choose p hp using hpos
+   exact ⟨p, hp⟩
+diff --git a/src/Development/EtaleCohomology/CohomologicalPurity/Bundle0027.lean b/src/Development/EtaleCohomology/CohomologicalPurity/Bundle0027.lean
+index 1308b0fd2da..b2f93cd8739 100644
+--- a/src/Development/EtaleCohomology/CohomologicalPurity/Bundle0027.lean
++++ b/src/Development/EtaleCohomology/CohomologicalPurity/Bundle0027.lean
+@@ -178,12 +178,28 @@ theorem eqv_of_iso (R : Type) [CommRing R] {E E' : Spc} (e : E ≅ E') (F : Shv
+   · rw [← pull_comp, e.inv_hom_id, pull_id]
+   · rw [← pull_comp, e.hom_inv_id, pull_id]
+
++theorem eqv_comp (R : Type) [CommRing R] {E E' E'' : Spc} (f : E ⟶ E') (g : E' ⟶ E'') (F : Shv R)
++    (hf : Eqv R f F) (hg : Eqv R g F) : Eqv R (f ≫ g) F := by
++  intro n
++  have : ⇑(pull R (f ≫ g) F n) = ⇑(pull R f F n) ∘ ⇑(pull R g F n) := funext fun x => pull_comp R f g F n x
++  rw [this]; exact (hf n).comp (hg n)
++
++theorem eqv_of_section (R : Type) [CommRing R] {E E' : Spc} (g : E ⟶ E') (s : E' ⟶ E) (F : Shv R)
++    (h : g ≫ s = 𝟙 _) (hs : Eqv R s F) : Eqv R g F := by
++  intro n
++  have hid : ∀ x, pull R g F n (pull R s F n x) = x := fun x => by rw [← pull_comp, h, pull_id]
++  have hsurj : Function.Surjective (pull R g F n) := fun x => ⟨_, hid x⟩
++  refine ⟨fun a b hab => ?_, hsurj⟩
++  obtain ⟨a', rfl⟩ := (hs n).2 a
++  obtain ⟨b', rfl⟩ := (hs n).2 b
++  rw [hid, hid] at hab; rw [hab]
++
+ theorem LeafWEqvL_of (hGm : LeafWGm) (hT : LeafWTors) : LeafWEqvL := by
+   intro hH q _ d R _ I hI hq g hg i
+   obtain ⟨e, he⟩ := hT d R I hI
+   obtain ⟨hsm, hsu⟩ := hGm d R I
+   have hA2 : Eqv _ (cechAug (gmU d R I)) (tw q i) := hH.2.1 _ (gmU d R I) (tw q i)
+-  exact eqv_of_section (he g hg) (eqv_comp (eqv_of_iso _ e _) hA2)
++  exact eqv_of_section _ g _ _ (he g hg) (eqv_comp _ _ _ _ (eqv_of_iso _ e _) hA2)
+
+ end LateralTheory.CohomologicalPurity.Thom.ExcP.Chart
+ end
+diff --git a/src/Development/EtaleCohomology/CohomologicalPurity/LeafChartFactPf.lean b/src/Development/EtaleCohomology/CohomologicalPurity/LeafChartFactPf.lean
+index 61fb78d2aaa..9218569db1d 100644
+--- a/src/Development/EtaleCohomology/CohomologicalPurity/LeafChartFactPf.lean
++++ b/src/Development/EtaleCohomology/CohomologicalPurity/LeafChartFactPf.lean
+@@ -86,20 +86,6 @@ theorem opn_mono {X : Scheme.{0}} (U : X.Opens) : Mono (opn U).hom := by
+ def LeafWCov : Prop := Hyp → ∀ (q : ℕ) [NeZero q] (d : ℕ) (R : Type) [CommRing R], IsUnit (q : R) →
+   Cover2 (ZMod q) (wb d R) (pr d R).hom
+
+-theorem eqv_comp {R : Type} [CommRing R] {E E' E'' : Spc} {f : E ⟶ E'} {g : E' ⟶ E''} {F : Shv R}
+-    (hf : Eqv R f F) (hg : Eqv R g F) : Eqv R (f ≫ g) F := by
+-  intro n
+-  have : (pull R (f ≫ g) F n : _ → _) = pull R f F n ∘ pull R g F n := funext fun x => pull_comp R f g F n x
+-  rw [this]; exact (hf n).comp (hg n)
+-
+-theorem eqv_of_section {R : Type} [CommRing R] {E E' : Spc} {f : E ⟶ E'} {r : E' ⟶ E} {F : Shv R}
+-    (h : f ≫ r = 𝟙 _) (hr : Eqv R r F) : Eqv R f F := by
+-  intro n
+-  have hc : (pull R f F n : _ → _) ∘ pull R r F n = id := by
+-    funext x; change pull R f F n (pull R r F n x) = x; rw [← pull_comp, h, pull_id]
+-  have : Function.Bijective ((pull R f F n : _ → _) ∘ pull R r F n) := by rw [hc]; exact Function.bijective_id
+-  exact (Function.Bijective.of_comp_iff _ (hr n)).1 this
+-
+ def LeafWEqvR : Prop := Hyp → ∀ (q : ℕ) [NeZero q] (d : ℕ) (R : Type) [CommRing R], IsUnit (q : R) →
+   ∀ i, Eqv _ (wa d R) (tw q i)
+
+diff --git a/src/Development/EtaleCohomology/CohomologicalPurity/LeafWEqvRPf.lean b/src/Development/EtaleCohomology/CohomologicalPurity/LeafWEqvRPf.lean
+index 97f390038b9..e11e98f359a 100644
+--- a/src/Development/EtaleCohomology/CohomologicalPurity/LeafWEqvRPf.lean
++++ b/src/Development/EtaleCohomology/CohomologicalPurity/LeafWEqvRPf.lean
+@@ -16,6 +16,20 @@ theorem eqv_of_isIso {R : Type} [CommRing R] {E E' : Spc} (f : E ⟶ E') [IsIso
+     rwa [← pull_comp, ← pull_comp, IsIso.inv_hom_id, pull_id, pull_id] at this
+   · rw [← pull_comp, IsIso.hom_inv_id, pull_id]
+
++theorem eqv_comp {R : Type} [CommRing R] {E E' E'' : Spc} {f : E ⟶ E'} {g : E' ⟶ E''} {F : Shv R}
++    (hf : Eqv R f F) (hg : Eqv R g F) : Eqv R (f ≫ g) F := by
++  intro n
++  have : (pull R (f ≫ g) F n : _ → _) = pull R f F n ∘ pull R g F n := funext fun x => pull_comp R f g F n x
++  rw [this]; exact (hf n).comp (hg n)
++
++theorem eqv_of_section {R : Type} [CommRing R] {E E' : Spc} {f : E ⟶ E'} {r : E' ⟶ E} {F : Shv R}
++    (h : f ≫ r = 𝟙 _) (hr : Eqv R r F) : Eqv R f F := by
++  intro n
++  have hc : (pull R f F n : _ → _) ∘ pull R r F n = id := by
++    funext x; change pull R f F n (pull R r F n x) = x; rw [← pull_comp, h, pull_id]
++  have : Function.Bijective ((pull R f F n : _ → _) ∘ pull R r F n) := by rw [hc]; exact Function.bijective_id
++  exact (Function.Bijective.of_comp_iff _ (hr n)).1 this
++
+ def fW (d : ℕ) (R : Type) [CommRing R] :
+     Spec (CommRingCat.of (LaurentPolynomial (MvPolynomial (Fin d) R))) ⟶ Spec (CommRingCat.of (MvPolynomial (Fin d) R)) :=
+   Spec.map (CommRingCat.ofHom (LaurentPolynomial.C : MvPolynomial (Fin d) R →+* _))
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/ArchimedeanBaseChange/ArchimedeanBaseChangeProof/HeckeFubiniCompatibility/Bundle0003.lean b/src/Development/WeilBound/RepresentationTheoryGL/ArchimedeanBaseChange/ArchimedeanBaseChangeProof/HeckeFubiniCompatibility/Bundle0003.lean
+index c834a783f23..92d8237b655 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/ArchimedeanBaseChange/ArchimedeanBaseChangeProof/HeckeFubiniCompatibility/Bundle0003.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/ArchimedeanBaseChange/ArchimedeanBaseChangeProof/HeckeFubiniCompatibility/Bundle0003.lean
+@@ -89,6 +89,11 @@ theorem gInf_eq (v : InfinitePlace E) (g : GA E n) :
+     gInf v g = GeneralLinearGroup.map (Pi.evalRingHom (fun _ : InfinitePlace E => ℂ) v)
+       (GeneralLinearGroup.map (pInf E) g) := rfl
+
++theorem continuous_gInf (v : InfinitePlace E) : Continuous (gInf (E := E) (n := n) v) := by
++  have h : Continuous (GeneralLinearGroup.map (n := Fin n) (Pi.evalRingHom (fun _ : InfinitePlace E => ℂ) v)) :=
++    Continuous.units_map _ (by exact continuous_id.matrix_map (continuous_apply v))
++  exact (h.comp (_root_.GlobalTheory.GLProj.continuous_proj_incl E n).1).congr fun g => (gInf_eq v g).symm
++
+ theorem continuous_hFin : Continuous (hFin (E := E) (a := a) (b := b)) :=
+   ((_root_.GlobalTheory.GLProj.continuous_proj_incl E a).2.1.comp continuous_fst).prodMk ((_root_.GlobalTheory.GLProj.continuous_proj_incl E b).2.1.comp continuous_snd)
+
+@@ -150,8 +155,8 @@ theorem tens_entry {Ma : Mods E a} {Mb : Mods E b} {κ : Type} [MeasurableSpace
+     have cB : ∀ v, Continuous fun y : G b => ent (Mb v) (kb v y.val) (i.1.2 v) (j.1.2 v) := fun v =>
+       (mult_ent (hB v) _ _).1
+     refine ⟨?_, ?_⟩
+-    · exact ((continuous_finsetProd _ fun v _ => (cA v).comp ((continuous_gInf a v).comp continuous_fst)).mul
+-        (continuous_finsetProd _ fun v _ => (cB v).comp ((continuous_gInf b v).comp continuous_snd))).mul
++    · exact ((continuous_finsetProd _ fun v _ => (cA v).comp ((continuous_gInf v).comp continuous_fst)).mul
++        (continuous_finsetProd _ fun v _ => (cB v).comp ((continuous_gInf v).comp continuous_snd))).mul
+         ((hψ i.2 j.2).1.comp continuous_hFin)
+     · refine hasCompactSupport_of_section (fun g : H E a b => ((fun v => gInf v g.1, fun v => gInf v g.2), hFin g))
+         ofParts continuous_ofParts ofParts_parts
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0006.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0006.lean
+index b4e89c1389b..015f85b990e 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0006.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0006.lean
+@@ -323,6 +323,8 @@ theorem isDil_unique (X : Fin n → ℝ) (s : ℝ) (a a' : GR n) (h : IsDil X s
+   apply Units.ext
+   exact h.trans h'.symm
+
++theorem mR_mul (g h : GR n) : mR (g * h) = mR g * mR h := rfl
++
+ theorem form_inv (g : M2 n) (hg : InG g) (V : Fin n ⊕ Fin n → ℂ) :
+     star (g *ᵥ V) ⬝ᵥ (JJ n *ᵥ (g *ᵥ V)) = star V ⬝ᵥ (JJ n *ᵥ V) := by
+   rw [Matrix.star_mulVec, ← Matrix.dotProduct_mulVec, Matrix.mulVec_mulVec, Matrix.mulVec_mulVec]
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0007.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0007.lean
+index 77fa35126b6..41fe15b6751 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0007.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AbsoluteConvergence/Bundle0007.lean
+@@ -23,6 +23,8 @@ theorem cont_KR_mul (n : ℕ) (y k1 : GR n) : Continuous (fun k : KR n => y * (k
+ theorem cont_KR_mul' (n : ℕ) (k1 : GR n) : Continuous (fun k : KR n => (k : GR n) * k1) :=
+   continuous_subtype_val.mul continuous_const
+
++theorem mR_mul {n : ℕ} (a b : GR n) : mR (a * b) = mR a * mR b := rfl
++
+ theorem spherical_section_eq_extension {n : ℕ} (p q : ℕ) (e : ℤ) (g : GR n) : F0 p q e g = twistedScalarSection p q e (mR g) := by
+   simp only [F0, twistedScalarSection]
+
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0004.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0004.lean
+index c229461c79d..fc3c6ebf2db 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0004.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0004.lean
+@@ -209,11 +209,6 @@ def IterNested : Prop :=
+       iteratedFDeriv ℂ a (fun t1 => iteratedFDeriv ℂ b (fun t2 => F (c + L1 t1 + L2 t2)) 0 w) 0 u =
+         iteratedFDeriv ℂ (a + b) F c (Fin.append (fun i => L1 (u i)) (fun i => L2 (w i)))
+
+-theorem iter_cast {V : Type} [NormedAddCommGroup V] [NormedSpace ℂ V] {F : V → ℂ} {c : V} {m m' : ℕ} (h : m = m')
+-    (v : Fin m → V) : iteratedFDeriv ℂ m F c v = iteratedFDeriv ℂ m' F c (v ∘ Fin.cast h.symm) := by
+-  subst h
+-  rfl
+-
+ variable {n : ℕ}
+
+ def bdiag (j : ℕ) (c c' : ℂ) (t : Matrix (Fin n) (Fin n) ℂ) : Matrix (Fin n) (Fin n) ℂ :=
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0007.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0007.lean
+index ebe586b4b28..bf67b9e927d 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0007.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0007.lean
+@@ -213,6 +213,10 @@ lemma iter_diffAt {F : V → ℂ} {Ω : Set V} (hΩ : IsOpen Ω) (hF : ContDiffO
+     DifferentiableAt ℂ (iteratedFDeriv ℂ i F) y := by
+   exact ((iter_smooth hΩ hF i).differentiableOn (by simp)).differentiableAt (hΩ.mem_nhds hy)
+
++lemma iter_cast {F : V → ℂ} {c : V} {m m' : ℕ} (h : m = m') (v : Fin m → V) :
++    iteratedFDeriv ℂ m F c v = iteratedFDeriv ℂ m' F c (v ∘ Fin.cast h.symm) := by
++  subst h; rfl
++
+ end
+
+ theorem iterAffine : IterAffine := by
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0009.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0009.lean
+index d35aa6e996d..3bf2fcf1fbd 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0009.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/AnalyticDeterminants/Bundle0009.lean
+@@ -182,6 +182,11 @@ open PositivityTheory.Rg.Sw PositivityTheory.Rg.Sw.LVs
+
+ attribute [local instance] Matrix.normedAddCommGroup Matrix.normedSpace
+
++theorem iter_cast {V : Type} [NormedAddCommGroup V] [NormedSpace ℂ V] (f : V → ℂ) (x : V) {m m' : ℕ} (h : m = m')
++    (v : Fin m → V) : iteratedFDeriv ℂ m f x v = iteratedFDeriv ℂ m' f x (v ∘ Fin.cast h.symm) := by
++  subst h
++  rfl
++
+ end PositivityTheory.Rg.Sw.LVs.TC
+ end
+ end
+diff --git a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/GlobalGaussLaws/Bundle0029.lean b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/GlobalGaussLaws/Bundle0029.lean
+index c41b2d7b0a0..559426f1cf7 100644
+--- a/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/GlobalGaussLaws/Bundle0029.lean
++++ b/src/Development/WeilBound/RepresentationTheoryGL/SiegelWeilProof/HolomorphicContinuation/GlobalGaussLaws/Bundle0029.lean
+@@ -87,6 +87,9 @@ theorem mat_one' : mat (1 : G D n) = 1 := by
+
+ theorem G_ext' {a b : G D n} (h : mat a = mat b) : a = b := Subtype.ext (Units.ext h)
+
++theorem reidx_mul (A B : M2 n) : reidx (A * B) = reidx A * reidx B := by
++  simp [reidx, Matrix.submatrix_mul_equiv]
++
+ theorem reidx_ct (A : M2 n) : reidx Aᴴ = (reidx A)ᴴ := by simp [reidx, Matrix.conjTranspose_submatrix]
+
+ theorem reidx_inj {A B : M2 n} (h : reidx A = reidx B) : A = B := by
+diff --git a/src/Formalism/LocalToGlobal/CharacterGerms/Bundle0014.lean b/src/Formalism/LocalToGlobal/CharacterGerms/Bundle0014.lean
+index 0168b718c3c..1c1ca1ca8b9 100644
+--- a/src/Formalism/LocalToGlobal/CharacterGerms/Bundle0014.lean
++++ b/src/Formalism/LocalToGlobal/CharacterGerms/Bundle0014.lean
+@@ -133,6 +133,16 @@ theorem van_X {τ : Type} {T : Set τ} {q : τ} (hq : q ∈ T) : Van T (X q : Mv
+     exact hν q (by rw [h]; simp) hq
+   · rfl
+
++theorem van_univ {τ : Type} {f : MvPowerSeries τ C} (hf : constantCoeff f = 0) : Van Set.univ f := by
++  intro ν hν
++  have h0 : ν = 0 := by
++    ext w
++    by_contra h
++    exact hν w (Finsupp.mem_support_iff.mpr h) (Set.mem_univ _)
++  subst h0
++  rw [MvPowerSeries.coeff_zero_eq_constantCoeff_apply]
++  exact hf
++
+ variable [CharZero C] {V : VF C} {O : Type} [CommRing O] [StarRing O] {dd : ℕ}
+
+ theorem constantCoeff_inCol (col : Fin 2) (f : MvPowerSeries (Fin dd) C) (hf : constantCoeff f = 0) :
+diff --git a/src/Formalism/LocalToGlobal/CharacterGerms/RowTiePHStab.lean b/src/Formalism/LocalToGlobal/CharacterGerms/RowTiePHStab.lean
+index d076897db42..183f975b2f8 100644
+--- a/src/Formalism/LocalToGlobal/CharacterGerms/RowTiePHStab.lean
++++ b/src/Formalism/LocalToGlobal/CharacterGerms/RowTiePHStab.lean
+@@ -271,6 +271,12 @@ variable {dd : ℕ}
+
+ def Tg (dd : ℕ) (g : Fin 2) : Set (Fin 2 × Fin dd) := {s | s.1 = g}
+
++theorem van_X {τ : Type} {T : Set τ} {s : τ} (hs : s ∈ T) : Van T (X s : MvPowerSeries τ C) := by
++  intro ν hν
++  rw [coeff_X, if_neg]
++  intro h
++  exact hν s (by rw [h]; simp) hs
++
+ def bil (F : PS C 2 dd) (w v : Fin dd → C) : C :=
+   ∑ i, ∑ j, coeff (E2 ((0 : Fin 2), i) ((1 : Fin 2), j)) F * (w i * v j)
+
+diff --git a/src/Formalism/LocalToGlobal/IndefiniteReal/FinitePlaces/Bundle0009.lean b/src/Formalism/LocalToGlobal/IndefiniteReal/FinitePlaces/Bundle0009.lean
+index 76c5cad69c2..5b6c34738dc 100644
+--- a/src/Formalism/LocalToGlobal/IndefiniteReal/FinitePlaces/Bundle0009.lean
++++ b/src/Formalism/LocalToGlobal/IndefiniteReal/FinitePlaces/Bundle0009.lean
+@@ -90,6 +90,9 @@ theorem cF_cF (z : Af D.host.F ⊗[D.host.F] D.host.E) : cF D (cF D z) = z := by
+     rw [star_star]
+   | add x y hx hy => rw [map_add (f := _), map_add (f := _), hx, hy]
+
++theorem intAf_mul {a a' : Af D.host.F} (ha : a ∈ intAf D.host.F) (ha' : a' ∈ intAf D.host.F) :
++    a * a' ∈ intAf D.host.F := fun w => by rw [map_mul]; exact mul_mem (ha w) (ha' w)
++
+ theorem intAE_mul {z z' : Af D.host.F ⊗[D.host.F] D.host.E} (hz : z ∈ intAE D) (hz' : z' ∈ intAE D) :
+     z * z' ∈ intAE D := by
+   induction hz using AddSubgroup.closure_induction with
+diff --git a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0003.lean b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0003.lean
+index 04779333985..93537fa975a 100644
+--- a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0003.lean
++++ b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0003.lean
+@@ -68,6 +68,10 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
+
+ variable {D : D7}
+
++theorem mt_mul (V : HSp D) (g h : GA D V) :
++    Formalism.L2.Theta.mt V (g * h) = Formalism.L2.Theta.mt V g * Formalism.L2.Theta.mt V h := by
++  unfold Formalism.L2.Theta.mt; rw [map_mul]; rfl
++
+ theorem actO_actO (S T : HSp D) (g g' : GA D S) (h h' : GA D T) (x : WO S T) :
+     actO S T g h (actO S T g' h' x) = actO S T (g * g') (h * h') x := by
+   unfold actO
+diff --git a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0006.lean b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0006.lean
+index 3ccea0907f6..7553a08cf50 100644
+--- a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0006.lean
++++ b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0006.lean
+@@ -28,6 +28,11 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
+
+ variable {D : D7} {S T : HSp D}
+
++theorem actO_add (g : GA D S) (h : GA D T) (x y : WO S T) :
++    actO S T g h (x + y) = actO S T g h x + actO S T g h y := by
++  unfold actO
++  simp [Matrix.mul_add, Matrix.add_mul, smul_add]
++
+ end Formalism.IndefR.Eqv
+
+ end
+diff --git a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0007.lean b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0007.lean
+index 549fb517c37..e1f0ab449e0 100644
+--- a/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0007.lean
++++ b/src/Formalism/LocalToGlobal/IndefiniteReal/LevelTypeEquivalence/Bundle0007.lean
+@@ -437,6 +437,10 @@ attribute [local instance] Formalism.BasicNotions.Host.cmStar
+
+ variable {D : D7} {S T : HSp D} {k : ℕ}
+
++theorem continuous_actO (g : GA D S) (h : GA D T) : Continuous (actO S T g h) := by
++  unfold actO
++  exact (continuous_const.matrix_mul continuous_id).matrix_mul continuous_const
++
+ end Formalism.IndefR.Eqv
+
+ end
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/ArchimedeanOrbitMeasures/Bundle0015.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/ArchimedeanOrbitMeasures/Bundle0015.lean
+index 1239864fcf0..1ba39e74865 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/ArchimedeanOrbitMeasures/Bundle0015.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/ArchimedeanOrbitMeasures/Bundle0015.lean
+@@ -208,6 +208,24 @@ def ProperOne : Prop := ∀ {D : D7} (X : HidaSetting D) (u' : D.what₂.Word) (
+ def InvNbhd : Prop := ∀ {D : D7} (X : HidaSetting D),
+     ∃ N ∈ 𝓝 (1 : MfI X), ∃ Nc : Set (MfI X), IsCompact Nc ∧ ∀ b ∈ N, ∃ c ∈ Nc, c * b = 1
+
++theorem rmulT_rmulT {D : D7} (X : HidaSetting D) (b c : MfI X) (Y : TupI X) :
++    rmulT X c (rmulT X b Y) = rmulT X (b * c) Y := by
++  funext a i
++  simp only [rmulT, Matrix.mul_apply, Finset.mul_sum, Finset.sum_mul]
++  rw [Finset.sum_comm]
++  exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
++
++theorem smul_rmulT {D : D7} (X : HidaSetting D) (g : HA (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J) (b : MfI X)
++    (Y : TupI X) : g • rmulT X b Y = rmulT X b (g • Y) := by
++  change (fun a => ((HA.mat (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J g : GL (Fin X.B.I.n) (Ainf X.B.I.F ⊗[X.B.I.F] X.B.I.E)) :
++      Matrix (Fin X.B.I.n) (Fin X.B.I.n) _).mulVec (rmulT X b Y a)) =
++    rmulT X b (fun a => ((HA.mat (Ainf X.B.I.F) X.B.I.cm.sig X.B.I.J g : GL (Fin X.B.I.n) (Ainf X.B.I.F ⊗[X.B.I.F] X.B.I.E)) :
++      Matrix (Fin X.B.I.n) (Fin X.B.I.n) _).mulVec (Y a))
++  funext a i
++  simp only [rmulT, Matrix.mulVec, dotProduct, Finset.mul_sum]
++  rw [Finset.sum_comm]
++  exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
++
+ theorem continuous_right_mul_tuple {D : D7} (X : HidaSetting D) :
+     Continuous (fun p : MfI X × TupI X => rmulT X p.1 p.2) := by
+   have : FiniteDimensional X.B.I.F X.B.I.E := fd_of X
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/CharacterIdempotents/CoeffMulCharIdem.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/CharacterIdempotents/CoeffMulCharIdem.lean
+index ab45ce56133..e4acdb4bd96 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/CharacterIdempotents/CoeffMulCharIdem.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/CharacterIdempotents/CoeffMulCharIdem.lean
+@@ -1,5 +1,7 @@
+ module
+
++public import Mathlib
++public import Formalism.PeriodIntegrals.Bundle0001
+ public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.CharacterIdempotents.Development
+ public import Formalism.PeriodIntegrals.UnitaryGroupMassFormula.CharacterIdempotents.Bundle0001
+
+@@ -13,6 +15,10 @@ open PI.CharIdem
+
+ variable {G : Type} [Group G] [Fintype G]
+
++theorem act_single (W : FDRep ℂ G) (g : G) (r : ℂ) :
++    act W (MonoidAlgebra.single g r) = r • W.ρ g := by
++  simp [act, MonoidAlgebra.lift_single]
++
+ theorem coeff_mul_charIdem (W : FDRep ℂ G) (x : MonoidAlgebra ℂ G) (h : G) :
+     (x * charIdem W).coeff h =
+       ((Module.finrank ℂ W : ℂ) / (Fintype.card G : ℂ)) *
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/Bundle0004.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/Bundle0004.lean
+index 2a8dd3e6364..fe940246b0c 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/Bundle0004.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/Bundle0004.lean
+@@ -23,6 +23,12 @@ variable {F E : Type} [Field F] [NumberField F] [Field E] [NumberField E] [Algeb
+   (σ : E →ₐ[F] E) {n : ℕ} (J : Matrix (Fin n) (Fin n) E) (ψ : AddChar (AF F) ℂ)
+   (v : HeightOneSpectrum (𝓞 F)) (Λ : Set (Fin n → E))
+
++theorem unif_ne_zero {ϖ : Fv F v} (hϖ : IsUnif v ϖ) : ϖ ≠ 0 := by
++  rintro rfl
++  unfold IsUnif at hϖ
++  rw [map_zero] at hϖ
++  exact WithZero.zero_ne_coe hϖ
++
+ end PI.OmLocU
+ end
+ end
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/CrossMSmulRight.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/CrossMSmulRight.lean
+index 3ce6ac96991..1473bd51505 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/CrossMSmulRight.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/LocalUnitaryOrbits/CrossMSmulRight.lean
+@@ -91,6 +91,11 @@ end Alg
+
+ section Rem
+
++theorem sigR_sc (r : Fv F v) : sigR (Fv F v) σ (sc (E := E) v r) = sc (E := E) v r := by
++  first
++  | (simp [sigR, sc]; done)
++  | (unfold sigR sc; done)
++
+ theorem hR_smul_smul (r t : Fv F v) (x y : Fin n → Fv F v ⊗[F] E) :
+     hR (Fv F v) σ J (r • x) (t • y) = sc (E := E) v (r * t) * hR (Fv F v) σ J x y := by
+   have hs : ∀ u : Fv F v, algebraMap (Fv F v) (Fv F v ⊗[F] E) u = sc (E := E) v u := fun u => rfl
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/MatrixCoefficientBound/Bundle0002.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/MatrixCoefficientBound/Bundle0002.lean
+index 757ace7ef8c..aa206f1d5c1 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/MatrixCoefficientBound/Bundle0002.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/MatrixCoefficientBound/Bundle0002.lean
+@@ -80,6 +80,27 @@ theorem repGam_subrep {V : Type} [AddCommGroup V] [Module ℂ V] (ψ₀ : AddCha
+     | rfl
+     | simp
+
++theorem gam_one_real (ψ₀ : AddChar F ℂ) :
++    gam ψ₀ (1 : GL (Fin k) F) = (((Fintype.card (GL (Fin k) F) : ℝ) / (cardU F k : ℝ) : ℝ) : ℂ) := by
++  have hsd : superdiag k (1 : Matrix (Fin k) (Fin k) F) = 0 := by
++    unfold superdiag
++    refine Finset.sum_eq_zero fun i _ => Finset.sum_eq_zero fun j _ => ?_
++    split_ifs with h
++    · rw [Matrix.one_apply_ne]
++      intro hij
++      subst hij
++      omega
++    · rfl
++  have hpsi : psiNat ψ₀ (1 : GL (Fin k) F) = 1 := by
++    unfold psiNat psiU
++    rw [if_pos isUni_one, Units.val_one, hsd, AddChar.map_zero_eq_one]
++  unfold gam
++  have h1 : ∀ y : GL (Fin k) F, y * 1 * y⁻¹ = 1 := fun y => by group
++  have h2 : ∀ y : GL (Fin k) F, y * y⁻¹ = 1 := fun y => by group
++  simp only [h1, h2, hpsi, Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one]
++  push_cast
++  ring
++
+ theorem gam_one_re_pos (ψ₀ : AddChar F ℂ) : 0 < (gam ψ₀ (1 : GL (Fin k) F)).re := by
+   rw [gam_one_real, Complex.ofReal_re]
+   have hU : 0 < cardU F k := by
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensCnt.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensCnt.lean
+index 09b2d80fd3d..715a273bcf0 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensCnt.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensCnt.lean
+@@ -20,6 +20,11 @@ section Place
+ variable {F E : Type} [Field F] [NumberField F] [Field E] [Algebra F E]
+   (v : HeightOneSpectrum (𝓞 F)) {σ : E →ₐ[F] E} (A : AntiB F E σ)
+
++theorem sigR_incl (e : E) : sigR (Fv F v) σ (inclR (Fv F v) e) = inclR (Fv F v) (σ e) := by
++  first
++    | rfl
++    | simp [sigR, inclR]
++
+ theorem two_ne_zero_k (h2 : Valued.v (algebraMap F (Fv F v) 2) = 1) :
+     (2 : 𝓞 F ⧸ v.asIdeal) ≠ 0 := by
+   intro h0
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHH.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHH.lean
+index cd4f72b7c10..28953c44688 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHH.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHH.lean
+@@ -123,6 +123,11 @@ theorem intA_mul (hg : ∀ k l m, algebraMap F (Fv F v) (b.repr (b k * b l) m)
+   rw [smul_mul_smul_comm, hB, hB, ← map_mul]
+   exact intA_smul (mul_mem (hz k) (hw l)) (intA_incl _ (hg k l))
+
++theorem sigR_incl (σ : E →ₐ[F] E) (e : E) :
++    sigR (Fv F v) σ (inclR (Fv F v) e) = inclR (Fv F v) (σ e) := by
++
++  simp [sigR, inclR, Algebra.TensorProduct.map_tmul]
++
+ theorem sigR_smul (σ : E →ₐ[F] E) (c : Fv F v) (z : Fv F v ⊗[F] E) :
+     sigR (Fv F v) σ (c • z) = c • sigR (Fv F v) σ z := by
+
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHL.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHL.lean
+index 47df6d29797..b945fc057e6 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHL.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/StabilizerVolume/LocDensHL.lean
+@@ -47,12 +47,6 @@ end LatFactsW
+ open scoped TensorProduct
+ open NumberField IsDedekindDomain Topology Filter Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes PI.VolFromSW LatFactsW
+
+-theorem sigR_incl {F E : Type} [Field F] [NumberField F] [Field E] [Algebra F E]
+-    {v : HeightOneSpectrum (𝓞 F)} (σ : E →ₐ[F] E) (e : E) :
+-    sigR (Fv F v) σ (inclR (Fv F v) e) = inclR (Fv F v) (σ e) := by
+-
+-  simp [sigR, inclR, Algebra.TensorProduct.map_tmul]
+-
+ theorem latFacts_holds : LatFacts := by
+   intro F E _ _ _ _ _ σ d b a M v
+   obtain ⟨h0, hπ, hint⟩ := unifV_spec v
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0001.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0001.lean
+index 5fa4d560299..f9883b3499a 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0001.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0001.lean
+@@ -185,6 +185,33 @@ theorem continuous_zjH {p s : ℕ} (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ)
+   · exact continuous_const
+   · exact continuous_apply_apply a' b'
+
++theorem det_zjH_ne {p s : ℕ} (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ) (hd : ∀ i, d i ≠ 0) (η : XiH p s σ)
++    (Z : G.Mat s) (hZ : G.detM Z ≠ 0) : (ZjH σ d η Z).det ≠ 0 := by
++  unfold ZjH Zj headH
++  simp only [Matrix.det_mul, blk2, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
++    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, one_mul, mul_one]
++  unfold wP lowW G.upper
++  repeat' apply mul_ne_zero
++  all_goals first
++    | exact hZ
++    | (rw [Matrix.det_diagonal]; exact Finset.prod_ne_zero_iff.2 fun i _ => hd i)
++    | (have hP : (of fun a b => if σ a = b then (1 : ℂ) else 0) =
++          (1 : Matrix (Fin p) (Fin p) ℂ).submatrix σ id := by
++         ext a b
++         simp [Matrix.one_apply]
++       rw [hP, Matrix.det_permute]
++       simp)
++    | (first | rw [Matrix.det_of_lowerTriangular _ ?_] | rw [Matrix.det_of_lowerTriangular ?_]
++       · simp
++       · intro i j hij
++         have hij' : i < j := hij
++         simp [Matrix.one_apply, hij'.ne, not_lt.2 hij'.le])
++    | (first | rw [Matrix.det_of_upperTriangular ?_] | rw [Matrix.det_of_upperTriangular _ ?_]
++       · simp [G.strictUpper]
++       · intro i j hij
++         have hij' : j < i := hij
++         simp [G.strictUpper, Matrix.one_apply, hij'.ne', not_lt.2 hij'.le])
++
+ theorem rn_mem_of (hR : RadicalParam) (k j ρ : ℕ) (x : RC k j ρ) : Rn k j ρ x ∈ B.GV k (j + ρ) := by
+   unfold RadicalParam at hR
+   obtain ⟨-, hrange, hsub⟩ := hR k j ρ
+@@ -197,14 +224,14 @@ theorem gaXi_mem_of (hM : SliceMem) (hR : RadicalParam) (k p s ρ : ℕ) (σ : E
+   unfold gaXi
+   exact Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_mul
+     (Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_mul (Formalism.FourierDecayAlt.P.BetaSesquilinearity.gv_inv (rn_mem_of hR _ _ _ _))
+-      ((hM k (p + s) ρ).1 _ γ (det_zjH_ne hd ξ.2 hZ) hγ)) (rn_mem_of hR _ _ _ _)
++      ((hM k (p + s) ρ).1 _ γ (det_zjH_ne σ d hd ξ.2 Z hZ) hγ)) (rn_mem_of hR _ _ _ _)
+
+ theorem gaXi_contAt (k p s ρ : ℕ) (σ : Equiv.Perm (Fin p)) (d : Fin p → ℂ) (hd : ∀ i, d i ≠ 0)
+     (ξ : Xi k p s ρ σ) (Z : G.Mat s) (γ : B.Mat k ρ) (hZ : G.detM Z ≠ 0) :
+     ContinuousAt (fun Z' : G.Mat s => gaXi k ρ σ d ξ Z' γ) Z := by
+   have hZj := continuous_zjH σ d ξ.2 (s := s)
+   have hdet : ((ZjH σ d ξ.2 Z)ᴴ).det ≠ 0 := by
+-    rw [Matrix.det_conjTranspose]; exact star_ne_zero.2 (det_zjH_ne hd ξ.2 hZ)
++    rw [Matrix.det_conjTranspose]; exact star_ne_zero.2 (det_zjH_ne σ d hd ξ.2 Z hZ)
+   have hinvC : ContinuousAt Ring.inverse ((ZjH σ d ξ.2 Z)ᴴ).det := by
+     simpa using NormedRing.inverse_continuousAt (Units.mk0 _ hdet)
+   have hinv : ContinuousAt (fun Z' : G.Mat s => (ZjH σ d ξ.2 Z')ᴴ⁻¹) Z :=
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0003.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0003.lean
+index 368ec965f81..d6157900c7e 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0003.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/Bundle0003.lean
+@@ -147,6 +147,19 @@ private lemma det_one_add_strictUpper' {q : ℕ} (M : Matrix (Fin q) (Fin q) ℂ
+     have hij' : j < i := hij
+     simp [Matrix.one_apply_ne hij'.ne', h i j hij'.le]
+
++lemma det_zjH_ne (hd : ∀ i, d i ≠ 0) (η : XiH p s σ) {Z : G.Mat s} (hZ : G.detM Z ≠ 0) :
++    (ZjH σ d η Z).det ≠ 0 := by
++  simp only [ZjH, Zj, blk2, Matrix.det_mul, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
++    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, headH, G.detM] at hZ ⊢
++  simp only [lowW, G.upper]
++  rw [det_one_add_strictLower _ (fun a b hab => ?_), det_one_add_strictUpper' _ (fun a b hab => ?_)]
++  · rw [permutationMatrix_eq_permMatrix', Matrix.det_permutation, Matrix.det_diagonal]
++    simp only [one_mul, mul_one]
++    refine mul_ne_zero (mul_ne_zero ?_ (Finset.prod_ne_zero_iff.2 fun i _ => hd i)) hZ
++    rcases Int.units_eq_one_or (Equiv.Perm.sign σ) with h | h <;> simp [h]
++  · simp [G.strictUpper, not_lt.2 hab]
++  · simp [not_lt.2 hab]
++
+ lemma rn_mem' (hRP : RadicalParam) (j : ℕ) (x : RC k j ρ) : Rn k j ρ x ∈ B.GV k (j + ρ) := by
+   have hr : Rn k j ρ x ∈ Rset k j ρ := (hRP k j ρ).2.1 ▸ Set.mem_range_self x
+   exact ((hRP k j ρ).2.2 hr).1
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/LetterSize.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/LetterSize.lean
+index d5a53789455..c975eeadff4 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/LetterSize.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/UnipotentCost/LetterSize.lean
+@@ -11,33 +11,6 @@ noncomputable section
+
+ namespace PI.UnitaryGroupMassFormula.UsCost
+
+-theorem det_zjH_ne {p s : ℕ} {σ : Equiv.Perm (Fin p)} {d : Fin p → ℂ} (hd : ∀ i, d i ≠ 0) (η : XiH p s σ)
+-    {Z : G.Mat s} (hZ : G.detM Z ≠ 0) : (ZjH σ d η Z).det ≠ 0 := by
+-  unfold ZjH Zj headH
+-  simp only [Matrix.det_mul, blk2, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₁₂,
+-    Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, one_mul, mul_one]
+-  unfold wP lowW G.upper
+-  repeat' apply mul_ne_zero
+-  all_goals first
+-    | exact hZ
+-    | (rw [Matrix.det_diagonal]; exact Finset.prod_ne_zero_iff.2 fun i _ => hd i)
+-    | (have hP : (of fun a b => if σ a = b then (1 : ℂ) else 0) =
+-          (1 : Matrix (Fin p) (Fin p) ℂ).submatrix σ id := by
+-         ext a b
+-         simp [Matrix.one_apply]
+-       rw [hP, Matrix.det_permute]
+-       simp)
+-    | (first | rw [Matrix.det_of_lowerTriangular _ ?_] | rw [Matrix.det_of_lowerTriangular ?_]
+-       · simp
+-       · intro i j hij
+-         have hij' : i < j := hij
+-         simp [Matrix.one_apply, hij'.ne, not_lt.2 hij'.le])
+-    | (first | rw [Matrix.det_of_upperTriangular ?_] | rw [Matrix.det_of_upperTriangular _ ?_]
+-       · simp [G.strictUpper]
+-       · intro i j hij
+-         have hij' : j < i := hij
+-         simp [G.strictUpper, Matrix.one_apply, hij'.ne', not_lt.2 hij'.le])
+-
+ def lsz {k r : ℕ} (X : B.Mat k r) : ℝ := max 1 (mx X)
+
+ def cj (k j ρ : ℕ) (x : RC k j ρ) (Y : B.Mat k ρ) : B.Mat k (j + ρ) :=
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/Bundle0004.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/Bundle0004.lean
+index bba7cce5e2b..7a9fc017322 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/Bundle0004.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/Bundle0004.lean
+@@ -23,10 +23,6 @@ open PI.RhsWLim
+
+ variable {k r : ℕ}
+
+-theorem hb_sq (k : ℕ) : Hb k * Hb k = 1 := by
+-  rw [Hb, Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
+-  congr 1; funext j; split_ifs <;> norm_num
+-
+ theorem herm_mulVec_right {p : Mat k r} (hp : p ∈ UH (Hpk k r)) (v u : Fin (2 * r + k + 1) → ℂ) :
+     herm (Hpk k r) v (p *ᵥ u) = herm (Hpk k r) (p⁻¹ *ᵥ v) u := by
+   have hu := HU.isUnit_of_uh hp
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/OrbitPushI.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/OrbitPushI.lean
+index 3ae1b9a7c88..0f660ec4c51 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/OrbitPushI.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/OrbitPushI.lean
+@@ -166,6 +166,14 @@ lemma continuous_blkAct (μ : Matrix (Fin (k + 1)) (Fin (k + 1)) ℂ) : Continuo
+   exact (continuous_pi fun i => (continuous_apply (Fin.castSucc i)).comp hc).prodMk
+     ((continuous_apply (Fin.last k)).comp hc)
+
++lemma hb_sq : Hb k * Hb k = 1 := by
++  unfold Hb
++  rw [Matrix.diagonal_mul_diagonal]
++  rw [← Matrix.diagonal_one]
++  congr 1
++  funext j
++  split_ifs <;> norm_num
++
+ lemma hb_inv_mul {μ : Matrix (Fin (k + 1)) (Fin (k + 1)) ℂ} (hμ : μᴴ * Hb k * μ = Hb k) :
+     (Hb k * μᴴ * Hb k) * μ = 1 := by
+   calc (Hb k * μᴴ * Hb k) * μ = Hb k * (μᴴ * Hb k * μ) := by simp only [Matrix.mul_assoc]
+diff --git a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/UnimodS.lean b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/UnimodS.lean
+index ab13aed28e3..16bf0687266 100644
+--- a/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/UnimodS.lean
++++ b/src/Formalism/PeriodIntegrals/UnitaryGroupMassFormula/WeightedLimitGauge/UnimodS.lean
+@@ -154,6 +154,10 @@ theorem unitInv_of (hB : BallConj) : UnitInv := by
+     (ENNReal.div_le_iff h0.ne' ht.ne).2 (by rw [one_mul]; exact le1 qᴴ hq' hqu')
+   rw [hsc, one_of_le _ _ hm hc1 hc1', one_smul]
+
++theorem hb_sq (k : ℕ) : Hb k * Hb k = 1 := by
++  rw [Hb, Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
++  congr 1; funext j; split_ifs <;> norm_num
++
+ theorem hermInv_of (hU : UnitInv) : HermInv := by
+   intro k r ν hk hG B₀ hB hBh
+   have hHbh : (Hb k)ᴴ = Hb k := MB.Hb_conjT
+diff --git a/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/ChartSymmEventuallyEq.lean b/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/ChartSymmEventuallyEq.lean
+index a5ceefd3709..759f0dc39b9 100644
+--- a/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/ChartSymmEventuallyEq.lean
++++ b/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/ChartSymmEventuallyEq.lean
+@@ -41,6 +41,14 @@ theorem chart_symm_eventuallyEq {M : Type*} [TopologicalSpace M] (n : ℕ) (z :
+   apply e₂.injOn hy1 (e₂.map_target hy3)
+   rw [e₂.right_inv hy3, ← h₂ hy1, h₁ (e₁.map_target hy2), e₁.right_inv hy2]
+
++theorem wd_congr (n : ℕ) (j : Fin n) (g₁ g₂ : V n → ℂ) (y : V n) (h : g₁ =ᶠ[𝓝 y] g₂) :
++    wd n j g₁ y = wd n j g₂ y := by
++  simp only [wd, h.fderiv_eq]
++
++theorem wdb_congr (n : ℕ) (j : Fin n) (g₁ g₂ : V n → ℂ) (y : V n) (h : g₁ =ᶠ[𝓝 y] g₂) :
++    wdb n j g₁ y = wdb n j g₂ y := by
++  simp only [wdb, h.fderiv_eq]
++
+ theorem d_eq_wd {M : Type*} [TopologicalSpace M] (n : ℕ) (z : M → V n)
+     (e : OpenPartialHomeomorph M (V n)) (he : IsChart n z e) (j : Fin n) (f : M → ℂ) (x : M)
+     (hx : x ∈ e.source) :
+diff --git a/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/IntegralFderivApplyEqZero.lean b/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/IntegralFderivApplyEqZero.lean
+index e1bda994f99..0a8c15b2a49 100644
+--- a/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/IntegralFderivApplyEqZero.lean
++++ b/src/ReciprocityTheory/L2DbarEstimates/ChartDerivatives/IntegralFderivApplyEqZero.lean
+@@ -107,8 +107,8 @@ private theorem d_db_eq_zero_of_not_mem_tsupport {M : Type*} [TopologicalSpace M
+       (e.continuousAt_symm (e.map_source hxe)).preimage_mem_nhds (by rw [e.left_inv hxe]; exact h1)
+     filter_upwards [h2] with y hy
+     exact image_eq_zero_of_notMem_tsupport (f := f) hy
+-  exact ⟨(@wd_congr n j _ _ _ hzero).trans (wd_zero_fun n j _),
+-    (@wdb_congr n j _ _ _ hzero).trans (wdb_zero_fun n j _)⟩
++  exact ⟨(wd_congr n j _ _ _ hzero).trans (wd_zero_fun n j _),
++    (wdb_congr n j _ _ _ hzero).trans (wdb_zero_fun n j _)⟩
+
+ theorem integral_db_chart_eq_zero {M : Type*} [TopologicalSpace M] [T2Space M] [SecondCountableTopology M] [MeasurableSpace M] [BorelSpace M] (n : ℕ) (z : M → V n) (hz : IsLocalHomeomorph z)
+     (e : OpenPartialHomeomorph M (V n)) (he : IsChart n z e) (j : Fin n) (h : M → ℂ) (hh : Ck n z 1 h)
+@@ -122,10 +122,10 @@ theorem integral_db_chart_eq_zero {M : Type*} [TopologicalSpace M] [T2Space M] [
+   have h1 : ∫ y in e.target, db n z j h (e.symm y) = ∫ y in e.target, wdb n j H y := by
+     refine setIntegral_congr_fun e.open_target.measurableSet fun y hy => ?_
+     rw [db_comp_symm n z e he j h y hy]
+-    exact @wdb_congr n j _ _ y (hHt y hy).symm
++    exact wdb_congr n j _ _ y (hHt y hy).symm
+   have h2 : ∫ y in e.target, wdb n j H y = ∫ y, wdb n j H y := by
+     refine setIntegral_eq_integral_of_forall_compl_eq_zero fun y hy => ?_
+-    exact (@wdb_congr n j _ _ y (hHo y hy)).trans (wdb_zero_fun n j y)
++    exact (wdb_congr n j _ _ y (hHo y hy)).trans (wdb_zero_fun n j y)
+   rw [h1, h2, integral_wdb_eq_zero n j H hH1 hHc]
+
+ private theorem wd_wdb_finset_sum {ι : Type*} {n : ℕ} (s : Finset ι) (G : ι → V n → ℂ) (y : V n)
+diff --git a/src/ReciprocityTheory/L2DbarEstimates/IsLocalHomeomorph.lean b/src/ReciprocityTheory/L2DbarEstimates/IsLocalHomeomorph.lean
+index 51bd1cd4d18..f544e1cf04e 100644
+--- a/src/ReciprocityTheory/L2DbarEstimates/IsLocalHomeomorph.lean
++++ b/src/ReciprocityTheory/L2DbarEstimates/IsLocalHomeomorph.lean
+@@ -21,16 +21,6 @@ def wd (n : ℕ) (j : Fin n) (g : V n → ℂ) (y : V n) : ℂ :=
+ def wdb (n : ℕ) (j : Fin n) (g : V n → ℂ) (y : V n) : ℂ :=
+   (fderiv ℝ g y (bas n j) + Complex.I * fderiv ℝ g y (Complex.I • bas n j)) / 2
+
+-open Filter Topology in
+-theorem wd_congr {n : ℕ} {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
+-    wd n j f x = wd n j g x := by
+-  simp only [wd, h.fderiv_eq]
+-
+-open Filter Topology in
+-theorem wdb_congr {n : ℕ} {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
+-    wdb n j f x = wdb n j g x := by
+-  simp only [wdb, h.fderiv_eq]
+-
+ def IsChart {M : Type*} [TopologicalSpace M] (n : ℕ) (z : M → V n)
+     (e : OpenPartialHomeomorph M (V n)) : Prop :=
+   Set.EqOn z e e.source
+diff --git a/src/ReciprocityTheory/L2DbarEstimates/LeviForms/EventuallyDifferentiableAtOfContDiffAt.lean b/src/ReciprocityTheory/L2DbarEstimates/LeviForms/EventuallyDifferentiableAtOfContDiffAt.lean
+index 1a2ed807a64..24217484609 100644
+--- a/src/ReciprocityTheory/L2DbarEstimates/LeviForms/EventuallyDifferentiableAtOfContDiffAt.lean
++++ b/src/ReciprocityTheory/L2DbarEstimates/LeviForms/EventuallyDifferentiableAtOfContDiffAt.lean
+@@ -13,6 +13,14 @@ def LeviNonnegOn (n : ℕ) (φ : V n → ℝ) (U : Set (V n)) : Prop :=
+
+ variable {n : ℕ}
+
++theorem wd_congr {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
++    wd n j f x = wd n j g x := by
++  simp only [wd, h.fderiv_eq]
++
++theorem wdb_congr {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
++    wdb n j f x = wdb n j g x := by
++  simp only [wdb, h.fderiv_eq]
++
+ theorem wdb_eventuallyEq {j : Fin n} {f g : V n → ℂ} {x : V n} (h : f =ᶠ[𝓝 x] g) :
+     wdb n j f =ᶠ[𝓝 x] wdb n j g := h.eventuallyEq_nhds.mono fun _ hy => wdb_congr hy
+
+diff --git a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ArakelovVolumes/UpperBounds/Bundle0009.lean b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ArakelovVolumes/UpperBounds/Bundle0009.lean
+index 3a2c7814868..41ef279e5dd 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ArakelovVolumes/UpperBounds/Bundle0009.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ArakelovVolumes/UpperBounds/Bundle0009.lean
+@@ -334,7 +334,7 @@ theorem gc_leviV_comp (n d : ℕ) (g : V d → ℂ) (F : V n → V d) (U : Set (
+       wd d b (wdb d a g) (F v) * fderiv ℂ F v (bas n j) b *
+         (starRingEnd ℂ) (fderiv ℂ F v (bas n k) a) := by
+     intro j k
+-    rw [@wd_congr n j _ _ v (hwdb k),
++    rw [wd_congr n j _ _ v (hwdb k),
+       fc_wd_sum n j Finset.univ (fun a y => wdb d a g (F y) *
+         (starRingEnd ℂ) (fderiv ℂ F y (bas n k) a)) v (fun a _ => (hWa a).mul (hCa k a))]
+     refine Finset.sum_congr rfl fun a _ => ?_
+diff --git a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/DiscreteValuationRings/Bundle0012.lean b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/DiscreteValuationRings/Bundle0012.lean
+index bbf3e378995..02882517312 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/DiscreteValuationRings/Bundle0012.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/DiscreteValuationRings/Bundle0012.lean
+@@ -170,6 +170,11 @@ def SecBDvdSt : Prop :=
+       ∀ j, ∃ g : Γ(D.toPre.P.A.left, LB.wchart D.toPre.P.L (D.toPre.famφB α) j),
+         f.f j = constFn D.toPre.P.A.hom _ r * g
+
++theorem gs_fsum {X Y : Scheme.{0}} (f : Y ⟶ X) (y : Y) (U : X.Opens) (h : f y ∈ U) {κ : Type} (S : Finset κ)
++    (a : κ → Γ(X, U)) : gs f y U (∑ i ∈ S, a i) = ∑ i ∈ S, gs f y U (a i) := by
++  set_option synthInstance.maxHeartbeats 100000 in
++    simp only [gs, dif_pos h, map_sum]
++
+ theorem isUnit_gs_pow {X Y : Scheme.{0}} (f : Y ⟶ X) (y : Y) (U : X.Opens) (h : f y ∈ U) (u : Γ(X, U)ˣ) (k : ℕ) :
+     IsUnit (gs f y U (u.val ^ k)) := by
+   simp only [gs, dif_pos h]
+diff --git a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ExtensionDescent/ChartPullbacks/UniversalCharts/ChartLaw.lean b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ExtensionDescent/ChartPullbacks/UniversalCharts/ChartLaw.lean
+index c8ac6b514c3..b2427a0e9dd 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ExtensionDescent/ChartPullbacks/UniversalCharts/ChartLaw.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/ArithmeticGeometry/ExtensionDescent/ChartPullbacks/UniversalCharts/ChartLaw.lean
+@@ -85,6 +85,10 @@ theorem isLieComb_iff {d : ℕ} (c : Fin d → R) (v : Fin d → (epsR R ⟶ G))
+
+ variable {n : ℕ} {x : ∀ m : ℕ, sp (R₀ := R) (JetR R (Fin n) m) ⟶ G} (hx : IsUnivChart G n x)
+
++theorem tcoord_congr {w w' : sp (R₀ := R) (DualNumber R) ⟶ G} (e : w = w') (h : IsTan w)
++    (h' : IsTan w') : tcoord hx w h = tcoord hx w' h' := by
++  subst e; rfl
++
+ theorem list_prod_tan : ∀ {k : ℕ} (u : Fin k → (sp (R₀ := R) (DualNumber R) ⟶ G))
+     (hu : ∀ i, IsTan (u i)), ∃ h : IsTan (List.ofFn u).prod, tcoord hx _ h = ∑ i, tcoord hx (u i) (hu i) := by
+   intro k
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/CasimirCoefficients/Bundle0011.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/CasimirCoefficients/Bundle0011.lean
+index 6f8b622c2a8..912b84949f6 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/CasimirCoefficients/Bundle0011.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/CasimirCoefficients/Bundle0011.lean
+@@ -108,6 +108,8 @@ variable {n : ℕ}
+
+ variable {ε : Fin n → Bool} {Λ : Fin n → ℝ}
+
++lemma toMK_one' : toMK (1 : KG ε) = 1 := rfl
++
+ lemma op_mul' (T : KType ε Λ) (k k' : KG ε) : T.op (k * k') = T.op k * T.op k' := by
+   show ((T.τ (k * k') : unitary (T.V →L[ℂ] T.V)) : T.V →L[ℂ] T.V) = _
+   rw [map_mul]
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/DiscreteSeriesExistence/Bundle0013.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/DiscreteSeriesExistence/Bundle0013.lean
+index 0a7d3100127..34da2f2b57d 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/DiscreteSeriesExistence/Bundle0013.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/DiscreteSeriesExistence/Bundle0013.lean
+@@ -20,6 +20,9 @@ namespace ReciprocityTheory.ChartRestriction.DS
+ variable {n : ℕ} {ε : Fin n → Bool} {lam : Fin n → ℝ} {T : S7.KType ε (lowK ε lam)}
+   {Ψ : Matrix (Fin n) (Fin n) ℂ → (T.V →L[ℂ] T.V)} {v₀ : T.V}
+
++theorem umat_mem_UJset (g : Formalism.REAL.UJ ε) : Formalism.MainNotions.S.umat g ∈ UJset ε := by
++  rw [← mir_UJset_eq]; exact g.2
++
+ theorem sigLam_umat_one (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) :
+     sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat (1 : Formalism.REAL.UJ ε)) = 1 := by
+   have e : Formalism.MainNotions.S.umat (1 : Formalism.REAL.UJ ε) = 1 := rfl
+@@ -30,11 +33,11 @@ theorem sigLam_umat_mul (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv
+     sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat (a * b)) = (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat a)).comp (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat b)) := by
+   have e : Formalism.MainNotions.S.umat (a * b) = Formalism.MainNotions.S.umat a * Formalism.MainNotions.S.umat b := rfl
+   rw [e]
+-  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset _ a) _ (umat_mem_UJset _ b)
++  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset a) _ (umat_mem_UJset b)
+
+ theorem sigLam_umat_iso (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (g : Formalism.REAL.UJ ε)
+     (v : Hlam ε Ψ v₀) : ‖sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) v‖ = ‖v‖ :=
+-  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset _ g) v
++  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset g) v
+
+ theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (w₀ x₀ : Hlam ε Ψ v₀)
+     (hx₀ : x₀ ≠ 0)
+@@ -49,7 +52,7 @@ theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (h
+ theorem inner_sigLam_umat (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (y z : Hlam ε Ψ v₀)
+     (g : Formalism.REAL.UJ ε) :
+     ⟪y, sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) z⟫_ℂ = inner ℂ (y : L2 ε) (rreg ε (Formalism.MainNotions.S.umat g) (z : L2 ε)) := by
+-  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset _ g)]
++  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset g)]
+
+ theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (x : Hlam ε Ψ v₀) :
+     MemLp (fun g : Formalism.REAL.UJ ε =>
+@@ -63,7 +66,7 @@ theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀
+   have e0 : (fun g : Formalism.REAL.UJ ε => ⟪w₀, sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) w₀⟫_ℂ) =
+       fun g => ((‖uniformisationL2 ε Ψ v₀ T.w‖ ^ 2 : ℝ) : ℂ) * jfun Ψ T.w T.w (Formalism.MainNotions.S.umat g) := by
+     funext g
+-    rw [inner_sigLam_umat hgap hP hv₀, hw₀, formulaF hgap hP hv₀ (umat_mem_UJset _ g)]
++    rw [inner_sigLam_umat hgap hP hv₀, hw₀, formulaF hgap hP hv₀ (umat_mem_UJset g)]
+     rfl
+   have h0 : MemLp (fun g : Formalism.REAL.UJ ε => ⟪w₀, sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) w₀⟫_ℂ) 2 (Formalism.REAL.muG ε) := by
+     rw [e0]
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/ExceptionalGroupG2/ExistenceG2/SigLamMemLpOfNe.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/ExceptionalGroupG2/ExistenceG2/SigLamMemLpOfNe.lean
+index c925fbd9951..551bfa64760 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/ExceptionalGroupG2/ExistenceG2/SigLamMemLpOfNe.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/ExceptionalGroupG2/ExistenceG2/SigLamMemLpOfNe.lean
+@@ -42,11 +42,11 @@ theorem sigLam_umat_mul (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv
+     sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat (a * b)) = (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat a)).comp (sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat b)) := by
+   have h1 : Formalism.MainNotions.S.umat (a * b) = Formalism.MainNotions.S.umat a * Formalism.MainNotions.S.umat b := rfl
+   rw [h1]
+-  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset _ a) _ (umat_mem_UJset _ b)
++  exact (sigLam_isURepOn hgap hP hv₀).1.2 _ (umat_mem_UJset a) _ (umat_mem_UJset b)
+
+ theorem sigLam_umat_iso (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (g : Formalism.REAL.UJ ε)
+     (v : Hlam ε Ψ v₀) : ‖sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) v‖ = ‖v‖ :=
+-  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset _ g) v
++  (sigLam_isURepOn hgap hP hv₀).2.1 _ (umat_mem_UJset g) v
+
+ theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (w₀ x₀ : Hlam ε Ψ v₀)
+     (hx₀ : x₀ ≠ 0)
+@@ -67,7 +67,7 @@ theorem sigLam_memLp_of_ne (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (h
+ theorem inner_sigLam_umat (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (y z : Hlam ε Ψ v₀)
+     (g : Formalism.REAL.UJ ε) :
+     ⟪y, sigLam ε Ψ v₀ (Formalism.MainNotions.S.umat g) z⟫_ℂ = inner ℂ (y : L2 ε) (rreg ε (Formalism.MainNotions.S.umat g) (z : L2 ε)) := by
+-  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset _ g)]
++  rw [Submodule.coe_inner, sigLam_coe hgap hP hv₀ (umat_mem_UJset g)]
+
+ theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀ : v₀ ≠ 0) (x : Hlam ε Ψ v₀) :
+     MemLp (fun g : Formalism.REAL.UJ ε =>
+@@ -88,7 +88,7 @@ theorem coef_memLp_all (hgap : StdGap ε lam) (hP : IsPsiFor ε lam T Ψ) (hv₀
+         fun g => ((‖uniformisationL2 ε Ψ v₀ T.w‖ ^ 2 : ℝ) : ℂ) *
+           ((innerSL ℂ T.w).comp (ContinuousLinearMap.apply ℂ T.V T.w)) (Ψ (Formalism.MainNotions.S.umat g)) := by
+       funext g
+-      rw [formulaF hgap hP hv₀ (umat_mem_UJset _ g) T.w T.w]
++      rw [formulaF hgap hP hv₀ (umat_mem_UJset g) T.w T.w]
+       rfl
+     rw [e']
+     exact h1
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0001.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0001.lean
+index 2b63af80bd0..f14f78e3482 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0001.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0001.lean
+@@ -79,6 +79,13 @@ def wordOf (ε : Fin n → Bool) (w : List (Fin n × Fin n)) (s : Fin w.length
+ def coefOf (w : List (Fin n × Fin n)) (s : Fin w.length → Bool) : ℂ :=
+   ∏ i, if s i then Complex.I else 1
+
++theorem dSW_smooth {ε : Fin n → Bool} {σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)} (hσ : IsURepOn (UJset ε) σ) :
++    ∀ (W : List (Matrix (Fin n) (Fin n) ℂ)), (∀ X ∈ W, inG ε X) → ∀ {v : H}, IsSmoothVecU ε σ v →
++      IsSmoothVecU ε σ (dSW σ W v)
++  | [], _, _, hv => hv
++  | X :: W, hW, _, hv => IsSmoothVecU.dS hσ (hW X (List.mem_cons_self ..))
++      (dSW_smooth hσ W (fun Y hY => hW Y (List.mem_cons_of_mem _ hY)) hv)
++
+ theorem dS_fsum {ε : Fin n → Bool} {σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)} (hσ : IsURepOn (UJset ε) σ)
+     {X : Matrix (Fin n) (Fin n) ℂ} (hX : inG ε X) {ι : Type*} (s : Finset ι) (c : ι → ℂ) (v : ι → H)
+     (hv : ∀ i, IsSmoothVecU ε σ (v i)) : dS σ X (∑ i ∈ s, c i • v i) = ∑ i ∈ s, c i • dS σ X (v i) := by
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/DecBoundJ.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/DecBoundJ.lean
+index 543bbc0785f..41912d74aba 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/DecBoundJ.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/DecBoundJ.lean
+@@ -32,13 +32,6 @@ def dSW (σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)) : List (Matrix (Fi
+   | [], v => v
+   | X :: w, v => dS σ X (dSW σ w v)
+
+-theorem dSW_smooth {ε : Fin n → Bool} {σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)} (hσ : IsURepOn (UJset ε) σ) :
+-    ∀ (W : List (Matrix (Fin n) (Fin n) ℂ)), (∀ X ∈ W, inG ε X) → ∀ {v : H}, IsSmoothVecU ε σ v →
+-      IsSmoothVecU ε σ (dSW σ W v)
+-  | [], _, _, hv => hv
+-  | X :: W, hW, _, hv => IsSmoothVecU.dS hσ (hW X (List.mem_cons_self ..))
+-      (dSW_smooth hσ W (fun Y hY => hW Y (List.mem_cons_of_mem _ hY)) hv)
+-
+ def nuJ (σ : Matrix (Fin n) (Fin n) ℂ → (H →L[ℂ] H)) (Ws : List (List (Matrix (Fin n) (Fin n) ℂ))) (v : H) : ℝ :=
+   (Ws.map fun w => ‖dSW σ w v‖).sum
+
+diff --git a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0002.lean b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0002.lean
+index 0d267a449b1..1748a9c89af 100644
+--- a/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0002.lean
++++ b/src/ReciprocityTheory/ReductiveGroups/DiscreteSeries/InfinitesimalDecay/Bundle0002.lean
+@@ -57,6 +57,14 @@ theorem dSW_append (a b : List (Matrix (Fin n) (Fin n) ℂ)) (v : H) :
+   | nil => rfl
+   | cons X a ih => rw [List.cons_append, dSW_cons, dSW_cons, ih]
+
++theorem dSW_smooth (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n) ℂ)} (hw : ∀ X ∈ w, inG ε X)
++    {v : H} (hv : IsSmoothVecU ε σ v) : IsSmoothVecU ε σ (dSW σ w v) := by
++  induction w with
++  | nil => exact hv
++  | cons X w ih =>
++    rw [dSW_cons]
++    exact IsSmoothVecU.dS hσ (hw X (by simp)) (ih (fun Y hY => hw Y (by simp [hY])))
++
+ theorem dSW_add (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n) ℂ)} (hw : ∀ X ∈ w, inG ε X)
+     {v v' : H} (hv : IsSmoothVecU ε σ v) (hv' : IsSmoothVecU ε σ v') :
+     dSW σ w (v + v') = dSW σ w v + dSW σ w v' := by
+@@ -65,7 +73,7 @@ theorem dSW_add (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin n)
+   | cons X w ih =>
+     have hw' : ∀ Y ∈ w, inG ε Y := fun Y hY => hw Y (by simp [hY])
+     rw [dSW_cons, dSW_cons, dSW_cons, ih hw',
+-      dS_add_vec hσ (hw X (by simp)) (dSW_smooth hσ _ hw' hv) (dSW_smooth hσ _ hw' hv')]
++      dS_add_vec hσ (hw X (by simp)) (dSW_smooth hσ hw' hv) (dSW_smooth hσ hw' hv')]
+
+ theorem dSW_smul (c : ℂ) (w : List (Matrix (Fin n) (Fin n) ℂ)) (v : H) :
+     dSW σ w (c • v) = c • dSW σ w v := by
+@@ -126,7 +134,7 @@ theorem inner_dSW (hσ : IsURepOn (UJset ε) σ) {w : List (Matrix (Fin n) (Fin
+     have hX : inG ε X := hw X (by simp)
+     have hw' : ∀ Y ∈ w, inG ε Y := fun Y hY => hw Y (by simp [hY])
+     have hXy : IsSmoothVecU ε σ (dS σ X y) := IsSmoothVecU.dS hσ hX hy
+-    have h1 := inner_dS_add hσ hX hy (dSW_smooth hσ _ hw' hv)
++    have h1 := inner_dS_add hσ hX hy (dSW_smooth hσ hw' hv)
+     have h2 : inner ℂ (dS σ X y) (dSW σ w v) =
+         (-1 : ℂ) ^ w.length * inner ℂ (dSW σ w.reverse (dS σ X y)) v := ih (y := dS σ X y) hw' hXy
+     have e : dSW σ [X] y = dS σ X y := rfl
+@@ -194,7 +202,7 @@ theorem dSW_conj (hσ : IsURepOn (UJset ε) σ) {k : Matrix (Fin n) (Fin n) ℂ}
+       intro Y hY
+       obtain ⟨Z, hZ, rfl⟩ := List.mem_map.mp hY
+       exact inG_conj_K hk (hw' Z hZ)
+-    rw [List.map_cons, dSW_cons, dSW_cons, ih hw', dS_conj hσ hk hX (dSW_smooth hσ _ hm hv)]
++    rw [List.map_cons, dSW_cons, dSW_cons, ih hw', dS_conj hσ hk hX (dSW_smooth hσ hm hv)]
+
+ end ReciprocityTheory.ChartRestriction.DS.DecInf
+ end

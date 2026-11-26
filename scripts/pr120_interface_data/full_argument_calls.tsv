@@ -1,0 +1,4 @@
+ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	wdb_congr hcomp	wdb_congr n j _ _ _ hcomp
+ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	wd_congr hw	wd_congr _ _ _ _ _ hw
+ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	ReciprocityTheory.L2DbarEstimates.PlurisubharmonicCharts.FlatLoc	wd_congr hev	wd_congr _ _ _ _ _ hev
+ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.ArakelovVolumes.UpperBounds.Bundle0020	ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.ArakelovVolumes.UpperBounds.RhGradFPf	wd_congr (j := j) hev	wd_congr (nd X) j _ _ z hev
