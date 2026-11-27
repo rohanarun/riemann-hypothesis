@@ -42,6 +42,9 @@ then compiles only the modules whose inputs differ from the baseline's, and the 
 imports changed as a result; it reuses the rest. The script exits 4 when it has restored a
 baseline. `python3 -I scripts/tests/test_ci_cache_baseline.py` tests the selection.
 
+For a pull request, CI starts this search at the base commit recorded in the event. The test
+merge contains that base even if newer batches land on `main` before a runner picks up the job.
+
 ## CI
 
 Pull requests land through GitHub's merge queue. `.github/workflows/build.yml` has one job,

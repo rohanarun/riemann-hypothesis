@@ -25,11 +25,11 @@ name: build
 # after the merge queue has moved main to that commit, .github/workflows/publish-ci-cache.yml
 # verifies them with main's code and publishes them.
 #
-# The cache restore uses the record for the exact build inputs when there is one. A pull request
-# that changes src never has one, so scripts/ci-cache-get.py --baseline falls back to the newest
-# published record on main's first-parent history (else the record pinned in
-# scripts/cache-baseline.json), and `lake build` compiles only the modules whose inputs changed
-# and the modules that import them.
+# The cache restore uses the record for the exact build inputs when there is one. On a miss,
+# scripts/ci-cache-get.py --baseline walks first-parent history from the PR's tested base, or
+# from main for other events. If no compatible record is available there, it tries the record
+# pinned in scripts/cache-baseline.json. Lake then rebuilds modules whose inputs changed and
+# the modules that import them.
 #
 # A change to a module that most of src imports (Lib.Base, Lib.Speed, ...) rebuilds all 802
 # modules: about 4 hours of module build time, so about 10 minutes on the 64 vCPUs of the
@@ -80,11 +80,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 -I scripts/ci-github.py queue-tested --sha "$GITHUB_SHA"
 
-      - name: Fetch main's history for the cache baseline
+      - name: Fetch history for the cache baseline
         if: steps.queue.outputs.tested != 'true'
-        # On a pull request the checkout is GitHub's merge of the head into main. The baseline is
-        # looked up along main's first-parent history (at most 200 commits).
-        run: git fetch --no-tags --depth=200 origin +refs/heads/main:refs/remotes/origin/main
+        # The merge under test includes exactly this base. Main can advance while a PR is queued.
+        env:
+          BASELINE_START: ${{ github.event.pull_request.base.sha || 'refs/heads/main' }}
+        run: git fetch --no-tags --depth=200 origin "+$BASELINE_START:refs/ci/cache-baseline"
 
       - name: Install elan and the toolchain in lean-toolchain
         if: steps.queue.outputs.tested != 'true'
@@ -120,7 +121,7 @@ jobs:
         run: |
           ulimit -Sn "$(ulimit -Hn)"
           status=0
-          python3 scripts/ci-cache-get.py --baseline origin/main || status=$?
+          python3 scripts/ci-cache-get.py --baseline refs/ci/cache-baseline || status=$?
           case "$status" in
             0) echo "::notice::Restored the cache for these exact build inputs." ;;
             4) echo "::notice::Restored a baseline cache; lake build compiles the modules that changed since and the modules that import them." ;;

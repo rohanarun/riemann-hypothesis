@@ -7,7 +7,7 @@ their own (grh-lean/grh/ and artifacts/<repo>-grh-lean/grh/), shared with the gr
 branch grh-lean-cache and separate from the keys of the earlier main branch; the project may be
 a subdirectory of its Git repository; and records are looked up by input fingerprint only.
 
-With --baseline <ref> (CI uses origin/main), a miss falls back to a baseline: the record of the
+With --baseline <ref>, a miss falls back to a baseline: the record of the
 nearest first-parent ancestor of <ref> that has one, else the record pinned in
 scripts/cache-baseline.json. Candidates are looked up by their own input fingerprint, computed
 from Git objects with the same code, and must have the current toolchain and lake-manifest.json
