@@ -358,20 +358,23 @@ theorem integratedRep_eq_zero_of_notMem_rootCone (hg : l.HasLargeGap A)
     simp only [h_integrand, integral_const_mul, h_zero, mul_zero]
   simpa [h_self] using hu.pos w h_ne
 
-/-- Let `λ = l / 2` have gap `500 n³ + A`, let `π` be a representation of `U(diag ε)` with invariant
-positive form `B` and growth exponent `A` (`New.IsUnitaryRep`), and let `ρ` be its derivative along
-`ι`. Let `v` be `K`-highest of weight `Λ = New.HCParam.lowestKType l` and `x = ι v`. If
-`B x (π z x) > 0` for every positive definite `z` in `U(diag ε)`, then `Re B x (π(e_λ) x) > 0`,
-where `e_λ = New.HCParam.dsKernel l` is the function `g ↦ deg_λ · conj(c_λ(g))` and
-`π(e_λ) x = ∫ e_λ(g) π(g) x dg`. -/
-theorem re_integratedRep_dsKernel_pos (hg : l.HasLargeGap A) (hu : IsUnitaryRep A π B)
+omit [CompleteSpace X] in
+/-- Pointwise `K × K`-average positivity for `re_integratedRep_dsKernel_pos`:
+at every `g ∈ U(diag ε)`, the biaverage of
+`k ↦ B x (e_λ(k₁⁻¹ g k₂) • π (k₁⁻¹ g k₂) x)` over `K × K` has positive real part. -/
+private lemma re_biaverage_dsKernel_pos (hg : l.HasLargeGap A) (hu : IsUnitaryRep A π B)
     (hd : IsDerivedAction π ι ρ) (hv : l.IsKHighest ρ l.lowestKType v)
-    (h_pos : ∀ z : USign ε, z.val.val.PosDef → 0 < B (ι v) (π z (ι v))) :
-    0 < (B (ι v) (integratedRep π l.dsKernel (ι v))).re := by
-  -- Average the integrand over `g ↦ k₁⁻¹ g k₂`, `k₁, k₂ ∈ K`. At `g = κ z` the average is, by
-  -- `dsCoeff_polar`, `h_left` and `h_right`, a mean over `K` of positive numbers.
+    (h_pos : ∀ z : USign ε, z.val.val.PosDef → 0 < B (ι v) (π z (ι v))) (g : USign ε) :
+    0 < (∫ k : maxCompactU ε × maxCompactU ε,
+      B (ι v) (l.dsKernel (↑k.1⁻¹ * (g * k.2)) • π (↑k.1⁻¹ * (g * k.2)) (ι v))
+      ∂((haarK ε).prod (haarK ε))).re := by
+  -- At `g = κ z` the average is, by `dsCoeff_polar`, `h_left` and `h_right`, a mean over `K` of
+  -- positive numbers.
+  -- At `g = κ z` the average is, by `dsCoeff_polar`, `h_left` and `h_right`, a mean over `K`
+  -- of positive numbers.
   set Λ : HCParam ε := l.lowestKType
   set x : X := ι v
+  let μ : Measure (maxCompactU ε × maxCompactU ε) := (haarK ε).prod (haarK ε)
   -- Averaging over `K` against `conj (weightMinors Λ)` in the second argument of `B`, or against
   -- `weightMinors Λ` in the first, multiplies `x` by `Λ.kTypeNormSq`.
   have h_right (w : X) (g : USign ε) :
@@ -384,40 +387,25 @@ theorem re_integratedRep_dsKernel_pos (hg : l.HasLargeGap A) (hu : IsUnitaryRep 
         Λ.kTypeNormSq * B x w := by
     simpa [← integral_conj, hu.conj_symm, hu.form_apply_eq_form_inv_apply _ w, -map_mul,
       RingHom.map_mul, conj_weightMinors] using congrArg conj (h_right w 1)
-  let μ : Measure (maxCompactU ε × maxCompactU ε) := (haarK ε).prod (haarK ε)
-  let Φ (g : USign ε) : ℂ := B x (l.dsKernel g • π g x)
-  have kernel_int : Integrable fun g : USign ε ↦ l.dsKernel g * (‖(g : Matrix n n ℂ)‖ : ℂ) ^ A :=
-    hg.integrable_dsKernel_mul_norm_pow A A.le_succ
-  have Φ_int : Integrable Φ := (B x).integrable_comp (integrable_smul_rep hu kernel_int x)
-  have h_invariant (k : maxCompactU ε × maxCompactU ε) :
-      Measure.map (fun g : USign ε ↦ ↑k.1⁻¹ * (g * k.2)) volume = volume :=
-    ((measurePreserving_mul_right _ k.2.val).mul_left _ (k.1⁻¹).val).map_eq
-  -- The average of `Φ` over `K × K` is integrable, with the same integral as `Φ`.
-  obtain ⟨avg_int, avg_eq⟩ := integral_skew_product h_invariant (Φ_int.comp_snd μ)
-  have h_avg : B x (integratedRep π l.dsKernel x) =
-      ∫ g : USign ε, ∫ k, Φ (↑k.1⁻¹ * (g * k.2)) ∂μ := by
-    rw [avg_eq]
-    simp [Φ, map_integratedRep hu kernel_int]
-  refine (re_integral_pos avg_int fun g ↦ ?_).trans_eq (congrArg re h_avg.symm)
-  change 0 < (∫ k, Φ (↑k.1⁻¹ * (g * k.2)) ∂μ).re
   obtain ⟨κ, z, hz, rfl, -⟩ := exists_polar g
   have conj_pos (u : USign ε) : (u.val.valᴴ * z.val.val * u.val.val).PosDef :=
     hz.conjTranspose_mul_mul_same (Matrix.mulVec_injective_iff_isUnit.2 u.val.isUnit)
-  -- `dsCoeff_polar` writes `Φ (k₁⁻¹ κ z k₂)` as the mean over `u ∈ K` of `Ψ (k₁, k₂) u`.
+  -- `dsCoeff_polar` writes the integrand as a mean over `u ∈ K` of `Ψ k u`.
   let Ψ (k : maxCompactU ε × maxCompactU ε) (u : maxCompactU ε) : ℂ :=
     l.formalDegree * (weightMinors Λ (u.val.val.valᴴ * κ.val.val.valᴴ * k.1) *
       weightMinors Λ (k.2.val.val.valᴴ * u) /
         weightMinors (-paramAddRho l) (u.val.val.valᴴ * z * u) / Λ.kTypeNormSq) *
       B x (π (k.1⁻¹ * κ * z * k.2) x)
   have h_polar (k : maxCompactU ε × maxCompactU ε) :
-      ∫ u, Ψ k u ∂haarK ε = Φ (↑k.1⁻¹ * (κ * z * k.2)) := by
+      ∫ u, Ψ k u ∂haarK ε =
+        B x (l.dsKernel (↑k.1⁻¹ * (κ * z * k.2)) • π (↑k.1⁻¹ * (κ * z * k.2)) x) := by
     have h_coeff : conj (l.dsCoeff ↑(↑k.1⁻¹ * (κ * z * k.2) : USign ε)) =
         (∫ u : maxCompactU ε, weightMinors Λ (u.val.val.valᴴ * κ.val.val.valᴴ * k.1) *
           weightMinors Λ (k.2.val.val.valᴴ * u) /
             weightMinors (-paramAddRho l) (u.val.val.valᴴ * z * u) ∂haarK ε) / Λ.kTypeNormSq := by
       simpa [mul_assoc, maxCompactU.coe_inv, conj_weightMinors, ← integral_conj, hz.1.eq,
         RingHom.map_mul] using congrArg conj (dsCoeff_polar hg (k.1⁻¹ * κ) k.2⁻¹ hz)
-    simp only [Φ, Ψ, dsKernel, h_coeff, map_smul, smul_eq_mul]
+    simp only [Ψ, dsKernel, h_coeff, map_smul, smul_eq_mul]
     simp only [integral_mul_const, integral_const_mul, integral_div, mul_assoc]
   have Ψ_int : Integrable Ψ.uncurry (μ.prod (haarK ε)) :=
     integrable_of_compactSpace (by fun_prop (disch :=
@@ -442,8 +430,38 @@ theorem re_integratedRep_dsKernel_pos (hg : l.HasLargeGap A) (hu : IsUnitaryRep 
   -- Each factor on the right of `h_inner` is positive, `u⁻¹ z u` being positive definite.
   have h_inner_pos (u : maxCompactU ε) : 0 < ∫ k, Ψ k u ∂μ := by
     simp [h_inner, h_pos, conj_pos, -map_mul, maxCompactU.coe_inv, weightMinors_pos]
+  change 0 < (∫ k, B x (l.dsKernel (↑k.1⁻¹ * (κ * z * k.2)) • π (↑k.1⁻¹ * (κ * z * k.2)) x) ∂μ).re
   simp_rw [← h_polar, integral_integral_swap Ψ_int]
   exact re_integral_pos Ψ_int.integral_prod_right fun u ↦ (pos_iff.1 (h_inner_pos u)).1
+
+/-- Let `λ = l / 2` have gap `500 n³ + A`, let `π` be a representation of `U(diag ε)` with invariant
+positive form `B` and growth exponent `A` (`New.IsUnitaryRep`), and let `ρ` be its derivative along
+`ι`. Let `v` be `K`-highest of weight `Λ = New.HCParam.lowestKType l` and `x = ι v`. If
+`B x (π z x) > 0` for every positive definite `z` in `U(diag ε)`, then `Re B x (π(e_λ) x) > 0`,
+where `e_λ = New.HCParam.dsKernel l` is the function `g ↦ deg_λ · conj(c_λ(g))` and
+`π(e_λ) x = ∫ e_λ(g) π(g) x dg`. -/
+theorem re_integratedRep_dsKernel_pos (hg : l.HasLargeGap A) (hu : IsUnitaryRep A π B)
+    (hd : IsDerivedAction π ι ρ) (hv : l.IsKHighest ρ l.lowestKType v)
+    (h_pos : ∀ z : USign ε, z.val.val.PosDef → 0 < B (ι v) (π z (ι v))) :
+    0 < (B (ι v) (integratedRep π l.dsKernel (ι v))).re := by
+  -- Average the integrand over `g ↦ k₁⁻¹ g k₂`, `k₁, k₂ ∈ K`; each fiber average has positive real
+  -- part by `re_biaverage_dsKernel_pos`.
+  let μ : Measure (maxCompactU ε × maxCompactU ε) := (haarK ε).prod (haarK ε)
+  let Φ (g : USign ε) : ℂ := B (ι v) (l.dsKernel g • π g (ι v))
+  have kernel_int : Integrable fun g : USign ε ↦ l.dsKernel g * (‖(g : Matrix n n ℂ)‖ : ℂ) ^ A :=
+    hg.integrable_dsKernel_mul_norm_pow A A.le_succ
+  have Φ_int : Integrable Φ := (B (ι v)).integrable_comp (integrable_smul_rep hu kernel_int (ι v))
+  have h_invariant (k : maxCompactU ε × maxCompactU ε) :
+      Measure.map (fun g : USign ε ↦ ↑k.1⁻¹ * (g * k.2)) volume = volume :=
+    ((measurePreserving_mul_right _ k.2.val).mul_left _ (k.1⁻¹).val).map_eq
+  -- The average of `Φ` over `K × K` is integrable, with the same integral as `Φ`.
+  obtain ⟨avg_int, avg_eq⟩ := integral_skew_product h_invariant (Φ_int.comp_snd μ)
+  have h_avg : B (ι v) (integratedRep π l.dsKernel (ι v)) =
+      ∫ g : USign ε, ∫ k, Φ (↑k.1⁻¹ * (g * k.2)) ∂μ := by
+    rw [avg_eq]
+    simp [Φ, map_integratedRep hu kernel_int]
+  exact (re_integral_pos avg_int (re_biaverage_dsKernel_pos hg hu hd hv h_pos)).trans_eq
+    (congrArg re h_avg.symm)
 
 /-! ### Rigidity of highest vectors -/
 
