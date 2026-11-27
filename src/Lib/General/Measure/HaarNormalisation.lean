@@ -8,18 +8,15 @@ public import Lib.Speed
 import Lib.Adelic.Hecke.Basic
 
 /-!
-# Uniqueness of Haar measure, integrals over subgroups and Gaussian normalisation of volumes
+# Integrals over subgroups and Gaussian normalisation of volumes
 
-The file treats three topics of measure theory. Two additive Haar measures on a locally compact,
-second countable group agree if some real function has integral 1 for both. Integrals over compact
-or open subgroups are computed by translation invariance, orthogonality of characters and reduction
-to finite sums. A normalisation of volumes by Gaussian integrals is defined. It holds for `ℝ` and
-`ℂ` and passes to binary products and finite powers under σ-finiteness assumptions.
+The file treats two topics of measure theory. Integrals over compact or open subgroups are computed
+by translation invariance, orthogonality of characters and reduction to finite sums. A
+normalisation of volumes by Gaussian integrals is defined. It holds for `ℝ` and `ℂ` and passes to
+binary products and finite powers under σ-finiteness assumptions.
 
 ## Main definitions and results
 
-* `New.addHaar_eq_of_integral_eq_one`: uniqueness of additive Haar measure, with the constant fixed
-  by the integral of one test function.
 * `New.setIntegral_char`: orthogonality for a multiplicative function over an open subgroup.
 * `New.setIntegral_eq_finsum`: over a compact `M`, a function constant on the cosets of an open
   subgroup `L` integrates to `ν (L ∩ M)` times a finite sum over `M ⧸ (L ∩ M)`.
@@ -30,26 +27,6 @@ to finite sums. A normalisation of volumes by Gaussian integrals is defined. It 
 -/
 
 @[expose] public section
-
-/-! ## Uniqueness of Haar measure -/
-
-section HaarUnique
-
-open MeasureTheory
-
-/-- Let `μ` and `ν` be additive Haar measures on a locally compact, second countable group. If some
-real function has integral 1 for both, then `μ = ν`. -/
-lemma New.addHaar_eq_of_integral_eq_one {G : Type*} [AddGroup G] [TopologicalSpace G]
-    [IsTopologicalAddGroup G] [LocallyCompactSpace G] [SecondCountableTopology G]
-    [MeasurableSpace G] [BorelSpace G] {μ ν : Measure G} [μ.IsAddHaarMeasure] [ν.IsAddHaarMeasure]
-    {f : G → ℝ} (hν : ∫ x : G, f x ∂ν = 1) (hμ : ∫ x : G, f x ∂μ = 1) :
-    μ = ν := by
-  -- By uniqueness `μ = c • ν` for a constant `c`, and the two integrals give `c = 1`.
-  obtain ⟨c, rfl⟩ : ∃ c : NNReal, μ = c • ν := ⟨_, μ.isAddLeftInvariant_eq_smul ν⟩
-  obtain rfl : c = 1 := by simpa [integral_smul_nnreal_measure, hν, NNReal.smul_def] using hμ
-  exact one_smul _ ν
-
-end HaarUnique
 
 /-!
 ## Integrals over subgroups

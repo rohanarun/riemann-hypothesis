@@ -15,6 +15,7 @@ import Mathlib.RingTheory.TotallySplit
 import Mathlib.Tactic.Linter.Style
 import Mathlib.Topology.Separation.CompletelyRegular
 import TauCeti.Analysis.Matrix.IndefiniteUnitaryGroup
+import TauCeti.MeasureTheory.Measure.Haar.IntegralUnique
 import TauCeti.Topology.Algebra.Group.Units
 public import Lib.General.LinearAlgebra.HermitianMatrices
 public import Lib.General.Measure.HaarNormalisation
@@ -288,9 +289,11 @@ theorem HasGaussianIntegral.measurePreserving (e : V ≃ₗ[ℝ] W)
   -- The image of the volume under `e` is invariant and gives the Gaussian of `q'` the integral `1`,
   -- so it is the volume of `W` by the uniqueness of Haar measure.
   have h_emb : Topology.IsClosedEmbedding e.toLinearMap := isClosedEmbedding_of_injective e.ker
-  refine ⟨h_emb.measurable, addHaar_eq_of_integral_eq_one (f := fun y ↦ rexp (-π * q' y)) ?_ ?_⟩
-  · simpa using h_gauss'.integral_exp_eq pi_pos
-  · exact (h_emb.integral_map _).trans (by simpa [he] using h_gauss.integral_exp_eq pi_pos)
+  have h_one : ∫ y : W, rexp (-π * q' y) = 1 := by simpa using h_gauss'.integral_exp_eq pi_pos
+  refine ⟨h_emb.measurable,
+    Measure.eq_addHaar_of_integral_eq (f := fun y ↦ rexp (-π * q' y)) ?_ (h_one ▸ one_ne_zero)⟩
+  rw [h_one]
+  exact (h_emb.integral_map _).trans (by simpa [he] using h_gauss.integral_exp_eq pi_pos)
 
 /-- Suppose `∫ exp (-t q) = (π / t) ^ a` on `V` for all `t > 0` (`HasGaussianIntegral a q`), and
 `V` has the dimension of the real `n × n` matrices. A linear map `f` from these matrices to `V`
